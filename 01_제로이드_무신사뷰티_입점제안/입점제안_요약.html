@@ -1,0 +1,121 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>제로이드 입점 제안 요약</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Montserrat:wght@600;700&display=swap">
+<style>
+/* Layout: A4 세로 한 장(210:297). 위→아래로 요청·이득·근거·제품·로드맵·연락. 제안서와 같은 네이비/하늘색, 라이트 단일 테마 */
+:root{
+  --page:#DCE5EE; --paper:#FFFFFF; --tint:#F3F7FB; --navy:#16295A; --sky:#4F9FDE; --sky-soft:#D8EAF8;
+  --ink:#18212F; --muted:#465366; --line:#D2DDE9;
+  --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --latin:"Montserrat","Noto Sans KR",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:13.5px;line-height:1.55;word-break:keep-all;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.a4{max-width:794px;aspect-ratio:210/297;margin:0 auto;background:var(--paper);border-radius:6px;box-shadow:0 8px 28px rgba(22,41,90,.12);padding:40px 44px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
+h1,h2,h3,p{margin:0}
+.top{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);border-bottom:2px solid var(--navy);padding-bottom:8px}
+.top b{font-family:var(--latin);letter-spacing:.14em;color:var(--navy)}
+h1{font-size:26px;font-weight:900;line-height:1.3;letter-spacing:-0.03em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--sky)}
+.ask{background:var(--navy);color:#fff;border-radius:10px;padding:12px 16px;font-size:14px}
+.ask b{display:block;font-family:var(--latin);font-size:10.5px;letter-spacing:.12em;color:var(--sky-soft);margin-bottom:2px}
+h2{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+h2::before{content:"";width:6px;height:14px;border-radius:2px;background:var(--sky)}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.row3 > div{background:var(--tint);border-radius:8px;padding:10px 12px;min-width:0}
+.row3 b{display:block;color:var(--navy);font-size:13.5px}
+.row3 span{font-size:12.5px;color:var(--muted)}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.nums div{text-align:center;border:1px solid var(--line);border-radius:8px;padding:8px 6px;min-width:0}
+.nums strong{display:block;font-family:var(--latin);font-size:19px;color:var(--navy);line-height:1.2}
+.nums span{font-size:11.5px;color:var(--muted)}
+.prod{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.prod div{border-top:3px solid var(--sky);padding-top:6px;min-width:0}
+.prod div:nth-child(even){border-color:var(--navy)}
+.prod b{display:block;font-size:13.5px}
+.prod span{font-size:12px;color:var(--muted)}
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:8px;overflow:hidden}
+.road div{padding:10px 12px;background:var(--sky-soft);min-width:0;position:relative}
+.road div:nth-child(2){background:#B9D8F2}
+.road div:nth-child(3){background:var(--navy);color:#fff}
+.road div:nth-child(3) span{color:var(--sky-soft)}
+.road small{font-family:var(--latin);font-weight:700;font-size:10.5px;letter-spacing:.08em;color:var(--sky)}
+.road div:nth-child(3) small{color:var(--sky-soft)}
+.road b{display:block;font-size:13px}
+.road span{font-size:11.5px;color:var(--muted)}
+.give{display:flex;flex-wrap:wrap;gap:6px}
+.give span{background:var(--tint);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px}
+.foot{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;border-top:1px solid var(--line);padding-top:12px}
+.foot ol{margin:0;padding-left:18px;font-size:12.5px}
+.contact{text-align:right;font-size:12.5px}
+.contact b{display:block;color:var(--navy);font-size:13.5px}
+.fill{color:#C0621E}
+.src{font-size:10px;color:var(--muted)}
+@media (max-width:640px){
+  .a4{aspect-ratio:auto;padding:24px 20px}
+  .row3,.prod,.road,.foot{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr}
+  .contact{text-align:left}
+}
+</style>
+
+<article class="a4">
+  <div class="top"><b>ZEROID</b><span>제로이드 × 무신사 뷰티 입점 제안 요약 · 2026.10</span></div>
+
+  <h1>운동 뒤 단백질 챙기듯,<br><em>피부엔 장벽 루틴</em>을</h1>
+  <p class="ask"><b>제안 요청</b>2027년 3월 성수에서 12일간 제로이드 단독 팝업을 열고, 4월부터 메가스토어 성수 뷰티존과 무신사 뷰티 온라인에 상설 입점하고자 합니다.</p>
+
+  <div>
+    <h2>무신사가 얻는 것</h2>
+    <div class="row3">
+      <div><b>남성 더마 수요</b><span>1.2조 원 남성 뷰티 시장, 남성 고객이 믿고 고를 더마 브랜드</span></div>
+      <div><b>무신사 단독 상품</b><span>1만 원대 휴대용 키트 3종은 12개월간 무신사에서만. 정가는 전 채널 동일, 무신사 단독 행사 연 2회 이상</span></div>
+      <div><b>거래액 목표</b><span>팝업+상설 7개월 약 5.7억 원 확정, 단독 매장 진입 시 +4.2억 원. 팝업 투자 1.6억 원은 제로이드 부담</span></div>
+    </div>
+  </div>
+
+  <div>
+    <h2>왜 제로이드인가</h2>
+    <div class="nums">
+      <div><strong>7~8위</strong><span>올리브영 더마 카테고리 (2025년 말)</span></div>
+      <div><strong>+30%</strong><span>제로이드 성장률 (2025.2Q)</span></div>
+      <div><strong>MLE®</strong><span>독자 피부장벽 기술</span></div>
+      <div><strong>10가지</strong><span>배제 성분, 전 제품 자극 테스트</span></div>
+    </div>
+  </div>
+
+  <div>
+    <h2>주력 4종 · 고민 1개에 제품 1개</h2>
+    <div class="prod">
+      <div><b>인텐시브</b><span>극건성 · 1회 사용 손상 장벽 2.5배 개선</span></div>
+      <div><b>수딩 (대표)</b><span>민감·진정 · 1회 사용 민감도 54% 개선</span></div>
+      <div><b>핌프로브</b><span>트러블 · 좁쌀·수부지 피부</span></div>
+      <div><b>루트힐</b><span>두피 · MLE®와 세라마이드 적용</span></div>
+    </div>
+  </div>
+
+  <div>
+    <h2>3단계 입점 로드맵</h2>
+    <div class="road">
+      <div><small>2027.3 · 12일</small><b>단독 팝업</b><span>측정 2,900명, 팝업 거래액 1억 원</span></div>
+      <div><small>2027.4~9</small><b>뷰티존 + 온라인</b><span>월 거래액 4,700만 → 1억 원</span></div>
+      <div><small>2027.10~</small><b>단독 매장 (무신사 판단 시)</b><span>월 1.4억 원, 더마 10위권</span></div>
+    </div>
+  </div>
+
+  <div>
+    <h2>제로이드가 준비하는 것</h2>
+    <div class="give"><span>피부·두피 측정 체험</span><span>무신사 웰컴 기프트</span><span>러너·캠퍼·클리어 키트</span><span>러닝 크루 사전 체험단</span><span>아웃도어 의류 크로스 연출</span><span>더마 기획전 큐레이션</span><span>런칭 6개월 무신사 광고 집행</span></div>
+  </div>
+
+  <div class="foot">
+    <div><h2>다음 단계</h2><ol><li>30분 미팅으로 제안 설명</li><li>시험 보고서·정가표·상품 리스트 전달</li><li>팝업 기간·공간·단독 구성 협의</li></ol></div>
+    <div class="contact"><b>(주)네오팜 제로이드 브랜드 영업팀</b><span class="fill">담당 MD [이름] · [연락처] · [이메일]</span></div>
+  </div>
+  <p class="src">출처: 네오팜 공시 실적, 하나증권 리포트 인용 보도, 시사저널e, 제로이드 공식 브랜드사이트. 목표 수치는 공개 자료 기반 추정이며 무신사와 협의해 조정합니다.</p>
+</article>
+
+</body></html>

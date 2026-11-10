@@ -1,0 +1,668 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>제로이드 미팅 준비 노트</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 피부 장벽(벽돌+모르타르) 층위를 모티프로, 좌측 정렬 문서형 제안서. 섹션 = 제안 논리 순서 */
+:root{
+  --bg:#F6F8FA; --surface:#FFFFFF; --ink:#14202E; --muted:#5A6878; --line:#DCE3EA;
+  --accent:#2347C8; --accent-soft:#E6ECFB; --mint:#1F8F7A; --mint-soft:#E2F3EF; --warn:#B4541A;
+  --display:"Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E141B; --surface:#151E28; --ink:#E7EDF3; --muted:#9AA8B6; --line:#26323F;
+  --accent:#7D98FF; --accent-soft:#1C2647; --mint:#5CC9B2; --mint-soft:#14302B; --warn:#F09A5E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141B; --surface:#151E28; --ink:#E7EDF3; --muted:#9AA8B6; --line:#26323F;
+  --accent:#7D98FF; --accent-soft:#1C2647; --mint:#5CC9B2; --mint-soft:#14302B; --warn:#F09A5E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;word-break:keep-all}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:72px;border-top:1px solid var(--line)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-0.02em}
+h2{font-size:clamp(26px,3.6vw,36px);font-weight:800;line-height:1.3}
+h3{font-size:19px;font-weight:800}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
+.lede{color:var(--muted);max-width:62ch;margin-top:14px}
+.src{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:20px}
+
+/* HERO */
+.hero{padding-block:56px 64px;border-top:0}
+.hero-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:48px}
+.hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:18px;margin-top:22px}
+.barrier{margin-top:44px;display:grid;grid-template-columns:repeat(12,1fr);gap:5px;max-width:560px}
+.barrier span{height:16px;border-radius:3px;background:var(--accent-soft)}
+.barrier span:nth-child(odd){background:var(--accent);opacity:.85}
+.barrier span:nth-child(4n){background:var(--mint)}
+.barrier-cap{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
+@media (prefers-reduced-motion:no-preference){
+  .barrier span{animation:lay .5s ease-out both}
+  .barrier span:nth-child(n+13){animation-delay:.15s}.barrier span:nth-child(n+25){animation-delay:.3s}
+  @keyframes lay{from{transform:translateY(-6px);opacity:.2}}
+}
+
+/* summary */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.summary div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px}
+.summary b{display:block;font-family:var(--display);font-size:17px;margin-bottom:6px}
+.summary p{color:var(--muted);font-size:15px}
+
+/* why now */
+.why{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:36px}
+.why ul{list-style:none;padding:0;margin:0;display:grid;gap:18px}
+.why li{padding-left:18px;border-left:3px solid var(--line)}
+.why li b{display:block}
+.why li span{color:var(--muted);font-size:15px}
+.stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stat{background:var(--surface);padding:20px}
+.stat .n{font-family:var(--display);font-weight:900;font-size:34px;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{font-size:13.5px;color:var(--muted);margin-top:6px}
+
+/* proof */
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:36px}
+.proof .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.tag{font-family:var(--mono);font-size:11.5px;color:var(--mint);background:var(--mint-soft);padding:3px 8px;border-radius:4px;align-self:flex-start}
+.free{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.free span{font-size:12.5px;border:1px solid var(--line);border-radius:20px;padding:2px 10px;color:var(--muted)}
+
+/* products */
+.prod{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:36px}
+.p{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.p .line{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent)}
+.p .who{font-size:14.5px;color:var(--muted)}
+.p .metric{border-top:1px dashed var(--line);padding-top:12px;display:grid;gap:6px}
+.p .metric div{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.p .metric b{font-family:var(--mono);color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* journey */
+.journey-scroll{overflow-x:auto;margin-top:36px;padding-bottom:6px}
+.journey{display:grid;grid-template-columns:repeat(6,minmax(150px,1fr));min-width:900px;position:relative}
+.journey::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line)}
+.step{position:relative;padding-right:14px}
+.dot{width:32px;height:32px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--accent);position:relative}
+.step .t{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px}
+.step b{display:block;font-family:var(--display);margin-top:2px}
+.step p{font-size:14px;color:var(--muted);margin-top:6px}
+.step .pick{display:inline-block;margin-top:10px;font-size:12.5px;background:var(--accent-soft);color:var(--accent);padding:3px 9px;border-radius:4px;font-weight:600}
+
+/* personas */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+.tabs button{font:inherit;font-size:14.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:24px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.persona{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:32px;display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+.persona > div{min-width:0}
+.persona h3{font-size:24px}
+.persona .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px}
+.persona .pain{margin-top:18px}
+.kv{display:grid;grid-template-columns:88px 1fr;gap:10px 14px;font-size:15px;margin-top:18px}
+.kv dt{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px}
+.kv dd{margin:0}
+.voice{background:var(--bg);border-radius:10px;padding:20px;font-size:15px}
+.voice .who{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
+.sat{margin-top:16px;padding:16px 18px;border-left:3px solid var(--mint);background:var(--mint-soft);border-radius:0 8px 8px 0;font-size:15px}
+
+/* plan */
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+.plan .col{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px}
+.plan .col h3{display:flex;align-items:center;gap:10px}
+.plan .col h3 small{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:4px}
+.plan ol{margin:16px 0 0;padding-left:20px;display:grid;gap:12px}
+.plan li b{display:block}
+.plan li span{color:var(--muted);font-size:14.5px}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;counter-reset:s}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:10px;position:relative;min-width:0}
+.stage:nth-child(1){border-top:4px solid var(--mint)}
+.stage:nth-child(2){border-top:4px solid var(--accent)}
+.stage:nth-child(3){border-top:4px solid var(--ink)}
+.phase{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted)}
+.goal{font-size:14.5px;font-weight:600;color:var(--accent)}
+.stage ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:14.5px}
+.stage ul b{display:block}
+.gate{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--muted)}
+.road + .plan{margin-top:20px}
+@media (max-width:860px){.road{grid-template-columns:1fr}}
+
+/* table */
+.tbl{overflow-x:auto;margin-top:36px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:620px;background:var(--surface);font-size:14.5px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);color:var(--accent);font-variant-numeric:tabular-nums}
+
+/* note */
+.note{margin-top:28px;border:1px dashed var(--warn);border-radius:10px;padding:18px 20px;font-size:14.5px}
+.note b{color:var(--warn)}
+.note ul{margin:8px 0 0;padding-left:20px}
+
+footer{padding-block:48px 64px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .contact{font-family:var(--mono);color:var(--ink);margin-top:6px}
+
+@media (max-width:760px){
+  .why,.persona,.plan{grid-template-columns:1fr}
+  .persona{padding:22px}
+  section{padding-block:52px}
+}
+.tcap{font-size:17px;font-weight:800;margin:32px 0 0}
+#estimate td.num{white-space:nowrap}
+.dsum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
+.dsum div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.dsum b{display:block;font-family:var(--mono);font-size:28px;color:var(--accent)}
+.dsum span{font-size:13px;color:var(--muted)}
+.dfilter{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.dfilter button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 14px;border-radius:999px;cursor:pointer}
+.dfilter button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dfilter button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dtable{min-width:760px}
+.dtable td:nth-child(3){font-weight:600}
+.vd{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;white-space:nowrap;color:#fff}
+.vd-a{background:#1F6FB8}.vd-b{background:#16295A}.vd-c{background:#C0621E}.vd-d{background:#5E6A7C}
+@media (max-width:760px){.dsum{grid-template-columns:1fr 1fr}}
+</style>
+
+<style>
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.phase{padding:26px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px;min-width:0}
+.phase:last-child{border-right:0}
+.phase .ph{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em}
+.phase .bar{height:6px;border-radius:3px;background:var(--accent-soft);overflow:hidden}
+.phase .bar i{display:block;height:100%;background:var(--accent)}
+.phase p{font-size:14.5px;color:var(--muted)}
+.phase .gate{margin-top:auto;font-size:13.5px;border-top:1px dashed var(--line);padding-top:10px}
+.phase .gate b{font-family:var(--mono);font-size:11.5px;color:var(--mint);display:block;letter-spacing:.06em}
+.persona .gender{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent);margin-left:8px;vertical-align:middle}
+.channels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.channels > div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.channels > div.me{border:2px solid var(--accent)}
+.channels p{font-size:14px;color:var(--muted)}
+.terms{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px}
+.terms h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.terms h3 small{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--warn);border:1px solid var(--warn);padding:1px 8px;border-radius:4px}
+.terms dl{display:grid;grid-template-columns:110px 1fr;gap:10px 16px;margin:16px 0 0;font-size:15px}
+.terms dt{font-weight:600}.terms dd{margin:0;color:var(--muted)}
+.qa-group{margin-top:36px}
+.qa-group h3{font-size:16px;color:var(--accent);margin-bottom:10px}
+.qa-group details{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-top:8px}
+.qa-group summary{cursor:pointer;padding:14px 18px;font-weight:600;display:flex;gap:12px;list-style:none}
+.qa-group summary::-webkit-details-marker{display:none}
+.qa-group summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.qa-group summary .q{font-family:var(--mono);color:var(--accent);font-weight:500;flex:none;width:30px}
+.qa-group summary::after{content:"+";margin-left:auto;color:var(--muted);font-family:var(--mono)}
+.qa-group details[open] summary::after{content:"–"}
+.qa-group .a{padding:0 18px 16px 60px;font-size:15px;color:var(--ink)}
+.qa-group .a em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:0 6px;margin-left:4px;white-space:nowrap}
+.qa-tools{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.qa-tools button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:20px;cursor:pointer}
+.qa-principles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.qa-principles div{border-top:3px solid var(--mint);padding-top:12px;font-size:14.5px;color:var(--muted)}
+.qa-principles b{display:block;color:var(--ink);margin-bottom:4px}
+@media (max-width:760px){.channels,.qa-principles{grid-template-columns:1fr}.terms dl{grid-template-columns:1fr;gap:2px 0}.terms dd{margin-bottom:10px}.qa-group .a{padding-left:18px}}
+.voice.todo{border:1px dashed var(--warn);background:transparent}
+.voice.todo .who{color:var(--warn)}
+@media (max-width:760px){.road{grid-template-columns:1fr}.phase{border-right:0;border-bottom:1px solid var(--line)}.phase:last-child{border-bottom:0}}
+</style>
+
+<style>
+.secret{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:2px 10px;margin-bottom:18px}
+.todo-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:8px}
+.todo-list li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;display:flex;gap:12px;align-items:flex-start}
+.todo-list input{margin-top:6px;accent-color:var(--accent);flex:none}
+.todo-list label{cursor:pointer}
+.todo-list .who{font-family:var(--mono);font-size:11.5px;color:var(--muted);display:block}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.flow div{border-top:3px solid var(--accent);padding-top:10px;font-size:14.5px;color:var(--muted)}
+.flow b{display:block;color:var(--ink);font-family:var(--display)}
+@media (max-width:760px){.flow{grid-template-columns:1fr 1fr}}
+</style>
+<div class="wrap">
+<header class="hero" style="padding-block:48px 40px">
+  <div class="hero-top"><span>ZEROID × MUSINSA BEAUTY · 내부 준비 자료</span><span>2026.10 · 미팅 전 확인용</span></div>
+  <span class="secret">대외비 · 제안서와 함께 보내지 않습니다</span>
+  <h1 style="font-size:clamp(30px,5vw,48px)">무신사 미팅 준비 노트</h1>
+  <p class="lede">제안서를 보낸 뒤 미팅에 들고 들어갈 자료입니다. 보내기 전 확인할 것, 협상 기준, 예상 질문 30개의 답변 대본을 담았습니다.</p>
+  <div class="flow">
+    <div><b>1. 자료 채우기</b>아래 확인 목록의 별첨·내부 확인 항목 준비</div>
+    <div><b>2. 팀장 검토</b>가격·조건·문구 수위 승인 받기</div>
+    <div><b>3. 제안서 발송</b>본문 + 별첨만 전달</div>
+    <div><b>4. 미팅</b>이 노트의 Q&amp;A로 대응, 회신 날짜 약속</div>
+  </div>
+</header>
+
+<section id="check" style="padding-block:48px">
+  <span class="eyebrow">Before sending · 보내기 전 확인</span>
+  <h2>제안서에서 뺀 확인 필요 항목</h2>
+  <p class="lede">제안서 본문에는 넣지 않은 우리 쪽 메모입니다. 모두 해결하거나, 미팅에서 "확인 후 회신" 항목으로 관리합니다.</p>
+  <div class="note" style="margin-top:24px"><b>초안 확인 필요 항목</b>
+    <ul>
+      <li>주름·기미 표현: 주력 4종은 미백·주름개선 기능성 표기가 확인되지 않아 '자극 부담을 덜어주는 장벽 케어', '자외선 차단과 함께하는 기미 예방'으로만 표현 — 사내 RA 검토 필요</li>
+      <li>별첨 준비: 인체적용시험 보고서, 정가표, 네오팜 브랜드별 포지셔닝 자료</li>
+      <li>내부 확인: 공급가·마진, 초도 물량·반품, 마케팅 예산, 신제품 일정, 고객 성별·연령·재구매 데이터</li>
+      <li>아웃도어·두피(루트힐) 리뷰 근거 보강 필요</li>
+    </ul>
+  </div>
+
+  <ul class="todo-list">
+    <li><input type="checkbox" id="todo-0"><label for="todo-0">인체적용시험 보고서 원문 (시험기관·대상 인원·기간)<span class="who">별첨 · 브랜드팀/연구소</span></label></li>
+    <li><input type="checkbox" id="todo-1"><label for="todo-1">제품별 정가표, 공급가·마진 조건<span class="who">별첨 · 영업팀장 승인</span></label></li>
+    <li><input type="checkbox" id="todo-2"><label for="todo-2">네오팜 브랜드별 포지셔닝 자료 (아토팜·리얼베리어와 차이)<span class="who">별첨 · 마케팅팀</span></label></li>
+    <li><input type="checkbox" id="todo-3"><label for="todo-3">루트힐 두피 관련 시험 자료<span class="who">별첨 · 연구소</span></label></li>
+    <li><input type="checkbox" id="todo-4"><label for="todo-4">주름·기미 관련 문구 RA(인허가) 검토<span class="who">필수 · RA팀</span></label></li>
+    <li><input type="checkbox" id="todo-5"><label for="todo-5">초도 물량, 반품 조건, 직매입/위탁 기준<span class="who">내부 확인 · 영업팀장</span></label></li>
+    <li><input type="checkbox" id="todo-6"><label for="todo-6">팝업·마케팅 예산, 쿠폰 분담 가능 범위<span class="who">내부 확인 · 팀장</span></label></li>
+    <li><input type="checkbox" id="todo-7"><label for="todo-7">신제품·리뉴얼 일정 (무신사 선론칭 가능 여부)<span class="who">내부 확인 · 브랜드팀</span></label></li>
+    <li><input type="checkbox" id="todo-8"><label for="todo-8">고객 성별·연령 분포, 재구매율 데이터<span class="who">내부 확인 · CRM 담당</span></label></li>
+    <li><input type="checkbox" id="todo-9"><label for="todo-9">측정 장비(수분·유분, 두피) 대여 또는 보유 여부<span class="who">내부 확인 · 운영</span></label></li>
+    <li><input type="checkbox" id="todo-10"><label for="todo-10">아웃도어·루트힐 실사용 리뷰 캡처 보강<span class="who">직접 · 올리브영·쿠팡 리뷰</span></label></li>
+    <li><input type="checkbox" id="todo-11"><label for="todo-11">오픈마켓 가격 관리 정책<span class="who">내부 확인 · 영업팀</span></label></li>
+  </ul>
+  <p class="src">체크 표시는 이 브라우저에서만 잠시 유지됩니다.</p>
+</section>
+
+<section id="terms" style="padding-block:48px">
+  <span class="eyebrow">Negotiation · 협상 기준</span>
+  <h2>먼저 꺼내지 말고, 물어보면 답할 조건</h2>
+  <p class="lede">상대가 먼저 조건을 말하게 한 뒤 아래 기준 안에서 답합니다. 숫자는 그 자리에서 약속하지 않습니다.</p>
+  <div class="terms">
+    <h3>거래·운영 조건 <small>우리 쪽 협상 기준 · 먼저 꺼내지 않기</small></h3>
+    <dl>
+      <dt>거래 방식</dt><dd>1단계 위탁 또는 소량 직매입 → 2단계부터 직매입 확대 희망</dd>
+      <dt>물류</dt><dd>MFS(무신사 풀필먼트) 활용 및 무배당발 적용 긍정 검토</dd>
+      <dt>가격</dt><dd>병원·타 채널과 단품 가격 경쟁 대신 무신사 단독 구성으로 차별화</dd>
+      <dt>비용 분담</dt><dd>팝업 부스·운영 인력·샘플은 브랜드 부담 기본, 쿠폰·기획전 분담 비율은 협의</dd>
+      <dt>재고</dt><dd>유통기한 충분한 제품만 입고, 시즌 제품은 진열 교체 시점 기획전으로 소진</dd>
+    </dl>
+  </div>
+
+  <div class="note" style="border-color:var(--line)"><b style="color:var(--ink)">약점과 대응</b>
+    <ul>
+      <li>올리브영 입점 중 → "재구매 채널 vs 신규 고객 발견 채널"로 역할 구분, 무신사 단독 구성 강조</li>
+      <li>아웃도어 페르소나 근거 부족 → 가설임을 인정하고 러닝 크루 체험단·팝업 데이터로 검증하겠다고 연결</li>
+      <li>미백·주름 기능성 없음 → "개선" 표현 쓰지 않음, 장벽 케어·기미 예방(선케어) 메시지로만 대응</li>
+    </ul>
+  </div>
+</section>
+
+<section id="estimate" style="padding-block:48px">
+  <span class="eyebrow">Estimates · 가설 수치 근거</span>
+  <h2>제안서 숫자는 이렇게 만들었습니다</h2>
+  <p class="lede">공개된 파편 데이터에 역산을 더한 추정입니다. 미팅에서 "근거가 뭐냐"고 물으면 이 순서로 설명합니다. 계산 원본: 작업 폴더의 zeroid_model.py</p>
+
+  <h3 class="tcap" style="margin-top:28px">1. 제로이드 매출 역산</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>단계</th><th>계산</th><th>값</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td>2023 제로이드 매출</td><td>네오팜 971억 × 30%</td><td class="num">약 291억</td><td>네오팜 공시 실적, NH투자증권 브랜드 비중</td></tr>
+      <tr><td>2025 제로이드 매출</td><td>네오팜 1,322억 × 29%</td><td class="num">약 383억</td><td>네오팜 공시 실적, 하나증권 브랜드 비중</td></tr>
+      <tr><td>올리브영 외 채널 (2025)</td><td>291억 × 1.03²</td><td class="num">약 309억</td><td>가정: 병원 채널 '전년과 유사'(하나증권) → 연 3%</td></tr>
+      <tr><td>올리브영 공급 매출 (2025)</td><td>383억 − 309억</td><td class="num">약 74억</td><td>2024.8 올리브영 입점 이후 증가분</td></tr>
+      <tr><td>올리브영 소비자 매출 (2025)</td><td>74억 ÷ (1 − 27%)</td><td class="num">약 102억</td><td>공정위: 올리브영 오프라인 실질수수료 27.0%</td></tr>
+      <tr><td>올리브영 소비자 매출 (2026)</td><td>102억 × 1.5</td><td class="num">약 153억</td><td>하나증권: 제로이드 2Q +30%, 3Q26 +60% 전망 → 연 50% 가정</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="tcap">2. 무신사 잠재 매출 (시나리오)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>시나리오</th><th>무신사 뷰티 거래액 (2026, 추정)</th><th>올리브영 대비</th><th>제로이드 연 매출</th><th>월 거래액</th><th>하루 판매</th></tr></thead>
+    <tbody>
+      <tr><td>보수</td><td class="num">3,750억 (전체 5조 × 5% × 1.5)</td><td class="num">5.8%</td><td class="num">8.9억</td><td class="num">7,400만</td><td class="num">88개</td></tr>
+      <tr><td>기준 (제안서 사용)</td><td class="num">5,250억 (× 7%)</td><td class="num">8.2%</td><td class="num">12.5억</td><td class="num">1.04억</td><td class="num">124개</td></tr>
+      <tr><td>공격</td><td class="num">7,500억 (× 10%)</td><td class="num">11.7%</td><td class="num">17.8억</td><td class="num">1.49억</td><td class="num">177개</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">근거: 무신사 2025 거래액 5조 원 이상, 뷰티 거래액 +50%(파이낸셜뉴스·시사저널e), 올리브영 2025 매출 5조 8,335억 원(+10% 가정). 무신사 뷰티 비중 5~10%는 '아직 작다'는 보도에 근거한 가정. 하루 판매는 평균 판매가 2.8만 원 기준.</p>
+
+  <h3 class="tcap">3. 단독 팝업 손익 (12일)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>비용 항목</th><th>금액</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td>대관 (30평급, 하루 400만 원)</td><td class="num">4,800만</td><td>성수 50평 비중심 200~300만, 유통업체 시세 400~700만 원/일 (뉴스토마토)</td></tr>
+      <tr><td>부스 제작·인테리어</td><td class="num">6,000만</td><td>공정위 1회 평균 인테리어: 면세점 3,000만, 백화점 7,200만</td></tr>
+      <tr><td>운영 인력 5명 × 12일 × 20만 원</td><td class="num">1,200만</td><td>가정</td></tr>
+      <tr><td>웰컴 기프트 3,000개 × 2,000원</td><td class="num">600만</td><td>가정 (파우치 4종 + 포장)</td></tr>
+      <tr><td>측정 장비 대여</td><td class="num">300만</td><td>가정</td></tr>
+      <tr><td>집객 마케팅 (인플루언서·러닝 크루 체험단)</td><td class="num">3,000만</td><td>가정</td></tr>
+      <tr><td>보안·청소·보험 등</td><td class="num">500만</td><td>가정</td></tr>
+      <tr><td><b>합계</b></td><td class="num"><b>1억 6,400만</b></td><td></td></tr>
+    </tbody>
+  </table></div>
+  <div class="tbl"><table>
+    <thead><tr><th>성과 항목</th><th>계산</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>방문객</td><td>하루 800명 × 12일 (벤치마크 성수 뷰티 팝업 피크 5,000명의 16%)</td><td class="num">9,600명</td></tr>
+      <tr><td>측정 참여</td><td>방문객의 30% (2석 최대 처리 4,800명의 60%)</td><td class="num">2,880명</td></tr>
+      <tr><td>구매</td><td>방문객의 25% (벤치마크 전환율 40%보다 보수적)</td><td class="num">2,400명</td></tr>
+      <tr><td>팝업 현장 거래액</td><td>2,400명 × 객단가 3.8만 원 (키트 + 본품)</td><td class="num">9,120만</td></tr>
+      <tr><td>팝업 후 QR 쿠폰 거래액</td><td>측정 2,880명 × 사용률 15% × 3.5만 원</td><td class="num">1,512만</td></tr>
+      <tr><td><b>팝업 총 거래액</b></td><td>비용 대비 0.65배 (직접 회수 아님, 신규 고객 획득 투자)</td><td class="num"><b>약 1.06억</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="tcap">4. 무신사 수익과 협상 기준 (제안서에 쓰지 않음)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>항목</th><th>가정</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td>온라인 판매수수료</td><td class="num">22%</td><td>무신사 실질수수료 평균 12.2%(2022, 전 카테고리)와 올리브영 온라인 23.5% 사이, 뷰티는 상단 가정. 공정위 온라인몰 업태 평균 10.0%</td></tr>
+      <tr><td>오프라인 직매입 공급률</td><td class="num">65% (무신사 마진 35%)</td><td>올리브영 오프라인 실질수수료 27% 대비 무신사에 유리하게 제시 가능한 범위</td></tr>
+      <tr><td>무신사 수익 (확정 7개월)</td><td class="num">약 1.4억</td><td>거래액 5.7억 × (온라인 80% × 22% + 오프라인 20% × 35%). 단독 매장 진입 시 합계 약 2.4억</td></tr>
+      <tr><td>양보 가능선</td><td>수수료 25%까지</td><td>MD가 올리브영 수준을 요구할 때. 그 이상은 팀장 승인</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="tcap">5. 키트 가격</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>키트</th><th>본품 환산가</th><th>판매가</th><th>혜택</th></tr></thead>
+    <tbody>
+      <tr><td>러너 (수딩 25ml + 루트힐 미니 + 파우치)</td><td class="num">약 13,800원</td><td class="num">11,500원</td><td class="num">약 17%</td></tr>
+      <tr><td>캠퍼 (인텐시브 25ml + 로션 미니 + 파우치)</td><td class="num">약 20,200원</td><td class="num">16,900원</td><td class="num">약 16%</td></tr>
+      <tr><td>클리어 (핌프로브 미니 3종)</td><td class="num">약 15,000원</td><td class="num">12,500원</td><td class="num">약 17%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">환산 기준: 다나와 온라인 실판매가 하위권(인텐시브 크림 80ml 약 3.1만 원, 수딩 크림 80ml 약 2.4만 원). 루트힐·핌프로브 미니 가격은 가정.</p>
+
+  <h3 class="tcap">6. 네이버 데이터랩 확인 결과 (2025.10.29~2026.10.29, 일간)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>조회</th><th>관찰 (그래프 판독, 근사치)</th><th>제안서 활용</th></tr></thead>
+    <tbody>
+      <tr><td>남성 · '제로이드' vs '남성스킨케어'</td><td>'제로이드' 지수 대략 45~100, '남성스킨케어' 대략 0~10이며 최근 0~2로 하락. 같은 그래프 안에서 10배 이상 차이</td><td>'왜 ①' 장 제목과 숫자: 남성은 일반어가 아니라 브랜드를 검색</td></tr>
+      <tr><td>남성 · '제로이드'</td><td>1년 내내 대체로 50 이상 유지, 2026년 9~10월 고점(90 안팎)</td><td>남성 자연 수요가 연중 존재한다는 근거</td></tr>
+      <tr><td>여성 · '제로이드'</td><td>대략 35~85, 2026년 7월 중순 하루 급등(100), 5~7월 저점(40 안팎)</td><td>여성은 비교 참고용, 제안서에는 쓰지 않음</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note" style="margin-top:16px"><b>해석할 때 주의할 점</b>
+    <ul>
+      <li>데이터랩 지수는 그래프마다 최댓값을 100으로 다시 맞춘 상대값입니다. 남성 그래프와 여성 그래프를 서로 비교해 "남성이 더 많이 검색한다"고 말할 수는 없습니다.</li>
+      <li>'남성스킨케어'는 사람들이 잘 쓰지 않는 검색어라 차이가 커 보일 수 있습니다. 미팅에서 물으면 "남성은 일반어보다 브랜드명으로 검색한다"는 경향 근거로만 설명합니다.</li>
+      <li>남성 검색 비중(%)이 필요하면 아이템스카우트(로그인)나 네이버 광고 키워드도구의 성별 비중을 확인해야 합니다.</li>
+    </ul>
+  </div>
+
+  <div class="note" style="margin-top:24px"><b>확인하지 못한 데이터와 대체 방법</b>
+    <ul>
+      <li>아이템스카우트, 판다랭크, 마크비전: 로그인이 필요해 접근하지 못했습니다. 직접 로그인해 '제로이드' 월 검색량, 남성 비중, 경쟁 상품 수를 확인하면 2번 시나리오의 적합도 지수를 보정할 수 있습니다.</li>
+      <li>DART 원문: 직접 열람은 막혀 있어 공시 기반 집계 사이트(알파스퀘어·버틀러)의 수치를 썼습니다. 사업보고서의 '주요 제품 매출' 표로 제로이드 비중을 재확인하세요.</li>
+      <li>무신사 뷰티 거래액, 무신사 뷰티 수수료율, 무신사 남성 고객 비중: 공개되지 않았습니다. 미팅에서 MD에게 기준을 묻고 모델을 다시 돌리는 것이 가장 정확합니다.</li>
+      <li>가맹사업거래, 상권정보시스템: 이번 계산(플랫폼 입점·단기 팝업)에는 직접 쓰이는 수치가 없어 사용하지 않았습니다. 상설 매장이나 가맹 출점을 검토할 때 유용합니다.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="defense" style="padding-block:48px">
+  <span class="eyebrow">Defense · 보강팀 대응표</span>
+  <h2>공격 100개에 대한 보강 100개</h2>
+  <p class="lede">올리브영 출신 무신사 MD(공격팀)의 지적 100개를 『기획의 정석』 원칙으로 하나씩 처리했습니다. 기획은 상대의 두려움을 없애는 일이므로, 모든 대응은 "MD님이 무엇을 걱정하는가"에서 출발합니다.</p>
+  <div class="dsum">
+    <div><b>65</b><span>반영 · 제안서를 고침</span></div>
+    <div><b>23</b><span>방어 · 미팅에서 논리로 답함</span></div>
+    <div><b>7</b><span>보완 · 내부 자료가 필요함</span></div>
+    <div><b>5</b><span>수용 · 지적을 인정하고 조정</span></div>
+  </div>
+  <div class="dfilter" role="group" aria-label="판정별 보기">
+    <button type="button" data-f="all" aria-pressed="true">전체</button>
+    <button type="button" data-f="반영" aria-pressed="false">반영</button>
+    <button type="button" data-f="방어" aria-pressed="false">방어</button>
+    <button type="button" data-f="보완" aria-pressed="false">보완</button>
+    <button type="button" data-f="수용" aria-pressed="false">수용</button>
+  </div>
+  <div class="tbl"><table class="dtable">
+    <thead><tr><th>번호</th><th>영역</th><th>공격팀 지적</th><th>판정</th><th>보강 논리</th></tr></thead>
+    <tbody>
+      <tr data-v="반영"><td class="num">001</td><td>첫인상</td><td>차별화된 한 줄이 없다</td><td><span class="vd vd-a">반영</span></td><td>컨셉 &#x27;운동 뒤 단백질 챙기듯, 피부엔 장벽 루틴&#x27; (보조 카피 &#x27;운동 후 3분&#x27;). 남성·운동 회복이라는 무신사 전용 메시지</td></tr>
+      <tr data-v="반영"><td class="num">002</td><td>첫인상</td><td>요청이 희망 사항 수준</td><td><span class="vd vd-a">반영</span></td><td>표지 요청: 2027년 3월 성수 12일 단독 팝업 → 4월 뷰티존·온라인 상설</td></tr>
+      <tr data-v="반영"><td class="num">003</td><td>첫인상</td><td>원하는 시기가 없다</td><td><span class="vd vd-a">반영</span></td><td>2027년 3월, 러닝 시즌 개막에 맞춤</td></tr>
+      <tr data-v="반영"><td class="num">004</td><td>첫인상</td><td>무신사 이득이 추상적</td><td><span class="vd vd-a">반영</span></td><td>&#x27;그래서&#x27; 장: 확정 목표 5.7억 = 1.1 + 4.6억, 단독 매장 진입 시 +4.2억(별도 표기), 하루 120개(12분에 1개)</td></tr>
+      <tr data-v="반영"><td class="num">005</td><td>첫인상</td><td>1,600만 개는 오래된 숫자</td><td><span class="vd vd-a">반영</span></td><td>표지 숫자를 올리브영 더마 7~8위, 성장률 +30%로 교체</td></tr>
+      <tr data-v="반영"><td class="num">006</td><td>첫인상</td><td>12개국 수출은 무의미</td><td><span class="vd vd-a">반영</span></td><td>본문에서 삭제</td></tr>
+      <tr data-v="방어"><td class="num">007</td><td>첫인상</td><td>여전히 길다</td><td><span class="vd vd-b">방어</span></td><td>본문을 왜·무엇을·어떻게·그래서 4묶음으로 나누고 표지에 내비 추가. 바쁜 날은 원페이저만 보셔도 됩니다</td></tr>
+      <tr data-v="반영"><td class="num">008</td><td>첫인상</td><td>올리브영 팝업과 같은 콘셉트</td><td><span class="vd vd-a">반영</span></td><td>장벽을 &#x27;쌓는&#x27; 표현 → 운동 후 &#x27;회복&#x27;으로 변경, 포토월도 러닝 기록판으로</td></tr>
+      <tr data-v="수용"><td class="num">009</td><td>첫인상</td><td>패션 화보 감도 부족</td><td><span class="vd vd-d">수용</span></td><td>미팅 후 무신사 톤 가이드를 받아 팝업·키트 시안에 반영</td></tr>
+      <tr data-v="반영"><td class="num">010</td><td>첫인상</td><td>결정권자가 안 보인다</td><td><span class="vd vd-a">반영</span></td><td>연락처에 브랜드 책임자 기입란 추가 (이름은 내부 확인)</td></tr>
+      <tr data-v="반영"><td class="num">011</td><td>데이터</td><td>무신사 데이터를 무신사에 설명</td><td><span class="vd vd-a">반영</span></td><td>무신사 자체 통계 삭제, 시장·러닝·남성 데이터로 교체</td></tr>
+      <tr data-v="반영"><td class="num">012</td><td>데이터</td><td>다른 브랜드 성과 인용</td><td><span class="vd vd-a">반영</span></td><td>타 브랜드 성장률 삭제, 제로이드 추정치로 대체</td></tr>
+      <tr data-v="반영"><td class="num">013</td><td>데이터</td><td>83.1%와 아웃도어의 비약</td><td><span class="vd vd-a">반영</span></td><td>해당 문장 삭제</td></tr>
+      <tr data-v="반영"><td class="num">014</td><td>데이터</td><td>제로이드 판매 데이터 없음</td><td><span class="vd vd-a">반영</span></td><td>공개 자료: 올리브영 더마 7~8위, +30%, 네오팜 매출의 29%</td></tr>
+      <tr data-v="방어"><td class="num">015</td><td>데이터</td><td>화해 평가는 인원만 있다</td><td><span class="vd vd-b">방어</span></td><td>본문은 판매 순위로 대체, 평점은 별첨 자료로</td></tr>
+      <tr data-v="반영"><td class="num">016</td><td>데이터</td><td>공식몰 리뷰 수가 적어 보인다</td><td><span class="vd vd-a">반영</span></td><td>본문에서 리뷰 수 삭제</td></tr>
+      <tr data-v="방어"><td class="num">017</td><td>데이터</td><td>인용 리뷰가 오래됐다</td><td><span class="vd vd-b">방어</span></td><td>후기는 보조 근거. 팝업 전 체험단 50명으로 최신 후기 확보</td></tr>
+      <tr data-v="수용"><td class="num">018</td><td>데이터</td><td>언론 재인용 수치</td><td><span class="vd vd-d">수용</span></td><td>무신사 공식 수치를 받으면 모델을 다시 계산</td></tr>
+      <tr data-v="반영"><td class="num">019</td><td>데이터</td><td>시장 규모 없음</td><td><span class="vd vd-a">반영</span></td><td>남성 뷰티 1.2조 원, 러닝 인구 1,000만 명</td></tr>
+      <tr data-v="반영"><td class="num">020</td><td>데이터</td><td>기대 카테고리 순위 없음</td><td><span class="vd vd-a">반영</span></td><td>3단계 목표: 더마 카테고리 10위권</td></tr>
+      <tr data-v="반영"><td class="num">021</td><td>채널·가격</td><td>올리브영과 같으면 살 이유가 없다</td><td><span class="vd vd-a">반영</span></td><td>정가 동일 + 무신사 단독 키트 3종 + 측정 체험은 무신사에서만</td></tr>
+      <tr data-v="반영"><td class="num">022</td><td>채널·가격</td><td>올영세일 때 무신사 가격은?</td><td><span class="vd vd-a">반영</span></td><td>주요 행사 가격은 사전 협의 + 최소 기준으로 무신사 단독 행사 연 2회 이상 공동 진행 (동일 조건 보장은 하지 않음)</td></tr>
+      <tr data-v="보완"><td class="num">023</td><td>채널·가격</td><td>올리브영 독점 조건 충돌</td><td><span class="vd vd-c">보완</span></td><td>계약 조건 법무 확인. 단독 키트는 신규 SKU라 기존 계약과 겹치지 않는다는 논리로 방어</td></tr>
+      <tr data-v="반영"><td class="num">024</td><td>채널·가격</td><td>마케팅은 무신사, 매출은 올영</td><td><span class="vd vd-a">반영</span></td><td>&#x27;신규 고객 발견 채널&#x27; 표현 삭제, 무신사 거래액 목표를 금액으로 제시</td></tr>
+      <tr data-v="방어"><td class="num">025</td><td>채널·가격</td><td>병원 고객 이탈</td><td><span class="vd vd-b">방어</span></td><td>의료기기 라인은 병원 전용, 무신사는 일반 라인이라 고객이 나뉨</td></tr>
+      <tr data-v="보완"><td class="num">026</td><td>채널·가격</td><td>네오팜 타 브랜드와 중복</td><td><span class="vd vd-c">보완</span></td><td>무신사 입점 현황 확인. 아토팜은 영유아, 리얼베리어는 데일리 보습으로 역할이 다름</td></tr>
+      <tr data-v="반영"><td class="num">027</td><td>채널·가격</td><td>자사몰 가격과의 관계</td><td><span class="vd vd-a">반영</span></td><td>정가는 전 채널 동일</td></tr>
+      <tr data-v="보완"><td class="num">028</td><td>채널·가격</td><td>최저가 관리 실적 없음</td><td><span class="vd vd-c">보완</span></td><td>영업팀 가격 모니터링 정책을 별첨</td></tr>
+      <tr data-v="방어"><td class="num">029</td><td>채널·가격</td><td>오픈마켓 저가 판매</td><td><span class="vd vd-b">방어</span></td><td>단독 키트는 가격 비교가 불가능한 구성, 본품은 가격 관리 약속</td></tr>
+      <tr data-v="반영"><td class="num">030</td><td>채널·가격</td><td>직매입·위탁 불명</td><td><span class="vd vd-a">반영</span></td><td>온라인 위탁, 오프라인 직매입 희망 명시</td></tr>
+      <tr data-v="방어"><td class="num">031</td><td>채널·가격</td><td>무신사 글로벌 판매</td><td><span class="vd vd-b">방어</span></td><td>2단계 성과 후 검토. 네오팜 해외 판매 경험 보유</td></tr>
+      <tr data-v="방어"><td class="num">032</td><td>채널·가격</td><td>29CM 동시 입점</td><td><span class="vd vd-b">방어</span></td><td>1차는 무신사 집중, 성과 확인 후 협의</td></tr>
+      <tr data-v="반영"><td class="num">033</td><td>제품</td><td>초도 SKU 수 불명</td><td><span class="vd vd-a">반영</span></td><td>본품 10개 SKU + 단독 키트 3개 SKU</td></tr>
+      <tr data-v="방어"><td class="num">034</td><td>제품</td><td>대표 제품 근거 약함</td><td><span class="vd vd-b">방어</span></td><td>수딩은 운동 후 진정이라는 남성 메인 수요에 맞는 진입 제품. 팝업 측정 데이터로 최종 확정</td></tr>
+      <tr data-v="방어"><td class="num">035</td><td>제품</td><td>원래 대표는 인텐시브</td><td><span class="vd vd-b">방어</span></td><td>올리브영 대표는 인텐시브, 무신사 남성 첫 구매는 가벼운 수딩. 인텐시브는 캠퍼 키트로 연결</td></tr>
+      <tr data-v="방어"><td class="num">036</td><td>제품</td><td>루트힐을 넣은 이유</td><td><span class="vd vd-b">방어</span></td><td>모자·땀 두피는 러닝 남성의 실제 고민, 무신사 홍대 두피 존과 연결. 효능 표현은 보습 수준으로 낮춤</td></tr>
+      <tr data-v="방어"><td class="num">037</td><td>제품</td><td>핌프로브 가격 경쟁</td><td><span class="vd vd-b">방어</span></td><td>클리어 키트 12,500원으로 진입가를 낮춤</td></tr>
+      <tr data-v="방어"><td class="num">038</td><td>제품</td><td>선케어가 빠짐</td><td><span class="vd vd-b">방어</span></td><td>팝업은 4종 집중, 선케어는 3단계 라인 확장 후보</td></tr>
+      <tr data-v="반영"><td class="num">039</td><td>제품</td><td>가격 정보 없음</td><td><span class="vd vd-a">반영</span></td><td>본품 2~3만 원대, 키트 1만 원대</td></tr>
+      <tr data-v="반영"><td class="num">040</td><td>제품</td><td>대용량이 부담</td><td><span class="vd vd-a">반영</span></td><td>1만 원대 휴대 키트로 첫 구매 부담 해소</td></tr>
+      <tr data-v="방어"><td class="num">041</td><td>제품</td><td>패키지가 의약품 같다</td><td><span class="vd vd-b">방어</span></td><td>메디컬 패키지는 신뢰 신호. 키트 파우치로 감도 보완</td></tr>
+      <tr data-v="반영"><td class="num">042</td><td>제품</td><td>신제품·선론칭 카드 없음</td><td><span class="vd vd-a">반영</span></td><td>단독 키트 3종 + 웰컴 기프트가 &#x27;오직 무신사&#x27; 카드</td></tr>
+      <tr data-v="반영"><td class="num">043</td><td>제품</td><td>사용감 설명 없음</td><td><span class="vd vd-a">반영</span></td><td>&#x27;빠르게 흡수&#x27; 등 사용감 문구 추가. 상세 사용감 표는 보완</td></tr>
+      <tr data-v="방어"><td class="num">044</td><td>제품</td><td>남성용 제품이 없다</td><td><span class="vd vd-b">방어</span></td><td>성별 구분 없는 저자극이 장점. 키트와 남성 그루밍 동선 진열로 남성화</td></tr>
+      <tr data-v="반영"><td class="num">045</td><td>제품</td><td>라인 비교표 없음</td><td><span class="vd vd-a">반영</span></td><td>&#x27;고민 1개 = 제품 1개&#x27; 구조. 직원 교육용 비교표는 별도 준비</td></tr>
+      <tr data-v="반영"><td class="num">046</td><td>효능·규제</td><td>시험 조건 미기재</td><td><span class="vd vd-a">반영</span></td><td>별첨 C에 실증 요약표(기관·인원·기간 기입란) 추가</td></tr>
+      <tr data-v="반영"><td class="num">047</td><td>효능·규제</td><td>54% 표현 심의</td><td><span class="vd vd-a">반영</span></td><td>보고서 범위 안의 문구만 사용, 사내 RA 검토 후 전달</td></tr>
+      <tr data-v="반영"><td class="num">048</td><td>효능·규제</td><td>&#x27;병의원이 검증한&#x27; 리스크</td><td><span class="vd vd-a">반영</span></td><td>&#x27;병·의원 20년&#x27;(판매 이력 사실)으로 교체</td></tr>
+      <tr data-v="반영"><td class="num">049</td><td>효능·규제</td><td>&#x27;피부과가 먼저 고른&#x27; 리스크</td><td><span class="vd vd-a">반영</span></td><td>삭제</td></tr>
+      <tr data-v="반영"><td class="num">050</td><td>효능·규제</td><td>&#x27;진단&#x27;은 의료행위 오인</td><td><span class="vd vd-a">반영</span></td><td>&#x27;측정&#x27;으로 통일</td></tr>
+      <tr data-v="반영"><td class="num">051</td><td>효능·규제</td><td>주름·기미 연결 오인</td><td><span class="vd vd-a">반영</span></td><td>웰니스 페르소나 삭제 (남성 메인 전환)</td></tr>
+      <tr data-v="수용"><td class="num">052</td><td>효능·규제</td><td>루트힐 두피 장벽 근거</td><td><span class="vd vd-d">수용</span></td><td>&#x27;건조한 두피 보습&#x27; 수준으로 표현을 낮춤</td></tr>
+      <tr data-v="방어"><td class="num">053</td><td>효능·규제</td><td>무첨가 표현 가이드</td><td><span class="vd vd-b">방어</span></td><td>&#x27;배제 성분&#x27;은 공식 자료 표현. 상세페이지는 가이드에 맞춰 조정</td></tr>
+      <tr data-v="보완"><td class="num">054</td><td>효능·규제</td><td>MLE를 이해하기 어렵다</td><td><span class="vd vd-c">보완</span></td><td>&#x27;피부 지질 구조를 닮게 설계한 기술&#x27; 한 줄 설명을 상세페이지에 추가</td></tr>
+      <tr data-v="반영"><td class="num">055</td><td>효능·규제</td><td>&#x27;엠디&#x27; 상품명 혼동</td><td><span class="vd vd-a">반영</span></td><td>상품 리스트는 일반 라인만, 의료기기 제외 명시</td></tr>
+      <tr data-v="반영"><td class="num">056</td><td>고객</td><td>페르소나 근거 비약</td><td><span class="vd vd-a">반영</span></td><td>남성 후기 중심으로 교체, 장면은 &#x27;구성 예시&#x27;로 표기</td></tr>
+      <tr data-v="반영"><td class="num">057</td><td>고객</td><td>아웃도어 근거 0</td><td><span class="vd vd-a">반영</span></td><td>러닝 인구 1,000만, 가민 +61%, 29CM 러닝 +130% + 체험단 50명</td></tr>
+      <tr data-v="방어"><td class="num">058</td><td>고객</td><td>무신사 주 고객은 여성</td><td><span class="vd vd-b">방어</span></td><td>여성 스킨케어는 이미 경쟁 과열. 무신사는 남성 패션 고객에서 출발했고, 러닝화를 산 남성이 스킨케어로 넘어올 동선이 비어 있음</td></tr>
+      <tr data-v="반영"><td class="num">059</td><td>고객</td><td>그룹별 규모 없음</td><td><span class="vd vd-a">반영</span></td><td>매출 목표 비중 메인 60% : 확장 40%</td></tr>
+      <tr data-v="반영"><td class="num">060</td><td>고객</td><td>러너가 무신사 뷰티를 사나</td><td><span class="vd vd-a">반영</span></td><td>29CM 러닝 의류 +130%로 러닝 고객 존재 확인. 구매 전환은 팝업으로 검증</td></tr>
+      <tr data-v="방어"><td class="num">061</td><td>고객</td><td>여정이 비현실적</td><td><span class="vd vd-b">방어</span></td><td>한 사람이 다 쓰는 게 아니라 순간마다 하나씩. 첫 구매는 키트 1개</td></tr>
+      <tr data-v="수용"><td class="num">062</td><td>고객</td><td>외국인 고객 누락</td><td><span class="vd vd-d">수용</span></td><td>성수 외국인 고객은 영문 안내 카드로 부가 대응</td></tr>
+      <tr data-v="반영"><td class="num">063</td><td>고객</td><td>30~40대 여성은 핵심 아님</td><td><span class="vd vd-a">반영</span></td><td>삭제</td></tr>
+      <tr data-v="반영"><td class="num">064</td><td>고객</td><td>직업 설정이 꾸민 느낌</td><td><span class="vd vd-a">반영</span></td><td>삭제</td></tr>
+      <tr data-v="반영"><td class="num">065</td><td>고객</td><td>구매 장벽 분석 없음</td><td><span class="vd vd-a">반영</span></td><td>5Why 사슬로 진짜 원인 도출: 근거·싸게 써 볼 기회·바를 순간</td></tr>
+      <tr data-v="반영"><td class="num">066</td><td>팝업</td><td>장소가 모호</td><td><span class="vd vd-a">반영</span></td><td>단독 팝업으로 확정</td></tr>
+      <tr data-v="반영"><td class="num">067</td><td>팝업</td><td>부스 규모 근거</td><td><span class="vd vd-a">반영</span></td><td>30평 공간 기준, 하루 800명·평균 체류 15분이면 동시 체류 약 20명</td></tr>
+      <tr data-v="반영"><td class="num">068</td><td>팝업</td><td>측정 대기 줄</td><td><span class="vd vd-a">반영</span></td><td>2석 × 시간당 20명 = 하루 최대 400명, 목표 240명으로 여유 40%</td></tr>
+      <tr data-v="수용"><td class="num">069</td><td>팝업</td><td>세면대 급배수</td><td><span class="vd vd-d">수용</span></td><td>클렌징 티슈 체험대로 변경, 공사 없음</td></tr>
+      <tr data-v="반영"><td class="num">070</td><td>팝업</td><td>포토월 재탕</td><td><span class="vd vd-a">반영</span></td><td>러닝 기록 포토월로 변경</td></tr>
+      <tr data-v="반영"><td class="num">071</td><td>팝업</td><td>팝업 예산 불명</td><td><span class="vd vd-a">반영</span></td><td>1.6억 원 전액 제로이드 부담</td></tr>
+      <tr data-v="반영"><td class="num">072</td><td>팝업</td><td>집객 계획</td><td><span class="vd vd-a">반영</span></td><td>러닝 크루 체험단 50명, 인플루언서 예산 3,000만 원</td></tr>
+      <tr data-v="반영"><td class="num">073</td><td>팝업</td><td>팝업 혜택 미정</td><td><span class="vd vd-a">반영</span></td><td>웰컴 기프트 3,000명, 키트 가격 확정안</td></tr>
+      <tr data-v="반영"><td class="num">074</td><td>팝업</td><td>운영 인력</td><td><span class="vd vd-a">반영</span></td><td>5명 × 12일 (내부 예산표)</td></tr>
+      <tr data-v="방어"><td class="num">075</td><td>팝업</td><td>남은 재고</td><td><span class="vd vd-b">방어</span></td><td>키트 잔량은 무신사 온라인 단독으로 전환 판매</td></tr>
+      <tr data-v="반영"><td class="num">076</td><td>키트</td><td>기프트 원가·수량</td><td><span class="vd vd-a">반영</span></td><td>3,000개 × 2,000원 = 600만 원</td></tr>
+      <tr data-v="반영"><td class="num">077</td><td>키트</td><td>앱 첫 구매 혜택은 무신사 권한</td><td><span class="vd vd-a">반영</span></td><td>&#x27;팝업 방문 앱 회원 3,000명 한정&#x27;으로 수정, 첫 구매 연계는 무신사 제안 시</td></tr>
+      <tr data-v="방어"><td class="num">078</td><td>키트</td><td>파우치 샘플은 흔하다</td><td><span class="vd vd-b">방어</span></td><td>4종 한 세트는 무신사에서만, 측정 결과 카드와 함께 제공</td></tr>
+      <tr data-v="반영"><td class="num">079</td><td>키트</td><td>키트 판매가 없음</td><td><span class="vd vd-a">반영</span></td><td>러너 11,500 · 클리어 12,500 · 캠퍼 16,900원</td></tr>
+      <tr data-v="보완"><td class="num">080</td><td>키트</td><td>미니 용량 생산</td><td><span class="vd vd-c">보완</span></td><td>기존 25ml 우선. 신규 미니는 12월 2주 발주 → 2월 말 입고(약 10~12주 가정), 일정이 안 맞는 클리어 키트는 4월 온라인 출시</td></tr>
+      <tr data-v="방어"><td class="num">081</td><td>키트</td><td>방수 파우치가 평범</td><td><span class="vd vd-b">방어</span></td><td>2단계에서 무신사 입점 아웃도어 브랜드와 협업 파우치 제안</td></tr>
+      <tr data-v="방어"><td class="num">082</td><td>키트</td><td>키트 3종은 많다</td><td><span class="vd vd-b">방어</span></td><td>측정 결과 3갈래와 1:1로 맞춘 구성. 부진 키트는 2단계에서 정리</td></tr>
+      <tr data-v="반영"><td class="num">083</td><td>키트</td><td>단독 기간 약속 없음</td><td><span class="vd vd-a">반영</span></td><td>최소 12개월</td></tr>
+      <tr data-v="반영"><td class="num">084</td><td>KPI</td><td>측정 2,000명 근거</td><td><span class="vd vd-a">반영</span></td><td>방문 9,600명 × 30% = 2,880명, 처리 용량 4,800명의 60%</td></tr>
+      <tr data-v="방어"><td class="num">085</td><td>KPI</td><td>쿠폰 사용률 15% 근거</td><td><span class="vd vd-b">방어</span></td><td>측정 고객은 이미 체험한 고관여 고객. 무신사 평균을 알려주시면 조정</td></tr>
+      <tr data-v="반영"><td class="num">086</td><td>KPI</td><td>거래액 +100%는 불성립</td><td><span class="vd vd-a">반영</span></td><td>금액 목표로 교체: 팝업 기간 거래액 1억 원</td></tr>
+      <tr data-v="반영"><td class="num">087</td><td>KPI</td><td>리뷰 이벤트 비용</td><td><span class="vd vd-a">반영</span></td><td>제로이드 부담 명시</td></tr>
+      <tr data-v="반영"><td class="num">088</td><td>KPI</td><td>재구매 목표 없음</td><td><span class="vd vd-a">반영</span></td><td>90일 재구매율 20%</td></tr>
+      <tr data-v="반영"><td class="num">089</td><td>KPI</td><td>3단계를 브랜드가 요구</td><td><span class="vd vd-a">반영</span></td><td>&#x27;무신사 판단 시&#x27;로 명시</td></tr>
+      <tr data-v="반영"><td class="num">090</td><td>KPI</td><td>단계별 기간 없음</td><td><span class="vd vd-a">반영</span></td><td>2027.3 / 4~9월 / 10월~</td></tr>
+      <tr data-v="반영"><td class="num">091</td><td>KPI</td><td>월 매출 목표 없음</td><td><span class="vd vd-a">반영</span></td><td>월 4,700만 → 1억 → 1.4억 원</td></tr>
+      <tr data-v="방어"><td class="num">092</td><td>거래·문서</td><td>마진·공급률 없음</td><td><span class="vd vd-b">방어</span></td><td>본문은 &#x27;미팅 협의&#x27;. 내부 기준(수수료 22%, 양보선 25%) 보유</td></tr>
+      <tr data-v="반영"><td class="num">093</td><td>거래·문서</td><td>MFS 사용 여부</td><td><span class="vd vd-a">반영</span></td><td>MFS 입고 희망</td></tr>
+      <tr data-v="반영"><td class="num">094</td><td>거래·문서</td><td>광고 집행 의향</td><td><span class="vd vd-a">반영</span></td><td>런칭 6개월 월 거래액의 10%</td></tr>
+      <tr data-v="보완"><td class="num">095</td><td>거래·문서</td><td>정가·바코드 빈칸</td><td><span class="vd vd-c">보완</span></td><td>정식 견적과 함께 전달</td></tr>
+      <tr data-v="보완"><td class="num">096</td><td>거래·문서</td><td>연락처 빈칸</td><td><span class="vd vd-c">보완</span></td><td>발송 전 기입</td></tr>
+      <tr data-v="반영"><td class="num">097</td><td>거래·문서</td><td>별첨 C 대부분 빈칸</td><td><span class="vd vd-a">반영</span></td><td>공개 수치로 일부 채움, 나머지는 &#x27;정식 견적 시 제공&#x27;</td></tr>
+      <tr data-v="반영"><td class="num">098</td><td>거래·문서</td><td>포지셔닝 &#x27;제안자 해석&#x27;</td><td><span class="vd vd-a">반영</span></td><td>&#x27;카테고리 유형 기준&#x27;으로 문구 수정</td></tr>
+      <tr data-v="반영"><td class="num">099</td><td>거래·문서</td><td>출처가 너무 많다</td><td><span class="vd vd-a">반영</span></td><td>슬라이드마다 한 줄로 줄임</td></tr>
+      <tr data-v="반영"><td class="num">100</td><td>거래·문서</td><td>PDF 없이는 결재 불가</td><td><span class="vd vd-a">반영</span></td><td>인쇄용 스타일 추가: 브라우저 인쇄로 PDF 저장 시 슬라이드당 1쪽</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="tcap">『기획의 정석』을 제안서 어디에 적용했나</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>원칙·기법</th><th>뜻</th><th>제안서 적용 위치</th></tr></thead>
+    <tbody>
+      <tr><td>기획 = 두려움 제거</td><td>상대가 걱정하는 것을 먼저 없애 준다</td><td>'어떻게 ②' 걱정 6가지와 약속</td></tr>
+      <tr><td>4가지 질문</td><td>왜 → 무엇을 → 어떻게 → 그래서 뭐가 달라지나</td><td>표지 내비, 모든 슬라이드 제목표</td></tr>
+      <tr><td>5Y</td><td>'왜'를 다섯 번 이어 물어 진짜 원인을 찾는다</td><td>'왜 ①' 5단계 사슬 → 진짜 원인 3가지</td></tr>
+      <tr><td>쪼개기</td><td>큰 덩어리를 작게 나눠 구체화한다</td><td>원인 3갈래(신뢰·시작·습관), 확정 목표 5.7억 = 1.1 + 4.6억, 진입 시 +4.2억</td></tr>
+      <tr><td>숫자</td><td>체감되는 숫자로 바꾼다</td><td>하루 120개 = 12분에 1개, 러닝 인구 1,000만 명</td></tr>
+      <tr><td>연결</td><td>상대가 이미 아는 것에 잇는다</td><td>'운동 뒤 단백질을 챙기듯', '러닝화를 산 바로 그 고객'</td></tr>
+      <tr><td>감성</td><td>한 사람의 장면으로 공감을 만든다</td><td>토요일 10km를 뛴 31살 도윤 씨 장면</td></tr>
+      <tr><td>비교</td><td>전후·대상 비교로 차이를 보인다</td><td>올리브영 vs 무신사 표, 지금 vs 입점 후 10개월</td></tr>
+      <tr><td>수사</td><td>기억에 남는 한 줄을 만든다</td><td>'운동 뒤 단백질 챙기듯, 피부엔 장벽 루틴', '근육은 단백질로, 피부는 장벽으로', '씻고, 바르고, 끝'</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="attack2" style="padding-block:48px">
+  <span class="eyebrow">Round 2 · 2차 공격 대응</span>
+  <h2>2차 공격 30개, 3차 보강 결과</h2>
+  <div class="dsum">
+    <div><b>16</b><span>해결</span></div>
+    <div><b>4</b><span>부분 해결</span></div>
+    <div><b>6</b><span>미팅에서 방어</span></div>
+    <div><b>4</b><span>다음 라운드</span></div>
+  </div>
+  <div class="tbl"><table class="dtable">
+    <thead><tr><th>번호</th><th>영역</th><th>2차 지적</th><th>상태</th><th>보강 내용</th></tr></thead>
+    <tbody>
+      <tr><td class="num">01</td><td>근거</td><td>올리브영 남성 회원 수치는 올영의 근거</td><td><span class="vd vd-a">해결</span></td><td>올영 수치 삭제, 네이버 데이터랩 남성 검색(제로이드 &gt; 남성스킨케어 10배 이상)으로 교체</td></tr>
+      <tr><td class="num">02</td><td>근거</td><td>29CM 러닝 기사는 여성 중심</td><td><span class="vd vd-a">해결</span></td><td>&#x27;남녀 전체&#x27;로 표기, 확장 타깃 근거로만 사용</td></tr>
+      <tr><td class="num">03</td><td>근거</td><td>남성 후기가 1건</td><td><span class="vd vd-c">부분</span></td><td>데이터랩 남성 검색 근거 추가. 후기는 팝업 전 체험단 50명으로 확보 예정</td></tr>
+      <tr><td class="num">04</td><td>근거</td><td>&#x27;러닝화를 산 그 고객&#x27;은 상상</td><td><span class="vd vd-a">해결</span></td><td>&#x27;러닝화를 고르는 바로 그런 고객&#x27;으로 수정, 장면 예시 표기 유지</td></tr>
+      <tr><td class="num">05</td><td>근거</td><td>5Why가 끝까지 가설</td><td><span class="vd vd-c">부분</span></td><td>데이터랩 검색 행동이 &#x27;믿을 근거&#x27; 원인을 뒷받침. 팝업 측정 설문으로 검증</td></tr>
+      <tr><td class="num">06</td><td>근거</td><td>올영 7~8위 기준 불명</td><td><span class="vd vd-b">방어</span></td><td>하나증권 리포트 인용(2025년 말)으로 출처 표기. 정확한 기준은 내부 확인</td></tr>
+      <tr><td class="num">07</td><td>근거</td><td>실적과 전망 혼재</td><td><span class="vd vd-a">해결</span></td><td>전망치는 &#x27;전망&#x27;으로 표기</td></tr>
+      <tr><td class="num">08</td><td>숫자</td><td>모든 숫자가 8% 가정에 의존</td><td><span class="vd vd-a">해결</span></td><td>&#x27;그래서&#x27; 장에 계산기 추가: MD가 무신사 실제 비율을 넣으면 월 거래액·확정 목표·하루 판매가 바로 바뀜</td></tr>
+      <tr><td class="num">09</td><td>숫자</td><td>9.9억에 3단계 매출 포함</td><td><span class="vd vd-a">해결</span></td><td>확정 목표 5.7억과 &#x27;진입 시 +4.2억&#x27; 분리</td></tr>
+      <tr><td class="num">10</td><td>숫자</td><td>팝업 투자 대비 거래액 0.65배</td><td><span class="vd vd-b">방어</span></td><td>팝업은 신규 고객 획득 투자. 본사 예산 승인은 발송 전 내부 확인</td></tr>
+      <tr><td class="num">11</td><td>숫자</td><td>재구매율 20%·쿠폰 15% 근거</td><td><span class="vd vd-b">방어</span></td><td>측정 고객은 고관여 고객. 무신사 평균을 받아 조정</td></tr>
+      <tr><td class="num">12</td><td>숫자</td><td>광고비가 매출 연동</td><td><span class="vd vd-a">해결</span></td><td>월 거래액의 10%, 최소 월 500만 원</td></tr>
+      <tr><td class="num">13</td><td>숫자</td><td>표지 숫자가 우리 투자액</td><td><span class="vd vd-a">해결</span></td><td>표지 숫자를 &#x27;확정 목표 거래액 5.7억 원&#x27;으로 교체</td></tr>
+      <tr><td class="num">14</td><td>컨셉</td><td>단백질 비유의 효능 오인</td><td><span class="vd vd-a">해결</span></td><td>&#x27;회복&#x27; 대신 &#x27;챙긴다&#x27;로 수정, 단백질 비유는 매장·캠페인 카피 한정, 상세페이지 효능 문구 사용 금지 명시</td></tr>
+      <tr><td class="num">15</td><td>컨셉</td><td>메시지가 너무 많다</td><td><span class="vd vd-c">부분</span></td><td>대표 카피를 &#x27;운동 뒤 단백질 챙기듯, 피부엔 장벽 루틴&#x27; 하나로 통일. 보조 메시지 정리는 다음 라운드</td></tr>
+      <tr><td class="num">16</td><td>컨셉</td><td>메인 페르소나가 둘</td><td><span class="vd vd-d">남음</span></td><td>다음 라운드에서 메인 1명(30대 러너) 중심으로 정리 예정</td></tr>
+      <tr><td class="num">17</td><td>컨셉</td><td>운동 안 하는 남성 배제</td><td><span class="vd vd-b">방어</span></td><td>1단계는 집중이 목적. 비운동 남성은 수딩 크림 본품으로 3단계에서 확장</td></tr>
+      <tr><td class="num">18</td><td>실행</td><td>신규 미니 생산 일정 촉박</td><td><span class="vd vd-a">해결</span></td><td>역산 일정표 추가: 12월 2주 발주 → 2월 말 입고. 신규 미니가 필요한 클리어 키트는 4월 온라인 출시</td></tr>
+      <tr><td class="num">19</td><td>실행</td><td>팝업 장소 미확보</td><td><span class="vd vd-c">부분</span></td><td>12월 2주까지 무신사 성수 공간 우선 협의, 불가 시 외부 대관 확정</td></tr>
+      <tr><td class="num">20</td><td>실행</td><td>측정 결과가 효능처럼 보임</td><td><span class="vd vd-a">해결</span></td><td>&#x27;피부 상태 참고용, 효능 보장 아님&#x27; 안내 문구</td></tr>
+      <tr><td class="num">21</td><td>실행</td><td>웰컴 기프트 기준 불명</td><td><span class="vd vd-a">해결</span></td><td>측정 참여 + 앱 회원 인증 선착순 3,000명(하루 250개)</td></tr>
+      <tr><td class="num">22</td><td>실행</td><td>1단계 직매입은 부담</td><td><span class="vd vd-a">해결</span></td><td>팝업은 제로이드 재고 + 무신사 앱 결제, 직매입은 2단계 성과 후 협의</td></tr>
+      <tr><td class="num">23</td><td>실행</td><td>두피 존은 홍대 이야기</td><td><span class="vd vd-a">해결</span></td><td>&#x27;홍대 매장처럼 성수에서도 같은 고민 존을&#x27;로 논리 수정</td></tr>
+      <tr><td class="num">24</td><td>실행</td><td>행사 협의는 미루기</td><td><span class="vd vd-a">해결</span></td><td>최소 기준: 무신사 단독 행사 연 2회 이상</td></tr>
+      <tr><td class="num">25</td><td>문서</td><td>별첨 C 빈칸</td><td><span class="vd vd-d">남음</span></td><td>정가·바코드·시험 조건은 내부 자료로 채움</td></tr>
+      <tr><td class="num">26</td><td>문서</td><td>아직 길다</td><td><span class="vd vd-d">남음</span></td><td>다음 라운드에서 압축 검토</td></tr>
+      <tr><td class="num">27</td><td>문서</td><td>경쟁 브랜드 실명 없음</td><td><span class="vd vd-b">방어</span></td><td>실명 비교는 반박 소지가 커서 유형으로 표기, 미팅에서 구두 설명</td></tr>
+      <tr><td class="num">28</td><td>문서</td><td>수수료 &#x27;협의&#x27;뿐</td><td><span class="vd vd-b">방어</span></td><td>내부 기준(22%, 양보선 25%) 보유, 미팅에서 제시</td></tr>
+      <tr><td class="num">29</td><td>문서</td><td>원페이저 순서 불일치</td><td><span class="vd vd-d">남음</span></td><td>다음 라운드에서 4가지 질문 순서로 재정렬</td></tr>
+      <tr><td class="num">30</td><td>문서</td><td>외국인 대응 없음</td><td><span class="vd vd-a">해결</span></td><td>웰컴 데스크 영문 안내 카드 비치</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="tcap">컨셉 카피 사용 기준 (14번 대응)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>구분</th><th>쓸 수 있는 곳·표현</th><th>쓰지 않는 표현</th></tr></thead>
+    <tbody>
+      <tr><td>대표 카피</td><td>제안서, 팝업 사이니지, SNS 캠페인: "운동 뒤 단백질 챙기듯, 피부엔 장벽 루틴"</td><td>상세페이지 효능 영역</td></tr>
+      <tr><td>보조 카피</td><td>"근육은 단백질로 챙기고, 피부는 장벽 케어로 챙깁니다", "씻고, 바르고, 끝"</td><td>"피부에 단백질·영양 공급", "피부를 회복·재생시킨다"</td></tr>
+      <tr><td>효능 문구</td><td>시험 보고서 범위 안의 수치만, 사내 인허가 검토 후</td><td>"치료", "진단", "병원이 검증한"</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="qa">
+  <span class="eyebrow">Q&amp;A · 예상 질문과 답변</span>
+  <h2>무신사 MD가 물어볼 30가지 질문</h2>
+  <p class="lede">미팅에서 나올 질문을 미리 정리했습니다. <em style="font-style:normal;font-family:var(--mono);font-size:12px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:0 6px">내부 확인</em> 표시는 회사 자료로 숫자와 조건을 채운 뒤 정식 회신할 항목입니다.</p>
+  <div class="qa-principles">
+    <div><b>숫자와 조건은 약속하지 않기</b>가격, 마진, 물량, 예산은 "확인 후 정식 회신"으로 넘기고 회신 날짜를 함께 말합니다.</div>
+    <div><b>약점은 먼저 인정하기</b>아웃도어 근거 부족, 기능성 표현 한계는 먼저 말하고 검증 계획으로 연결합니다.</div>
+    <div><b>무신사의 이득으로 끝내기</b>신규 고객, 더마 카테고리 강화, 단독 상품으로 답을 마무리합니다.</div>
+  </div>
+  <div class="qa-tools"><button type="button" id="qa-open">모두 펼치기</button><button type="button" id="qa-close">모두 접기</button></div>
+  <div class="qa-group"><h3>채널 전략·차별성</h3>
+    <details open><summary><span class="q">Q01</span><span>올리브영에 이미 있는데, 무신사만의 차별점은?</span></summary><p class="a">올리브영은 제로이드를 이미 아는 고객이 재구매하는 채널이고, 무신사는 제로이드를 모르는 2030 남녀와 아웃도어 고객을 새로 만나는 채널입니다. 무신사에는 타 채널에 없는 단독 키트, 아웃도어 루틴 큐레이션, 피부·두피 측정 체험을 따로 준비합니다.</p></details>
+    <details open><summary><span class="q">Q02</span><span>병의원 채널과 가격이 충돌하지 않나?</span></summary><p class="a">병원 전용 MD(의료기기) 라인과 일반 유통 라인을 구분해 운영하고 있으며, 무신사에는 일반 유통 라인과 단독 구성으로 들어갑니다. 구체적인 가격 정책은 확인 후 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q03</span><span>오픈마켓 가격이 더 낮으면?</span></summary><p class="a">단품 가격 경쟁 대신 무신사 단독 구성으로 직접 비교가 어렵게 만들겠습니다. 오픈마켓 가격은 영업팀에서 별도로 관리합니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q04</span><span>무신사 고객층과 제로이드 고객층이 다르지 않나?</span></summary><p class="a">그래서 이번 제안의 목적은 고객층 확장입니다. 무신사 뷰티 신규 고객의 83.1%가 기존 패션 고객이라, 아웃도어 의류 고객이 피부·두피 케어로 넘어오는 동선이 이미 있습니다. 저자극 장벽 케어라 남성 고객의 진입 장벽도 낮습니다.</p></details>
+    <details open><summary><span class="q">Q05</span><span>네오팜 다른 브랜드와 겹치지 않나?</span></summary><p class="a">아토팜은 영유아, 리얼베리어는 데일리 장벽 보습 중심입니다. 제로이드는 병의원 기반 메디컬 포지션이라 더마 카테고리에서 역할이 다릅니다. 브랜드별 포지셔닝 자료를 별첨하겠습니다.<em>내부 확인</em></p></details>
+  </div>
+  <div class="qa-group"><h3>상품·가격·단독 구성</h3>
+    <details open><summary><span class="q">Q06</span><span>판매가, 공급가, 마진 구조는?</span></summary><p class="a">판매가는 정가표와 같습니다. 공급가와 마진은 거래 방식(직매입/위탁)에 따라 달라지므로 방식이 정해지면 정식 견적으로 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q07</span><span>단독 구성은 어떤 SKU이고 언제 가능한가?</span></summary><p class="a">기존 제품 조합 기획 세트로 생각하고 있습니다. 예를 들어 수딩 크림과 루트힐 샴푸 미니의 '러너 키트', 인텐시브 크림과 로션의 '캠퍼 키트'입니다. 기존 제품 조합이라 빠르게 준비할 수 있고, 단독 패키지는 일정을 따로 협의합니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q08</span><span>선론칭 가능한 신제품이 있나?</span></summary><p class="a">출시 예정 제품이 있으면 무신사 선론칭을 우선 검토하겠습니다. 일정은 확인 후 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q09</span><span>대표 1품과 근거는?</span></summary><p class="a">수딩 크림입니다. 공식몰 리뷰가 가장 많고(143건), 민감·진정은 남녀 모두의 고민이며, 아웃도어 일주일 동선에서 가장 자주 쓰입니다. 1단계 팝업 측정 데이터로 최종 확정합니다.</p></details>
+    <details open><summary><span class="q">Q10</span><span>패키지 감도와 굿즈 협업 의향은?</span></summary><p class="a">메디컬 패키지는 신뢰 요소라 본품 디자인은 유지합니다. 단독 키트 파우치, 러닝 크루용 굿즈 등 무신사 감도에 맞는 협업은 적극 검토하겠습니다.</p></details>
+  </div>
+  <div class="qa-group"><h3>효능 근거·규제</h3>
+    <details open><summary><span class="q">Q11</span><span>인체적용시험 수치를 증빙할 수 있나?</span></summary><p class="a">모든 수치는 인체적용시험 결과이며, 시험기관·대상 인원·시험 기간이 담긴 보고서 원문을 별첨으로 드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q12</span><span>주름·기미 표현은 괜찮은가?</span></summary><p class="a">주력 4종은 미백·주름 기능성 제품이 아니어서 '개선' 표현은 쓰지 않습니다. '고기능 노화 관리 루틴의 자극 부담을 덜어주는 장벽 케어', '자외선 차단과 함께하는 기미 예방'으로만 표현하고, 모든 문구는 사내 RA 검토를 거칩니다.</p></details>
+    <details open><summary><span class="q">Q13</span><span>루트힐의 두피 효능 근거는?</span></summary><p class="a">MLE®와 세라마이드HS로 두피 장벽을 케어하는 라인이며, 두피 시험 자료는 확인 후 별첨하겠습니다. 탈모 관련 표현은 사용하지 않습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q14</span><span>의료기기 제품과 화장품 구분은?</span></summary><p class="a">이번 제안 4종은 모두 화장품입니다. 의료기기(MD) 제품은 병원 전용으로 두고 입점 대상에서 제외했습니다.</p></details>
+  </div>
+  <div class="qa-group"><h3>고객·페르소나 근거</h3>
+    <details open><summary><span class="q">Q15</span><span>페르소나는 데이터 기반인가?</span></summary><p class="a">공식몰 실구매 리뷰에서 반복되는 사용 상황을 바탕으로 만들었습니다. 아웃도어 페르소나는 가설 단계이며, 이를 검증하는 것이 1단계 팝업의 목적 중 하나입니다.</p></details>
+    <details open><summary><span class="q">Q16</span><span>남성·아웃도어 고객 근거가 있나?</span></summary><p class="a">남성 여드름·수부지 개선 리뷰는 공식몰에 있습니다. 아웃도어는 근거가 부족해 팝업 전 러닝 크루 체험단으로 후기를 먼저 확보하겠습니다.</p></details>
+    <details open><summary><span class="q">Q17</span><span>현재 고객의 성별·연령 분포는?</span></summary><p class="a">자사몰과 CRM 데이터를 확인해 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q18</span><span>재구매 데이터가 있나?</span></summary><p class="a">누적 판매 1,600만 개와 리뷰의 '수년째 사용', '정착템' 표현이 재구매 지표입니다. 정량 재구매율은 내부 데이터 확인 후 회신드리겠습니다.<em>내부 확인</em></p></details>
+  </div>
+  <div class="qa-group"><h3>팝업·오프라인 운영</h3>
+    <details open><summary><span class="q">Q19</span><span>팝업 기간, 규모, 예산은?</span></summary><p class="a">성수 단독 팝업 기준 10~14일, 또는 무뷰페 부스 참여를 희망합니다. 규모와 예산은 무신사의 공간 조건을 받은 뒤 확정하겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q20</span><span>인테리어와 운영 인력은 누가 부담하나?</span></summary><p class="a">부스 제작, 운영 인력, 샘플은 브랜드 부담이 기본입니다. 무신사의 공간·집객 지원 범위를 알려주시면 분담안을 정리하겠습니다.</p></details>
+    <details open><summary><span class="q">Q21</span><span>측정 장비와 전문 인력이 있나?</span></summary><p class="a">피부 수분·유분 측정기와 두피 측정기를 준비하고, 교육받은 브랜드 직원이 상담합니다. 결과는 의학적 측정이 아닌 제품 추천용임을 안내합니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q22</span><span>브랜드 자체 마케팅 계획은?</span></summary><p class="a">러닝·아웃도어 인플루언서 체험, 러닝 크루 사전 체험단, 제로이드 인스타그램 홍보를 계획합니다. 예산은 확인 후 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q23</span><span>상설 진열 공간 요구 조건은?</span></summary><p class="a">스킨케어·더마 존 곤돌라 1면을 희망하고, 가능하면 남성 그루밍 동선에 핌프로브·루트힐 추가 진열을 요청드립니다.</p></details>
+  </div>
+  <div class="qa-group"><h3>물류·재고·거래 조건</h3>
+    <details open><summary><span class="q">Q24</span><span>직매입과 위탁 중 무엇을 원하나? 초도 물량·반품은?</span></summary><p class="a">1단계는 반응 검증이 목적이라 위탁 또는 소량 직매입을, 2단계부터 직매입 확대를 희망합니다. 초도 물량과 반품 조건은 정식 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q25</span><span>MFS와 무배당발 대응이 가능한가?</span></summary><p class="a">MFS 사용을 긍정적으로 검토하겠습니다. 무배당발 적용을 위한 입고 조건을 알려주시면 맞추겠습니다.</p></details>
+    <details open><summary><span class="q">Q26</span><span>유통기한과 시즌 재고 관리는?</span></summary><p class="a">유통기한이 충분히 남은 제품만 입고하고, 시즌 제품은 진열 교체 시점 기획전으로 소진합니다. 4종 모두 연중 수요가 있어 악성 재고 위험은 낮다고 봅니다.<em>내부 확인</em></p></details>
+  </div>
+  <div class="qa-group"><h3>성과·KPI·마케팅 지원</h3>
+    <details open><summary><span class="q">Q27</span><span>목표 지표의 산정 근거는?</span></summary><p class="a">성수 단독 팝업 기간 온라인 거래액 +240%, 메가스토어 뷰티존 입점 후 +35% 같은 무신사 공개 사례를 참고해 보수적으로 잡은 가안입니다. 무신사 내부 기준을 알려주시면 맞춰 조정하겠습니다.</p></details>
+    <details open><summary><span class="q">Q28</span><span>단계 조건을 못 채우면? 철수 기준은?</span></summary><p class="a">조건 미달 시 바로 확장하지 않고, 원인(제품·진열·가격)을 분석해 한 번 더 테스트한 뒤 판단합니다. 철수 기준은 무신사와 사전에 합의하겠습니다.</p></details>
+    <details open><summary><span class="q">Q29</span><span>할인·쿠폰 비용은 어떻게 분담하나?</span></summary><p class="a">기획전 할인은 브랜드 부담이 기본이며, 무신사 쿠폰 연계 분담 비율은 확인 후 회신드리겠습니다.<em>내부 확인</em></p></details>
+    <details open><summary><span class="q">Q30</span><span>캠페인·라이브·콘텐츠 참여 의향은?</span></summary><p class="a">적극 참여하겠습니다. 특히 '아웃도어 피부 회복' 주제로 라이브 방송과 콘텐츠를 함께 만들고 싶습니다. 예산은 확인 후 회신드리겠습니다.<em>내부 확인</em></p></details>
+  </div>
+</section>
+
+<footer>
+  <p>작성: 제로이드 브랜드 영업팀 신입 MD · 내부용</p>
+</footer>
+</div>
+<script>
+document.querySelectorAll('.todo-list input').forEach(c=>{
+  try{c.checked=localStorage.getItem(c.id)==='1'}catch(e){}
+  c.addEventListener('change',()=>{try{localStorage.setItem(c.id,c.checked?'1':'0')}catch(e){}});
+});
+document.getElementById('qa-open').onclick=()=>document.querySelectorAll('#qa details').forEach(d=>d.open=true);
+document.getElementById('qa-close').onclick=()=>document.querySelectorAll('#qa details').forEach(d=>d.open=false);
+document.querySelectorAll('.dfilter button').forEach(b=>b.addEventListener('click',()=>{
+  const f=b.dataset.f;
+  document.querySelectorAll('.dfilter button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  document.querySelectorAll('.dtable tbody tr').forEach(tr=>{tr.hidden=!(f==='all'||tr.dataset.v===f)});
+}));
+</script>
+
+</body></html>

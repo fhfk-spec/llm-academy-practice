@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>퍼소나 분석 스킬 v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* layout: 좁은 본문 칼럼 + 단계 레일. v2 추가분은 앰버 표시로 구분 */
+  --bg:#F3F4F1; --surface:#FFFFFF; --ink:#18212B; --muted:#5B6672; --line:#D9DDD8;
+  --accent:#0F6B66; --accent-soft:#E2F0EE; --new:#B87700; --new-soft:#FBF0D9;
+  --display:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12171C; --surface:#1A2128; --ink:#E7ECEF; --muted:#9AA6B1; --line:#2C3640;
+  --accent:#4FB8AF; --accent-soft:#16302F; --new:#E2A73B; --new-soft:#33290F; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#12171C; --surface:#1A2128; --ink:#E7ECEF; --muted:#9AA6B1; --line:#2C3640;
+  --accent:#4FB8AF; --accent-soft:#16302F; --new:#E2A73B; --new-soft:#33290F; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding:40px 20px 72px;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:34px}
+h2{font-size:22px;display:flex;align-items:baseline;gap:10px}
+h2 .no{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:.04em}
+h3{font-size:16px}
+p{margin:0}
+.muted{color:var(--muted)}
+section{display:grid;gap:16px}
+.new{display:inline-block;font-size:11px;font-weight:700;color:var(--new);background:var(--new-soft);border-radius:4px;padding:1px 6px;vertical-align:middle;letter-spacing:.03em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.card.isnew{border-left:4px solid var(--new)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+header{display:grid;gap:12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 12px}
+.chip.new-c{border-color:var(--new);color:var(--new);background:var(--new-soft)}
+/* flow rail */
+.rail{display:grid;gap:0;position:relative}
+.step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;position:relative;padding-bottom:14px}
+.step::before{content:"";position:absolute;left:21px;top:40px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.dot{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:700;background:var(--accent-soft);color:var(--accent);border:2px solid var(--accent)}
+.step.v2 .dot{border-color:var(--new);color:var(--new);background:var(--new-soft)}
+.step .body{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:grid;gap:4px}
+.gate{font-size:12.5px;font-weight:700;color:var(--accent)}
+.gate.stop{color:var(--new)}
+/* loop */
+.loop{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.loop .n{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-weight:500}
+.loop .n.hl{border-color:var(--accent);background:var(--accent-soft)}
+.loop .arr{color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:13px;color:var(--muted);font-weight:700}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px 10px}
+code,.lab{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--accent-soft);color:var(--accent);padding:1px 6px;border-radius:4px;white-space:nowrap}
+.lab.n{background:var(--new-soft);color:var(--new)}
+ul{margin:0;padding-left:20px;display:grid;gap:4px}
+/* timeline */
+.tl{display:grid;gap:10px}
+.tl .row{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
+.tl .when{font-family:var(--display);font-weight:700;color:var(--accent);font-size:13.5px;padding-top:12px}
+.tl .what{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.tl .rule{font-size:13px;color:var(--new);font-weight:700;margin-top:4px}
+/* persona trio */
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.p{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.p .badge{font-size:11.5px;font-weight:700;color:var(--accent)}
+.p.main{border:2px solid var(--accent)}
+.p .str{font-size:13.5px;background:var(--accent-soft);border-radius:6px;padding:6px 10px}
+.merge{text-align:center;font-family:var(--display);font-weight:700;background:var(--new-soft);color:var(--ink);border:1px dashed var(--new);border-radius:10px;padding:12px}
+.kpi{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.kpi .from{opacity:.75;text-decoration:line-through;text-decoration-color:var(--muted)}
+.kpi .to{border-color:var(--accent)}
+@media (max-width:560px){.kpi{grid-template-columns:1fr}.kpi .arr{text-align:center}.tl .row{grid-template-columns:1fr}.tl .when{padding-top:0}h1{font-size:27px}}
+.check li{list-style:none;margin-left:-20px}
+.check li::before{content:"☐ ";color:var(--accent)}
+footer{font-size:13.5px;color:var(--muted);display:grid;gap:6px;border-top:1px solid var(--line);padding-top:18px}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header>
+  <p class="muted">persona-analysis · v2 · 2026-11-10</p>
+  <h1>퍼소나 분석 스킬 v2</h1>
+  <p>아이디어·통계·리서치 자료로 근거 있는 퍼소나를 <strong>문답하며</strong> 만들고, 사업 목적에 맞는 메인 퍼소나를 고른 뒤, 인사이트를 기획·KPI 결정까지 연결하는 작업 흐름입니다.</p>
+  <div class="meta">
+    <span class="chip">기반: GitHub 퍼소나 스킬 7종</span>
+    <span class="chip">v1: 라라스윗 실습 (제품형)</span>
+    <span class="chip new-c">v2: AI 실전 창업 부트캠프 문답 실습 (프로그램형)</span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="no">WHAT'S NEW</span>v1에서 v2로 바뀐 것</h2>
+  <div class="grid3">
+    <div class="card isnew"><h3>점진 문답 루프</h3><p class="muted">질문은 2~4개씩, 추천안과 이유를 함께. 빈 질문지 대신 초안부터 보여주고 반응을 받는다.</p></div>
+    <div class="card isnew"><h3>사업 유형 분기</h3><p class="muted">제품형은 이익 관점(v1), 교육·공공 프로그램형은 사업 목적 관점(발주처 KPI·대체 불가성 등)으로 메인을 고른다.</p></div>
+    <div class="card isnew"><h3>설정 → 지역 맥락</h3><p class="muted">주최·규모·지역을 먼저 확정. 지역 통계가 퍼소나 서사를 바꾼다.</p></div>
+    <div class="card isnew"><h3>층별 신뢰도 · [대리] 라벨</h3><p class="muted">통계 근거와 개인 행동의 신뢰도를 따로 단다. 다른 지역 자료는 [대리]로 표시.</p></div>
+    <div class="card isnew"><h3>보완관계 분석</h3><p class="muted">비교표에 '강점' 행을 넣어 퍼소나끼리 빈 곳을 채우는 조합(혼합팀)을 찾는다.</p></div>
+    <div class="card isnew"><h3>인사이트 → KPI</h3><p class="muted">인사이트가 '성공의 정의'를 바꾸면 성과지표를 다시 설계한다. 여정지도는 요청 시에만.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">FLOW</span>전체 흐름</h2>
+  <p class="muted">초록 점은 v1에서 이어온 단계, 앰버 점은 v2에서 새로 생기거나 크게 바뀐 단계입니다. 각 단계 끝의 확인 지점에서 사용자가 확정해야 다음으로 넘어갑니다.</p>
+  <div class="rail">
+    <div class="step"><div class="dot">0</div><div class="body"><h3>철칙과 근거 라벨</h3><p>지어내지 않기 · 상황·동기·대안으로 나누기 · 낙인·효능 단정 금지</p></div></div>
+    <div class="step v2"><div class="dot">1</div><div class="body"><h3>시작: 점진 문답 + 기본 설정 <span class="new">v2</span></h3><p>5가지 확인(대상·목적·사업 유형·자료·깊이) → 프로그램형이면 주최·규모·지역·구성 확정 → 지역 맥락 레이어</p><p class="gate">확인① 설정 확정</p></div></div>
+    <div class="step"><div class="dot">2</div><div class="body"><h3>근거 수집</h3><p>모드 A 자료 분석 / B 공개 신호(기본) / C 프로토. 공공통계 → 조사·논문 → 기사 사례 순</p><p class="gate">확인② 초안 A·B·C에 반응</p></div></div>
+    <div class="step"><div class="dot">3</div><div class="body"><h3>분석·세분화</h3><p>코딩 태그 8종 · 역할 지도(프로그램형은 발주처 포함) · 후보 5 → 최종 3</p></div></div>
+    <div class="step v2"><div class="dot">4</div><div class="body"><h3>메인 선정: 이익 관점 / 사업 목적 관점 <span class="new">v2</span></h3><p>기준별 점수 → 가중 총점 · 추천 이유 3개 · 정원 배분</p><p class="gate">확인③ 메인 확정</p></div></div>
+    <div class="step"><div class="dot">5</div><div class="body"><h3>퍼소나 카드</h3><p>메인은 심층 카드, 서브는 메인과 다른 점만 담은 간이 카드</p><p class="gate">확인④ 카드 확정</p></div></div>
+    <div class="step v2"><div class="dot">6</div><div class="body"><h3>비교표 + 보완관계 <span class="new">v2</span></h3><p>강점 행으로 퍼소나 조합 찾기 → 팀 구성·과제·번들 설계로 연결</p></div></div>
+    <div class="step v2"><div class="dot">7</div><div class="body"><h3>인사이트 Top 5 → KPI <span class="new">v2</span></h3><p>누가 → 어떤 상황에서 → 무엇 때문에 → 어떤 행동 → 무엇을 바꿀까. '목적 vs 수단' 유형 추가</p></div></div>
+    <div class="step"><div class="dot">8</div><div class="body"><h3>검증 설계: 4채널 × 호·불호</h3><p>리뷰 · CS 보이스 · 인터뷰 · 만족도 조사. 2채널 이상 같은 방향이면 판정</p></div></div>
+    <div class="step v2"><div class="dot">9</div><div class="body"><h3>산출물 + 다음 단계 제안 <span class="new">v2</span></h3><p>상세 문서 + 한 장 요약 카드 · 포트폴리오 모드 체크</p><p class="gate stop">여정지도 게이트: customer-journey-map은 제안만, 요청이 있을 때 진행</p></div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">LOOP</span>점진 문답 루프</h2>
+  <div class="card">
+    <div class="loop">
+      <span class="n">설정 확정</span><span class="arr">→</span>
+      <span class="n hl">초안 먼저 제시</span><span class="arr">→</span>
+      <span class="n">사용자 반응·수정</span><span class="arr">→</span>
+      <span class="n">통계로 근거 보강</span><span class="arr">→</span>
+      <span class="n">확정</span><span class="arr">↺ 다음 블록</span>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>할 것</h3><ul><li>질문 1회 2~4개, 각각 추천안 + 이유</li><li>"확정" 한 마디로도 진행되게</li><li>블록 끝에 "다음은 ○○" 한 줄 예고</li><li>사용자의 교체 결정은 이유를 묻지 않고 반영하고 이력에 남김</li></ul></div>
+    <div class="card"><h3>하지 않을 것</h3><ul><li>질문 10개를 한꺼번에</li><li>이미 받은 정보 다시 묻기</li><li>설정 없이 퍼소나부터 만들기</li><li>요청 전에 다음 스킬(여정지도)로 넘어가기</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">LABELS</span>근거 라벨과 층별 신뢰도</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>라벨</th><th>뜻</th><th>예시</th></tr></thead>
+    <tbody>
+      <tr><td><span class="lab">[확인]</span></td><td>출처로 확인한 사실</td><td>2025년 20~30대 쉬었음 인구 71.7만 명 (국가데이터처)</td></tr>
+      <tr><td><span class="lab n">[대리]</span> <span class="new">v2</span></td><td>다른 지역·대상 자료를 빌린 근거</td><td>월세 부담으로 귀향한 대구 청년 사례 → 대전 퍼소나 생활 장면</td></tr>
+      <tr><td><span class="lab">[해석]</span></td><td>사실을 연결한 설명</td><td>일경험이 없어 시작을 못 한다</td></tr>
+      <tr><td><span class="lab">[가설]</span></td><td>검증이 필요한 가능성</td><td>참여수당이 지원 결정에 결정적이다</td></tr>
+      <tr><td><span class="lab">[미확인]</span></td><td>판단할 자료가 없음</td><td>인용은 [자료 필요]로 비워 둠</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card isnew"><h3>층별 신뢰도 <span class="new">v2</span></h3><p>한 퍼소나 안에서도 근거의 단단함이 다릅니다. <strong>중간(통계) / 낮음(개인 행동)</strong>처럼 나눠 표기하면, 규모·경향은 믿되 일과·우회 방법은 인터뷰로 검증해야 한다는 게 한눈에 보입니다. 자료 5개 미만이면 프로토 퍼소나로 명시합니다.</p></div>
+</section>
+
+<section>
+  <h2><span class="no">SELECT</span>메인 퍼소나 선정: 사업 유형별 분기</h2>
+  <div class="grid2">
+    <div class="card"><h3>4-A 제품형 · 이익 관점 (v1)</h3>
+      <ul><li>시장 규모</li><li>매출 잠재력</li><li>고객당 기여이익</li><li>재구매·정착</li><li>획득 용이성</li><li>리스크 감점</li></ul>
+      <p class="muted" style="margin-top:8px">기본 가중치(수익성): 규모 20 · 매출 15 · 기여이익 30 · 재구매 25 · 획득 10</p></div>
+    <div class="card isnew"><h3>4-B 프로그램형 · 사업 목적 관점 <span class="new">v2</span></h3>
+      <ul><li>정책·사회 문제 규모</li><li>발주처 KPI 정합성</li><li>운영사 미션 적합</li><li>대체 불가성: 왜 이 프로그램이어야 하나</li><li>모집·도달 용이성</li><li>성과 전환 가능성</li><li>리스크 감점: 중도 이탈·낙인</li></ul>
+      <p class="muted" style="margin-top:8px">데이터가 없으면 "가설 순위, 확신 낮음". 메인 추천은 이유 3개로.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">CASE</span>실전 적용: AI 실전 창업 부트캠프 (가상)</h2>
+  <p class="muted">2026-11-10 문답에서 퍼소나를 찾아간 순서입니다. 각 장면에서 스킬에 들어간 규칙을 앰버색으로 표시했습니다.</p>
+  <div class="tl">
+    <div class="row"><div class="when">설정</div><div class="what">주최 유디임팩트 × 창업진흥원, 10주 · 30명 · 오프라인. 퍼소나는 메인 1 + 서브 2.<div class="rule">→ 1-1 프로그램형 기본 설정을 퍼소나보다 먼저</div></div></div>
+    <div class="row"><div class="when">초안 반응</div><div class="what">초안 A·B·C 중 B를 '전환기 직장인'에서 '대학생 창업자'로 교체.<div class="rule">→ 초안 먼저 · 교체는 이유 묻지 않고 반영 + 변경 이력</div></div></div>
+    <div class="row"><div class="when">근거 보강</div><div class="what">쉬었음 청년 통계, 대학생 창업 기피 요인(실패 위험 40.8%), 소상공인 디지털 역량(기초·입문 83.3%)으로 프로토 퍼소나 뼈대.<div class="rule">→ 통계 기반 프로토 순서 · 층별 신뢰도</div></div></div>
+    <div class="row"><div class="when">메인 확정</div><div class="what">A(취준·재도전 청년). 이유: 정책 명분 · 운영사 '실행' 철학 일치 · B는 대학 창업지원단 등 대체재가 많음.<div class="rule">→ 4-B 사업 목적 관점 · 이유 3개</div></div></div>
+    <div class="row"><div class="when">지역</div><div class="what">대전 확정. 대전은 비수도권 중 드문 청년 순유입 지역 → 메인을 '서울 취준 끝에 돌아온 청년'으로. 교육장은 창업진흥원이 운영하는 대전 팁스타운.<div class="rule">→ 1-2 지역 맥락 레이어 · [대리] 근거</div></div></div>
+    <div class="row"><div class="when">카드</div><div class="what">메인 '한재윤(28)' 심층 카드, 서브 '이서진(23)'·'박민호(31)' 간이 카드, 비교표와 정원 배분 15·8·7명.<div class="rule">→ 메인 심층 / 서브 간이 · 정원 배분</div></div></div>
+    <div class="row"><div class="when">인사이트</div><div class="what">재윤이에게 창업은 목적이 아니라 재기의 수단 → 성과지표를 다시 설계.<div class="rule">→ '목적 vs 수단' 유형 · 인사이트 → KPI</div></div></div>
+    <div class="row"><div class="when">대기</div><div class="what">고객여정지도는 사용자가 요청할 때까지 진행하지 않음.<div class="rule">→ 여정지도 게이트</div></div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">COMBINE</span>보완관계 분석 예시</h2>
+  <div class="trio">
+    <div class="p main"><span class="badge">메인 · 15명</span><h3>A. 재윤 (28)</h3><p class="muted">서울 취준 후 대전 귀향, 일경험 없음</p><div class="str">강점: 시간과 절박함</div></div>
+    <div class="p"><span class="badge">서브 · 8명</span><h3>B. 서진 (23)</h3><p class="muted">대학 4학년, 교내 대회 수상</p><div class="str">강점: 실행 속도 · 디지털 역량</div></div>
+    <div class="p"><span class="badge">서브 · 7명</span><h3>C. 민호 (31)</h3><p class="muted">원도심 부모님 가게 합류</p><div class="str">강점: 실제 고객과 매출</div></div>
+  </div>
+  <div class="merge">혼합팀: C의 가게를 실전 과제로 삼아 A·B·C가 함께 고객을 검증한다</div>
+  <p class="muted">이름·나이·배경은 [가상 설정]입니다.</p>
+</section>
+
+<section>
+  <h2><span class="no">KPI</span>인사이트 → 성과지표 재설계</h2>
+  <div class="kpi">
+    <div class="card from">사업자등록 전환율 하나만 측정</div>
+    <div class="arr muted">→</div>
+    <div class="card to"><strong>첫 고객 검증률</strong> + <strong>진로 재진입률</strong>(창업 또는 취업) 함께 측정</div>
+  </div>
+  <p class="muted">근거: 쉬었음 청년의 88.4%가 취·창업을 포기하지 않고 자신을 '일시정지 상태'로 규정 (2025 쉬었음 청년 연구보고서).</p>
+</section>
+
+<section>
+  <h2><span class="no">VERIFY</span>검증 설계: 4채널 × 호·불호</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>채널</th><th>호 신호</th><th>불호 신호</th><th>주의</th></tr></thead>
+    <tbody>
+      <tr><td>리뷰·후기</td><td>재구매·재참여·추천</td><td>"기대보다", 이탈 이유</td><td>협찬 여부</td></tr>
+      <tr><td>CS·문의 보이스</td><td>재입고·다음 기수 문의</td><td>환불·불만·같은 질문 반복</td><td>문제 쪽 편향</td></tr>
+      <tr><td>인터뷰</td><td>묻기 전에 대체 경험을 말함</td><td>포기·다른 대안으로 이동</td><td>과거 행동만</td></tr>
+      <tr><td>만족도 조사</td><td>4~5점 + 재참여 의향</td><td>낮은 점수 + 이유</td><td>의향 ≠ 행동</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted">2채널 이상 같은 방향이면 판정 · 1채널이면 보류 · 엇갈리면 퍼소나 재분할. 불호는 적합성 · 기대 불일치 · 운영 조건 · 편의 · 타이밍으로 원인을 나눕니다.</p>
+</section>
+
+<section>
+  <h2><span class="no">CHECK</span>제출 전 자가 검수</h2>
+  <div class="card"><ul class="check">
+    <li>근거 라벨과 층별 신뢰도가 있다</li>
+    <li>인용은 원문이거나 [자료 필요]다</li>
+    <li>프로그램형이면 설정과 지역 맥락이 반영됐다</li>
+    <li>메인/서브 구분, 선정 이유 3개, 정원 배분이 있다</li>
+    <li>비교표에 강점 행과 보완관계 결론이 있다</li>
+    <li>인사이트가 KPI·기획 결정까지 이어진다</li>
+    <li>호·불호 분기, 가정별 인터뷰 질문이 있다</li>
+    <li>낙인 표현·효능 단정·민감정보 추정이 없다</li>
+    <li>여정지도는 제안만 했다</li>
+  </ul></div>
+</section>
+
+<footer>
+  <p><strong>버전 기록</strong></p>
+  <p>v1 (2026-11-10): GitHub 레퍼런스 + 라라스윗 실습 → 이익 관점 주력 선정 · 인사이트 · 호/불호 검증 분기</p>
+  <p>v2 (2026-11-10): AI 실전 창업 부트캠프 문답 실습 반영 → 점진 문답 루프 · 사업 유형 분기 · 기본 설정 · 지역 맥락 · [대리] 라벨 · 층별 신뢰도 · 메인/서브 + 정원 배분 · 보완관계 · 인사이트→KPI · 포트폴리오 모드 · 여정지도 게이트</p>
+  <p>다음 버전에서 정할 것: 4-B 기준별 기본 가중치, 실제 인터뷰로 검증한 뒤의 결과 반영</p>
+</footer>
+
+</main>
+</body>
+</html>

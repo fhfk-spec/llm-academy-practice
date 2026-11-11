@@ -1,0 +1,263 @@
+{
+ "ep": 3,
+ "axis": "서사+AI",
+ "series": "뿌뿌의 취준 재도전기",
+ "title": "내 캐릭터인데\\n그릴수록 이상해진다",
+ "title_hl": "그릴수록 이상해진다",
+ "subtitle": "AI로 인스타툰 1화 만들기까지 🤖",
+ "caption_title": "내 캐릭터인데 그릴수록 이상해진다 🤖",
+ "hashtags": [
+  "인스타툰",
+  "AI툰",
+  "AI공부",
+  "AI그림",
+  "생성형AI",
+  "캐릭터디자인",
+  "챗GPT",
+  "부트캠프",
+  "취준툰",
+  "성장툰",
+  "뿌뿌",
+  "공감툰"
+ ],
+ "cards": [
+  {
+   "type": "cover",
+   "name": "표지",
+   "bg": "yellow",
+   "sticker": "face_shock",
+   "size": 720,
+   "props": [
+    {
+     "emoji": "❓",
+     "x": 160,
+     "y": 760,
+     "size": 110,
+     "rot": -12
+    },
+    {
+     "emoji": "🎨",
+     "x": 820,
+     "y": 780,
+     "size": 110
+    }
+   ]
+  },
+  {
+   "type": "panels",
+   "name": "시안",
+   "panels": [
+    {
+     "narration": "직접 만든 뿌뿌 시안을 AI에게 보여줬다",
+     "sticker": "pose_sulky_sit",
+     "pos": "right",
+     "dx": 140,
+     "bubbles": [
+      {
+       "text": "이 느낌 그대로\n그려줘!",
+       "x": 60,
+       "y": 160
+      }
+     ]
+    },
+    {
+     "narration": "그런데 고치면 고칠수록…",
+     "sticker": "face_suspicious",
+     "pos": "right",
+     "dx": 140,
+     "bubbles": [
+      {
+       "text": "…이거 누구세요?",
+       "x": 60,
+       "y": 170
+      }
+     ],
+     "props": [
+      {
+       "emoji": "❓",
+       "x": 420,
+       "y": 330,
+       "size": 90
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "panels",
+   "name": "리셋",
+   "panels": [
+    {
+     "narration": "색 바꾸고, 비율 바꾸고, 또 바꾸고",
+     "fx": "gloom",
+     "sticker": "laptop_despair",
+     "pos": "right",
+     "dx": 120,
+     "bubbles": [
+      {
+       "text": "원본이 제일\n나았잖아…",
+       "kind": "think",
+       "x": 60,
+       "y": 160
+      }
+     ]
+    },
+    {
+     "narration": "결국 처음 시안으로!",
+     "fx": "lines",
+     "sticker": "face_fighting",
+     "pos": "right",
+     "dx": 110,
+     "bubbles": [
+      {
+       "text": "전부 리셋!",
+       "kind": "shout",
+       "x": 50,
+       "y": 140,
+       "size": 90
+      },
+      {
+       "text": "일단 대충이라도\n다시 하자.",
+       "x": 60,
+       "y": 330,
+       "size": 38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "info",
+   "name": "배운점",
+   "bg": "mint",
+   "label": "🤖 AI 나눔 | 내가 배운 것",
+   "title": "AI로 캐릭터 그릴 때\n**이것만은 지키자**",
+   "points": [
+    "원본 시안을 매번 같이 보여주기",
+    "바꿀 건 한 번에 하나만",
+    "\"원본 그대로\"를 글로 딱 못 박기"
+   ],
+   "box": "💡 고칠수록 좋아지는 게 아니라\n원본에서 멀어질 수 있어요",
+   "sticker": "point_left",
+   "size": 400,
+   "theme": "info"
+  },
+  {
+   "type": "panels",
+   "name": "API",
+   "panels": [
+    {
+     "narration": "다음 관문: API",
+     "sticker": "face_soul_out",
+     "pos": "right",
+     "dx": 140,
+     "size": 360,
+     "bubbles": [
+      {
+       "text": "결제, 인증, 키…\n이게 다 뭔데…",
+       "x": 40,
+       "y": 100
+      }
+     ],
+     "props": [
+      {
+       "emoji": "🔑",
+       "x": 520,
+       "y": 250,
+       "size": 80
+      }
+     ]
+    },
+    {
+     "narration": "하나씩 따라 하다 보니",
+     "sticker": "laptop_typing",
+     "pos": "right",
+     "dx": 100,
+     "size": 340,
+     "bubbles": [
+      {
+       "text": "인증… 완료!\n키… 연결!",
+       "x": 40,
+       "y": 100
+      }
+     ],
+     "props": [
+      {
+       "emoji": "✅",
+       "x": 540,
+       "y": 250,
+       "size": 80
+      }
+     ]
+    },
+    {
+     "narration": "드디어 1화 완성!!",
+     "fx": "rays",
+     "sticker": "cheer",
+     "pos": "right",
+     "dx": 110,
+     "size": 370,
+     "bubbles": [
+      {
+       "text": "내 뿌뿌가\n돌아왔다!!",
+       "x": 40,
+       "y": 100
+      }
+     ],
+     "props": [
+      {
+       "emoji": "🎉",
+       "x": 560,
+       "y": 240,
+       "size": 80
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "panels",
+   "name": "기절_예고",
+   "panels": [
+    {
+     "narration": "그리고 그날 밤",
+     "sticker": "desk_nap_pillow",
+     "pos": "right",
+     "dx": 120,
+     "bubbles": [
+      {
+       "text": "(완성하자마자 기절)",
+       "kind": "inner",
+       "x": 60,
+       "y": 180,
+       "tail": false
+      }
+     ],
+     "props": [
+      {
+       "emoji": "🌙",
+       "x": 120,
+       "y": 360,
+       "size": 90
+      }
+     ]
+    },
+    {
+     "narration": "다음 화 예고",
+     "title": "돈 안 쓰고 인스타툰\n**자동 제작**이 될까?",
+     "sticker": "hold_sign",
+     "size": 330,
+     "pos": "center"
+    }
+   ]
+  }
+ ],
+ "style": {
+  "theme": "story",
+  "cover_layout": "center",
+  "fonts": {
+   "title": "jua",
+   "body": "pretendard"
+  }
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "ep": 0,
+ "axis": "소개",
+ "series": "뿌뿌의 취준 재도전기",
+ "style": {
+  "theme": "story",
+  "cover_layout": "center",
+  "fonts": {
+   "title": "jua",
+   "body": "pretendard"
+  }
+ },
+ "title": "처음 왔다면,\\n뿌뿌를 소개할게요",
+ "title_hl": "뿌뿌를 소개할게요",
+ "subtitle": "면접 6연패 취준생의 성장 & AI 기록 🌱",
+ "caption_title": "처음 오셨다면, 뿌뿌를 소개할게요 🌱",
+ "hashtags": [
+  "인스타툰",
+  "일상툰",
+  "캐릭터소개",
+  "취준툰",
+  "취준생",
+  "부트캠프",
+  "AI공부",
+  "성장툰",
+  "공감툰",
+  "뿌뿌",
+  "자기계발",
+  "2030"
+ ],
+ "cards": [
+  {
+   "type": "cover",
+   "name": "표지",
+   "ep_label": "PROFILE",
+   "sticker": "wave_smile",
+   "size": 700
+  },
+  {
+   "type": "panels",
+   "name": "누구",
+   "layout": "1+2",
+   "panels": [
+    {
+     "narration": "6개월째 면접 탈락만 하던 취준생",
+     "sticker": "collapse_floor",
+     "pos": "right",
+     "dx": 140,
+     "bubbles": [
+      {
+       "text": "또 떨어졌다…",
+       "x": 70,
+       "y": 170
+      }
+     ]
+    },
+    {
+     "narration": "그러다 어느 날",
+     "sticker": "call_surprised",
+     "bubbles": [
+      {
+       "text": "추가합격이요?!",
+       "pos": "tl"
+      }
+     ]
+    },
+    {
+     "narration": "AI 부트캠프 합격!",
+     "fx": "rays",
+     "sticker": "jump_joy",
+     "bubbles": [
+      {
+       "text": "꺄아아!",
+       "kind": "shout",
+       "x": 40,
+       "y": 110,
+       "size": 64
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "panels",
+   "name": "성격",
+   "panels": [
+    {
+     "narration": "겉은 무덤덤·까칠한데",
+     "sticker": "face_pokerface",
+     "pos": "right",
+     "dx": 140,
+     "bubbles": [
+      {
+       "text": "흥, 별거 아니네.",
+       "x": 70,
+       "y": 180
+      }
+     ]
+    },
+    {
+     "narration": "속은 생각 많고 여려요",
+     "sticker": "face_touched_tear",
+     "pos": "right",
+     "dx": 140,
+     "bubbles": [
+      {
+       "text": "(사실 엄청 신경 쓰임…)",
+       "kind": "inner",
+       "x": 60,
+       "y": 180
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "panels",
+   "name": "대표대사",
+   "panels": [
+    {
+     "narration": "걱정이 많아서 늘 망설이지만",
+     "sticker": "hide_blanket",
+     "pos": "right",
+     "dx": 140,
+     "bubbles": [
+      {
+       "text": "내가 할 수 있을까…",
+       "kind": "think",
+       "x": 60,
+       "y": 180
+      }
+     ]
+    },
+    {
+     "narration": "결국은 이렇게 말해요",
+     "fx": "rays",
+     "sticker": "face_fighting",
+     "pos": "right",
+     "dx": 110,
+     "bubbles": [
+      {
+       "text": "일단 대충이라도\n하자!",
+       "kind": "shout",
+       "x": 50,
+       "y": 150,
+       "size": 74
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "info",
+   "name": "이계정은",
+   "label": "🌱 이 계정에서는",
+   "title": "뿌뿌와 함께\n**이런 걸 봐요**",
+   "points": [
+    "📖 취준 → 부트캠프 → 취업까지 진짜 겪은 성장 이야기",
+    "🤖 AI 1도 모르던 뿌뿌가 배운 AI를 쉽게 나눔",
+    "💬 늦었다고 생각해도, 그래도 해보는 사람들의 공감"
+   ],
+   "sticker": "point_left",
+   "size": 380
+  },
+  {
+   "type": "intro",
+   "name": "팔로우"
+  }
+ ]
+}

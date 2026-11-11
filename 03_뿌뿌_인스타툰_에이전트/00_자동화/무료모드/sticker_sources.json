@@ -1,0 +1,746 @@
+[
+ {
+  "id": "pose_sulky_sit",
+  "src": "src/base_pose.png",
+  "already_transparent": true,
+  "tags": [
+   "기본",
+   "시큰둥",
+   "앉음",
+   "고민"
+  ],
+  "desc": "무릎 끌어안고 앉아 시큰둥"
+ },
+ {
+  "id": "wave_smile",
+  "src": "src/poses/wave_fighting.png",
+  "tags": [
+   "인사",
+   "반짝눈",
+   "소개",
+   "기본"
+  ],
+  "desc": "서서 손 흔들며 반짝눈 미소"
+ },
+ {
+  "id": "cheer",
+  "src": "src/ppuppu_ep1_07_만세.png",
+  "tags": [
+   "기쁨",
+   "만세",
+   "성공",
+   "신남"
+  ],
+  "desc": "두 팔 번쩍 만세"
+ },
+ {
+  "id": "surprised_box_phone",
+  "src": "src/ppuppu_ep1_00_표지.png",
+  "tags": [
+   "놀람",
+   "전화",
+   "당황"
+  ],
+  "desc": "상자 들고 쪼그려 앉아 울리는 폰에 놀람"
+ },
+ {
+  "id": "angry_phone",
+  "src": "src/ppuppu_ep1_01_탈락메일.png",
+  "tags": [
+   "짜증",
+   "폰",
+   "탈락",
+   "분노"
+  ],
+  "desc": "폰 화면 노려보며 짜증 (상반신)"
+ },
+ {
+  "id": "bed_gloomy",
+  "src": "src/ppuppu_ep1_02_이불.png",
+  "tags": [
+   "우울",
+   "이불",
+   "밤",
+   "무기력"
+  ],
+  "desc": "이불 덮고 멍하니 우울"
+ },
+ {
+  "id": "work_pointing_cart",
+  "src": "src/ppuppu_ep1_03_행사팀장.png",
+  "tags": [
+   "일",
+   "지시",
+   "바쁨",
+   "의욕"
+  ],
+  "desc": "카트 밀며 손가락으로 지시"
+ },
+ {
+  "id": "call_surprised",
+  "src": "src/ppuppu_ep1_04_전화.png",
+  "tags": [
+   "전화",
+   "놀람",
+   "통화"
+  ],
+  "desc": "상자 든 채 전화 받고 깜짝"
+ },
+ {
+  "id": "phone_puzzled",
+  "src": "src/ppuppu_ep1_05_재확인.png",
+  "crop": [
+   0,
+   380,
+   560,
+   1402
+  ],
+  "tags": [
+   "갸웃",
+   "폰",
+   "확인",
+   "의아"
+  ],
+  "desc": "폰 들고 갸웃"
+ },
+ {
+  "id": "phone_sparkle",
+  "src": "src/ppuppu_ep1_05_재확인.png",
+  "crop": [
+   566,
+   300,
+   1122,
+   1402
+  ],
+  "tags": [
+   "감동",
+   "폰",
+   "확인",
+   "반짝"
+  ],
+  "desc": "빛나는 폰 보며 눈 동그래짐"
+ },
+ {
+  "id": "call_sheepish",
+  "src": "src/ppuppu_ep1_06_실장님통화.png",
+  "tags": [
+   "미안",
+   "통화",
+   "공손",
+   "어색"
+  ],
+  "desc": "꾸벅하며 미안한 통화",
+  "crop": [
+   262,
+   350,
+   830,
+   1402
+  ]
+ },
+ {
+  "id": "clipboard_serious",
+  "src": "src/ppuppu_ep1_08_인수인계.png",
+  "crop": [
+   380,
+   560,
+   965,
+   1402
+  ],
+  "tags": [
+   "진지",
+   "설명",
+   "일",
+   "까칠겉"
+  ],
+  "desc": "클립보드 들고 진지하게 설명"
+ },
+ {
+  "id": "thought_dance",
+  "src": "src/ppuppu_ep1_08_인수인계.png",
+  "crop": [
+   200,
+   20,
+   1015,
+   600
+  ],
+  "tags": [
+   "속마음",
+   "신남",
+   "상상"
+  ],
+  "desc": "생각 구름 속 신나서 춤추는 뿌뿌",
+  "erase": [
+   [
+    [
+     0,
+     452
+    ],
+    [
+     20,
+     470
+    ],
+    [
+     38,
+     497
+    ],
+    [
+     78,
+     528
+    ],
+    [
+     130,
+     537
+    ],
+    [
+     168,
+     537
+    ],
+    [
+     178,
+     552
+    ],
+    [
+     184,
+     580
+    ],
+    [
+     0,
+     580
+    ]
+   ]
+  ]
+ },
+ {
+  "id": "floor_happy_tired",
+  "src": "src/ppuppu_ep1_09_퇴근뻗음.png",
+  "crop": [
+   140,
+   300,
+   1088,
+   1250
+  ],
+  "tags": [
+   "뻗음",
+   "피곤",
+   "행복",
+   "휴식"
+  ],
+  "desc": "바닥에 대자로 뻗었지만 행복"
+ },
+ {
+  "id": "bust_hehe",
+  "src": "src/profile_B.png",
+  "tags": [
+   "헤헤",
+   "기쁨",
+   "상반신"
+  ],
+  "desc": "두 손 모으고 헤헤 웃는 상반신"
+ },
+ {
+  "id": "bust_wave_hehe",
+  "src": "src/profile_final.png",
+  "tags": [
+   "인사",
+   "헤헤",
+   "상반신",
+   "프로필"
+  ],
+  "desc": "손 흔들며 헤헤 (프로필)"
+ },
+ {
+  "id": "face_annoyed",
+  "src": "src/sheet.png",
+  "crop": [
+   505,
+   118,
+   680,
+   292
+  ],
+  "upscale": 3,
+  "kind": "face",
+  "tags": [
+   "짜증"
+  ],
+  "desc": "얼굴: 짜증나..."
+ },
+ {
+  "id": "face_hehe",
+  "src": "src/sheet.png",
+  "crop": [
+   688,
+   118,
+   860,
+   292
+  ],
+  "upscale": 3,
+  "kind": "face",
+  "tags": [
+   "헤헤",
+   "기쁨"
+  ],
+  "desc": "얼굴: 헤헤"
+ },
+ {
+  "id": "face_hmm",
+  "src": "src/sheet.png",
+  "crop": [
+   866,
+   118,
+   1030,
+   292
+  ],
+  "upscale": 3,
+  "kind": "face",
+  "tags": [
+   "음",
+   "고민",
+   "무표정"
+  ],
+  "desc": "얼굴: 음..."
+ },
+ {
+  "id": "face_dontwanna",
+  "src": "src/sheet.png",
+  "crop": [
+   505,
+   335,
+   690,
+   478
+  ],
+  "upscale": 3,
+  "kind": "face",
+  "tags": [
+   "하기싫다",
+   "귀찮음",
+   "엎드림"
+  ],
+  "desc": "얼굴: 아... 하기싫다 (엎드림)"
+ },
+ {
+  "id": "face_fighting",
+  "src": "src/sheet.png",
+  "crop": [
+   688,
+   335,
+   860,
+   478
+  ],
+  "upscale": 3,
+  "kind": "face",
+  "tags": [
+   "화이팅",
+   "다짐",
+   "반짝"
+  ],
+  "desc": "얼굴: 화이팅!"
+ },
+ {
+  "id": "face_tomorrow",
+  "src": "src/sheet.png",
+  "crop": [
+   860,
+   335,
+   1040,
+   478
+  ],
+  "upscale": 3,
+  "kind": "face",
+  "tags": [
+   "피곤",
+   "잠",
+   "내일"
+  ],
+  "desc": "얼굴: 또 내일... (베개)"
+ },
+ {
+  "id": "face_cry_big",
+  "src": "src/poses/face_cry_big.png",
+  "tags": [
+   "오열",
+   "슬픔",
+   "눈물",
+   "리액션"
+  ],
+  "desc": "오열, 눈물 폭포",
+  "kind": "face"
+ },
+ {
+  "id": "face_soul_out",
+  "src": "src/poses/face_soul_out.png",
+  "tags": [
+   "멍",
+   "넋나감",
+   "현타",
+   "리액션"
+  ],
+  "desc": "영혼 나감",
+  "kind": "face"
+ },
+ {
+  "id": "face_shock",
+  "src": "src/poses/face_shock.png",
+  "tags": [
+   "충격",
+   "놀람",
+   "경악",
+   "리액션"
+  ],
+  "desc": "충격, 흰 눈+세로줄",
+  "kind": "face"
+ },
+ {
+  "id": "face_rage_red",
+  "src": "src/poses/face_rage_red.png",
+  "tags": [
+   "빡침",
+   "분노",
+   "리액션"
+  ],
+  "desc": "빨간 얼굴로 빡침",
+  "kind": "face"
+ },
+ {
+  "id": "face_pokerface",
+  "src": "src/poses/face_pokerface.png",
+  "tags": [
+   "무표정",
+   "당황",
+   "땀",
+   "리액션"
+  ],
+  "desc": "포커페이스 땀 한 방울",
+  "kind": "face"
+ },
+ {
+  "id": "face_sparkle_eyes",
+  "src": "src/poses/face_sparkle_eyes.png",
+  "tags": [
+   "기대",
+   "설렘",
+   "반짝",
+   "리액션"
+  ],
+  "desc": "반짝반짝 기대",
+  "kind": "face"
+ },
+ {
+  "id": "face_smug",
+  "src": "src/poses/face_smug.png",
+  "tags": [
+   "뿌듯",
+   "으쓱",
+   "자신감",
+   "리액션"
+  ],
+  "desc": "팔짱 끼고 뿌듯",
+  "kind": "face"
+ },
+ {
+  "id": "face_embarrassed",
+  "src": "src/poses/face_embarrassed.png",
+  "tags": [
+   "민망",
+   "부끄",
+   "리액션"
+  ],
+  "desc": "두 손으로 볼 가리고 민망",
+  "kind": "face"
+ },
+ {
+  "id": "face_suspicious",
+  "src": "src/poses/face_suspicious.png",
+  "tags": [
+   "의심",
+   "흘겨봄",
+   "리액션"
+  ],
+  "desc": "실눈 의심",
+  "kind": "face"
+ },
+ {
+  "id": "face_touched_tear",
+  "src": "src/poses/face_touched_tear.png",
+  "tags": [
+   "감동",
+   "울먹",
+   "리액션"
+  ],
+  "desc": "감동 울먹",
+  "kind": "face"
+ },
+ {
+  "id": "face_speechless",
+  "src": "src/poses/face_speechless.png",
+  "tags": [
+   "할말잃음",
+   "멍",
+   "리액션"
+  ],
+  "desc": "할 말 잃음 점 눈",
+  "kind": "face"
+ },
+ {
+  "id": "face_sleepy",
+  "src": "src/poses/face_sleepy.png",
+  "tags": [
+   "졸림",
+   "피곤",
+   "리액션"
+  ],
+  "desc": "졸려서 콧방울",
+  "kind": "face"
+ },
+ {
+  "id": "laptop_typing",
+  "src": "src/poses/laptop_typing.png",
+  "tags": [
+   "노트북",
+   "공부",
+   "AI",
+   "집중",
+   "작업"
+  ],
+  "desc": "노트북 타자 집중",
+  "kind": "full"
+ },
+ {
+  "id": "laptop_despair",
+  "src": "src/poses/laptop_despair.png",
+  "tags": [
+   "노트북",
+   "좌절",
+   "AI",
+   "에러",
+   "작업"
+  ],
+  "desc": "노트북 앞 머리 감싸쥠",
+  "kind": "full"
+ },
+ {
+  "id": "desk_faceplant",
+  "src": "src/poses/desk_faceplant.png",
+  "tags": [
+   "책상",
+   "뻗음",
+   "지침"
+  ],
+  "desc": "책상에 엎드려 뻗음",
+  "kind": "full"
+ },
+ {
+  "id": "notebook_study",
+  "src": "src/poses/notebook_study.png",
+  "tags": [
+   "공부",
+   "필기",
+   "집중"
+  ],
+  "desc": "엎드려 공책 필기",
+  "kind": "full"
+ },
+ {
+  "id": "phone_bed_lying",
+  "src": "src/poses/phone_bed_fighting.png",
+  "tags": [
+   "폰",
+   "누움",
+   "집순이",
+   "설렘",
+   "반짝눈"
+  ],
+  "desc": "베개 베고 누워 폰 보며 설렘",
+  "kind": "full"
+ },
+ {
+  "id": "coffee_cup",
+  "src": "src/poses/coffee_cup.png",
+  "tags": [
+   "커피",
+   "한숨",
+   "피곤"
+  ],
+  "desc": "머그컵 들고 한숨",
+  "kind": "full"
+ },
+ {
+  "id": "point_left",
+  "src": "src/poses/point_left.png",
+  "tags": [
+   "설명",
+   "가리킴",
+   "정보카드"
+  ],
+  "desc": "왼쪽을 손가락으로 가리킴",
+  "kind": "full"
+ },
+ {
+  "id": "hold_sign",
+  "src": "src/poses/hold_sign_fighting.png",
+  "tags": [
+   "팻말",
+   "설명",
+   "정보카드",
+   "반짝눈"
+  ],
+  "desc": "빈 팻말 들기, 반짝눈 (글자 얹기용)",
+  "kind": "full"
+ },
+ {
+  "id": "peek_side",
+  "src": "src/poses/peek_side.png",
+  "tags": [
+   "빼꼼",
+   "궁금",
+   "정보카드"
+  ],
+  "desc": "오른쪽에서 빼꼼",
+  "kind": "full",
+  "crop": [
+   0,
+   0,
+   968,
+   1024
+  ]
+ },
+ {
+  "id": "thumbs_up",
+  "src": "src/poses/thumbs_up.png",
+  "tags": [
+   "엄지척",
+   "칭찬",
+   "추천",
+   "윙크"
+  ],
+  "desc": "엄지척 윙크",
+  "kind": "full"
+ },
+ {
+  "id": "shrug",
+  "src": "src/poses/shrug.png",
+  "tags": [
+   "몰라",
+   "으쓱",
+   "무심"
+  ],
+  "desc": "어깨 으쓱 몰라~",
+  "kind": "full"
+ },
+ {
+  "id": "collapse_floor",
+  "src": "src/poses/collapse_floor.png",
+  "tags": [
+   "주저앉음",
+   "좌절",
+   "탈락"
+  ],
+  "desc": "털썩 주저앉음 먹구름",
+  "kind": "full"
+ },
+ {
+  "id": "bow_sorry",
+  "src": "src/poses/bow_sorry.png",
+  "tags": [
+   "사과",
+   "꾸벅",
+   "미안"
+  ],
+  "desc": "꾸벅 사과",
+  "kind": "full"
+ },
+ {
+  "id": "run_late",
+  "src": "src/poses/run_late.png",
+  "tags": [
+   "지각",
+   "허둥지둥",
+   "급함"
+  ],
+  "desc": "허둥지둥 달리기",
+  "kind": "full"
+ },
+ {
+  "id": "walk_bag",
+  "src": "src/poses/walk_bag.png",
+  "tags": [
+   "등원",
+   "출근",
+   "다짐",
+   "걷기"
+  ],
+  "desc": "백팩 메고 걷기",
+  "kind": "full"
+ },
+ {
+  "id": "jump_joy",
+  "src": "src/poses/jump_joy.png",
+  "tags": [
+   "점프",
+   "기쁨",
+   "신남",
+   "성공"
+  ],
+  "desc": "점프하며 기쁨",
+  "kind": "full"
+ },
+ {
+  "id": "hide_blanket",
+  "src": "src/poses/hide_blanket.png",
+  "tags": [
+   "이불",
+   "숨기",
+   "불안",
+   "집순이"
+  ],
+  "desc": "이불 뒤집어쓰고 빼꼼",
+  "kind": "full"
+ },
+ {
+  "id": "eat_ramen",
+  "src": "src/poses/eat_ramen.png",
+  "tags": [
+   "라면",
+   "먹방",
+   "행복",
+   "집순이"
+  ],
+  "desc": "라면 후루룩",
+  "kind": "full"
+ },
+ {
+  "id": "desk_nap_pillow",
+  "src": "src/poses/desk_nap_pillow.png",
+  "tags": [
+   "책상",
+   "낮잠",
+   "기절",
+   "휴식"
+  ],
+  "desc": "책상 위 베개 베고 옆으로 엎드려 잠",
+  "kind": "full"
+ },
+ {
+  "id": "desk_faceplant_tired",
+  "src": "src/poses/desk_faceplant_tired.png",
+  "tags": [
+   "책상",
+   "현타",
+   "지침",
+   "하기싫다"
+  ],
+  "desc": "팔 위에 턱 괴고 지친 표정",
+  "kind": "full"
+ },
+ {
+  "id": "ep2_cover",
+  "src": "src/poses/ep2_cover_char.png",
+  "tags": [
+   "녹초",
+   "파스",
+   "약",
+   "책상"
+  ],
+  "desc": "책상에 턱 괴고 녹초, 이마에 파스",
+  "kind": "full"
+ }
+]

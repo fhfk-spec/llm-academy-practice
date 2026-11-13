@@ -1,0 +1,580 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>AX CONTROL</title>
+<style>
+:root{--bg:#0b1018;--panel:#131b27;--panel2:#18222f;--line:#293444;--muted:#a2b0c3;--text:#ecf1f8;--green:#a4edb2;--violet:#b3a4ff;--amber:#f2ce82;--red:#ff9da3;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,'Pretendard','Noto Sans KR',system-ui,sans-serif;font-size:14px;line-height:1.65}
+button,input,select{font:inherit}button{cursor:pointer}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+.side{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:30px 20px;display:flex;flex-direction:column;background:#0e1520}
+.brand{font-size:20px;letter-spacing:2px;font-weight:800}.brand i{color:var(--green);font-style:normal}
+.label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.brandSub{font-size:12px;color:var(--muted);margin:9px 0 34px}
+.nav{display:flex;flex-direction:column;gap:8px}
+.nav button{background:none;border:0;text-align:left;color:var(--muted);padding:12px 14px;border-radius:8px}
+.nav button.active{background:#233329;color:var(--green)}.nav button:hover{color:#fff;background:#202c3d}
+.sideBottom{margin-top:auto;font-size:11px;color:var(--muted)}
+.led{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px}
+.main{min-width:0}
+.top{padding:19px 38px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:11px;color:var(--muted);white-space:nowrap}
+.pill.green{color:var(--green);border-color:#365943;background:#14291e}.pill.amber{color:var(--amber);border-color:#655334}.pill.red{color:var(--red);border-color:#7a4048}
+.content{max-width:1500px;margin:auto;padding:34px 38px 60px}
+.page{display:none}.page.active{display:block}
+.headline{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:26px}
+h1{font-size:34px;letter-spacing:-1.2px;line-height:1.3;margin:8px 0 12px;text-wrap:balance}
+h2{font-size:19px;margin:0 0 16px}h3{font-size:14px;margin:0 0 9px}p{margin:0 0 12px}
+.muted{color:var(--muted)}.small{font-size:12px}
+.btn{background:#223226;color:var(--green);border:1px solid #416148;border-radius:7px;padding:9px 14px}
+.btn.secondary{background:#192231;border-color:var(--line);color:var(--text)}
+.notice{padding:13px 17px;border:1px solid #50492f;border-radius:9px;background:#242218;color:#e7cf92;font-size:12px;margin-bottom:24px}
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:24px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:21px;min-width:0}
+.kpi .value{font-size:31px;letter-spacing:-1px;margin:10px 0;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:11px;color:var(--muted)}
+.two{grid-template-columns:1.25fr 1fr;margin-bottom:22px}.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cardHead{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}.cardHead h2{margin:0}
+.row{padding:13px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}.row:last-child{border:0}
+.num{color:var(--green);font-size:12px;font-weight:700;padding-top:3px;min-width:22px;font-variant-numeric:tabular-nums}
+.grow{flex:1;min-width:0}.row p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.tag{color:var(--amber);font-size:10px;border:1px solid #665338;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.timeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:18px}
+.time{border-top:2px solid #3b4a60;padding:12px 4px}.time.current{border-color:var(--green)}.time.off{border-color:#5a4b6e}
+.time b{display:block;font-size:12px}.time span{color:var(--muted);font-size:11px}
+.partners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.partner{border-left:2px solid var(--violet);padding-left:13px}.partner p{font-size:12px;color:var(--muted)}
+.agentGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.agent{background:var(--panel);color:var(--text);text-align:left;border:1px solid var(--line);border-radius:9px;padding:16px;min-height:112px}
+.agent:hover,.agent.selected{border-color:var(--green);background:#1b2d29}
+.agent .n{font:11px ui-monospace,monospace;color:var(--green);margin-bottom:7px;display:flex;justify-content:space-between;gap:6px}
+.agent p{font-size:11px;color:var(--muted);margin:6px 0 0}
+.agent .used{color:var(--amber)}
+.director{border:1px solid #4e6c55;background:linear-gradient(120deg,#233c2d,#18222f);border-radius:12px;padding:22px;margin-bottom:18px}
+.detail{margin-top:18px;border-color:#4e6c55;min-height:170px}
+code{color:#c2b7ff;font-size:12px;overflow-wrap:anywhere}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.step{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--panel)}.step.on{border-color:var(--green);background:#1b3025}
+.step p{font-size:12px;color:var(--muted);margin:8px 0 0}
+.log{font-family:ui-monospace,monospace;font-size:12px;min-height:150px;padding:16px;background:#0c141c;border-radius:8px;margin:16px 0;color:#bad3c0}
+.log div{padding:6px 0;border-bottom:1px solid #1e2b33}
+table{border-collapse:collapse;width:100%;font-size:12px}th{text-align:left;color:var(--muted);font-weight:500}
+th,td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}td{font-variant-numeric:tabular-nums}
+.tableWrap{overflow-x:auto}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}
+input{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radius:6px;padding:10px;width:100%}
+.field{margin-bottom:14px}
+.result{border:1px solid #586b46;background:#1b2a22;border-radius:8px;padding:18px;margin-top:16px}
+.result.warn{border-color:#79603c;background:#30271b;color:#f3d18b}.result.risk{border-color:#98535a;background:#331f28;color:#ffc2c5}
+.result .big{font-size:26px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.meter{display:grid;grid-template-columns:5fr 2fr 3fr 42fr;height:10px;border-radius:6px;overflow:hidden;margin:14px 0 6px}
+.meter span:nth-child(1){background:#2e6b43}.meter span:nth-child(2){background:#7a6330}.meter span:nth-child(3){background:#7a3a44}.meter span:nth-child(4){background:#3b2230}
+.meterLab{display:grid;grid-template-columns:5fr 2fr 3fr 42fr;font-size:10px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.flow span{padding:8px 12px;background:#202d3b;border:1px solid #39495e;border-radius:6px;font-size:12px}
+.flow span.gate{border-color:#79603c;color:var(--amber)}
+.ruleBlock p{color:var(--muted);font-size:12px;margin:0}
+.st-ok{color:var(--green)}.st-wait{color:var(--amber)}.st-user{color:var(--violet)}
+.footer{margin-top:30px;font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:17px}
+select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radius:6px;padding:9px;font:inherit}
+.tin{width:76px;padding:7px 8px}
+.ruleList{margin:0;padding-left:18px;font-size:12px;color:var(--muted)}.ruleList li{margin:4px 0}.ruleList b{color:var(--text)}
+.src{font-size:10px;color:var(--violet);border:1px solid #4a4370;border-radius:4px;padding:1px 6px;white-space:nowrap;margin-left:4px}
+.fields3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.inline{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}.inline select{width:auto}
+.ok{color:var(--green)}.no{color:var(--red)}.wn{color:var(--amber)}
+.phone{max-width:380px;width:100%;border:1px solid var(--line);border-radius:24px;padding:14px;background:#0c141c;margin:0 auto}
+.phoneTop{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:0 6px 8px;border-bottom:1px solid #1e2b33}
+.chatlog{height:380px;overflow-y:auto;display:flex;flex-direction:column;padding:8px 2px}
+.bubble{max-width:86%;padding:9px 12px;border-radius:12px;margin:5px 0;font-size:13px;white-space:pre-wrap;line-height:1.55}
+.bubble.bot{background:#1d2a3a;border-top-left-radius:4px}.bubble.me{background:#233c2d;margin-left:auto;border-top-right-radius:4px}
+.bubble.call{background:#2b2448;border-top-left-radius:4px}
+.bubble.sys{background:none;color:var(--muted);font-size:11px;text-align:center;max-width:100%;margin:2px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chips .btn{padding:6px 10px;font-size:12px}
+.inrow{display:flex;gap:6px;margin-top:8px}.inrow input{flex:1;min-width:0;padding:9px}
+.handoff{font-family:ui-monospace,monospace;font-size:12px;background:#0c141c;border-radius:8px;padding:12px;min-height:90px;color:#bad3c0}
+.handoff div{padding:4px 0;border-bottom:1px solid #1e2b33}
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:6px 0 4px}
+.tl div{border-top:2px solid #3b4a60;padding:10px 4px;font-size:12px}.tl b{display:block;font-variant-numeric:tabular-nums}.tl span{color:var(--muted);font-size:11px}
+.tl .hot{border-color:var(--amber)}.tl .cut{border-color:var(--red)}
+@media(max-width:680px){.fields3{grid-template-columns:1fr}.tl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1200px){.agentGrid,.steps{grid-template-columns:repeat(3,minmax(0,1fr))}.timeline{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1050px){.shell{grid-template-columns:180px 1fr}.content{padding:26px 22px}.top{padding:16px 22px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.agentGrid,.steps,.three{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:28px}}
+@media(max-width:680px){.shell{display:block}.side{position:static;height:auto;padding:16px;border-right:0;border-bottom:1px solid var(--line)}.brandSub,.sideBottom{display:none}.nav{flex-direction:row;overflow-x:auto;margin-top:12px;gap:4px}.nav button{white-space:nowrap;padding:8px}.content{padding:22px 16px}.top{padding:12px 16px}.headline{display:block}.agentGrid,.steps,.three,.partners,.kpis{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:26px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="shell">
+<aside class="side">
+  <div class="brand">AX <i>CONTROL</i></div>
+  <div class="brandSub">CJ · AX 취업교육 운영 PM 팀</div>
+  <nav class="nav" aria-label="주 메뉴">
+    <button class="active" data-page="overview">01　운영 브리핑</button>
+    <button data-page="team">02　에이전트 조직</button>
+    <button data-page="workflow">03　주간 운영 루프</button>
+    <button data-page="attendance">04　출석 계산기</button>
+    <button data-page="rules">05　운영 규칙</button>
+    <button data-page="comms">06　발송 준비</button>
+    <button data-page="bot">07　출결 알림 봇</button>
+  </nav>
+  <div class="sideBottom"><p><span class="led"></span>운영 중 · 3주차</p>v3 · 2026-11-13<br>실데이터 미연결<br>발송 도구 미연결</div>
+</aside>
+<main class="main">
+<header class="top"><span>WORKSPACE / projects/261111_CJ_AX취업교육</span><span>기준일 2026-11-12(목) KST　<span class="pill green">운영 중</span></span></header>
+<div class="content">
+
+<!-- 01 -->
+<section class="page active" id="overview">
+  <div class="headline"><div><div class="label">Program operations / overview</div><h1>끝까지 남게 돕고,<br>판단은 근거로 남기는 PM.</h1><p class="muted small">CJ 소속 총괄 PM과 전문 에이전트 11명의 운영 현황</p></div><button class="btn" data-go="workflow">주간 운영 루프 보기 ↗</button></div>
+  <div class="notice">명단·출석·취업 실데이터는 아직 받지 않았습니다. "데이터 대기"는 0이 아닙니다. 목표선과 실적을 구분해 표시합니다.</div>
+  <div class="grid kpis">
+    <div class="card kpi"><span class="muted small">선발 / 예비</span><div class="value">30 <span class="small muted">명 / 15명</span></div><div class="sub">현재 재원 인원 · 데이터 대기</div></div>
+    <div class="card kpi"><span class="muted small">교육일 경과</span><div class="value">14 <span class="small muted">/ 52일</span></div><div class="sub">월~금, 12/25·1/1 휴강 · 11/12 포함</div></div>
+    <div class="card kpi"><span class="muted small">개인 출석 단계</span><div class="value">90·85·80<span class="small">%</span></div><div class="sub">경고 · 위험 · 중도이탈 (전체 교육일 분모)</div></div>
+    <div class="card kpi"><span class="muted small">다음 주간 점검</span><div class="value">11/16 <span class="small muted">월</span></div><div class="sub">1~3주차 학원 집계 필요</div></div>
+  </div>
+  <div class="grid two">
+    <div class="card">
+      <div class="cardHead"><h2>지금 할 일</h2><span class="pill amber">사용자 실행 대기</span></div>
+      <div class="row"><span class="num">01</span><div class="grow"><b>메시지 4건 발송</b><p>학원 데이터 요청 v7(+개인 안내 문안 첨부) · 대한상공회의소 현황 요청 v5 · 강사 면담 집계 v3 · 참여자 출석 계산 카드 v2</p></div><span class="tag">사용자</span></div>
+      <div class="row"><span class="num">02</span><div class="grow"><b>CJ 내부 준비 (11/13까지)</b><p>최종 명부 D01(raw에만) · 1주차 이탈·승계 기록 D04 · 사례 A·B·C 사유 코드</p></div><span class="tag">CJ 운영매니저</span></div>
+      <div class="row"><span class="num">03</span><div class="grow"><b>체크인 수집 고지·동의 전문 검토</b><p>이름 수집 · 첫 체크인(4주차) 전에 완료</p></div><span class="tag">전문 검토</span></div>
+      <div class="row"><span class="num">04</span><div class="grow"><b>대한상공회의소 회신 대기 (11/20 희망)</b><p>중도이탈 행정 처리 · 분모 포함 여부 · 취업 성공 이탈 · 통보 범위 · 수료 기준</p></div><span class="tag">대한상공회의소</span></div>
+    </div>
+    <div class="card">
+      <div class="cardHead"><h2>성과 모니터</h2><span class="pill">실적 미입력</span></div>
+      <div class="tableWrap"><table>
+        <tr><th>지표</th><th>현재</th><th>출처</th></tr>
+        <tr><td>출석 단계별 인원</td><td class="st-wait">데이터 대기</td><td>학원 집계 D15</td></tr>
+        <tr><td>단계 안내 발송 건수</td><td class="st-wait">데이터 대기</td><td>학원 D17</td></tr>
+        <tr><td>수료율</td><td class="st-wait">산출 불가 (수료 기준 미정)</td><td>판정 주체 D07</td></tr>
+        <tr><td>취업률</td><td class="st-wait">데이터 대기</td><td>대한상공회의소 D09</td></tr>
+        <tr><td>학습 기록 · 제작물</td><td class="st-wait">데이터 대기</td><td>강사 D10·D11</td></tr>
+        <tr><td>체크인 추세</td><td class="st-wait">미실행 (4주차 예정)</td><td>CJ D16</td></tr>
+      </table></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cardHead"><h2>기수 타임라인</h2><span class="pill">2026-10-26 → 2027-01-07 · 11개 주차</span></div>
+    <div class="timeline">
+      <div class="time"><b>10/26 개강</b><span>1주차 강사 면담 · 참여 의사</span></div>
+      <div class="time"><b>10/30 추가합격 마감</b><span>예비 15명 1:1 승계 · 이전 이탈 차감 없음</span></div>
+      <div class="time current"><b>11/16 첫 주간 점검</b><span>이후 매주 월요일</span></div>
+      <div class="time"><b>11/17 · 12/1 · 12/22</b><span>CJ 체크인 (4·6·9주차)</span></div>
+      <div class="time off"><b>12/25 · 1/1 휴강</b><span>공휴일</span></div>
+      <div class="time"><b>1/7 종료</b><span>수료 판정 점검 · 1/11 마감 집계</span></div>
+    </div>
+  </div>
+  <h2 style="margin-top:26px">함께 운영하는 기관</h2>
+  <div class="partners">
+    <div class="partner"><h3>CJ 운영팀 (우리)</h3><p>기획·총괄, 기관 조율, 참여자 소통(슬랙), 대시보드, 보고<br>상담 창구 = CJ 운영매니저 슬랙</p></div>
+    <div class="partner"><h3>대한상공회의소</h3><p>선발 우선순위 기준, 합격자 자격 검증, 취업 성과지표, 워크넷 연결, 행정 처리</p></div>
+    <div class="partner"><h3>그린컴퓨터아트학원</h3><p>교육 환경, 출석 체크, 현장 관리<br>출석 단계 개인 안내 발송 (C안)</p></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="page" id="team">
+  <div class="headline"><div><div class="label">Hub &amp; spoke / organization</div><h1>한 명의 총괄,<br>열한 개의 전문 역할.</h1><p class="muted">모든 호출·인수인계·검토·조정은 총괄 PM을 거칩니다.</p></div><span class="pill green">카드를 눌러 역할 확인</span></div>
+  <div class="director"><div class="label">Main conversation</div><h2 style="margin:8px 0">CJ 총괄 PM</h2><p>접수 → 설계 승인 → 지시문 6요소로 호출 → 인수인계 확인 → 다른 역할의 교차 검토 → 충돌 조정(decisions.md) → 보고</p><span class="small muted">유일한 호출 창구 · 처분 권한은 담당 기관에 있음</span></div>
+  <div class="agentGrid" id="agentGrid"></div>
+  <div class="card detail" id="agentDetail" aria-live="polite"></div>
+  <div class="flow"><span>지시문 6요소</span><span>자기 폴더에 산출물</span><span>handoffs/ 인수인계서</span><span>다른 역할의 교차 검토</span><span>PM 결정·기록</span></div>
+  <p class="muted small">역할 간 직접 호출 금지 · 자기 결과 자기 검토 금지 · 수정본은 _v2, _v3 · qa-reviewer는 읽기 전용(결과는 PM이 저장)</p>
+</section>
+
+<!-- 03 -->
+<section class="page" id="workflow">
+  <div class="headline"><div><div class="label">Operating loop / every Monday</div><h1>매주 월요일,<br>같은 순서로 돈다.</h1><p class="muted">11/16(월)부터 반복하는 주간 운영 루프입니다.</p></div></div>
+  <div class="notice">설명용 재생입니다. 실제 에이전트 호출·메시지 발송·행정 처리를 하지 않습니다.</div>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px"><button class="btn" id="play">▶ 재생</button><button class="btn secondary" id="next">한 단계 진행</button><button class="btn secondary" id="reset">처음부터</button><span class="pill" id="simStatus" aria-live="polite">0 / 8 단계</span></div>
+  <div class="steps" id="steps"></div>
+  <div class="log" id="simLog" aria-live="polite">재생을 누르면 흐름이 시작됩니다.</div>
+  <div class="grid three">
+    <div class="card"><div class="label">Evidence</div><h3 style="margin-top:10px">R · N · D 근거 ID</h3><p class="muted small">요구사항 R, 니즈·인사이트 N, 원자료 D. 수치는 D와 계산식이 있어야 보고서에 씁니다.</p></div>
+    <div class="card"><div class="label">Alert</div><h3 style="margin-top:10px">경보는 지원으로</h3><p class="muted small">경고·위험은 본인 안내와 상담으로 대응합니다. 처분이 아닙니다.</p></div>
+    <div class="card"><div class="label">Decision</div><h3 style="margin-top:10px">처분은 기관 확정 뒤</h3><p class="muted small">중도이탈·차감은 학원 출석 확정과 대한상공회의소 처리 확인 뒤에 안내합니다.</p></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="page" id="attendance">
+  <div class="headline"><div><div class="label">Decision support / attendance calculator</div><h1>지각까지 넣어 계산하는<br>수료·참여수당 판정.</h1><p class="muted">기준은 OT 자료 2종(출결관리·참여수당, 수료 기준)에서 가져왔습니다. 입력값은 저장하지 않습니다.</p></div></div>
+  <div class="notice">전체 교육일수: 요청하신 <b>53일</b>로 넣었습니다. 다만 OT 자료 두 개 모두 <b>52일</b>(2026.10.26~2027.01.07)이고, 달력으로 세어도 52일입니다(주말·12/25·1/1 제외). 어느 쪽이든 수료에 허용되는 결석은 <b>최대 10일</b>로 같습니다. 아래 칸에서 바꿀 수 있습니다.</div>
+
+  <div class="grid two">
+    <div class="card">
+      <div class="cardHead"><h2>판정 기준</h2><span class="pill green">OT 자료 확인</span></div>
+      <ul class="ruleList">
+        <li><b>수업 시간</b> 09:00~18:00, 점심 13:00~14:00 제외 <b>하루 8시간</b></li>
+        <li><b>정상 출석</b> 09:10까지 입실 (9시 전 입실은 언제든 가능) · <b>09:11부터 지각</b></li>
+        <li><b>조퇴</b> 17:50 전에 퇴실 · <b>외출</b> 수업 중 10분 이상 자리 비움</li>
+        <li><b>지각·조퇴·외출 3회 = 결석 1일.</b> 하루에 두 가지가 겹치면 2회로 셉니다.</li>
+        <li><b>그날 4시간 미만 수강이면 결석</b> (8시간의 50% 미만). 4시간 이상이면 지각·조퇴·외출로 인정</li>
+        <li><b>수료</b> 전체 교육일수의 80% 이상 출석 = 결석 20% 이하</li>
+        <li><b>참여수당</b> 단위기간(10/26부터 한 달씩) 출석률 80% 이상이면 월 50만 원</li>
+        <li><b>나머지 횟수</b> 단위기간마다 3회를 채우지 못한 1~2회는 수당 계산에서 빼고, 수료 판정에서는 전체를 합산</li>
+        <li><b>제적</b> 단위기간 결석 50% 이상, 또는 전체 결석이 20% 초과</li>
+        <li><b>공가</b> 예비군·채용시험·결혼·사망·출산·질병(전체 훈련일수의 10%, 5일) 등은 증빙을 LMS로 내면 출석 인정. 이 계산기에는 결석으로 넣지 마세요.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="cardHead"><h2>하루 판정기</h2><span class="pill">입실·퇴실 시각으로</span></div>
+      <div class="fields3">
+        <div class="field"><label for="dIn">입실 시각</label><input id="dIn" type="time" value="09:11"></div>
+        <div class="field"><label for="dOut">퇴실 시각</label><input id="dOut" type="time" value="18:00"></div>
+        <div class="field"><label for="dAway">외출 시간 (분)</label><input id="dAway" type="number" min="0" max="540" step="5" value="0" inputmode="numeric"></div>
+      </div>
+      <div class="result" id="dayResult" role="status"></div>
+      <div class="inline"><label for="dUnit" style="margin:0">이 결과를</label><select id="dUnit"></select><button class="btn" id="dApply" type="button">집계표에 더하기</button></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:22px">
+    <div class="cardHead"><h2>단위기간별 참여수당</h2><span class="pill">결석 · 지각·조퇴·외출 횟수 입력</span></div>
+    <div class="tableWrap"><table style="min-width:760px">
+      <thead><tr><th>단위기간</th><th>교육일수</th><th>결석 일수</th><th>지각·조퇴·외출</th><th>환산 결석</th><th>출석률</th><th>참여수당</th><th>남은 여유</th></tr></thead>
+      <tbody id="unitBody"></tbody>
+    </table></div>
+    <p class="muted small" style="margin:10px 0 0">교육일수는 달력 기준(주말·12/25·1/1 휴강)입니다. 3차 단위기간은 8일뿐이라 50만 원을 다 주는지, 일수만큼 나눠 주는지는 OT 자료에 없습니다 <span class="tag">대한상공회의소 확인 필요</span>. 단위기간 종료 후 지급까지 최대 한 달 이상 걸립니다.</p>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>전체 과정 수료 판정</h2>
+      <div class="field"><label for="totalDays">전체 교육일수</label><input id="totalDays" type="number" min="1" max="120" step="1" value="53" inputmode="numeric"></div>
+      <div class="meter" aria-hidden="true" id="meter"><span></span><span></span><span></span><span></span></div>
+      <div class="meterLab" aria-hidden="true" id="meterLab"></div>
+      <div class="result" id="attResult" role="status"></div>
+      <p class="muted small" style="margin-top:12px">이 계산은 경보입니다. 제적·중도탈락·K-뉴딜 1회 차감은 학원 출석 확정과 대한상공회의소 처리 뒤에 적용됩니다.</p>
+    </div>
+    <div class="card">
+      <h2>운영 단계표</h2>
+      <div class="tableWrap"><table>
+        <tr><th>단계</th><th>출석률</th><th>결석 일수 (53일 기준)</th><th>대응</th></tr>
+        <tr><td class="st-ok">정상</td><td>90% 이상</td><td>0~5일</td><td>—</td></tr>
+        <tr><td class="st-wait">경고</td><td>85~90% 미만</td><td>6~7일</td><td>학원 → 본인 안내 (슬랙 DM·문자·이메일)</td></tr>
+        <tr><td style="color:var(--red)">위험</td><td>80~85% 미만</td><td>8~10일</td><td>학원 → 본인 안내, CJ 상담 연결</td></tr>
+        <tr><td style="color:var(--red)">수료 불가 · 제적 기준</td><td>80% 미만</td><td>11일 이상</td><td>기관 확정 → 통보, 행정 처리 대한상공회의소</td></tr>
+      </table></div>
+      <p class="muted small" style="margin-top:12px">경고·위험은 우리 운영 기준이고, 80%는 OT 자료의 수료 기준입니다. 80% 정확히는 수료 가능입니다. 중도 포기는 K-뉴딜 참여 1회로 셉니다(연 2회까지).</p>
+    </div>
+  </div>
+  <div class="card">
+    <h2>경보에서 처분까지</h2>
+    <div class="flow"><span>학원 집계로 감지</span><span>본인 안내(경고·위험)</span><span>CJ 상담</span><span class="gate">학원 출석 확정</span><span class="gate">대한상공회의소 처리 확인</span><span>제적·중도탈락 통보</span><span>처리 회신 기록</span></div>
+    <div class="tableWrap"><table>
+      <tr><th>항목</th><th>지금 기준</th><th>출처 · 상태</th></tr>
+      <tr><td>지각·조퇴·외출 시각</td><td>09:11부터 지각, 17:50 전 조퇴, 10분 이상 외출</td><td class="st-ok">OT 자료 확인</td></tr>
+      <tr><td>3회 = 결석 1일, 4시간 미만 = 결석</td><td>하루 겹치면 각각 셈. 단위기간 나머지 1~2회는 수당 계산 제외, 수료 판정 합산</td><td class="st-ok">OT 자료 확인</td></tr>
+      <tr><td>수료 · 참여수당</td><td>전체 80% 이상 출석 · 단위기간 80% 이상 출석 시 월 50만 원</td><td class="st-ok">OT 자료 확인</td></tr>
+      <tr><td>전체 교육일수</td><td>53일로 계산 (OT 자료 52일)</td><td class="st-wait">사용자 확인 필요</td></tr>
+      <tr><td>4시간 미만 결석일의 지각 횟수</td><td>결석 하루로만 세고 지각 횟수에는 넣지 않음</td><td class="st-wait">추론 · 학원 확인 필요</td></tr>
+      <tr><td>3차 단위기간(8일) 수당</td><td>50만 원 전액으로 표시</td><td class="st-wait">대한상공회의소 확인 필요</td></tr>
+    </table></div>
+  </div>
+</section>
+<!-- 05 -->
+<section class="page" id="rules">
+  <div class="headline"><div><div class="label">Operating system / team rules</div><h1>일은 맡기고,<br>기준과 근거는 지킨다.</h1><p class="muted">공통 규칙 <code>CLAUDE.md</code> 요약. 2026-11-12에 ChatGPT 제작물에서 좋은 원칙을 골라 합쳤습니다.</p></div></div>
+  <div class="grid three">
+    <div class="card ruleBlock"><h2>01 · 허브 앤 스포크</h2><p>총괄 PM만 호출·취합·조정·보고. 에이전트끼리 부르지 않음.</p></div>
+    <div class="card ruleBlock"><h2>02 · 파일이 기억</h2><p>지시문 6요소, handoffs/ 인수인계서, decisions.md를 먼저 읽음.</p></div>
+    <div class="card ruleBlock"><h2>03 · 남이 검토</h2><p>정해진 검토자를 새로 호출. qa-reviewer는 읽기 전용 최종 관문.</p></div>
+    <div class="card ruleBlock"><h2>04 · 근거 ID와 태그</h2><p>R·N·D 근거, [확인]·[추론]·[가설]·[미확인]. "사용자 설명"과 "공식 문서" 구분. <span class="pill green">합침</span></p></div>
+    <div class="card ruleBlock"><h2>05 · 경보 ≠ 처분</h2><p>위험 표시는 지원 신호. 처분 안내는 기관 확정 뒤. <span class="pill green">합침</span></p></div>
+    <div class="card ruleBlock"><h2>06 · 데이터 정직성</h2><p>데이터 없음 ≠ 0. 목표선 ≠ 실적. 원본은 읽기 전용, 정정은 이력과 함께. <span class="pill green">합침</span></p></div>
+    <div class="card ruleBlock"><h2>07 · 발송 안전</h2><p>초안 기본. 위임·도구가 있어도 사용자 확인 후, 개인별·숨은참조, 발송 기록, 중복 방지 키. <span class="pill green">합침</span></p></div>
+    <div class="card ruleBlock"><h2>08 · 개인정보</h2><p>기관 → CJ는 집계만(C안), 0 / &lt;5 / n. 실명은 raw/에만, git 제외.</p></div>
+    <div class="card ruleBlock"><h2>09 · 공정성</h2><p>소수 사례 일반화 금지. 경제력·개인 사정을 선발 기준으로 쓰지 않음. 진술과 관찰 분리. <span class="pill green">합침</span></p></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h2>1주차에서 배운 것</h2>
+    <div class="grid three">
+      <div><span class="pill">사례 A · 다른 우선순위</span><p class="small muted" style="margin-top:10px">인턴 지원을 먼저 해 보고 취업 연계로 가려 함</p></div>
+      <div><span class="pill">사례 B · 참여 의사</span><p class="small muted" style="margin-top:10px">취업 관심 없고 쉬고 싶음</p></div>
+      <div><span class="pill">사례 C · 수준 불일치</span><p class="small muted" style="margin-top:10px">중상위 개발자, 과정 단계와 맞지 않음</p></div>
+    </div>
+    <p class="muted small" style="margin-top:14px">잔류자 공통점: 창작의 재미, 하고 싶은 마음, 적극성. 3건이라 일반화하지 않고, 4·6·9주차 체크인(새 우선순위·흥미·난이도)으로 확인합니다.</p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="page" id="comms">
+  <div class="headline"><div><div class="label">Communication / readiness</div><h1>안내는 정확하게,<br>발송 상태는 분명하게.</h1><p class="muted">초안 위치: <code>08_comms/messages/</code> · 발송은 사용자 (발송 도구 미연결)</p></div><span class="pill amber">모두 미발송</span></div>
+  <div class="card">
+    <div class="tableWrap"><table>
+      <tr><th>대상</th><th>파일</th><th>채널</th><th>상태</th></tr>
+      <tr><td>그린컴퓨터아트학원</td><td><code>20261112_그린컴퓨터아트학원_데이터요청_v7.md</code></td><td>이메일</td><td class="st-ok">발송 가능</td></tr>
+      <tr><td>↳ 첨부</td><td><code>20261112_출석단계_개인안내_문안.md</code></td><td>—</td><td class="st-ok">경고·위험 발송 가능 · 중도이탈은 기관 확정 뒤</td></tr>
+      <tr><td>대한상공회의소</td><td><code>20261112_대한상공회의소_현황요청_v5.md</code></td><td>이메일</td><td class="st-ok">발송 가능</td></tr>
+      <tr><td>담당 강사</td><td><code>20261111_강사_면담기록요청_v3.md</code></td><td>슬랙·이메일</td><td class="st-ok">발송 가능</td></tr>
+      <tr><td>참여자</td><td><code>20261112_참여자_출석계산카드_v2.md</code></td><td>슬랙 공지</td><td class="st-ok">발송 가능</td></tr>
+      <tr><td>참여자 체크인</td><td><code>20261112_참여자_체크인설문_v6.md</code></td><td>슬랙</td><td class="st-wait">고지·동의 전문 검토 뒤</td></tr>
+      <tr><td>현장 상담 안내</td><td><code>20261112_상담창구_안내문_v6.md</code></td><td>현장·슬랙</td><td class="st-wait">학원 협의 뒤</td></tr>
+      <tr><td>참여자 FAQ</td><td><code>../faq_v6.md</code></td><td>슬랙</td><td class="st-wait">창구 정보 채운 뒤</td></tr>
+    </table></div>
+  </div>
+  <div class="grid two" style="margin-top:16px">
+    <div class="card">
+      <h2>보내기 전 확인</h2>
+      <div class="row"><span class="num">01</span><div class="grow"><b>본문만 복사</b><p><code>---</code> 아래만. 머리말·내부 메모(HTML 주석) 제외</p></div></div>
+      <div class="row"><span class="num">02</span><div class="grow"><b>자리표시자 채우기</b><p>{담당자명} {총괄PM명} {회신 연락처} 등</p></div></div>
+      <div class="row"><span class="num">03</span><div class="grow"><b>수신자 확인</b><p>역할·주소 맞는지, 여러 명이면 개인별 또는 숨은참조</p></div></div>
+      <div class="row"><span class="num">04</span><div class="grow"><b>발송 기록</b><p><code>08_comms/dispatch_log.md</code>에 대상 ID·파일 판·채널·시각·상태</p></div></div>
+    </div>
+    <div class="card">
+      <h2>자동 발송을 붙이려면</h2>
+      <p class="muted small">사용자가 발송을 위임해도 지금은 도구가 없어 보낼 수 없습니다. 연결하려면:</p>
+      <div class="row"><span class="num">01</span><div class="grow"><b>발송 도구 연결</b><p>메일·슬랙 커넥터와 발신 계정</p></div></div>
+      <div class="row"><span class="num">02</span><div class="grow"><b>검증된 수신자 목록</b><p>역할별 주소, 접근 권한이 제한된 곳에 보관</p></div></div>
+      <div class="row"><span class="num">03</span><div class="grow"><b>발송 전 확인</b><p>에이전트가 수신자·본문 목록을 보여 주고 사용자가 한 번 확인</p></div></div>
+      <div class="row"><span class="num">04</span><div class="grow"><b>중복 방지와 기록</b><p>안내 종류+수신자 ID+기준 판+사건 키, 결과 확인 전 "완료" 금지</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="page" id="bot">
+  <div class="headline"><div><div class="label">Prototype / morning attendance bot</div><h1>9시에 먼저 묻는<br>출결 알림 봇.</h1><p class="muted">입실 체크가 안 된 참여자에게 09:00 문자, 09:05 음성 전화를 보냅니다. 답장을 읽고 지각·결석·공가 안내를 한 뒤, 학원 담당자에게 요약을 넘깁니다.</p></div></div>
+  <div class="notice">시뮬레이션입니다. 실제 문자·전화는 나가지 않습니다. 실제 발송에는 문자·음성 발송 서비스 계정과 사전 등록된 발신번호가 필요하고, 발송 주체는 학원입니다(아래 '실제 운영 연결' 참고). 화면의 이름은 모두 가명입니다.</div>
+
+  <div class="card" style="margin-bottom:22px">
+    <h2>아침 흐름</h2>
+    <div class="tl">
+      <div><b>~09:00</b><span>입실 체크 (9시 전 언제든)</span></div>
+      <div class="hot"><b>09:00</b><span>미체크자에게 문자 + 슬랙 DM</span></div>
+      <div class="hot"><b>09:05</b><span>그래도 미체크면 AI 음성 전화</span></div>
+      <div><b>09:10</b><span>유예 마감, 여기까지 정상 출석</span></div>
+      <div class="cut"><b>09:11</b><span>지각 기록, 학원 담당자에게 요약</span></div>
+    </div>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <div class="cardHead"><h2>참여자 휴대폰 화면</h2><span class="pill" id="botMode">문자</span></div>
+      <div class="phone">
+        <div class="phoneTop"><span id="phoneClock">09:00</span><span>L.L.M 아카데미 출결 알림</span></div>
+        <div class="chatlog" id="chatlog" aria-live="polite"></div>
+        <div class="chips" id="chips"></div>
+        <form class="inrow" id="replyForm"><input id="replyText" type="text" placeholder="답장 입력 (예: 버스 놓쳐서 10분 늦어요)" autocomplete="off" aria-label="답장"><button class="btn" type="submit">보내기</button></form>
+        <div class="chips"><button class="btn secondary" type="button" id="micBtn" hidden>🎤 말로 답하기</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>시뮬레이션 설정</h2>
+      <div class="fields3">
+        <div class="field"><label for="bName">참여자 (가명)</label><input id="bName" type="text" value="참여자 A"></div>
+        <div class="field"><label for="bLate">지금까지 지각·조퇴·외출</label><input id="bLate" type="number" min="0" max="60" value="1" inputmode="numeric"></div>
+        <div class="field"><label for="bTime">지금 시각</label><select id="bTime" style="width:100%"><option>08:55</option><option selected>09:00</option><option>09:05</option><option>09:10</option><option>09:11</option><option>09:20</option></select></div>
+      </div>
+      <label style="display:flex;gap:8px;align-items:center"><input id="bChecked" type="checkbox" style="width:auto"> 이미 입실 체크함</label>
+      <div class="chips" style="margin-top:12px">
+        <button class="btn" type="button" id="runSms">▶ 09:00 문자 보내기</button>
+        <button class="btn" type="button" id="runCall">▶ 09:05 음성 전화 걸기</button>
+        <button class="btn secondary" type="button" id="runReset">처음부터</button>
+      </div>
+      <p class="muted small" style="margin-top:10px">음성 전화는 이 브라우저의 한국어 음성으로 읽어 줍니다. 크롬·엣지에서는 마이크로 답할 수도 있습니다. 답장 이해는 지금 키워드 규칙으로 동작하며, 실제 운영에서는 AI 모델로 바꿀 자리입니다.</p>
+      <h3 style="margin-top:18px">학원 담당자에게 넘어가는 요약</h3>
+      <div class="handoff" id="handoff"><div>아직 없음</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>실제 운영 연결에 필요한 것</h2>
+    <div class="tableWrap"><table style="min-width:640px">
+      <tr><th>항목</th><th>내용</th><th>상태</th></tr>
+      <tr><td>발송 주체</td><td>학원(그린컴퓨터아트학원). 참여자 연락처는 학원에 있고, CJ는 집계만 받는 C안 그대로</td><td class="st-user">기존 결정</td></tr>
+      <tr><td>미체크자 판별</td><td>LMS 입실 기록 또는 슬랙 #06-출석체크 데일리 스레드 댓글을 08:59에 읽어 명단 만들기</td><td class="st-wait">학원 데이터 연결 방법 확인</td></tr>
+      <tr><td>문자·음성 발송</td><td>문자 + 음성(TTS) 전화를 보낼 수 있는 발송 서비스 계정, 발신번호 사전 등록(국내 규정)</td><td class="st-wait">학원 계정·비용 결정</td></tr>
+      <tr><td>AI 답장 이해</td><td>자유 답장을 지각·결석·공가·연결 요청으로 분류. 처분 판단은 하지 않고 안내와 전달만</td><td class="st-wait">모델 연결 전 · 지금은 규칙</td></tr>
+      <tr><td>수신 동의</td><td>아침 출결 문자·전화 수신 동의를 참여자에게 받기, 수신 거부 방법 안내</td><td class="st-wait">동의서 문안 필요</td></tr>
+      <tr><td>발송 안전</td><td>교육일만 발송(주말·12/25·1/1 제외), 하루 1인 문자 1건·전화 1건, 중복 방지 키, 발송 기록</td><td class="st-user">규칙 07 그대로</td></tr>
+    </table></div>
+  </div>
+</section>
+<footer class="footer">AX CONTROL v3 · CJ AX 취업교육 PM 팀 · 기준일 2026-11-12 · 규칙 <code>CLAUDE.md</code> · 결정 <code>00_brief/decisions.md</code> · 감별 기록 <code>agent-team/merge_notes_20261112.md</code></footer>
+</div></main></div>
+<script>
+const agents=[
+ {id:'needs',name:'니즈·문서 대장',en:'needs-researcher',folder:'01_needs',rev:'program',used:false,task:'고객사 니즈·RFP 요구사항(R) 분석. 운영 중에는 협약서·사업계획서·지침의 문서 대장으로 "사용자 설명"과 "공식 문서"를 대조.'},
+ {id:'program',name:'프로그램 설계',en:'program-designer',folder:'02_design',rev:'needs',used:false,task:'구조·커리큘럼·일정·예산·KPI 설계. 이번 사업은 수주 후라 협의용 기획안만.'},
+ {id:'proposal',name:'제안서',en:'proposal-writer',folder:'03_proposal',rev:'program',used:false,task:'입찰 제안서·요구사항 대응표. 이번 사업은 입찰이 없어 쓰지 않음.'},
+ {id:'recruit',name:'리크루팅',en:'recruiter',folder:'04_recruit',rev:'program',used:false,task:'모집 마케팅·공고, 멘토·연사 후보와 섭외 요청문.'},
+ {id:'selection',name:'선발·승계',en:'selection-designer',folder:'05_selection',rev:'qa',used:true,task:'대한상공회의소 기준을 평가표·절차로 옮김. 예비 15명 승계 규칙·기록, 이탈 사유 6분류.'},
+ {id:'accel',name:'액셀러레이팅',en:'accelerating-manager',folder:'06_accelerating',rev:'data',used:true,task:'마일스톤·주간 점검·위험 신호와 대응. 진술과 관찰 분리, 경보는 지원으로.'},
+ {id:'event',name:'행사 운영',en:'event-operator',folder:'07_events',rev:'comms',used:false,task:'웰컴데이·워크숍·데모데이 운영안·런시트·체크리스트·비상 대응.'},
+ {id:'comms',name:'커뮤니케이션',en:'communicator',folder:'08_comms',rev:'event',used:true,task:'참여자·강사·기관 안내 초안, 단계별 개인 안내 문안, 체크인 설문, 발송 기록 규칙.'},
+ {id:'data',name:'데이터·대시보드',en:'data-analyst',folder:'09_data',rev:'qa',used:true,task:'데이터 등록·요청 양식, 출석 4단계 집계, 대시보드, 지표 산출. 데이터 없음 ≠ 0, 원본 불변.'},
+ {id:'report',name:'보고서',en:'report-writer',folder:'10_report',rev:'program',used:false,task:'중간·결과 보고서, 고객사 보고 자료. 수치는 data-analyst 산출물에서만.'},
+ {id:'qa',name:'검수 · 최종 관문',en:'qa-reviewer',folder:'읽기 전용',rev:null,used:true,task:'요건·수치 근거·예산·개인정보·공정성·경보/처분·발송 안전 검수. 결과는 PM이 reviews/에 저장.'}
+];
+const nameOf=id=>id===null?'— 본인이 최종 관문':(agents.find(a=>a.id===id)||{}).name;
+const grid=document.getElementById('agentGrid');
+agents.forEach((a,i)=>{const b=document.createElement('button');b.className='agent';b.dataset.id=a.id;b.setAttribute('aria-pressed','false');
+ b.innerHTML='<div class="n"><span>AGENT '+String(i+1).padStart(2,'0')+'</span>'+(a.used?'<span class="used">이번 회차 사용</span>':'')+'</div><strong>'+a.name+'</strong><p>'+a.en+'</p><p>검토: '+nameOf(a.rev)+'</p>';
+ b.onclick=()=>selectAgent(a.id);grid.appendChild(b)});
+function selectAgent(id){const a=agents.find(x=>x.id===id);
+ document.querySelectorAll('.agent').forEach(x=>{const on=x.dataset.id===id;x.classList.toggle('selected',on);x.setAttribute('aria-pressed',on?'true':'false')});
+ const revBy=agents.filter(x=>x.rev===id).map(x=>x.name);
+ document.getElementById('agentDetail').innerHTML='<div class="cardHead"><h2>'+a.name+' <span class="muted small">'+a.en+'</span></h2><span class="pill green">검토: '+nameOf(a.rev)+'</span></div><p>'+a.task+'</p><p class="muted small">쓰기 범위: <code>'+a.folder+'</code> · 정의 파일: <code>.claude/agents/'+a.en+'.md</code></p>'+(revBy.length?'<p class="muted small">이 역할이 검토하는 산출물: '+revBy.join(', ')+'</p>':'')+'<p class="muted small">흐름: 총괄 PM → '+a.name+' → 총괄 PM → '+nameOf(a.rev)+' → 총괄 PM</p>'}
+selectAgent('accel');
+
+const phases=[
+ ['학원 집계 수령','월 오전, D03 출결·D15 단계 인원·D17 발송 건수 (0 / &lt;5 / n)'],
+ ['대시보드 갱신','data-analyst: 데이터 대기 칸은 그대로 두고 받은 값만'],
+ ['주간 점검','accelerating-manager: 경고·위험·신규 진입, 안내 누락 비교'],
+ ['교차 검토','data-analyst가 점검 판정을 데이터와 대조'],
+ ['본인 안내','학원: 경고·위험 개인 안내 (슬랙 DM·문자·이메일)'],
+ ['CJ 후속','슬랙 공지·상담 연결, 체크인 주차면 설문'],
+ ['처분 확인','중도이탈은 학원 확정 + 대한상공회의소 처리 확인 뒤 통보'],
+ ['기록·보고','decisions.md, dispatch_log, 사용자 보고']];
+const events=[
+ 'PM: 학원 집계 3종 수령 확인, 빠진 것은 "데이터 대기"로 둠',
+ 'PM → data-analyst: dashboard_YYMMDD.md 작성 (지시문 6요소)',
+ 'PM → accelerating-manager: checkpoint_YYMMDD.md 작성',
+ 'PM → data-analyst(검토): 단계 판정이 집계와 맞는지 → reviews/',
+ '학원: 단계별 개인 안내 발송, 발송 건수 회신 (CJ는 이름을 모름)',
+ 'PM → communicator: 필요 시 슬랙 전체 공지·상담 시간 안내 초안',
+ '중도이탈 대상이 있으면: 학원 확정 → 대한상공회의소 처리 확인 → 통보',
+ 'PM: 결정 기록, 사용자에게 단계별 인원·조치·회신 대기 보고'];
+let at=0,timer=null;const log=document.getElementById('simLog');
+function renderSteps(){document.getElementById('steps').innerHTML=phases.map((p,i)=>'<div class="step '+(i===at-1?'on':'')+'"><span class="label">Step '+String(i+1).padStart(2,'0')+'</span><h3 style="margin-top:8px">'+p[0]+'</h3><p>'+p[1]+'</p></div>').join('');document.getElementById('simStatus').textContent=at+' / '+phases.length+' 단계'}
+function stop(){if(timer)clearInterval(timer);timer=null;document.getElementById('play').textContent='▶ 재생'}
+function next(){if(at>=phases.length){stop();return}if(at===0)log.textContent='';const d=document.createElement('div');d.textContent=String(at+1).padStart(2,'0')+' · '+events[at];log.appendChild(d);at++;renderSteps();if(at===phases.length)stop()}
+document.getElementById('next').onclick=()=>{stop();next()};
+document.getElementById('play').onclick=()=>{if(timer){stop();return}if(at===phases.length){at=0;log.textContent='';renderSteps()}next();if(at<phases.length){timer=setInterval(next,1600);document.getElementById('play').textContent='Ⅱ 일시정지'}};
+document.getElementById('reset').onclick=()=>{stop();at=0;log.textContent='재생을 누르면 흐름이 시작됩니다.';renderSteps()};
+renderSteps();
+
+// ---- 출석 계산기 (OT 자료 기준) ----
+const START=540,GRACE=550,LUNCH_S=780,LUNCH_E=840,END=1080,EARLY=1070,HALF=240;
+const UNITS=[{n:'1차',r:'10/26~11/25',d:23,a:0,e:0},{n:'2차',r:'11/26~12/25',d:21,a:0,e:0},{n:'3차',r:'12/26~01/07',d:8,a:0,e:0}];
+const $=id=>document.getElementById(id);
+const toMin=t=>{if(!t)return NaN;const[h,m]=t.split(':').map(Number);return h*60+m};
+const ov=(a,b,c,d)=>Math.max(0,Math.min(b,d)-Math.max(a,c));
+const hm=m=>Math.floor(m/60)+'시간'+(m%60?' '+(m%60)+'분':'');
+function judgeDay(tin,tout,away){
+ const i=toMin(tin),o=toMin(tout);away=Math.max(0,Number(away)||0);
+ if(!Number.isFinite(i)||!Number.isFinite(o)||o<=i)return{err:'입실보다 늦은 퇴실 시각을 넣어 주세요.'};
+ const att=Math.max(0,ov(i,o,START,LUNCH_S)+ov(i,o,LUNCH_E,END)-away);
+ const late=i>GRACE,early=o<EARLY,out=away>=10;
+ if(att<HALF)return{absent:true,att,late,early,out,events:0};
+ return{absent:false,att,late,early,out,events:(late?1:0)+(early?1:0)+(out?1:0)};
+}
+let lastDay=null;
+function renderDay(){
+ const r=judgeDay($('dIn').value,$('dOut').value,$('dAway').value),el=$('dayResult');lastDay=r;
+ if(r.err){el.className='result risk';el.textContent=r.err;$('dApply').disabled=true;return}
+ $('dApply').disabled=false;
+ const tags=[r.late?'지각':'',r.early?'조퇴':'',r.out?'외출':''].filter(Boolean);
+ if(r.absent){el.className='result risk';el.innerHTML='<div class="big">결석 1일</div><div class="small">수강 '+hm(r.att)+' / 8시간 · 4시간 미만이라 결석 처리</div>';return}
+ if(!r.events){el.className='result';el.innerHTML='<div class="big">정상 출석</div><div class="small">수강 '+hm(r.att)+' / 8시간 · 09:10까지 입실, 17:50 이후 퇴실</div>';return}
+ el.className='result warn';
+ el.innerHTML='<div class="big">'+tags.join(' + ')+' · '+r.events+'회</div><div class="small">수강 '+hm(r.att)+' / 8시간 · 4시간 이상이라 출석 인정, 횟수만 쌓입니다'+(r.events>1?' (하루에 겹쳐 '+r.events+'회로 셈)':'')+'</div>';
+}
+function renderUnits(){
+ const body=$('unitBody');
+ body.innerHTML=UNITS.map((u,k)=>'<tr><td><b>'+u.n+'</b><div class="small muted">'+u.r+'</div></td>'+
+  '<td><input class="tin" type="number" min="1" max="31" data-k="'+k+'" data-f="d" value="'+u.d+'" aria-label="'+u.n+' 교육일수"></td>'+
+  '<td><input class="tin" type="number" min="0" max="31" data-k="'+k+'" data-f="a" value="'+u.a+'" aria-label="'+u.n+' 결석 일수"></td>'+
+  '<td><input class="tin" type="number" min="0" max="90" data-k="'+k+'" data-f="e" value="'+u.e+'" aria-label="'+u.n+' 지각·조퇴·외출 횟수"></td>'+
+  '<td id="uc'+k+'"></td><td id="ur'+k+'"></td><td id="up'+k+'"></td><td id="us'+k+'"></td></tr>').join('');
+ body.querySelectorAll('input').forEach(x=>x.addEventListener('input',e=>{const v=Number(e.target.value);if(Number.isFinite(v)&&v>=0){UNITS[e.target.dataset.k][e.target.dataset.f]=Math.floor(v);calcAll()}}));
+ $('dUnit').innerHTML=UNITS.map((u,k)=>'<option value="'+k+'">'+u.n+' 단위기간 ('+u.r+')</option>').join('');
+}
+function unitCalc(u){
+ const conv=Math.floor(u.e/3),abs=Math.min(u.d,u.a+conv),rate=u.d?(u.d-abs)/u.d*100:0,max=Math.floor(u.d*0.2+1e-9);
+ return{conv,rest:u.e%3,abs,rate,pay:rate>=80-1e-9,expel:abs>=u.d*0.5,left:max-abs};
+}
+function stageOf(r){if(r<80-1e-9)return['수료 불가 · 제적 기준','risk'];if(r<85)return['위험','risk'];if(r<90)return['경고','warn'];return['정상','']}
+function calcAll(){
+ let sa=0,se=0;
+ UNITS.forEach((u,k)=>{const c=unitCalc(u);sa+=u.a;se+=u.e;
+  $('uc'+k).innerHTML=c.conv+'일'+(c.rest?'<div class="small muted">남은 '+c.rest+'회는 수당 계산 제외</div>':'');
+  $('ur'+k).innerHTML='<b class="'+(c.pay?'ok':'no')+'">'+c.rate.toFixed(1)+'%</b><div class="small muted">결석 '+c.abs+' / '+u.d+'일</div>';
+  $('up'+k).innerHTML=c.expel?'<b class="no">0원 · 제적 기준</b><div class="small muted">단위기간 결석 50% 이상</div>':c.pay?'<b class="ok">500,000원</b>':'<b class="no">0원</b><div class="small muted">출석률 80% 미만</div>';
+  $('us'+k).innerHTML=c.left>=0?'결석 <b>'+c.left+'일</b> 더 가능'+(c.left===0?'':'')+'<div class="small muted">지각 등은 '+(c.left*3+(2-c.rest))+'회까지</div>':'<span class="no">이미 '+(-c.left)+'일 초과</span>';
+ });
+ const D=Number($('totalDays').value),el=$('attResult');
+ if(!Number.isInteger(D)||D<1){el.className='result risk';el.textContent='전체 교육일수를 1 이상의 정수로 넣어 주세요.';return}
+ const conv=Math.floor(se/3),A=Math.min(D,sa+conv),rate=(D-A)/D*100,max=Math.floor(D*0.2+1e-9),[st,cls]=stageOf(rate);
+ const toNext=3-se%3,left=max-A;
+ const sumD=UNITS.reduce((s,u)=>s+u.d,0);
+ let msg=left>=0?'수료까지 결석 <b>'+left+'일</b> 더 가능합니다. 지각·조퇴·외출은 '+toNext+'회 더 쌓이면 결석 1일이 늘어납니다.':'수료 기준(결석 '+max+'일 이하)을 '+(-left)+'일 넘었습니다. 기관 확정 전까지는 경보로만 다룹니다.';
+ if(sumD!==D)msg+='<br><span class="small">단위기간 교육일수 합계는 '+sumD+'일이라 전체 '+D+'일과 다릅니다.</span>';
+ el.className='result '+cls;
+ el.innerHTML='<div class="big">'+st+' · '+rate.toFixed(1)+'%</div><div class="small">결석 '+sa+'일 + 지각·조퇴·외출 '+se+'회 환산 '+conv+'일 = '+A+'일 / '+D+'일 · 수료 허용 결석 '+max+'일</div><p style="margin:10px 0 0">'+msg+'</p>';
+ const n90=[...Array(D+1).keys()].filter(n=>(D-n)/D>=0.9).length,n85=[...Array(D+1).keys()].filter(n=>(D-n)/D>=0.85).length,n80=[...Array(D+1).keys()].filter(n=>(D-n)/D>=0.8-1e-9).length;
+ const parts=[n90,n85-n90,n80-n85,D+1-n80];
+ $('meter').style.gridTemplateColumns=$('meterLab').style.gridTemplateColumns=parts.map(p=>Math.max(p,0.5)+'fr').join(' ');
+ const lab=(a,b)=>a>b?'—':a===b?a+'일':a+'~'+b+'일';
+ $('meterLab').innerHTML='<span>'+lab(0,n90-1)+'</span><span>'+lab(n90,n85-1)+'</span><span>'+lab(n85,n80-1)+'</span><span>'+n80+'일+</span>';
+}
+['dIn','dOut','dAway'].forEach(id=>$(id).addEventListener('input',renderDay));
+$('dApply').addEventListener('click',()=>{if(!lastDay||lastDay.err)return;const u=UNITS[$('dUnit').value];if(lastDay.absent)u.a+=1;else u.e+=lastDay.events;renderUnits();calcAll()});
+$('totalDays').addEventListener('input',calcAll);
+renderUnits();renderDay();calcAll();
+
+// ---- 아침 출결 알림 봇 (시뮬레이션) ----
+const B={mode:'sms',sent:false,called:false,late:1};
+const chatLog=$("chatlog");
+function bubble(cls,text){const d=document.createElement('div');d.className='bubble '+cls;d.textContent=text;chatLog.appendChild(d);chatLog.scrollTop=chatLog.scrollHeight}
+function hand(text){const h=$('handoff');if(h.dataset.empty!=='0'){h.innerHTML='';h.dataset.empty='0'}const d=document.createElement('div');d.textContent=$('bTime').value+' · '+$('bName').value+' · '+text;h.appendChild(d)}
+function chips(list){$('chips').innerHTML='';list.forEach(([t,v])=>{const b=document.createElement('button');b.type='button';b.className='btn secondary';b.textContent=t;b.onclick=()=>userSays(v);$('chips').appendChild(b)})}
+const MENU=[['1 가는 중','1'],['2 오늘 결석','2'],['3 담당자 연결','3']];
+function speak(t){try{if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ko-KR';u.rate=1;const v=speechSynthesis.getVoices().find(x=>/^ko/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+function say(t){if(B.mode==='call'){bubble('call','🔊 '+t);speak(t)}else bubble('bot',t)}
+const tmin=()=>toMin($('bTime').value);
+function smsText(){return '[L.L.M 아카데미 출결 알림]\n'+$('bName').value+'님, 아직 입실 체크가 확인되지 않았어요.\n09:10까지 LMS 입실 체크하면 정상 출석이고, 09:11부터 지각이에요.\n늦거나 못 오시면 답장해 주세요.\n1 가는 중 / 2 오늘 결석 / 3 담당자 연결'}
+function callText(){return '안녕하세요, L.L.M 아카데미 출결 알림입니다. '+$('bName').value+'님, 아직 입실 체크가 확인되지 않았어요. 9시 10분까지 체크하면 정상 출석입니다. 가는 중이면 1번, 오늘 결석이면 2번, 담당자 연결은 3번을 말씀해 주세요.'}
+function setTime(t){$('bTime').value=t;$('phoneClock').textContent=t}
+function runSms(){
+ setTime('09:00');B.mode='sms';$('botMode').textContent='문자';
+ if($('bChecked').checked){bubble('sys','09:00 · 입실 체크 확인됨 → 문자 보내지 않음');return}
+ if(B.sent){bubble('sys','오늘 문자는 이미 보냈어요 (하루 1건, 중복 방지)');return}
+ B.sent=true;bubble('sys','09:00 · 문자 발송');bubble('bot',smsText());chips(MENU);hand('09:00 미체크 → 문자 발송');
+}
+function runCall(){
+ setTime('09:05');
+ if($('bChecked').checked){bubble('sys','09:05 · 입실 체크 확인됨 → 전화하지 않음');return}
+ if(B.called){bubble('sys','오늘 전화는 이미 걸었어요 (하루 1건, 중복 방지)');return}
+ B.called=true;B.mode='call';$('botMode').textContent='음성 전화';
+ bubble('sys','📞 09:05 · AI 음성 전화 연결됨');say(callText());chips(MENU);hand('09:05 여전히 미체크 → 음성 전화');
+}
+function classify(t){
+ const s=t.replace(/\s/g,'');
+ if(/^3|담당|연결|상담|사람|통화/.test(s))return'agent';
+ if(/예비군|민방위|면접|채용|시험|결혼|장례|돌아가|출산|공가/.test(s))return'official';
+ if(/^2|아파|아프|병원|열이|몸살|감기|코로나|결석|못가|못갈|못와|쉬|입원/.test(s))return'absent';
+ if(/이미|체크했|찍었|도착했|왔어|와있|입실했/.test(s))return'arrived';
+ if(/^1|가는|가요|출발|버스|지하철|늦|막혀|분뒤|분후|분만|곧|도착예정|달려/.test(s))return'late';
+ return'unknown';
+}
+function userSays(t){
+ if(!t.trim())return;bubble('me',t);const k=classify(t),now=tmin(),late=Number($('bLate').value)||0;
+ if(k==='late'){
+  if(now<=GRACE){say('알겠어요. 아직 '+(GRACE-now)+'분 남았어요. 9시 10분까지 입실 체크하면 정상 출석이에요. 도착하면 LMS 입실 화면을 캡처해서 슬랙 #06-출석체크 스레드에 올려 주세요.');hand('가는 중 (유예 '+(GRACE-now)+'분 남음)')}
+  else{const n=late+1;say('09:11이 지나 오늘은 지각으로 기록돼요. 지각·조퇴·외출이 누적 '+n+'회가 돼요. '+(n%3===0?'3회가 되어 결석 1일로 바뀌어요.':(3-n%3)+'회 더 쌓이면 결석 1일이 돼요.')+' 오후 2시 전에 도착하면 4시간 이상 수강이라 출석은 인정돼요. 조심히 오세요.');hand('지각 예상 → 누적 '+n+'회'+(n%3===0?' (결석 1일 환산)':''))}
+ }else if(k==='absent'){say('오늘 결석으로 학원 담당자에게 전달할게요. 질병이면 진단서나 진료확인서를 LMS로 내면 출석 인정을 검토받을 수 있어요(전체 훈련일수의 10%, 5일까지). 인정 여부는 학원 확인 뒤 정해져요. 몸조리 잘하세요.');hand('오늘 결석 연락 → 증빙 제출 안내함, 학원 확인 필요')}
+ else if(k==='official'){say('공가 사유라면 교육 담당자에게 미리 알리고 증빙(예: 예비군 통지서, 면접 안내 메일·문자, 응시 확인서)을 LMS로 내 주세요. 접수 확인서는 인정되지 않고, 수업 시간 밖에도 볼 수 있는 일정이면 공가가 안 돼요. 학원 담당자에게 전달할게요.');hand('공가 사유 연락 → 증빙 안내함, 학원 확인 필요')}
+ else if(k==='arrived'){say('아직 체크 기록이 보이지 않아요. LMS 입실 화면을 캡처해서 슬랙 #06-출석체크 데일리 스레드에 댓글로 올려 주세요. 학원 담당자에게도 확인 요청할게요.');hand('본인은 체크했다고 함 → 기록 대조 요청')}
+ else if(k==='agent'){say('학원 담당자에게 연결 요청을 남겼어요. 곧 연락드릴게요.');hand('담당자 연결 요청 → 회신 필요')}
+ else{say('잘 이해하지 못했어요. 가는 중이면 1, 오늘 결석이면 2, 담당자 연결은 3으로 답해 주세요.');chips(MENU)}
+}
+function resetBot(){try{speechSynthesis.cancel()}catch(e){}B.sent=B.called=false;B.mode='sms';$('botMode').textContent='문자';chatLog.innerHTML='';$('chips').innerHTML='';$('handoff').innerHTML='<div>아직 없음</div>';$('handoff').dataset.empty='1';setTime('09:00');bubble('sys','시뮬레이션 준비됨 · 실제 발송 없음')}
+$('runSms').onclick=runSms;$('runCall').onclick=runCall;$('runReset').onclick=resetBot;
+$('bTime').addEventListener('change',e=>setTime(e.target.value));
+$('replyForm').addEventListener('submit',e=>{e.preventDefault();const v=$('replyText').value;$('replyText').value='';userSays(v)});
+(function(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;const m=$('micBtn');m.hidden=false;
+ m.onclick=()=>{try{const r=new SR();r.lang='ko-KR';r.interimResults=false;m.textContent='🎤 듣는 중…';r.onresult=ev=>userSays(ev.results[0][0].transcript);r.onend=()=>{m.textContent='🎤 말로 답하기'};r.onerror=()=>{m.textContent='🎤 말로 답하기'};r.start()}catch(e){}}})();
+resetBot();
+
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));
+ document.querySelectorAll('[data-page]').forEach(x=>{const on=x.dataset.page===id;x.classList.toggle('active',on);if(on)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});
+ if(id!=='workflow')stop();window.scrollTo(0,0)}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(b.dataset.page));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+</script>
+
+</body></html>

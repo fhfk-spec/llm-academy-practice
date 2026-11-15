@@ -200,14 +200,14 @@ select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radi
 <!-- 04 -->
 <section class="page" id="attendance">
   <div class="headline"><div><div class="label">Decision support / attendance calculator</div><h1>지각까지 넣어 계산하는<br>수료·참여수당 판정.</h1><p class="muted">기준은 OT 자료 2종(출결관리·참여수당, 수료 기준)에서 가져왔습니다. 입력값은 저장하지 않습니다.</p></div></div>
-  <div class="notice">전체 교육일수: 요청하신 <b>53일</b>로 넣었습니다. 다만 OT 자료 두 개 모두 <b>52일</b>(2026.10.26~2027.01.07)이고, 달력으로 세어도 52일입니다(주말·12/25·1/1 제외). 어느 쪽이든 수료에 허용되는 결석은 <b>최대 10일</b>로 같습니다. 아래 칸에서 바꿀 수 있습니다.</div>
+  <div class="notice"><b>표시 기준</b> · 계산은 OT 자료 2종에 있는 내용만 씁니다. 자료에 없는 내용은 <span class="tag">보류</span>(따로 말씀하신 내용, 확인 전까지 판정에 쓰지 않음) 또는 <span class="tag">미정</span>(자료에 없어 값이 정해지지 않음)으로 표시했습니다.<br>전체 교육일수는 OT 자료대로 <b>52일</b>(2026.10.26~2027.01.07)로 계산합니다. 말씀하신 53일은 <span class="tag">보류</span>입니다. 52일이든 53일이든 수료에 허용되는 결석은 최대 10일로 같습니다.</div>
 
   <div class="grid two">
     <div class="card">
       <div class="cardHead"><h2>판정 기준</h2><span class="pill green">OT 자료 확인</span></div>
       <ul class="ruleList">
         <li><b>수업 시간</b> 09:00~18:00, 점심 13:00~14:00 제외 <b>하루 8시간</b></li>
-        <li><b>정상 출석</b> 09:10까지 입실 (9시 전 입실은 언제든 가능) · <b>09:11부터 지각</b></li>
+        <li><b>정상 출석</b> 09:10까지 입실 (9시 전 입실 허용 시각 <span class="tag">보류</span>) ·<b>09:11부터 지각</b></li>
         <li><b>조퇴</b> 17:50 전에 퇴실 · <b>외출</b> 수업 중 10분 이상 자리 비움</li>
         <li><b>지각·조퇴·외출 3회 = 결석 1일.</b> 하루에 두 가지가 겹치면 2회로 셉니다.</li>
         <li><b>그날 4시간 미만 수강이면 결석</b> (8시간의 50% 미만). 4시간 이상이면 지각·조퇴·외출로 인정</li>
@@ -236,28 +236,28 @@ select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radi
       <thead><tr><th>단위기간</th><th>교육일수</th><th>결석 일수</th><th>지각·조퇴·외출</th><th>환산 결석</th><th>출석률</th><th>참여수당</th><th>남은 여유</th></tr></thead>
       <tbody id="unitBody"></tbody>
     </table></div>
-    <p class="muted small" style="margin:10px 0 0">교육일수는 달력 기준(주말·12/25·1/1 휴강)입니다. 3차 단위기간은 8일뿐이라 50만 원을 다 주는지, 일수만큼 나눠 주는지는 OT 자료에 없습니다 <span class="tag">대한상공회의소 확인 필요</span>. 단위기간 종료 후 지급까지 최대 한 달 이상 걸립니다.</p>
+    <p class="muted small" style="margin:10px 0 0">교육일수는 달력 기준(주말·12/25·1/1 휴강)입니다. 3차 단위기간은 8일뿐이라 50만 원을 다 주는지, 일수만큼 나눠 주는지는 OT 자료에 없어 지급액을 <span class="tag">미정</span>으로 둡니다. 단위기간 종료 후 지급까지 최대 한 달 이상 걸립니다.</p>
   </div>
 
   <div class="grid two">
     <div class="card">
       <h2>전체 과정 수료 판정</h2>
-      <div class="field"><label for="totalDays">전체 교육일수</label><input id="totalDays" type="number" min="1" max="120" step="1" value="53" inputmode="numeric"></div>
+      <div class="field"><label for="totalDays">전체 교육일수</label><input id="totalDays" type="number" min="1" max="120" step="1" value="52" inputmode="numeric"></div>
       <div class="meter" aria-hidden="true" id="meter"><span></span><span></span><span></span><span></span></div>
       <div class="meterLab" aria-hidden="true" id="meterLab"></div>
       <div class="result" id="attResult" role="status"></div>
       <p class="muted small" style="margin-top:12px">이 계산은 경보입니다. 제적·중도탈락·K-뉴딜 1회 차감은 학원 출석 확정과 대한상공회의소 처리 뒤에 적용됩니다.</p>
     </div>
     <div class="card">
-      <h2>운영 단계표</h2>
+      <div class="cardHead"><h2>운영 단계표</h2><span class="tag">경고·위험 보류</span></div>
       <div class="tableWrap"><table>
-        <tr><th>단계</th><th>출석률</th><th>결석 일수 (53일 기준)</th><th>대응</th></tr>
+        <tr><th>단계</th><th>출석률</th><th>결석 일수 (52일 기준)</th><th>대응</th></tr>
         <tr><td class="st-ok">정상</td><td>90% 이상</td><td>0~5일</td><td>—</td></tr>
         <tr><td class="st-wait">경고</td><td>85~90% 미만</td><td>6~7일</td><td>학원 → 본인 안내 (슬랙 DM·문자·이메일)</td></tr>
         <tr><td style="color:var(--red)">위험</td><td>80~85% 미만</td><td>8~10일</td><td>학원 → 본인 안내, CJ 상담 연결</td></tr>
         <tr><td style="color:var(--red)">수료 불가 · 제적 기준</td><td>80% 미만</td><td>11일 이상</td><td>기관 확정 → 통보, 행정 처리 대한상공회의소</td></tr>
       </table></div>
-      <p class="muted small" style="margin-top:12px">경고·위험은 우리 운영 기준이고, 80%는 OT 자료의 수료 기준입니다. 80% 정확히는 수료 가능입니다. 중도 포기는 K-뉴딜 참여 1회로 셉니다(연 2회까지).</p>
+      <p class="muted small" style="margin-top:12px">80%(수료·제적)만 OT 자료 기준입니다. 경고(90%)·위험(85%) 단계와 대응 방식은 OT 자료에 없어 <span class="tag">보류</span>입니다. 80% 정확히는 수료 가능입니다. 중도 포기는 K-뉴딜 참여 1회로 셉니다(연 2회까지).</p>
     </div>
   </div>
   <div class="card">
@@ -268,9 +268,13 @@ select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radi
       <tr><td>지각·조퇴·외출 시각</td><td>09:11부터 지각, 17:50 전 조퇴, 10분 이상 외출</td><td class="st-ok">OT 자료 확인</td></tr>
       <tr><td>3회 = 결석 1일, 4시간 미만 = 결석</td><td>하루 겹치면 각각 셈. 단위기간 나머지 1~2회는 수당 계산 제외, 수료 판정 합산</td><td class="st-ok">OT 자료 확인</td></tr>
       <tr><td>수료 · 참여수당</td><td>전체 80% 이상 출석 · 단위기간 80% 이상 출석 시 월 50만 원</td><td class="st-ok">OT 자료 확인</td></tr>
-      <tr><td>전체 교육일수</td><td>53일로 계산 (OT 자료 52일)</td><td class="st-wait">사용자 확인 필요</td></tr>
-      <tr><td>4시간 미만 결석일의 지각 횟수</td><td>결석 하루로만 세고 지각 횟수에는 넣지 않음</td><td class="st-wait">추론 · 학원 확인 필요</td></tr>
-      <tr><td>3차 단위기간(8일) 수당</td><td>50만 원 전액으로 표시</td><td class="st-wait">대한상공회의소 확인 필요</td></tr>
+      <tr><td>전체 교육일수</td><td>52일로 계산</td><td class="st-ok">OT 자료 확인</td></tr>
+      <tr><td>공가(출석 인정) 사유·일수</td><td>훈련·시험·공민권 소요일수, 결혼 5/1일, 사망 1~5일, 출산 5일, 질병 10%(5일)</td><td class="st-ok">OT 자료 확인</td></tr>
+      <tr><td>53일 여부</td><td>계산에 쓰지 않음</td><td class="st-wait">보류</td></tr>
+      <tr><td>9시 전 입실 허용</td><td>판정에 영향 없음 (09:10까지면 정상)</td><td class="st-wait">보류</td></tr>
+      <tr><td>경고 90% · 위험 85% 단계</td><td>표에만 남기고 판정 근거로 쓰지 않음</td><td class="st-wait">보류</td></tr>
+      <tr><td>4시간 미만 결석일의 지각 횟수</td><td>결석 하루로만 세고 지각 횟수에는 넣지 않음 (임시)</td><td class="st-wait">미정</td></tr>
+      <tr><td>3차 단위기간(8일) 수당</td><td>80% 이상이어도 지급액 표시 안 함</td><td class="st-wait">미정</td></tr>
     </table></div>
   </div>
 </section>
@@ -336,17 +340,17 @@ select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radi
 
 <!-- 07 -->
 <section class="page" id="bot">
-  <div class="headline"><div><div class="label">Prototype / morning attendance bot</div><h1>9시에 먼저 묻는<br>출결 알림 봇.</h1><p class="muted">입실 체크가 안 된 참여자에게 09:00 문자, 09:05 음성 전화를 보냅니다. 답장을 읽고 지각·결석·공가 안내를 한 뒤, 학원 담당자에게 요약을 넘깁니다.</p></div></div>
+  <div class="headline"><div><div class="label">Prototype / morning attendance bot</div><h1>9시에 먼저 묻는<br>출결 알림 봇.</h1><p class="muted">입실 체크가 안 된 참여자에게 09:00 문자를 보내고, 이어서 음성 전화를 겁니다(전화 시각은 미정, 화면은 09:05 예시). 답장을 읽고 지각·결석·공가 안내를 한 뒤, 학원 담당자에게 요약을 넘깁니다.</p></div></div>
   <div class="notice">시뮬레이션입니다. 실제 문자·전화는 나가지 않습니다. 실제 발송에는 문자·음성 발송 서비스 계정과 사전 등록된 발신번호가 필요하고, 발송 주체는 학원입니다(아래 '실제 운영 연결' 참고). 화면의 이름은 모두 가명입니다.</div>
 
   <div class="card" style="margin-bottom:22px">
     <h2>아침 흐름</h2>
     <div class="tl">
-      <div><b>~09:00</b><span>입실 체크 (9시 전 언제든)</span></div>
-      <div class="hot"><b>09:00</b><span>미체크자에게 문자 + 슬랙 DM</span></div>
-      <div class="hot"><b>09:05</b><span>그래도 미체크면 AI 음성 전화</span></div>
-      <div><b>09:10</b><span>유예 마감, 여기까지 정상 출석</span></div>
-      <div class="cut"><b>09:11</b><span>지각 기록, 학원 담당자에게 요약</span></div>
+      <div><b>~09:00</b><span>LMS 입실 체크 + 슬랙 #06 스레드에 캡처 (OT 자료)</span></div>
+      <div class="hot"><b>09:00</b><span>미체크자에게 문자 (슬랙 DM 병행은 미정)</span></div>
+      <div class="hot"><b>09:05 <span class="tag">미정</span></b><span>그래도 미체크면 AI 음성 전화</span></div>
+      <div><b>09:10</b><span>유예 마감, 여기까지 정상 출석 (OT 자료)</span></div>
+      <div class="cut"><b>09:11</b><span>지각 (OT 자료) · 담당자 요약 방식은 미정</span></div>
     </div>
   </div>
 
@@ -371,7 +375,7 @@ select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radi
       <label style="display:flex;gap:8px;align-items:center"><input id="bChecked" type="checkbox" style="width:auto"> 이미 입실 체크함</label>
       <div class="chips" style="margin-top:12px">
         <button class="btn" type="button" id="runSms">▶ 09:00 문자 보내기</button>
-        <button class="btn" type="button" id="runCall">▶ 09:05 음성 전화 걸기</button>
+        <button class="btn" type="button" id="runCall">▶ 음성 전화 걸기 (09:05 예시)</button>
         <button class="btn secondary" type="button" id="runReset">처음부터</button>
       </div>
       <p class="muted small" style="margin-top:10px">음성 전화는 이 브라우저의 한국어 음성으로 읽어 줍니다. 크롬·엣지에서는 마이크로 답할 수도 있습니다. 답장 이해는 지금 키워드 규칙으로 동작하며, 실제 운영에서는 AI 모델로 바꿀 자리입니다.</p>
@@ -384,12 +388,14 @@ select{color:var(--text);background:#0d1520;border:1px solid #3d4a5f;border-radi
     <h2>실제 운영 연결에 필요한 것</h2>
     <div class="tableWrap"><table style="min-width:640px">
       <tr><th>항목</th><th>내용</th><th>상태</th></tr>
-      <tr><td>발송 주체</td><td>학원(그린컴퓨터아트학원). 참여자 연락처는 학원에 있고, CJ는 집계만 받는 C안 그대로</td><td class="st-user">기존 결정</td></tr>
-      <tr><td>미체크자 판별</td><td>LMS 입실 기록 또는 슬랙 #06-출석체크 데일리 스레드 댓글을 08:59에 읽어 명단 만들기</td><td class="st-wait">학원 데이터 연결 방법 확인</td></tr>
-      <tr><td>문자·음성 발송</td><td>문자 + 음성(TTS) 전화를 보낼 수 있는 발송 서비스 계정, 발신번호 사전 등록(국내 규정)</td><td class="st-wait">학원 계정·비용 결정</td></tr>
-      <tr><td>AI 답장 이해</td><td>자유 답장을 지각·결석·공가·연결 요청으로 분류. 처분 판단은 하지 않고 안내와 전달만</td><td class="st-wait">모델 연결 전 · 지금은 규칙</td></tr>
-      <tr><td>수신 동의</td><td>아침 출결 문자·전화 수신 동의를 참여자에게 받기, 수신 거부 방법 안내</td><td class="st-wait">동의서 문안 필요</td></tr>
-      <tr><td>발송 안전</td><td>교육일만 발송(주말·12/25·1/1 제외), 하루 1인 문자 1건·전화 1건, 중복 방지 키, 발송 기록</td><td class="st-user">규칙 07 그대로</td></tr>
+      <tr><td>안내 내용의 근거</td><td>09:10 유예·09:11 지각, LMS 입실 체크와 슬랙 #06-출석체크 스레드 캡처, 공가 증빙(접수 확인서 불인정), 질병 10%(5일)</td><td class="st-ok">OT 자료 확인</td></tr>
+      <tr><td>발송 주체</td><td>학원(그린컴퓨터아트학원)으로 가정. OT 자료에 없음</td><td class="st-wait">보류</td></tr>
+      <tr><td>음성 전화 시각</td><td>화면은 09:05 예시</td><td class="st-wait">미정</td></tr>
+      <tr><td>미체크자 판별</td><td>LMS 입실 기록 또는 슬랙 #06 스레드 댓글 중 무엇을 읽을지</td><td class="st-wait">미정</td></tr>
+      <tr><td>문자·음성 발송</td><td>발송 서비스 계정, 사전 등록된 발신번호, 비용</td><td class="st-wait">미정</td></tr>
+      <tr><td>AI 답장 이해</td><td>자유 답장 분류 방식. 지금은 키워드 규칙, 처분 판단은 하지 않음</td><td class="st-wait">미정</td></tr>
+      <tr><td>수신 동의</td><td>아침 출결 문자·전화 수신 동의와 수신 거부 방법</td><td class="st-wait">미정</td></tr>
+      <tr><td>발송 횟수·요일</td><td>교육일만, 하루 1인 문자 1건·전화 1건으로 가정</td><td class="st-wait">보류</td></tr>
     </table></div>
   </div>
 </section>
@@ -487,13 +493,13 @@ function unitCalc(u){
  const conv=Math.floor(u.e/3),abs=Math.min(u.d,u.a+conv),rate=u.d?(u.d-abs)/u.d*100:0,max=Math.floor(u.d*0.2+1e-9);
  return{conv,rest:u.e%3,abs,rate,pay:rate>=80-1e-9,expel:abs>=u.d*0.5,left:max-abs};
 }
-function stageOf(r){if(r<80-1e-9)return['수료 불가 · 제적 기준','risk'];if(r<85)return['위험','risk'];if(r<90)return['경고','warn'];return['정상','']}
+function stageOf(r){if(r<80-1e-9)return['수료 불가 · 제적 기준','risk'];if(r<85)return['수료 기준 충족 · 운영 단계 위험(보류)','warn'];if(r<90)return['수료 기준 충족 · 운영 단계 경고(보류)','warn'];return['수료 기준 충족','']}
 function calcAll(){
  let sa=0,se=0;
  UNITS.forEach((u,k)=>{const c=unitCalc(u);sa+=u.a;se+=u.e;
   $('uc'+k).innerHTML=c.conv+'일'+(c.rest?'<div class="small muted">남은 '+c.rest+'회는 수당 계산 제외</div>':'');
   $('ur'+k).innerHTML='<b class="'+(c.pay?'ok':'no')+'">'+c.rate.toFixed(1)+'%</b><div class="small muted">결석 '+c.abs+' / '+u.d+'일</div>';
-  $('up'+k).innerHTML=c.expel?'<b class="no">0원 · 제적 기준</b><div class="small muted">단위기간 결석 50% 이상</div>':c.pay?'<b class="ok">500,000원</b>':'<b class="no">0원</b><div class="small muted">출석률 80% 미만</div>';
+  $('up'+k).innerHTML=c.expel?'<b class="no">0원 · 제적 기준</b><div class="small muted">단위기간 결석 50% 이상</div>':c.pay?(k===2?'<b class="wn">지급액 미정</b><div class="small muted">80% 이상 충족 · 8일 기간 지급액 자료 없음</div>':'<b class="ok">500,000원</b>'):'<b class="no">0원</b><div class="small muted">출석률 80% 미만</div>';
   $('us'+k).innerHTML=c.left>=0?'결석 <b>'+c.left+'일</b> 더 가능'+(c.left===0?'':'')+'<div class="small muted">지각 등은 '+(c.left*3+(2-c.rest))+'회까지</div>':'<span class="no">이미 '+(-c.left)+'일 초과</span>';
  });
  const D=Number($('totalDays').value),el=$('attResult');

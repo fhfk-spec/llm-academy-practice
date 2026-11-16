@@ -163,7 +163,7 @@ def place_sticker(c, default_size=760):
 # happy: 화기애애·행복 → tone yellow|pink|sky|mix 파스텔 + 몽글몽글 방울
 MOOD_TONES = {'yellow': ('#FFF6C9', '#FFE9A8'), 'pink': ('#FFE6EE', '#FFD3DF'), 'sky': ('#E3F3FF', '#CBE7FB'),
               'mix': ('#FFF3C4', '#FFDCE6', '#D6EEFF')}
-DARK_MOODS = ('shock', 'gloomy')
+DARK_MOODS = ('shock',)
 
 
 def mood_html(m, tone='mix'):
@@ -179,17 +179,38 @@ def mood_html(m, tone='mix'):
                 'radial-gradient(circle at 52% 92%,rgba(255,255,255,.5) 0 24px,transparent 25px),'
                 'radial-gradient(circle at 40% 40%,rgba(255,255,255,.35) 0 90px,transparent 91px)')
         return f'<div class="mood" style="background:{dots},{grad}"></div>'
+    if m == 'gloomy':
+        return gloomy_svg()
     return f'<div class="mood mood-{m}"></div>'
+
+
+def gloomy_svg():
+    """흰 배경 위 회색 먹구름(위쪽) + 약하게 내리는 빗줄기"""
+    import random
+    rnd = random.Random(7)
+    cloud = ''
+    for cx0, cy0, sc, col in [(250, 120, 1.0, '#9A9FA8'), (760, 95, 1.15, '#8D929B'), (520, 170, 0.9, '#A7ABB3')]:
+        for dx, dy, r in [(-110, 30, 70), (-40, -10, 95), (60, -25, 110), (150, 20, 80), (0, 45, 90), (95, 50, 75)]:
+            cloud += f'<circle cx="{cx0 + dx * sc:.0f}" cy="{cy0 + dy * sc:.0f}" r="{r * sc:.0f}" fill="{col}"/>'
+    shade = '<rect x="0" y="160" width="1080" height="130" fill="url(#cs)"/>'
+    rain = ''
+    for _ in range(34):
+        x = rnd.uniform(60, 1040); y = rnd.uniform(270, 760); L = rnd.uniform(26, 44)
+        op = max(0.18, 0.75 - (y - 270) / 700)
+        rain += f'<line x1="{x:.0f}" y1="{y:.0f}" x2="{x - L * 0.32:.0f}" y2="{y + L:.0f}" stroke="#8FA3B8" stroke-width="5" stroke-linecap="round" opacity="{op:.2f}"/>'
+    return ('<svg class="mood" width="1080" height="1350" viewBox="0 0 1080 1350">'
+            '<defs><linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E737C" stop-opacity=".35"/>'
+            '<stop offset="1" stop-color="#6E737C" stop-opacity="0"/></linearGradient>'
+            '<clipPath id="cc"><rect width="1080" height="300"/></clipPath></defs>'
+            f'<g clip-path="url(#cc)">{cloud}</g>{rain}</svg>')
 
 
 MOOD_CSS = """
 .mood{position:absolute;inset:0;z-index:0;pointer-events:none}
-.mood-urgent{background:radial-gradient(ellipse 34% 30% at 50% 46%,#fff 0 55%,rgba(255,255,255,0) 100%),
- repeating-conic-gradient(from 0deg at 50% 46%,#4E4F55 0deg .9deg,#C3C4C9 .9deg 4.2deg,#77787F 4.2deg 4.9deg,#D2D3D7 4.9deg 8.6deg)}
+.mood-urgent{background:radial-gradient(ellipse 40% 34% at 50% 46%,#fff 0 60%,rgba(255,255,255,0) 100%),
+ repeating-conic-gradient(from 0deg at 50% 46%,#C9CACF 0deg .8deg,#F1F1F3 .8deg 14deg),#F1F1F3}
 .mood-shock{background:repeating-linear-gradient(100deg,rgba(255,255,255,.035) 0 2px,transparent 2px 15px),
  radial-gradient(ellipse 70% 60% at 50% 42%,#38383E 0%,#161618 72%,#0B0B0C 100%)}
-.mood-gloomy{background:repeating-linear-gradient(76deg,rgba(255,255,255,.13) 0 2px,transparent 2px 34px),
- repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 3px,transparent 3px 9px),linear-gradient(180deg,#59606B 0%,#454B55 60%,#383D45 100%)}
 .card.dark .ftext{color:#fff;text-shadow:0 0 1px #000,3px 3px 0 rgba(0,0,0,.45)}
 .cont{position:absolute;right:52px;bottom:40px;z-index:9;font-size:34px;font-family:Jua,GB;color:#3A2E28;background:#fff;
  border:3px solid #3A2E28;border-radius:30px;padding:6px 24px}

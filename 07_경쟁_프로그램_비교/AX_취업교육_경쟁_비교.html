@@ -1,0 +1,382 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>AX 취업교육 경쟁 비교</title>
+<style>
+/* 이름 붙인 색 6가지 */
+:root{
+  --white:#ffffff;      /* 바탕 */
+  --sky:#e3f2fd;        /* 하늘색 면·선 */
+  --sky-deep:#0a7fd0;   /* 강조 하늘색 */
+  --navy:#0e2a47;       /* 글자 */
+  --gray:#5e7387;       /* 보조 글자 */
+  --neon:#e6ff3d;       /* 형광 핵심 표시 */
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+/* 글꼴 1가지 */
+body{margin:0;background:var(--white);color:var(--navy);font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px))}
+mark{background:var(--neon);color:var(--navy);padding:0 3px;border-radius:3px;font-weight:700}
+b,strong{font-weight:800}
+/* 맨 위 */
+.hero{background:var(--sky);border-radius:0 0 20px 20px;padding:28px 24px 24px;margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px))) 16px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:center}
+.eyebrow{font-size:13px;font-weight:800;color:var(--sky-deep);letter-spacing:.5px;margin:0 0 6px}
+h1{font-size:26px;line-height:1.4;margin:0;text-wrap:balance}
+.big{background:var(--white);border:2px solid var(--sky-deep);border-radius:16px;padding:18px 20px}
+.bigLab{font-size:14px;font-weight:700;color:var(--sky-deep)}
+.bigNum{font-size:44px;font-weight:900;line-height:1.15;font-variant-numeric:tabular-nums;margin:4px 0}
+.bigNum mark{padding:0 8px}
+.bigWho{font-size:14px;color:var(--gray)}
+.bigWho b{color:var(--navy)}
+h2{font-size:17px;margin:28px 0 10px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat{background:var(--white);border:1px solid var(--sky);border-radius:12px;padding:8px 14px}
+.stat .k{font-size:12px;color:var(--gray)}.stat .v{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.panel{background:var(--white);border:1px solid var(--sky);border-radius:12px;padding:14px;margin-top:12px}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.row+.row{margin-top:10px}
+.lab{font-size:12px;color:var(--gray);min-width:64px;font-weight:700}
+button.chip{font:inherit;font-size:13px;border:1px solid var(--sky);background:var(--sky);color:var(--navy);border-radius:99px;padding:5px 12px;cursor:pointer}
+button.chip[aria-pressed="true"]{background:var(--sky-deep);border-color:var(--sky-deep);color:var(--white);font-weight:700}
+button.chip:hover{border-color:var(--sky-deep)}
+.file{font-size:13px;color:var(--gray)}
+.file input{font:inherit;font-size:13px;max-width:100%}
+:focus-visible{outline:2px solid var(--sky-deep);outline-offset:2px}
+.msg{font-size:13px;margin-top:8px;color:var(--sky-deep)}
+/* 핵심 비교 */
+.keyWrap{overflow-x:auto;background:var(--white);border:1px solid var(--sky);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:14px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--sky);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--gray);font-weight:700;background:var(--sky)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+#kBody td[data-label="구분"],#kHead th:first-child{white-space:nowrap}#kBody td[data-label="경쟁사"]{min-width:150px}
+tr.base td{background:var(--sky)}tr.base td:first-child{box-shadow:inset 4px 0 0 var(--sky-deep)}
+.bar{height:8px;border-radius:4px;background:var(--sky);margin-top:6px;position:relative;min-width:120px}
+.bar span{position:absolute;inset:0 auto 0 0;background:var(--sky-deep);border-radius:4px}
+.tag{display:inline-block;font-size:12px;border-radius:6px;padding:1px 8px;background:var(--sky);color:var(--sky-deep);font-weight:700;white-space:nowrap}
+.tag.term{background:var(--white);border:1px solid var(--sky-deep)}
+.note{font-size:12px;color:var(--gray);margin-top:6px}
+/* 카드 */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--white);border:1px solid var(--sky);border-top:4px solid var(--sky-deep);border-radius:12px;padding:16px;min-width:0}
+.card .who{font-size:12px;font-weight:800;color:var(--sky-deep)}
+.card h3{font-size:16px;margin:2px 0 10px;line-height:1.4}
+.card dl{margin:0;display:grid;gap:8px}
+.card dt{font-size:12px;color:var(--gray);font-weight:700}
+.card dd{margin:0;font-size:14px;overflow-wrap:anywhere;white-space:pre-wrap}
+.missing{color:var(--gray);opacity:.45;font-style:italic}
+a{color:var(--sky-deep)}
+.empty{color:var(--gray);padding:20px;text-align:center}
+/* 수강생 입장 추천 */
+.recCards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:14px}
+.recCard{background:var(--white);border:1px solid var(--sky);border-top:4px solid var(--sky-deep);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start;min-width:0}
+.recCard:first-child{border:2px solid var(--sky-deep);border-top-width:4px}
+.recFor{font-size:13px;font-weight:800;color:var(--sky-deep)}
+.recWho b{font-size:16px}
+.recWhy{display:flex;flex-wrap:wrap;gap:4px}
+.recDesc{font-size:12px;color:var(--gray)}
+.recTable td[data-label="순위"]{width:56px}/* 보이는 칸 고르기 */
+.colpick{margin-top:10px}.colpick summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--sky-deep)}.colpick .row{margin-top:8px}
+/* 주제 탭 */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.tab{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--sky-deep);background:var(--white);color:var(--sky-deep);border-radius:10px;padding:7px 14px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--sky-deep);color:var(--white)}
+table.topic td{line-height:1.55}
+table.topic td.whoCol,table.topic th.whoCol{width:220px;background:var(--sky)}
+.sub{font-size:12px;color:var(--gray);margin-top:2px}
+ul.pts{margin:0;padding-left:18px}ul.pts li{margin:2px 0}
+/* 업체별 펼치기 */
+.acc{display:grid;gap:10px}
+.accItem{border:1px solid var(--sky);border-left:5px solid var(--sky-deep);border-radius:12px;background:var(--white)}
+.accItem summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:14px 16px}
+.accItem summary::-webkit-details-marker{display:none}
+.accItem summary::after{content:'펼치기 ▾';font-size:12px;font-weight:700;color:var(--sky-deep)}
+.accItem[open] summary::after{content:'접기 ▴'}
+.accItem[open] summary{border-bottom:1px solid var(--sky)}
+.sumMain{display:flex;flex-direction:column;min-width:0;flex:1 1 280px}
+.sumMain .who{font-size:12px;font-weight:800;color:var(--sky-deep)}
+.sumMain .pname{font-size:16px;font-weight:800;line-height:1.4}
+.badges{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.accBody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px 16px 16px}
+.grp{background:var(--white);border:1px solid var(--sky);border-radius:10px;padding:12px 14px;min-width:0}
+.grp h4{margin:0 0 8px;font-size:14px;color:var(--sky-deep)}
+.grp dl{margin:0;display:grid;gap:8px}
+.grp dt{font-size:12px;color:var(--gray);font-weight:700}
+.grp dd{margin:0;font-size:14px;overflow-wrap:anywhere}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--sky);font-size:13px;color:var(--gray);text-align:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr;padding:22px 16px 18px}h1{font-size:21px}.bigNum{font-size:38px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:1fr}
+  table{min-width:0}thead{display:none}
+  tbody,tr,td{display:block;width:100%}
+  tr{padding:10px 4px;border-bottom:1px solid var(--sky)}tr:last-child{border-bottom:0}
+  td{border:0;padding:3px 10px;display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px}
+  td::before{content:attr(data-label);font-size:12px;color:var(--gray)}
+  .bar{min-width:0}
+  table.topic td.whoCol{width:100%;background:var(--sky);border-radius:8px;padding:6px 10px}
+  .accBody{grid-template-columns:1fr;padding:12px}
+  .tag{white-space:normal}}
+</style>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">AX 취업교육 경쟁 비교 · 기준: CJ올리브네트웍스 L.L.M. 아카데미</p>
+      <h1>CJ L.L.M. 아카데미와 AX 취업교육 경쟁 프로그램 <mark id="hComp">-곳</mark>의 <b>기간·지원금·운영 방식</b>을 한 화면에서 비교합니다</h1>
+    </div>
+    <div class="big" aria-live="polite">
+      <div class="bigLab">매달 가장 많이 지원하는 곳 (월 지원금)</div>
+      <div class="bigNum" id="bigNum">-</div>
+      <div class="bigWho" id="bigWho">-</div>
+    </div>
+  </header>
+  <div class="stats">
+    <div class="stat"><div class="k">조사일</div><div class="v" id="sDate">-</div></div>
+    <div class="stat"><div class="k">경쟁 프로그램 수 (기준 제외)</div><div class="v" id="sComp">-</div></div>
+    <div class="stat"><div class="k">비교한 프로그램</div><div class="v" id="sRows">-</div></div>
+    <div class="stat"><div class="k">"못 찾음" 칸 수</div><div class="v" id="sMiss">-</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="row"><span class="lab">구분</span><span class="row" id="fKind"></span></div>
+    <div class="row"><span class="lab">경쟁사</span><span class="row" id="fComp"></span></div>
+    <details class="colpick"><summary>보이는 칸 고르기</summary><span class="row" id="fCols"></span></details>
+    <div class="row"><span class="lab">다른 CSV</span><label class="file"><input type="file" id="csvFile" accept=".csv,text/csv"></label><button class="chip" type="button" id="resetBtn">기본 표로 되돌리기</button></div>
+    <div class="msg" id="msg" role="status"></div>
+  </div>
+
+  <h2>수강생 입장 추천</h2>
+  <p class="note" style="margin-top:-4px">수강생이 내는 돈·받는 지원금·공개된 성과·후기·정보 공개 정도로 점수를 매겨 추천해요. 위의 구분·경쟁사 버튼으로 걸러 보면 추천도 함께 바뀝니다. 점수 기준은 학습용 (가정)이고, "못 찾음"은 점수에서 빠져요.</p>
+  <div id="recBox"></div>
+  <h2>한눈에 보기: 운영 형태·기간·월 지원금</h2>
+  <div class="keyWrap"><table><thead id="kHead"></thead><tbody id="kBody"></tbody></table></div>
+  <p class="note" id="kNote">막대는 월 지원금입니다(가장 많은 곳 = 꽉 찬 막대). 하늘색 줄이 기준(CJ L.L.M.)입니다. 기간 구분 기준(가정): 단기 3개월 이하, 중기 4~6개월, 장기 7개월 이상. 총액만 공개된 곳은 교육 개월 수로 나눈 값(가정)입니다.</p>
+
+  <h2>주제별로 비교하기</h2>
+  <p class="note" style="margin-top:-4px">궁금한 주제를 누르면 업체들을 한 줄씩 나란히 보여 줘요.</p>
+  <div class="tabs" role="tablist" aria-label="비교 주제" id="topicTabs"></div>
+  <div class="keyWrap"><table class="topic"><thead id="tHead"></thead><tbody id="tBody"></tbody></table></div>
+
+  <h2>업체별 자세히</h2>
+  <p class="note" style="margin-top:-4px">업체 이름을 누르면 펼쳐져요. 내용은 주제별로 묶어 두었어요.</p>
+  <div class="acc" id="cards"></div>
+
+  <div class="foot">공개 자료로 만든 학습용 MVP(Minimum Viable Product)이며, 조사한 회사와 관계없습니다</div>
+</div>
+
+<script type="text/plain" id="embedded">조사일,구분,경쟁사,프로그램명,신청처,대상·선발 조건,커리큘럼,강사진,강사 경력·평판 요약,운영안,운영 형태,기간 구분,제공하는 것,월 지원금(원),수강생 부담(원),정부지원·할인,만족도·평점,수강후기·댓글,성과 사례(취업 성과 포함),여러 플랫폼 확인 결과,출처 링크
+2026-11-16,기준,CJ올리브네트웍스,2026 K-뉴딜 L.L.M. 아카데미 (Local·Lifestyle·Modeling),네이버 폼 신청 → 온라인 면접 (2026-09-22 서류 마감),"만 15~34세 미취업 청년(군필 최대 39세), 전공·경력 무관. 서비스 기획·로컬 비즈니스에 관심 있는 사람. 대학 재학생·타 정부훈련 참여자·재직자 제외",지역 발견 → AI로 서비스 기획 → 웹·앱 프로토타입 직접 구현 → 나만의 서비스·포트폴리오 완성. Local·Lifestyle·Modeling 기초 이론부터 심화 프로젝트 실습,못 찾음,못 찾음,2026-10-01~12-18 월~금 09~18시 대면 집합 교육(3개월). 광주(사회실험공간 여그)·군산(군산상공회의소)·춘천(커먼즈필드)·강릉(가톨릭관동대). 대전 과정은 2026-10-26~2027-01-07(OT 자료),오프라인 (전일 대면 필수),단기 (약 3개월),"월 최대 50만원 참여수당, 1단계 수료 시 올리브영 기프트카드 5만원, 최종 수료 시 CJ ONE 상품권 10만원, CJ올리브네트웍스 명의 수료증, 우수 수료생 2027년 CJ 베트남 법인 방문 트립",500000,0,교육비 전액 무료(K-뉴딜 아카데미). 참여수당은 출석률에 따라 지급,못 찾음,못 찾음,못 찾음,"모집 공고(씽유·링커리어), 사내 OT 자료. 기사·후기 못 찾음",https://thinkyou.co.kr/contest/66777/
+2026-11-16,오프라인,삼성전자,삼성청년SW·AI아카데미(SSAFY) 16기,SSAFY 누리집 지원서 → SSAFY 적성진단 → 인터뷰 (2026-04-27~05-11),"29세 이하 취업 준비 청년, 대학교 또는 마이스터고 졸업자","삼성 SW·AI 교육 노하우와 서울대·연세대·카이스트 AI 교수진이 함께 설계한 AI 커리큘럼. 데이터 트랙 확대, 로봇 프로젝트(피지컬 AI) 신설, AI 전문 기업과 실습, 현업형 프로젝트",서울대·연세대·카이스트 AI 전문 교수진 공동 설계 (강사 이름 못 찾음),국내 주요 대학 AI 교수진이 커리큘럼 공동 설계. 임직원 멘토링,"2026년 7월부터 1년(2학기), 하루 8시간 총 1,725시간. 서울·대전·광주·구미·부울경 5개 캠퍼스",오프라인 (5개 캠퍼스),장기 (1년),"매월 교육 지원비 100만원, GPU 서버·3D 프린터·AI 도구, 로봇 교보재 무상 제공, 온라인 학습 플랫폼 'SSAFY AI 포털', 전담 취업 컨설턴트 1:1 컨설팅, 채용 박람회, 창업 캠프. 170여 개 기업이 서류 면제·가점",1000000,못 찾음,삼성전자 CSR 프로그램,못 찾음,"12기 수료생 박진현(광고홍보학 전공): ""SSAFY에서의 개발 경험은 제 커리어에서 가장 강력한 무기가 되었다""","12기까지 누적 수료 10,125명 중 8,566명 취업, 취업률 약 85%(2025년 12월 기준). 광고홍보 전공 12기 수료생이 채용연계형 기업 프로젝트로 디지털 헬스케어 기업에 기획자로 취업","삼성전자 뉴스룸 보도자료, 기사 다수(누적 취업률 85%). 블로그·유튜브 후기 따로 확인 못 함",https://news.samsung.com/kr/ai%EB%A1%9C-%EC%97%AC%EB%8A%94-%EB%82%98%EB%A7%8C%EC%9D%98-%EB%AF%B8%EB%9E%98-%EC%B2%AD%EB%85%84-sw%E2%88%99ai-%EC%9D%B8%EC%9E%AC-%ED%82%A4%EC%9A%B0%EB%8A%94-ssafy-16%EA%B8%B0
+2026-11-16,오프라인,중소벤처기업부 (엘리스 운영 누리집),이어드림스쿨 6기 (스타트업 AI 기술인력 양성),이어드림스쿨 누리집(yeardream2026.elice.io) 접수 (2026-04-06~05-10),"39세 이하 미취업 청년, 학력·전공 무관. 300명","AI 무료 교육, 국내외 AI 경진대회, 스타트업 현업 프로젝트, 인턴십. 기본반(비전공자, 7개월)·심화반(AI 경력자·전공자, 3개월)",못 찾음,못 찾음,서울·원주·대구·전주·천안 5개 권역,"오프라인 (5개 권역, 가정: 기사에 '교육 지역'으로만 표기)",장기 (기본반 7개월) / 단기 (심화반 3개월),"성적 우수자·조기 취업자에게 미국 실리콘밸리 등 해외 연수, 장학금, 상장. 스타트업 취·창업 연계",못 찾음,0,교육비 전액 무료,못 찾음,못 찾음,못 찾음,중기부 보도 기사(헤럴드경제 등). 후기·취업률 못 찾음,https://www.heraldk.com/article/2026040513000044072
+2026-11-16,오프라인,KT,KT K-뉴딜 아카데미 1기 (ICT·AX),KT 모집 (2026-07-06 마감),"만 34세 이하 미취업 청년, 2년제 대학 이상 졸업(예정)자. K-디지털 트레이닝 수료자도 가능. 1기 200여 명","KT그룹 서비스·사업 현장 기반 ICT·AX 실무 과정. 프로젝트 기반 학습(PBL), 발표회·경진대회, 그룹사 탐방·직무 체험, 비즈니스 커뮤니케이션·워크스마트 교육","KT 현업 전문가 (과정의 절반 이상을 현직 실무자가 운영, 이름 못 찾음)",2021년부터 운영한 에이블스쿨 교육 노하우를 반영,"판교·대전·대구·광주·부산 5개 교육장, 2026-07-28 입교",오프라인 (5개 교육장),못 찾음,"출석 요건 충족 시 매월 훈련 참여 수당, 그룹사 탐방·직무 체험, 직장 적응·자립 프로그램",못 찾음,0,교육 전액 무상. 수당 금액은 기사에 없음 (같은 K-뉴딜 제도라 월 최대 50만원일 가능성 (가정)),못 찾음,못 찾음,못 찾음 (1기 교육 중),"KT 보도 기사 2건(디지털데일리, 시대). 후기 못 찾음 — CJ L.L.M.과 같은 K-뉴딜 아카데미 제도 안의 직접 경쟁",https://www.sidae.com/article/2026061916525644342 ; https://www.ddaily.co.kr/page/view/2026072810115881780
+2026-11-16,오프라인,뉴팀즈 (서울시 청년취업사관학교 SeSAC 도봉),AI 시대 풀스택 솔로프리너 양성 과정,청년취업사관학교 누리집 수강신청 + 자기소개서 → 서류·레벨테스트·면접 (2026-06-29~07-12),만 15세 이상 서울시민 또는 서울 거소자. 24명,커리어 설계 / 기획·가설 수립 / PM 핵심·창업 기초 / MVP 핵심 기능 구축 / MVP 고도화·PMF 찾기 / 배포·운영 자동화 / IR 피칭 자료·취업 포트폴리오,이재철 (현직 솔로프리너),데이터 분석·AI 빌딩·운영 자동화·1인 창업을 모두 경험한 현직 솔로프리너 (모집공고 소개),"2026-07-23~10-08 월~금 10~18시, 점심 제공. 도봉캠퍼스(창동 씨드큐브)",오프라인,단기 (약 11주),"월 25만원 이상 AI 툴(Claude·Lovable 등) 이용료 지원, 점심 제공, 수료 후 취·창업 트랙별 지원, 동기 창업가 네트워크",못 찾음,0,"교육비 전액 무료(예치금 10만원 선납, 수료 시 전액 반환). 현금 수당 안내 없음",못 찾음,못 찾음,못 찾음,링커리어 모집공고. 기사·후기 못 찾음,https://linkareer.com/activity/331535
+2026-11-16,오프라인,유디임팩트·에프랩 (서울시 청년취업사관학교 SeSAC 금천),AI PM 스파르타 캠프,청년취업사관학교 신청 (2026-06-22 마감),만 15세 이상 서울 거주자 또는 서울 소재 대학(원) 재학·졸업자 중 고용보험 미가입자,"AI 서비스 기획, UX·UI 설계, 데이터 기반 의사결정, AI 리터러시, MVP 설계·론칭, 창업 교육, 바이브 코딩, LLM 활용, RAG 기반 서비스 설계. 프로젝트 기반 학습(PBL)",에프랩 개발자 멘토 (이름 못 찾음),"유디임팩트(창업·ESG 교육), 에프랩(개발자 멘토링·실무 교육)","2026-07-13~10-12 약 3개월, 총 480시간","오프라인 (가정: 캠퍼스 과정, 기사에 형태 표기 없음)",단기 (약 3개월),"데모데이, 모의 투자 프로그램, 팀 프로젝트로 서비스 기획·검증 경험",못 찾음,0,교육비 전액 무료,못 찾음,못 찾음,못 찾음,한경 기사 1건. 후기 못 찾음 — 이 화면을 만드는 회사(유디임팩트)의 과정이라 참고용,https://magazine.hankyung.com/job-joy/article/202606059583d
+2026-11-16,온라인,KT,KT 에이블스쿨(AIVLE School) 10기,KT 모집 (2026-08-10 마감),만 34세 이하 미취업자 중 4년제 대학 6학기 이상 수료자. AI 개발자 트랙 / DX 컨설턴트 트랙,AI·클라우드 기반 실무 교육 840시간(이론·실습) 후 프로젝트. 과제 발굴부터 서비스 구현까지 PBL. DX 컨설턴트 트랙은 디지털 전환 전략·문제 해결,현직 KT 전문가 코칭·멘토링 (이름 못 찾음),KT 현업 전문가,"9월 말 입교, 약 6개월. 온라인 실습 플랫폼 '에이블 에듀'로 지역 상관없이 같은 환경","온라인 (실습 플랫폼, 프로젝트 기간 권역 교육장 사용 가능 (가정))",중기 (약 6개월),"취업 지원 프로그램, 채용 연계",못 찾음,못 찾음,고용노동부와 함께 운영 (K-디지털 트레이닝),못 찾음,못 찾음,"2021년부터 약 3,500명 수료, 500여 개 기업 진출(AI 개발·데이터 분석·영업·마케팅·기획). 고용노동부 K-디지털 트레이닝 해커톤 4회 연속 대상",KT 보도 기사(디지털데일리). velog 수강 후기 있음(내용 미확인),https://www.ddaily.co.kr/page/view/2026070709321967551
+2026-11-16,온라인,팀스파르타,내일배움캠프 (AI·웹·앱·게임·데이터 트랙),내일배움캠프 누리집 (트랙별 상시 모집),"국비지원 IT 취업 부트캠프 (트랙별 조건 다름, 자세한 조건 못 찾음)",개발·데이터·디자인 등 새 직무 기초 학습 후 동료와 프로젝트 완성. 실력 평가 기반 수준별 학습·특강,못 찾음,못 찾음,트랙별 운영 (기간 못 찾음),온라인,못 찾음,수료 우수 인재를 IT·게임 기업 인턴십(미래내일일경험)에 매칭,못 찾음,못 찾음,국비지원 (훈련장려금 금액 못 찾음),못 찾음,못 찾음,"2026년 11월 기준 누적 1만 명 이상 수료, 2026년 10월까지 4,575명 취업. 회사 표기: 온라인 국비지원 시장 규모 1위·취업생 수 1위",팀스파르타 채용 공고 속 회사 소개(인디스워크). 후기 못 찾음,https://inthiswork.com/archives/418724 ; https://inthiswork.com/archives/418614
+2026-11-16,온라인,코드잇,코드잇 스프린트 IT 서비스 창업 부트캠프,code.it 지원 → 과제·비대면 인터뷰 (선착순),국민내일배움카드 발급 가능한 사람 누구나,27주: 생성형 AI 활용 / 비즈니스 설계·수요 검증 / 사업 전략 프로젝트 / 프로덕트 기획 / UI·UX 디자인 / 사용자 경험 설계 프로젝트 / MVP 개발(에이전틱 코딩·데이터·고도화) / 프로덕트 데이터 분석 / 비즈니스 확장·사업 분석 프로젝트,현직자 상시 Q&A·멘토링 (이름 못 찾음),못 찾음,2026-08-04~2027-02-24 (약 7개월). 매주 스프린트 미션,온라인 (가정: 다른 공고에 100% 온라인 표기),장기 (약 7개월),"훈련장려금 최대 210만원, 창업 경진대회 자금 최대 1,000만원, 창업 공간 12개월, 초기 마케팅 비용, 6주 창업 성공 프로그램, 인턴십 매칭, 코드잇 사이트(61만 회원) 내 서비스 홍보",300000,못 찾음,국비지원. 월 지원금은 총 최대 210만원을 약 7개월로 나눈 값 (가정),못 찾음,못 찾음,못 찾음,더팀스 모집공고. 기사·후기 못 찾음,https://www.theteams.kr/activities/page/335149/le
+2026-11-16,온라인,모두의연구소,아이펠 AI 에이전트 트랙 2기,aiffel.io 선착순 모집 (2026-07-10~2027-02-20),"취준생. 포트폴리오가 부족한 분, 마케팅·기획·HR·영업·디자인 직무 경쟁력을 높이고 싶은 분",전공·희망 직무에 맞춘 실전 AI 에이전트 포트폴리오 제작,못 찾음,못 찾음,2026-08-26~2027-02-19 6개월. 서울시민대학 다시가는캠퍼스(관악구),온라인+오프라인 (실시간 온라인 50% + 오프라인 50%),중기 (6개월),"훈련장려금 최대 240만원, 취업 축하금 최대 100만원, 우수생 장학금 최대 100만원, 채용 플랫폼 '그룹바이' 인재 등록·헤드헌팅, 현직자 1:1 멘토링·이력서 첨삭·모의면접",400000,0,"교육비 15,246,000원 → 0원 (전액 국비지원). 월 지원금은 최대 240만원을 6개월로 나눈 값 (가정)",못 찾음,못 찾음,회사 표기: 1기 조기 마감,더팀스 모집공고. 기사·후기 못 찾음,https://www.theteams.kr/activities/page/334596/le
+2026-11-16,온라인,카카오,카카오테크 부트캠프 4기,카카오 모집 (2026-03-22 마감),"과정별 50명, 총 150명 (자격 못 찾음)","AI 실무 개발, 풀스택, 클라우드 네이티브 3개 과정 (가정: 보도자료 원문을 열지 못해 검색 요약 기준)",못 찾음,못 찾음,"6개월 약 1,000시간 (가정: 검색 요약 기준)",못 찾음 (2024년 기수는 온라인+오프라인),"중기 (6개월, 가정)",못 찾음,못 찾음,못 찾음,2026년부터 자부담 60만원이라는 블로그 정리가 있으나 공식 확인 못 함,못 찾음,못 찾음,못 찾음,"카카오 보도자료(본문 열리지 않음), 블로그 정리. 후기 못 찾음",https://www.kakaocorp.com/page/detail/11963
+</script>
+<script>
+const MISS='못 찾음';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// 쉼표·큰따옴표·줄바꿈이 든 칸까지 읽는 CSV 파서
+function parseCSV(text){
+  text=text.replace(/^﻿/,'');
+  const rows=[];let row=[],f='',q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){
+      if(c==='"'){ if(text[i+1]==='"'){f+='"';i++} else q=false }
+      else f+=c;
+    }else if(c==='"') q=true;
+    else if(c===','){row.push(f);f=''}
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n')i++; row.push(f);f=''; if(row.some(v=>v.trim()!==''))rows.push(row); row=[] }
+    else f+=c;
+  }
+  row.push(f); if(row.some(v=>v.trim()!==''))rows.push(row);
+  return rows;
+}
+
+let H=[],D=[],compCol=1,shownComp=null,shownCols=new Set(),kindCol=-1,shownKind=null;
+const find=(re,fb)=>{const i=H.findIndex(h=>re.test(h));return i>=0?i:fb};
+
+function load(text,source){
+  const rows=parseCSV(text);
+  if(rows.length<2){$('msg').textContent='표를 읽지 못했어요. 첫 줄이 칸 이름인 CSV인지 확인해 주세요.';return}
+  H=rows[0].map(h=>h.trim());
+  D=rows.slice(1).map(r=>H.map((_,i)=>(r[i]??'').trim()));
+  compCol=find(/경쟁사|회사|브랜드/,Math.min(1,H.length-1));
+  shownComp=null;shownKind=null;kindCol=find(/^구분/,-1);
+  shownCols=new Set(H.map((_,i)=>i));
+  $('msg').textContent=source||'';
+  buildFilters();render();
+}
+
+function buildFilters(){
+  const comps=[...new Set(D.map(r=>r[compCol]))];
+  const fc=$('fComp');fc.innerHTML='';
+  const mk=(label,on,fn)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;b.setAttribute('aria-pressed',on?'true':'false');b.onclick=fn;return b};
+  const fk=$('fKind');fk.innerHTML='';
+  if(kindCol>=0){ fk.appendChild(mk('전체',shownKind===null,()=>{shownKind=null;buildFilters();render()}));
+    [...new Set(D.map(r=>r[kindCol]))].forEach(k=>fk.appendChild(mk(k,shownKind===k,()=>{shownKind=k;buildFilters();render()}))); }
+  fk.parentElement.hidden=kindCol<0;
+  fc.appendChild(mk('전체',true,()=>{shownComp=null;buildFilters();render()}));
+  comps.forEach(c=>fc.appendChild(mk(c,false,()=>{shownComp=c;buildFilters();render()})));
+  [...fc.children].forEach(b=>b.setAttribute('aria-pressed',(shownComp===null?b.textContent==='전체':b.textContent===shownComp)?'true':'false'));
+  const fl=$('fCols');fl.innerHTML='';
+  H.forEach((h,i)=>{ if(i===compCol)return;
+    fl.appendChild(mk(h,shownCols.has(i),()=>{shownCols.has(i)?shownCols.delete(i):shownCols.add(i);buildFilters();render()}));
+  });
+}
+
+const KEY=/(무료|전액 국비지원|국비지원|오프라인|실시간|1:1|취업률 약 85%|누적|채용 연계|서류 면제)/g;
+const isUrl=s=>/^https?:\/\//i.test(s);
+function cell(v){
+  if(!v) return '<span class="missing">비어 있음</span>';
+  if(v===MISS) return '<span class="missing">'+MISS+'</span>';
+  const parts=v.split(/\s*;\s*|\s+(?=https?:\/\/)/);
+  if(parts.every(isUrl)) return parts.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.replace(/^https?:\/\/(www\.)?/,'').slice(0,48))+'</a>').join('<br>');
+  const fmt=s=>esc(s).replace(KEY,'<mark>$1</mark>').replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+  const items=v.split(/\s+\/\s+/);
+  if(items.length>1) return '<ul class="pts">'+items.map(s=>'<li>'+fmt(s)+'</li>').join('')+'</ul>';
+  return fmt(v);
+}
+// 주제 묶음 (위에서부터 먼저 맞는 주제에 들어감)
+const TOPICS=[['가격·지원',/정가|부담|가격|정부지원|할인|지원금/],['기간·운영',/운영안|운영 형태|기간/],['대상·신청',/대상|선발|신청처/],['배우는 내용',/커리큘럼|내용/],['강사',/강사/],['제공 혜택',/제공/],['후기·만족도',/만족|후기|댓글|평점/],['성과 사례',/성과 사례|성과/],['출처',/링크|출처|플랫폼|조사일|날짜/]];
+let curTopic=0;
+function topicOf(i){ if(i===compCol) return -1; const t=TOPICS.findIndex(([,re])=>re.test(H[i])); return t<0?TOPICS.length:t }
+function money(h,v){ return (/정가|부담|가격|지원금|원\)/.test(h)&&toNum(v)!=null)?won(toNum(v)):cell(v) }
+const toNum=v=>{const n=Number(String(v).replace(/[^\d.]/g,''));return String(v).match(/\d/)&&Number.isFinite(n)?n:null};
+const won=n=>n==null?null:n.toLocaleString('ko-KR')+'원';
+
+function render(){
+  const rows=D.filter(r=>(shownComp===null||r[compCol]===shownComp)&&(shownKind===null||kindCol<0||r[kindCol]===shownKind));
+  // 위쪽 숫자 (전체 표 기준)
+  const dCol=find(/조사일|날짜|일자/,0);
+  const dates=[...new Set(D.map(r=>r[dCol]).filter(Boolean))];
+  $('sDate').textContent=dates.length?dates.sort().slice(-1)[0]+(dates.length>1?' 외':''):'-';
+  const comps=D.filter(r=>kindCol<0||r[kindCol]!=='기준');$('sComp').textContent=comps.length;
+  $('sRows').textContent=D.length+'개 (오프 '+D.filter(r=>r[kindCol]==='오프라인').length+' · 온 '+D.filter(r=>r[kindCol]==='온라인').length+')';
+  $('sMiss').textContent=D.reduce((s,r)=>s+r.filter(v=>v===MISS).length,0);
+  $('hComp').textContent=comps.length+'곳';
+  bigResult();
+  recommend(rows);
+
+  // 핵심 비교 표
+  const name=find(/프로그램|과정|상품/,-1),form=find(/운영 형태|형태/,-1),term=find(/기간 구분|기간/,-1),
+        pay=find(/부담|실제|판매가|할인가/,-1),list=find(/정가/,-1),link=find(/링크|출처|url/i,-1);
+  const grant=find(/월 지원금|지원금/,-1);
+  const keyCols=[['구분',kindCol],['경쟁사',compCol],['프로그램',name],['운영 형태',form],['기간',term],['월 지원금',grant],['수강생 부담',pay]].filter(k=>k[1]>=0);
+  const hasKey=pay>=0||term>=0||form>=0||grant>=0;
+  $('kHead').innerHTML=hasKey?'<tr>'+keyCols.map(k=>'<th>'+esc(k[0])+'</th>').join('')+'</tr>':'';
+  const barCol=grant>=0?grant:pay;
+  const maxPay=Math.max(1,...rows.map(r=>toNum(r[barCol])||0));
+  const sorted=grant>=0?[...rows].sort((a,b)=>(a[kindCol]==='기준'?-1:0)-(b[kindCol]==='기준'?-1:0)||(toNum(b[grant])??-1)-(toNum(a[grant])??-1)):rows;
+  $('kBody').innerHTML=!hasKey?'<tr><td class="empty">이 CSV에는 가격·기간·운영 형태 칸이 없어 아래 카드만 보여 줘요.</td></tr>':sorted.map(r=>'<tr'+(kindCol>=0&&r[kindCol]==='기준'?' class="base"':'')+'>'+keyCols.map(([k,i])=>{
+    const v=r[i],L=' data-label="'+esc(k)+'"';
+    if(i===barCol){const n=toNum(v);return '<td class="num"'+L+'><div>'+(n==null?cell(v):'<b>'+won(n)+'</b><div class="bar" aria-hidden="true"><span style="width:'+(n/maxPay*100).toFixed(1)+'%"></span></div>')+'</div></td>'}
+    if(i===pay||i===list){const n=toNum(v);return '<td class="num"'+L+'><div>'+(n==null?cell(v):(n===0?'<mark>무료</mark>':won(n)))+'</div></td>'}
+    if(i===kindCol) return '<td'+L+'><div><b>'+esc(v)+'</b></div></td>';
+    if(i===form&&v&&v!==MISS) return '<td'+L+'><div><span class="tag">'+esc(v)+'</span></div></td>';
+    if(i===term&&v&&v!==MISS) return '<td'+L+'><div><span class="tag term">'+esc(v)+'</span></div></td>';
+    if(i===compCol) return '<td'+L+'><div><b>'+esc(v)+'</b></div></td>';
+    return '<td'+L+'><div>'+cell(v)+'</div></td>';
+  }).join('')+'</tr>').join('');
+  $('kNote').hidden=!hasKey;
+
+  // 주제별 비교
+  const groups=[...TOPICS.map(t=>t[0]),'기타'].map((label,t)=>({label,cols:H.map((_,i)=>i).filter(i=>i!==name&&i!==kindCol&&shownCols.has(i)&&topicOf(i)===t)})).filter(g=>g.cols.length);
+  if(curTopic>=groups.length) curTopic=0;
+  $('topicTabs').innerHTML=groups.map((g,t)=>'<button type="button" role="tab" class="tab" aria-selected="'+(t===curTopic)+'" data-t="'+t+'">'+esc(g.label)+'</button>').join('');
+  $('topicTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{curTopic=+b.dataset.t;render();});
+  const g=groups[curTopic];
+  if(!g){$('tHead').innerHTML='';$('tBody').innerHTML='<tr><td class="empty">보이는 칸을 하나 이상 골라 주세요.</td></tr>'}
+  else{
+    $('tHead').innerHTML='<tr><th class="whoCol">업체 · 프로그램</th>'+g.cols.map(i=>'<th>'+esc(H[i])+'</th>').join('')+'</tr>';
+    $('tBody').innerHTML=rows.length?rows.map(r=>'<tr><td class="whoCol" data-label="업체"><div><b>'+esc(r[compCol])+'</b>'+(name>=0?'<div class="sub">'+esc(r[name])+'</div>':'')+'</div></td>'+g.cols.map(i=>'<td data-label="'+esc(H[i])+'"><div>'+money(H[i],r[i])+'</div></td>').join('')+'</tr>').join(''):'<tr><td class="empty">보여 줄 줄이 없어요.</td></tr>';
+  }
+
+  // 업체별 펼치기
+  const allGroups=[...TOPICS.map(t=>t[0]),'기타'].map((label,t)=>({label,cols:H.map((_,i)=>i).filter(i=>i!==name&&i!==kindCol&&shownCols.has(i)&&topicOf(i)===t)})).filter(x=>x.cols.length);
+  $('cards').innerHTML=rows.length?rows.map((r,k)=>{
+    const badges=[kindCol>=0?'<span class="tag">'+esc(r[kindCol])+'</span>':'',form>=0&&r[form]&&r[form]!==MISS?'<span class="tag">'+esc(r[form])+'</span>':'',term>=0&&r[term]&&r[term]!==MISS?'<span class="tag term">'+esc(r[term])+'</span>':'',grant>=0&&toNum(r[grant])!=null?'<mark>월 '+won(toNum(r[grant]))+'</mark>':''].join(' ');
+    return '<details class="accItem"'+(rows.length===1?' open':'')+'><summary><span class="sumMain"><span class="who">'+esc(r[compCol])+'</span><span class="pname">'+(name>=0?esc(r[name]):'')+'</span></span><span class="badges">'+badges+'</span></summary>'+
+      '<div class="accBody">'+allGroups.map(x=>'<section class="grp"><h4>'+esc(x.label)+'</h4><dl>'+x.cols.map(i=>'<div><dt>'+esc(H[i])+'</dt><dd>'+money(H[i],r[i])+'</dd></div>').join('')+'</dl></section>').join('')+'</div></details>';
+  }).join(''):'<div class="empty">보여 줄 줄이 없어요.</div>';
+}
+
+// ---- 수강생 입장 추천 (공개 자료 기반 학습용 점수, 가정) ----
+function recScore(r){
+  const pay=find(/부담|실제|판매가|할인가/,-1),grant=find(/월 지원금|지원금/,-1),out=find(/성과 사례|취업 성과/,-1),
+        sat=find(/만족도|평점/,-1),rev=find(/수강후기|댓글/,-1);
+  const has=v=>v&&v!==MISS&&!/^못 찾음/.test(v);
+  const pays=D.map(x=>toNum(x[pay])).filter(n=>n!=null),maxPay=Math.max(1,...pays);
+  const grants=grant<0?[]:D.map(x=>toNum(x[grant])).filter(n=>n!=null),maxG=Math.max(1,...grants);
+  const s={},why=[];
+  // 비용 25점: 무료 만점, 비쌀수록 감점, 모르면 8점
+  const p=pay<0?null:toNum(r[pay]);
+  s.cost=p==null?8:Math.round(25*(1-p/maxPay)); if(p===0)why.push('무료'); else if(p!=null&&p<=50000)why.push('부담 '+won(p));
+  // 지원금 25점 (칸이 있을 때만)
+  const g=grant<0?null:toNum(r[grant]);
+  s.grant=grant<0?0:(g==null?0:Math.round(25*g/maxG)); if(g)why.push('월 '+won(g)+' 지원');
+  // 성과 20점: 숫자로 공개 20, 글로만 10
+  const o=out<0?'':r[out];
+  const real=has(o)&&!/못 찾음/.test(o)&&/\d/.test(o)&&/(취업|수료|매출|투자|거래액|명|억|%)/.test(o), other=real&&/아니고|아님|다른 과정/.test(o);
+  s.out=real?(other?5:20):(has(o)&&!/못 찾음/.test(o)?8:0); if(real&&!other&&/취업/.test(o))why.push('취업 성과 숫자 공개'); else if(real&&!other)why.push('성과 숫자 공개'); else if(other)why.push('회사 전체 성과만 공개');
+  // 후기 15점: 평점 숫자 15, 후기 글 8
+  const st=sat<0?'':r[sat],rv=rev<0?'':r[rev];
+  s.rev=has(st)&&/\d/.test(st)?15:(has(rv)&&/"/.test(rv)?8:0); if(has(st)&&/\d/.test(st))why.push('평점 '+(st.match(/\d\.\d/)||[''])[0]); else if(s.rev)why.push('수강생 후기 있음');
+  // 정보 공개 15점: 못 찾음이 적을수록
+  const miss=r.filter(v=>v===MISS).length; s.info=Math.round(15*(1-miss/Math.max(1,r.length)));
+  const total=(grant<0?Math.round((s.cost+s.out+s.rev+s.info)*100/75):s.cost+s.grant+s.out+s.rev+s.info);
+  return {total:Math.min(100,total),s,why};
+}
+function recommend(rows){
+  const box=$('recBox'); if(!box) return;
+  const name=find(/프로그램|과정|상품/,-1),form=find(/운영 형태|형태/,-1),term=find(/기간 구분|기간/,-1),grant=find(/월 지원금|지원금/,-1);
+  const list=rows.map(r=>({r,...recScore(r)})).sort((a,b)=>b.total-a.total);
+  if(!list.length){box.innerHTML='<div class="empty">추천할 프로그램이 없어요.</div>';return}
+  const label=x=>'<b>'+esc(x.r[compCol])+'</b><div class="sub">'+(name>=0?esc(x.r[name]):'')+'</div>';
+  const chips=x=>x.why.length?x.why.map(w=>'<span class="tag">'+esc(w)+'</span>').join(' '):'<span class="missing">공개 정보가 적어요</span>';
+  const pick=(title,desc,arr)=>{const x=arr[0];return x?'<article class="recCard"><div class="recFor">'+esc(title)+'</div><div class="recWho">'+label(x)+'</div><div class="recWhy">'+chips(x)+'</div><div class="recDesc">'+esc(desc)+'</div></article>':''};
+  const by=(f)=>[...list].sort((a,b)=>f(b)-f(a)||b.total-a.total);
+  const tagOf=(x,col)=>col>=0?x.r[col]||'':'';
+  const cards=[
+    pick('종합 1순위','지원금·비용·성과·후기·정보 공개를 모두 더한 점수가 가장 높아요.',list),
+    pick('돈 부담이 가장 적은 곳','수강생이 내는 돈은 적고 받는 지원금은 많은 순서예요.',by(x=>x.s.cost+x.s.grant)),
+    pick('성과·후기가 검증된 곳','취업·성과 숫자와 평점·후기를 공개한 곳을 먼저 봤어요.',by(x=>x.s.out+x.s.rev)),
+    pick('짧게 시작하고 싶다면','기간이 단기(짧은 과정) 중 점수가 가장 높아요.',list.filter(x=>/단기/.test(tagOf(x,term)))),
+    pick('직접 만나서 배우고 싶다면','오프라인 과정 중 점수가 가장 높아요.',list.filter(x=>/오프라인/.test(tagOf(x,form))&&!/^온라인 \(|^온라인$/.test(tagOf(x,form)))),
+    pick('집에서 배우고 싶다면','온라인 과정 중 점수가 가장 높아요.',list.filter(x=>/^온라인/.test(tagOf(x,form))))
+  ].filter(Boolean).join('');
+  const maxT=Math.max(1,...list.map(x=>x.total));
+  const rank='<div class="keyWrap"><table class="recTable"><thead><tr><th>순위</th><th>업체 · 프로그램</th><th>추천 점수</th><th>이유</th></tr></thead><tbody>'+
+    list.map((x,k)=>'<tr'+(kindColR()>=0&&x.r[kindColR()]==='기준'?' class="base"':'')+'><td data-label="순위"><div><b>'+(k+1)+'</b></div></td><td data-label="업체"><div>'+label(x)+'</div></td><td class="num" data-label="점수"><div><b>'+x.total+'점</b><div class="bar" aria-hidden="true"><span style="width:'+(x.total/maxT*100).toFixed(1)+'%"></span></div><div class="sub">비용 '+x.s.cost+' · '+(grant>=0?'지원금 '+x.s.grant+' · ':'')+'성과 '+x.s.out+' · 후기 '+x.s.rev+' · 공개 '+x.s.info+'</div></div></td><td data-label="이유"><div>'+chips(x)+'</div></td></tr>').join('')+'</tbody></table></div>';
+  box.innerHTML='<div class="recCards">'+cards+'</div>'+rank;
+}
+function kindColR(){ return typeof kindCol==='number'?kindCol:find(/^구분/,-1) }
+
+function bigResult(){
+  const g=find(/월 지원금|지원금/,-1),name=find(/프로그램|과정|상품/,-1);
+  const vals=g<0?[]:D.map(r=>({r,n:toNum(r[g])})).filter(o=>o.n!=null);
+  if(!vals.length){$('bigNum').textContent='지원금 칸 없음';$('bigWho').textContent='이 CSV에는 월 지원금 칸이 없어요.';return}
+  const max=Math.max(...vals.map(o=>o.n)),tops=vals.filter(o=>o.n===max);
+  const base=kindCol>=0?D.find(r=>r[kindCol]==='기준'):null;
+  const known=vals.filter(o=>!base||o.r!==base).length, unknown=D.filter(r=>r!==base&&toNum(r[g])==null).length;
+  $('bigNum').innerHTML='<mark>월 '+won(max)+'</mark>';
+  $('bigWho').innerHTML='<b>'+esc(tops[0].r[compCol])+'</b>'+(name>=0?' · '+esc(tops[0].r[name]):'')+(base?'<br>기준 CJ L.L.M.: <b>월 최대 '+won(toNum(base[g]))+'</b>':'')+'<br>경쟁 '+known+'곳은 금액 공개, '+unknown+'곳은 못 찾음';
+}
+const EMBED=$('embedded').textContent;
+$('csvFile').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>load(rd.result,'"'+f.name+'" 내용으로 바꿨어요.');
+  rd.onerror=()=>{$('msg').textContent='파일을 읽지 못했어요.'};
+  rd.readAsText(f,'utf-8');
+});
+$('resetBtn').onclick=()=>{$('csvFile').value='';load(EMBED,'기본 표(research.csv)로 되돌렸어요.')};
+load(EMBED,'');
+</script>
+
+</body></html>

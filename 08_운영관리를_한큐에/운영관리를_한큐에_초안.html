@@ -1,0 +1,945 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>운영관리를 한큐에 · 초안</title>
+<style>
+:root{--bg:#f4f6f9;--bar:rgba(255,255,255,.92);--panel:#fff;--panel2:#f6f8fb;--input:#fff;--line:#e3e7ee;--line2:#c9d0db;--text:#151a22;--muted:#677285;--faint:#b7bfcb;--hover:#f0f3f8;--chip:#eef1f5;
+--acc:#2f6fed;--accbg:#eaf1ff;--onacc:#fff;--ok:#178a52;--okbg:#e6f6ee;--okln:#b9e3cb;--warn:#b86e00;--warnbg:#fff4e0;--warnln:#f1d29b;--bad:#d1394a;--badbg:#fdecee;--badln:#f3bcc3;--info:#0e8aa8;--infobg:#e3f6fa;--vio:#6a4ee8;--viobg:#efebff;--shadow:0 10px 30px rgba(20,30,50,.12)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 'Pretendard','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.top{position:sticky;top:0;z-index:20;background:var(--bar);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.topIn{max-width:1440px;margin:auto;padding:10px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.6px;white-space:nowrap;line-height:1.25}
+.brand em{font-style:normal;color:var(--acc)}
+.brand small{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0}
+.tabs{display:flex;gap:2px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}
+.tabs button{border:0;background:none;padding:9px 13px;border-radius:9px;color:var(--muted);white-space:nowrap;font-weight:700;font-size:13px}
+.tabs button:hover{color:var(--text);background:var(--hover)}
+.tabs button.on{background:var(--accbg);color:var(--acc)}
+.tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tools input[type=date]{padding:5px 8px;font-size:12px}
+.sync{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block;flex:none}
+.dot.pulse{animation:pl .9s ease-out}
+@keyframes pl{0%{box-shadow:0 0 0 0 var(--ok)}100%{box-shadow:0 0 0 9px transparent}}
+.pres{display:flex}
+.pres span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;margin-left:-6px;border:2px solid var(--bar)}
+.ibtn{position:relative;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:6px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.ibtn:hover{border-color:var(--acc)}
+.ibtn .cnt{position:absolute;top:-7px;right:-7px;background:var(--bad);color:#fff;border-radius:99px;font-size:10px;line-height:16px;min-width:16px;padding:0 4px;text-align:center}
+.drop{position:fixed;right:16px;top:64px;width:min(440px,calc(100vw - 32px));max-height:72vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);z-index:40;padding:6px 0}
+.drop[hidden]{display:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--line)}
+.ni{padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px}
+.ni.unread{background:var(--accbg)}
+.ni .meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-bottom:3px}
+.ni .acts{display:flex;gap:6px;margin-top:6px;align-items:center;flex-wrap:wrap}
+.acks{font-size:11px;color:var(--muted)}
+.acks b{color:var(--ok);font-weight:600}
+.wrap{max-width:1440px;margin:auto;padding:22px 24px 70px}
+.page{display:none}.page.on{display:block}
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:27px;margin:2px 0 4px;letter-spacing:-.8px;line-height:1.3}
+h2{font-size:16px;margin:0;letter-spacing:-.3px}
+h3{font-size:14px;margin:0 0 8px}
+p{margin:0 0 10px}
+.eyebrow{font-size:11px;letter-spacing:1.4px;color:var(--acc);font-weight:800;text-transform:uppercase}
+.muted{color:var(--muted)}.sm{font-size:12px}.xs{font-size:11px}
+.sec{margin-top:26px;margin-bottom:12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.g{display:grid;gap:14px}
+.k5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.c2{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+.c2e{grid-template-columns:repeat(2,minmax(0,1fr))}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.mt{margin-top:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.ch{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.kpi .v{font-size:25px;font-weight:800;letter-spacing:-.8px;font-variant-numeric:tabular-nums;margin:2px 0}
+.kpi.t-warn{border-color:var(--warnln)}.kpi.t-warn .v{color:var(--warn)}
+.kpi.t-bad{border-color:var(--badln)}.kpi.t-bad .v{color:var(--bad)}
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:99px;padding:1px 9px;font-size:11px;font-weight:700;white-space:nowrap;background:var(--chip);color:var(--muted);line-height:20px}
+.b-ok{background:var(--okbg);color:var(--ok)}.b-warn{background:var(--warnbg);color:var(--warn)}.b-bad{background:var(--badbg);color:var(--bad)}.b-info{background:var(--infobg);color:var(--info)}.b-acc{background:var(--accbg);color:var(--acc)}.b-vio{background:var(--viobg);color:var(--vio)}
+.btn{border:1px solid var(--acc);background:var(--acc);color:var(--onacc);border-radius:9px;padding:8px 13px;font-weight:700;font-size:13px;white-space:nowrap}
+.btn:hover{filter:brightness(1.07)}
+.btn.s{background:var(--panel);color:var(--text);border-color:var(--line)}
+.btn.s:hover{border-color:var(--acc)}
+.btn.sm{padding:4px 9px;font-size:12px;border-radius:7px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.x{border:0;background:none;color:var(--muted);font-size:17px;line-height:1;padding:2px 6px;border-radius:6px}
+.x:hover{color:var(--bad);background:var(--badbg)}
+input,select,textarea{background:var(--input);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+input:focus,select:focus,textarea:focus{border-color:var(--acc);outline:none}
+textarea{width:100%;resize:vertical;line-height:1.55}
+label.f{display:block;font-size:12px;color:var(--muted);margin:0 0 4px}
+.fr{display:grid;gap:8px;grid-template-columns:110px minmax(0,1fr) 120px 140px auto;align-items:end}
+.row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.grow{flex:1;min-width:0}
+.pri{font-size:10px;font-weight:800;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.p-high{background:var(--badbg);color:var(--bad)}.p-mid{background:var(--warnbg);color:var(--warn)}.p-low{background:var(--chip);color:var(--muted)}
+.st-open{color:var(--bad)}.st-doing{color:var(--warn)}.st-done{color:var(--ok)}
+.done .grow b{text-decoration:line-through;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-size:11px;color:var(--muted);font-weight:700;text-align:left;white-space:nowrap}
+th,td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td{font-variant-numeric:tabular-nums}
+tr.click{cursor:pointer}tr.click:hover td{background:var(--hover)}tr.sel td{background:var(--accbg)}
+.tw{overflow-x:auto}
+.inl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.notice{padding:11px 15px;border:1px solid var(--warnln);border-radius:11px;background:var(--warnbg);color:var(--text);font-size:12px;margin-bottom:16px}
+.ok{color:var(--ok)}.no{color:var(--bad)}.wn{color:var(--warn)}
+.bar{display:flex;height:12px;border-radius:7px;overflow:hidden;background:var(--chip);margin:8px 0}
+.bar i{display:block;height:100%}
+.leg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:var(--muted)}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chip{font-size:11px;border-radius:6px;padding:1px 7px;background:var(--chip)}
+.ev{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12px}
+.ev:last-child{border:0}
+.ev b{min-width:58px;font-variant-numeric:tabular-nums}
+.auto .tag{font-size:10px;font-weight:800;color:var(--acc);letter-spacing:.4px}
+.auto h3{margin:4px 0 6px;font-size:14px}
+.auto .stat{font-size:12px;color:var(--muted);min-height:38px}
+.feed .ni{padding:9px 0;border-bottom:1px solid var(--line)}
+.feed .ni:last-child{border:0}
+.feed .ni.unread{background:none;border-left:3px solid var(--acc);padding-left:9px}
+.out{border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;background:var(--panel2)}
+/* org */
+.org{display:flex;flex-direction:column;align-items:center;padding:6px 0}
+.onode{background:var(--panel);border:2px solid var(--acc);border-radius:14px;padding:12px 22px;text-align:center;min-width:210px}
+.onode:hover{box-shadow:var(--shadow)}
+.ostem{width:2px;height:24px;background:var(--line2)}
+.obranch{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:14px;width:100%;position:relative;padding-top:24px}
+.obranch::before{content:'';position:absolute;top:0;left:calc(50% / var(--n));right:calc(50% / var(--n));height:2px;background:var(--line2)}
+.ogroup{position:relative;background:var(--panel2);border-radius:12px;padding:10px}
+.ogroup::before{content:'';position:absolute;top:-24px;left:50%;width:2px;height:24px;background:var(--line2)}
+.ogh{text-align:center;font-weight:800;padding:6px 0 8px;border-top:4px solid var(--gc);border-radius:4px;font-size:13px}
+.omem{display:flex;gap:9px;align-items:center;width:100%;text-align:left;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin-top:6px;background:var(--panel)}
+.omem:hover,.omem.on{border-color:var(--acc)}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px;flex:none}
+.omem .d{display:block}
+.flowS{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.flowS span{padding:7px 11px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;font-size:12px}
+.flowS i{color:var(--muted);font-style:normal}
+.flowS span.gate{border-color:var(--warnln);color:var(--warn)}
+/* loop */
+.loop{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.lday{background:var(--panel2);border-radius:12px;padding:10px;min-width:0}
+.lday.today{outline:2px solid var(--acc)}
+.lday h3{display:flex;justify-content:space-between;margin:0 0 4px;font-size:13px}
+.litem{display:flex;gap:8px;align-items:flex-start;padding:8px;border-radius:9px;background:var(--panel);border:1px solid var(--line);margin-top:6px;width:100%;text-align:left}
+.litem:hover{border-color:var(--acc)}
+.litem .ck{width:18px;height:18px;border-radius:5px;border:2px solid var(--line2);flex:none;display:grid;place-items:center;font-size:11px;margin-top:2px}
+.litem.done .ck{background:var(--ok);border-color:var(--ok);color:#fff}
+.litem.done .lt{text-decoration:line-through;color:var(--muted)}
+.litem.late{border-color:var(--badln)}
+.litem .lt{font-size:12px;font-weight:600;display:block}
+.prog{height:8px;border-radius:5px;background:var(--chip);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--ok)}
+/* calendar */
+.modeBar{display:flex;flex-wrap:wrap;gap:6px}
+.modeBtn{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:12px}
+.modeBtn.on{border-color:var(--acc);background:var(--accbg);color:var(--acc);font-weight:800}
+.mk{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:17px;padding:0 4px;border-radius:5px;font-size:10px;font-weight:800;line-height:1;color:#11151c}
+.m-absent{background:#ff8f96}.m-short{background:#d29cff}.m-sickP{background:#ffb066}.m-sickD{background:#86c5ff}
+.m-late{background:#f5c95c}.m-early{background:#ffe48e}.m-out{background:#c7d2e0}.m-pre{background:#6b7586;color:#fff}.m-join{background:#7fe0a3}.m-pick{background:var(--line2);color:var(--text)}
+.mk.over{outline:2px solid var(--bad);outline-offset:1px}
+.calWrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.month{min-width:0}.mh{font-size:13px;font-weight:800;margin-bottom:6px}
+.wk,.grid7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.wk span{font-size:10px;color:var(--muted);text-align:center}
+.cd{position:relative;min-height:50px;min-width:0;border-radius:7px;border:1px solid var(--line);background:var(--input);padding:3px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;overflow:hidden;text-align:left}
+button.cd:hover{border-color:var(--acc)}
+.cd.empty{border:0;background:none}
+.cd.off{background:transparent;color:var(--faint);border-style:dashed}
+.cd.holi{color:var(--bad)}
+.cd .dn{font-size:11px;font-variant-numeric:tabular-nums}
+.cd .hl{font-size:9px}
+.cd .mks{display:flex;flex-wrap:wrap;gap:2px}
+.cd.u0{box-shadow:inset 0 3px 0 #4e9a6a}.cd.u1{box-shadow:inset 0 3px 0 #6b74c9}.cd.u2{box-shadow:inset 0 3px 0 #b08440}
+.cd.today{border:2px solid var(--warn)}
+.cd.sel{border:2px solid var(--acc);background:var(--accbg)}
+.cd.pre{opacity:.75}
+.cd.bot::after{content:'';position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:var(--info)}
+.calSum{margin-top:12px;font-size:12px;color:var(--muted);line-height:2.1}
+.calSum b{color:var(--text)}
+.result{border:1px solid var(--okln);background:var(--okbg);border-radius:11px;padding:15px;margin-top:12px}
+.result.warn{border-color:var(--warnln);background:var(--warnbg)}
+.result.risk{border-color:var(--badln);background:var(--badbg)}
+.result .big{font-size:22px;font-weight:800;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.meter{display:grid;height:10px;border-radius:6px;overflow:hidden;margin:14px 0 6px}
+.meter span:nth-child(1){background:#3f9a62}.meter span:nth-child(2){background:#d6a63a}.meter span:nth-child(3){background:#e0715f}.meter span:nth-child(4){background:#a33a4a}
+.meterLab{display:grid;font-size:10px;color:var(--muted)}
+.ruleList{margin:0;padding-left:18px;font-size:12.5px;color:var(--muted)}
+.ruleList li{margin:5px 0}.ruleList b{color:var(--text)}
+.src{font-size:10px;color:var(--vio);border:1px solid var(--vio);border-radius:4px;padding:0 5px;white-space:nowrap;margin-left:4px;opacity:.85}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--text);padding:20px;width:min(520px,calc(100vw - 32px));box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(10,14,20,.5)}
+.f3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.f3 input{width:100%}
+/* bot */
+.phone{max-width:340px;margin:0 auto;border-radius:30px;border:9px solid #1d222b;background:#bccbd9;height:560px;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow)}
+.ptop{background:#aebfcf;padding:10px 14px;font-weight:800;font-size:13px;color:#14181f;display:flex;justify-content:space-between;align-items:center}
+.ptop small{font-weight:500;font-size:11px;color:#3a4756}
+.pbody{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column}
+.kb{background:#fff;color:#14181f;border-radius:4px 14px 14px 14px;padding:10px 12px;max-width:88%;margin:5px 0;white-space:pre-wrap;font-size:12.5px;line-height:1.55;align-self:flex-start}
+.kb .kh{font-weight:800;font-size:11px;color:#5a6472;margin-bottom:3px}
+.kb.me{background:#ffe96a;border-radius:14px 4px 14px 14px;align-self:flex-end}
+.kb.call{background:#2d2a52;color:#fff}
+.ksys{align-self:center;font-size:10.5px;color:#334252;background:rgba(255,255,255,.45);border-radius:99px;padding:2px 10px;margin:5px 0;text-align:center}
+.kbtns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}
+.kbtns button{background:#f1f3f6;border:1px solid #dde1e7;border-radius:9px;padding:8px 4px;color:#14181f;font-weight:700;font-size:12px}
+.kbtns button:hover{background:#ffe96a}
+.kbtns button:disabled{opacity:.35;cursor:not-allowed}
+.pempty{margin:auto;color:#3a4756;font-size:12px;text-align:center;padding:20px}
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tl div{border-top:3px solid var(--line2);padding:9px 4px;font-size:12px}
+.tl b{display:block;font-variant-numeric:tabular-nums}.tl span{color:var(--muted);font-size:11px}
+.tl .hot{border-color:var(--warn)}.tl .cut{border-color:var(--bad)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border:0;background:var(--panel);padding:5px 11px;font-size:12px;font-weight:700;color:var(--muted)}
+.seg button.on{background:var(--accbg);color:var(--acc)}
+/* overlay + toast */
+.ov{position:fixed;inset:0;background:rgba(10,14,20,.55);display:grid;place-items:center;z-index:60;padding:16px}
+.ov[hidden]{display:none}
+.ovc{width:min(440px,100%);box-shadow:var(--shadow)}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.roles button{border:1px solid var(--line);background:var(--panel2);border-radius:11px;padding:12px 6px;font-weight:800;font-size:13px}
+.roles button.on{border-color:var(--acc);background:var(--accbg);color:var(--acc)}
+.roles button small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);margin-top:3px}
+.toasts{position:fixed;right:16px;bottom:16px;display:grid;gap:8px;z-index:70;width:min(370px,calc(100vw - 32px))}
+.toast{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:11px;padding:10px 13px;box-shadow:var(--shadow);font-size:13px;animation:tin .25s ease-out}
+.toast .meta{font-size:11px;color:var(--muted);margin-bottom:2px}
+@keyframes tin{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.foot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.linkb{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:11px;padding:0}
+@media(max-width:1200px){.k5{grid-template-columns:repeat(3,minmax(0,1fr))}.c5{grid-template-columns:repeat(3,minmax(0,1fr))}.c4{grid-template-columns:repeat(2,minmax(0,1fr))}.calWrap{grid-template-columns:repeat(2,minmax(0,1fr))}.loop{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){.c2,.c2e,.c3{grid-template-columns:1fr}.fr{grid-template-columns:1fr 1fr}.fr .full{grid-column:1/-1}}
+@media(max-width:680px){.topIn,.wrap{padding-left:16px;padding-right:16px}.k5,.c5,.c4{grid-template-columns:1fr 1fr}.calWrap,.loop{grid-template-columns:1fr}.obranch{grid-template-columns:1fr}.obranch::before,.ogroup::before{display:none}.tl{grid-template-columns:1fr 1fr}h1{font-size:23px}.f3{grid-template-columns:1fr}.sync .lbl{display:none}}
+@media(max-width:420px){.k5,.c5,.c4{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+<main class="wrap">
+
+<section class="page" id="pg-brief">
+ <div class="ph"><div><div class="eyebrow">01 · 운영브리핑</div><h1>오늘 문제는 무엇이고, 지금 어디까지 왔나</h1><p class="muted sm">출결·서류·위험군·이슈를 자동으로 모아 보여 줍니다. 누가 무엇을 바꾸든 모두의 화면이 함께 바뀌고 알림이 갑니다.</p></div></div>
+ <div class="notice"><b>연동 방식</b> · 기본은 같은 브라우저의 창·탭끼리 실시간 연동(＋ 다른 역할 창으로 시험). 상단 <b>⚙ 연동</b>에서 구글 시트 웹앱을 연결하면 PC·휴대폰 여러 기기가 함께 씁니다(<code>apps-script/설치_안내.md</code>). 참여자 이름·번호는 모두 가명 예시입니다.</div>
+ <div class="g k5" id="kpis"></div>
+ <div class="g c2 mt">
+  <div class="card"><div class="ch"><h2>🚨 지금 처리할 문제 <span class="xs muted">자동 감지</span></h2><span class="badge b-bad" id="autoCnt"></span></div><div id="autoIss"></div></div>
+  <div class="card"><div class="ch"><h2>📋 이슈 · 문의 · 요청</h2><span class="xs muted">상태 버튼을 누르면 접수→처리 중→완료</span></div><div id="issList"></div>
+   <div class="fr mt" id="issForm"></div></div>
+ </div>
+ <div class="sec"><h2>현황 구조 한눈에</h2><span class="xs muted">기준일 기준 자동 집계</span></div>
+ <div class="g c4" id="statusGrid"></div>
+ <div class="sec"><h2>반복업무 자동화</h2><span class="xs muted">매니저가 매일 하던 일 → 화면이 먼저 해 둡니다</span></div>
+ <div class="g c5" id="autoPanel"></div>
+ <div class="g c3 mt">
+  <div class="card" id="inqCard"><div class="ch"><h2>💬 문의 분류 · 안내 초안</h2></div><div id="inqBox"></div></div>
+  <div class="card"><div class="ch"><h2>📑 주간 보고 초안</h2><button class="btn s sm" data-act="report">다시 만들기</button></div><textarea id="reportOut" rows="10" placeholder="'보고 초안 만들기'를 누르면 자동 집계된 초안이 여기에 생깁니다."></textarea><div class="inl" style="margin-top:8px"><button class="btn s sm" data-act="copy" data-t="reportOut">복사</button></div></div>
+  <div class="card"><div class="ch"><h2>🕘 최근 변경 · 확인 현황</h2></div><div class="feed" id="feed"></div></div>
+ </div>
+</section>
+
+<section class="page" id="pg-org">
+ <div class="ph"><div><div class="eyebrow">02 · 운영조직도 · 주간 운영루프</div><h1>누가 무엇을 맡고, 매주 어떻게 도는가</h1><p class="muted sm">사람을 누르면 맡은 일이 보입니다. 조직도와 루프의 변경은 모두에게 알림으로 갑니다.</p></div></div>
+ <div class="g c2">
+  <div class="card"><div class="ch"><h2>운영 조직도</h2><span class="xs muted">매니저 중심 허브</span></div><div id="orgChart"></div>
+   <div class="flowS mt"><span>누구든 변경</span><i>→</i><span>한큐 화면에 즉시 반영</span><i>→</i><span>매니저·강사·운영진 전원 알림</span><i>→</i><span>각자 '확인했어요'</span><i>→</i><span class="gate">확인 현황이 남음</span></div></div>
+  <div><div class="card" id="orgDetail"></div><div class="card mt"><h3>구성원 추가</h3><div id="memForm"></div></div></div>
+ </div>
+ <div class="sec"><h2>주간 운영루프</h2></div>
+ <div class="card"><div id="loopProg"></div><div class="loop mt" id="loopBoard"></div></div>
+</section>
+
+<section class="page" id="pg-att">
+ <div class="ph"><div><div class="eyebrow">03 · 출결달력 목록 · 판정</div><h1>달력에 표시하면 수료·수당 판정이 바로 계산됩니다</h1><p class="muted sm">참여자를 고르고, 출결 종류를 고른 뒤 날짜를 누르세요. 출결봇 응답은 자동으로 들어옵니다(파란 점).</p></div></div>
+ <div class="card"><div class="ch"><h2>참여자 출결 목록</h2><span class="xs muted">행을 누르면 아래 개인 달력이 바뀝니다</span></div><div class="tw" id="stuList"></div></div>
+ <div class="card mt">
+  <div class="ch"><h2 id="calTitle"></h2><div class="inl"><span class="sm muted" id="selInfo"></span><button class="btn" data-act="judge">🧮 하루 판정기</button></div></div>
+  <div class="modeBar" id="modeBar"></div>
+  <p class="xs muted" style="margin:6px 0 12px">결석 종류는 하루에 하나, 지각·조퇴·외출은 겹쳐 표시할 수 있습니다. 같은 표시를 한 번 더 누르면 지워집니다. '날짜 선택만'은 판정기용으로 날짜만 고릅니다.</p>
+  <div class="calWrap" id="calWrap"></div><div class="calSum" id="calSum"></div>
+ </div>
+ <div class="g c2 mt">
+  <div class="card"><div class="ch"><h2>수료 · 참여수당 판정</h2><span class="badge b-ok">달력 기록으로 자동 계산</span></div>
+   <div class="tw"><table style="min-width:640px"><thead><tr><th>단위기간</th><th>교육일</th><th>결석</th><th>지각·조퇴·외출</th><th>환산 결석</th><th>출석률</th><th>참여수당</th><th>남은 여유</th></tr></thead><tbody id="unitBody"></tbody></table></div>
+   <h3 style="margin-top:16px">전체 과정 수료 판정</h3><div class="meter" id="meter"><span></span><span></span><span></span><span></span></div><div class="meterLab" id="meterLab"></div><div class="result" id="finalRes"></div>
+   <p class="xs muted" style="margin-top:8px">3차 단위기간(8일)의 지급액은 기준이 없어 '미정'으로 둡니다. 판정은 경보이며, 처분은 기관 확정 뒤입니다.</p></div>
+  <div class="card"><h2>판정 기준 · 경고에서 처분까지</h2>
+   <ul class="ruleList" style="margin-top:10px">
+    <li><b>수업</b> 09:00~18:00, 점심 제외 하루 8시간 · <b>09:10까지 입실 = 정상</b>, 09:11부터 지각</li>
+    <li><b>조퇴</b> 17:50 전 퇴실 · <b>외출</b> 수업 중 10분 이상 자리 비움</li>
+    <li><b>지각·조퇴·외출 3회 = 결석 1일</b> · 그날 <b>4시간 미만 수강 = 결석</b></li>
+    <li><b>병결</b> 서류 제출 완료 시 과정 전체 10%(5일)까지 출석 인정 · 서류 대기 중에는 결석으로 계산</li>
+    <li><b>참여수당</b> 단위기간 출석률 80% 이상 → 월 50만 원 · <b>수료</b> 전체 80% 이상 출석 · <b>제적 기준</b> 단위기간 결석 50% 이상 또는 전체 20% 초과</li>
+   </ul>
+   <div class="tw mt"><table><thead><tr><th>단계</th><th>출석률</th><th>결석(52일)</th><th>대응</th></tr></thead><tbody>
+    <tr><td><span class="badge b-ok">정상</span></td><td>90% 이상</td><td>0~5일</td><td>—</td></tr>
+    <tr><td><span class="badge b-warn">경고</span></td><td>85~90%</td><td>6~7일</td><td>본인 안내(봇·문자) + 강사 공유</td></tr>
+    <tr><td><span class="badge b-bad">위험</span></td><td>80~85%</td><td>8~10일</td><td>매니저 1:1 상담, 수당 영향 안내</td></tr>
+    <tr><td><span class="badge b-bad">수료 불가</span></td><td>80% 미만</td><td>11일+</td><td>기관 확정 → 통보 → 행정 처리</td></tr></tbody></table></div>
+   <div class="flowS mt"><span>자동 감지</span><i>→</i><span>본인 안내(경고)</span><i>→</i><span>매니저 상담(위험)</span><i>→</i><span class="gate">기관 출석 확정</span><i>→</i><span class="gate">행정 처리 확인</span><i>→</i><span>처분 통보 · 기록</span></div>
+   <p class="xs muted" style="margin-top:8px">경보는 지원 신호입니다. 처분은 기관 확정 뒤에만 안내합니다.</p></div>
+ </div>
+</section>
+
+<section class="page" id="pg-bot">
+ <div class="ph"><div><div class="eyebrow">04 · 출결관리봇 (카카오톡 · 문자)</div><h1>9시까지 입실이 안 되면, 봇이 먼저 묻습니다</h1><p class="muted sm">미입실자에게 알림톡(동의·채널 없으면 문자)을 보내고, 참여자가 고른 답을 출결달력에 자동으로 넣습니다. 병결은 서류 처리 여부를 따로 관리합니다.</p></div></div>
+ <div class="notice">시뮬레이션입니다. 실제 카카오톡·문자는 나가지 않습니다. 실제 발송에는 비즈니스 채널, 알림톡 템플릿 심사, 발송 대행 계정, 수신 동의가 필요합니다.</div>
+ <div class="card"><div class="tl"><div><b>~09:00</b><span>입실 체크</span></div><div class="hot"><b>09:00</b><span>미입실자 자동 알림 (카톡 → 문자)</span></div><div><b>응답</b><span>가는 중 · 지각 · 병결 · 일반결석</span></div><div><b>자동 입력</b><span>지각·병결(서류대기)·결석 → 달력</span></div><div class="cut"><b>09:11</b><span>마감: 가는 중→지각, 미응답→확인 전화</span></div></div></div>
+ <div class="g c2 mt">
+  <div><div class="card"><h2>봇 실행</h2><div id="botCtrl" style="margin-top:10px"></div></div>
+   <div class="card mt"><div class="ch"><h2>오늘 출결 보드</h2><span class="xs muted">행을 누르면 오른쪽 휴대폰 화면</span></div><div class="tw" id="botBoard"></div></div></div>
+  <div class="card"><div class="ch"><h2>참여자 휴대폰 화면</h2><span class="xs muted">버튼을 눌러 참여자 응답 재현</span></div>
+   <div class="phone"><div class="ptop" id="phoneHead"></div><div class="pbody" id="phoneBody"></div></div></div>
+ </div>
+ <div class="g c2 mt">
+  <div class="card"><div class="ch"><h2>병결 서류 관리</h2><span class="sm" id="docCnt"></span></div>
+   <div class="seg" style="margin-bottom:10px"><button data-act="docf" data-f="pending">서류대기</button><button data-act="docf" data-f="done">서류완료</button><button data-act="docf" data-f="all">전체</button></div>
+   <div class="tw" id="docTable"></div><p class="xs muted" style="margin-top:8px">제출 기한은 결석일로부터 3교육일로 가정했습니다. 서류완료만 출석 인정(5일 한도)에 들어갑니다.</p></div>
+  <div class="card"><div class="ch"><h2>발송 기록</h2><button class="btn s sm" data-act="docAll">서류 미제출자 일괄 안내</button></div><div id="sendLog"></div></div>
+ </div>
+</section>
+
+<footer class="foot"><span>운영관리를 한큐에 · 초안(신규) · MVP</span><button class="linkb" data-act="resetAll">예시 데이터로 초기화</button></footer>
+</main>
+<script>
+window.APP={id:'a',title:'운영관리를 한큐에',sub:'AX 교육 운영 · 초안',names:{'매니저':'김매니저','강사':'박강사','현장운영진':'최운영'},
+ org:{top:{id:'top',name:'김매니저',role:'운영 매니저 · 총괄',duty:'운영 전체 총괄, 위험군 상담, 기관 조율, 주간 보고. 모든 변경과 알림의 허브.'},
+  groups:[{id:'g1',name:'강사팀',color:'#7c5cff',members:[{id:'m1',name:'박강사',role:'주강사',duty:'커리큘럼 운영, 과제 피드백, 학습 문의 응답'},{id:'m2',name:'이보조',role:'보조강사',duty:'실습 지원, 질의응답, 수업 중 출결 특이사항 공유'}]},
+   {id:'g2',name:'현장운영진',color:'#e08a12',members:[{id:'m3',name:'최운영',role:'현장 매니저',duty:'입·퇴실 체크, 현장 관리, 미응답자 확인 전화'},{id:'m4',name:'정행정',role:'행정 담당',duty:'병결·공가 서류 확인, 참여수당 처리 자료'}]},
+   {id:'g3',name:'협력기관 · 참여자',color:'#1f9d74',members:[{id:'m5',name:'훈련기관',role:'협력기관',duty:'출석 확정, 수료·제적 행정 처리'},{id:'m6',name:'참여자 8명',role:'수강생',duty:'출결봇 응답, 서류 제출'}]}]},
+ loop:[{d:'월',items:[{id:'l1',t:'지난주 출결 확정·집계',o:'현장운영진'},{id:'l2',t:'위험군 명단 공유',o:'매니저'},{id:'l3',t:'주간 공지 발송',o:'매니저'}]},
+  {d:'화',items:[{id:'l4',t:'위험군 1:1 상담',o:'매니저'},{id:'l5',t:'진도·과제 점검',o:'강사'}]},
+  {d:'수',items:[{id:'l6',t:'병결 서류 마감 확인',o:'현장운영진'},{id:'l7',t:'자주 묻는 문의 정리',o:'매니저'}]},
+  {d:'목',items:[{id:'l8',t:'강사 피드백 회의',o:'강사'},{id:'l9',t:'다음 주 일정·강의실 확정',o:'현장운영진'}]},
+  {d:'금',items:[{id:'l10',t:'수당·수료 판정 점검',o:'매니저'},{id:'l11',t:'주간 운영보고·성과자료 취합',o:'매니저'}]}],
+ events:[{k:'2026-11-24',t:'특강 (강의실 변경 예정)'}]};
+</script>
+<script>
+(function(){
+'use strict';
+const A=window.APP;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const keyOf=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const fromKey=k=>new Date(k+'T00:00:00');
+const addDays=(k,n)=>{const d=fromKey(k);d.setDate(d.getDate()+n);return keyOf(d)};
+const md=k=>Number(k.slice(5,7))+'/'+Number(k.slice(8,10));
+const wd=k=>'일월화수목금토'[fromKey(k).getDay()];
+const toMin=t=>{if(!t)return NaN;const p=t.split(':').map(Number);return p[0]*60+p[1]};
+const nowHM=()=>{const d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes())};
+const stamp=()=>{const d=new Date();return (d.getMonth()+1)+'/'+d.getDate()+' '+pad(d.getHours())+':'+pad(d.getMinutes())};
+const clone=o=>JSON.parse(JSON.stringify(o));
+
+/* ---- 과정 달력 · 기준 ---- */
+const HOLI=new Set(['2026-12-25','2027-01-01']);
+const COURSE=[];for(let k='2026-10-26';k<='2027-01-07';k=addDays(k,1)){const w=fromKey(k).getDay();if(w>0&&w<6&&!HOLI.has(k))COURSE.push(k)}
+const CSET=new Set(COURSE);
+const UNITS=[{n:'1차',a:'2026-10-26',b:'2026-11-25'},{n:'2차',a:'2026-11-26',b:'2026-12-25'},{n:'3차',a:'2026-12-26',b:'2027-01-07'}];
+const unitOf=k=>UNITS.findIndex(u=>k>=u.a&&k<=u.b);
+const DT=COURSE.length,MAXABS=Math.floor(DT*0.2+1e-9),SICK_CAP=Math.floor(DT*0.1+1e-9);
+const NOWK=keyOf(new Date());
+const DEF_DAY=CSET.has(NOWK)?NOWK:(COURSE.find(k=>k>=NOWK)||COURSE[COURSE.length-1]);
+const docDue=k=>{const i=COURSE.findIndex(x=>x>=k);return COURSE[Math.min(COURSE.length-1,i+3)]};
+const mondayOf=k=>{const d=fromKey(k);d.setDate(d.getDate()-((d.getDay()+6)%7));return keyOf(d)};
+const ROLES=['매니저','강사','현장운영진'];
+const RDESC={'매니저':'운영 총괄 · 판단','강사':'수업 · 학습 문의','현장운영진':'출결 · 서류 · 현장'};
+const RCOL={'매니저':'#2f6fed','강사':'#7c5cff','현장운영진':'#e08a12','출결봇':'#0e9bb5','시스템':'#6b7586'};
+const RBADGE={'매니저':'b-acc','강사':'b-vio','현장운영진':'b-warn','출결봇':'b-info','시스템':''};
+const BOT={role:'출결봇',name:'자동'};
+const rb=r=>'<span class="badge '+(RBADGE[r]||'')+'">'+esc(r)+'</span>';
+
+/* ---- 시드 데이터 ---- */
+function seed(){
+ const names=[['s1','김하늘',1,1],['s2','이준호',1,1],['s3','박서연',1,1],['s4','최민재',1,1],['s5','정다은',0,1],['s6','강도윤',1,1],['s7','윤지아',1,0],['s8','한서준',1,1]];
+ const students=names.map(([id,name,kakao,consent],i)=>({id,name,phone:'010-0000-01'+pad(i+1),kakao:!!kakao,consent:!!consent,join:''}));
+ const ab=()=>({s:'absent'});
+ const cal={
+  s1:{'2026-10-29':{late:true},'2026-11-03':ab()},
+  s2:{'2026-11-05':{late:true,early:true},'2026-11-10':{s:'sick',doc:'done'},'2026-11-12':{out:true},'2026-11-13':{s:'sick',doc:'pending'}},
+  s3:{'2026-10-27':ab(),'2026-10-28':ab(),'2026-11-02':ab(),'2026-11-04':{late:true},'2026-11-06':{late:true},'2026-11-09':ab(),'2026-11-11':ab(),'2026-11-16':ab()},
+  s4:{'2026-10-30':ab(),'2026-11-03':ab(),'2026-11-04':ab(),'2026-11-06':ab(),'2026-11-10':ab(),'2026-11-11':ab(),'2026-11-13':ab(),'2026-11-16':ab()},
+  s6:{'2026-11-09':{s:'sick',doc:'pending'},'2026-11-11':{late:true}},
+  s8:{'2026-11-06':{early:true}}
+ };
+ const issues=[
+  {id:'i1',cat:'문의',t:'1차 단위기간 참여수당 지급일 문의 (3명)',owner:'매니저',st:'open',due:'2026-11-18',by:'김매니저',at:'11/16 10:20'},
+  {id:'i2',cat:'서류',t:'공가 증빙(예비군 통지서) 원본 확인',owner:'현장운영진',st:'doing',due:'2026-11-19',by:'최운영',at:'11/16 14:05'},
+  {id:'i3',cat:'일정',t:'11/24 특강 강의실 변경 공지',owner:'강사',st:'open',due:'2026-11-21',by:'박강사',at:'11/16 16:40'},
+  {id:'i4',cat:'요청',t:'실습실 3번 자리 모니터 교체 요청',owner:'현장운영진',st:'open',due:'',by:'최운영',at:'11/17 08:40'}
+ ];
+ const s={v:1,seq:1,students,cal,checkin:{},bot:{},botRun:{},issues,org:clone(A.org),loop:{},sendlog:[],ack:{},users:{},
+  notif:[{id:1,at:stamp(),r:'시스템',n:'',tab:'',t:'운영관리를 한큐에 시작 · 예시 데이터(참여자 8명, 가명)를 불러왔습니다',p:'brief'}]};
+ if(A.seedHook)A.seedHook(s);
+ return s;
+}
+
+/* ---- 실시간 연동 ----
+   LOCAL : 같은 브라우저의 창·탭끼리 (localStorage + BroadcastChannel)
+   CLOUD : 구글 앱스 스크립트 서버를 거쳐 여러 기기(PC·휴대폰)끼리 */
+const MEKEY='hq_'+A.id+'_me',TAB=Math.random().toString(36).slice(2,9);
+const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const lsSet=(k,v)=>{try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}};
+const GAS=typeof google!=='undefined'&&google.script&&google.script.run;
+const SYNC_URL=GAS?'':(A.sync||lsGet('hq_sync_url')||'').trim();
+const ROOM=((lsGet('hq_room_'+A.id)||A.room||A.id).replace(/[^\w-]/g,''))||A.id;
+const CLOUD=!!(GAS||SYNC_URL);
+const KEY=CLOUD?'hq_'+A.id+'_cloud_'+ROOM:'hq_'+A.id+'_state_v1',PKEY='hq_'+A.id+'_presence';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}}
+let bc=null;if(!CLOUD){try{bc=new BroadcastChannel(KEY);bc.onmessage=()=>pull()}catch(e){}}
+function persist(){lsSet(KEY,JSON.stringify(S));if(!CLOUD){try{bc&&bc.postMessage({v:S.v})}catch(e){}}pulse()}
+let S=load();if(!S||!S.students){S=seed();if(!CLOUD)persist()}
+const NET={st:CLOUD?'connecting':'local',pres:[],err:''};
+
+function applyFresh(n,quiet){const last=S.seq;S=n;const fresh=quiet?[]:S.notif.filter(x=>x.id>last&&x.tab!==TAB);render();pulse();fresh.slice(0,3).reverse().forEach(x=>toast(x))}
+function pull(){
+ if(CLOUD)return cloudPull();
+ const n=load();if(!n||!n.students||n.v<=S.v)return;
+ applyFresh(n);
+}
+if(!CLOUD)addEventListener('storage',e=>{if(e.key===KEY)pull();if(e.key===PKEY)rPresence()});
+setInterval(pull,CLOUD?2500:1500);
+
+function addNotif(s,text,page,by){const t=typeof text==='function'?text(s):text;
+ if(!t)return;const w=by||ME;s.seq++;s.notif.unshift({id:s.seq,at:stamp(),r:w.role,n:w.name,tab:TAB,t:t,p:page||''});
+ if(s.notif.length>150){s.notif.length=150;const keep=new Set(s.notif.map(x=>String(x.id)));Object.keys(s.ack).forEach(k=>{if(!keep.has(k))delete s.ack[k]})}}
+/* commit: 최신 상태 위에 변경 → 저장 → 모든 창·기기에 알림 */
+function commit(text,page,fn,by){
+ if(CLOUD){PENDING.push({text,page,fn,by});S=applyAll();persist();render();cloudPush();return}
+ const n=load();if(n&&n.students&&n.v>S.v)S=n;
+ fn(S);S.v++;addNotif(S,text,page,by);persist();render();
+}
+
+/* ---- 클라우드 연동 (낙관적 동시 편집: 충돌 시 서버 최신본 위에 내 변경을 다시 적용) ---- */
+let BASE=null,BOOT=clone(S),PENDING=[],INFLIGHT=false,PULLING=false,RETRY=0,FIRST=true;
+function call(req,url){req.room=req.room||ROOM;req.me=ME?{r:ME.role,n:ME.name}:null;req.tab=TAB;
+ if(GAS&&!url)return new Promise((res,rej)=>google.script.run.withSuccessHandler(res).withFailureHandler(rej).api(req));
+ return fetch(url||SYNC_URL,{method:'POST',body:JSON.stringify(req),redirect:'follow'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})}
+function applyAll(){const keep=S,s=clone(BASE||BOOT);PENDING.forEach(it=>{S=s;try{it.fn(s)}catch(e){console.error(e)}addNotif(s,it.text,it.page,it.by)});S=keep;return s}
+function toastNew(old,n){if(!old)return;n.notif.filter(x=>x.id>old.seq&&x.tab!==TAB).slice(0,3).reverse().forEach(x=>toast(x))}
+function setNet(st,err){NET.st=st;NET.err=err||'';rPresence()}
+function cloudPull(){
+ if(PULLING||INFLIGHT)return;PULLING=true;
+ call({op:'pull',since:BASE?BASE.v:-1}).then(r=>{PULLING=false;
+  if(r.error)throw new Error(r.error);
+  NET.pres=r.pres||[];
+  if(r.empty){setNet('connecting');return cloudInit()}
+  if(r.state){const n=JSON.parse(r.state);n.v=r.v;const old=BASE;BASE=n;if(!PENDING.length){applyFresh(clone(n),FIRST);persist()}else{toastNew(old,n);S=applyAll();render();cloudPush()}}
+  FIRST=false;setNet('ok');
+ }).catch(e=>{PULLING=false;setNet('off',e&&e.message||String(e))});
+}
+function cloudInit(){INFLIGHT=true;
+ call({op:'push',init:true,base:0,state:JSON.stringify(BOOT),log:[]}).then(r=>{INFLIGHT=false;
+  if(r.error)throw new Error(r.error);
+  if(r.conflict){const n=JSON.parse(r.state);n.v=r.v;BASE=n}else{BASE=clone(BOOT);BASE.v=r.v}
+  S=applyAll();persist();FIRST=false;setNet('ok');render();cloudPush();
+ }).catch(e=>{INFLIGHT=false;setNet('off',e&&e.message||String(e))});
+}
+function cloudPush(){
+ if(INFLIGHT||!BASE||!PENDING.length)return;INFLIGHT=true;
+ const n=PENDING.length,st=S,log=st.notif.filter(x=>x.id>BASE.seq).reverse().map(x=>[x.at,x.r,x.n,x.t]);
+ call({op:'push',base:BASE.v,state:JSON.stringify(st),log}).then(r=>{INFLIGHT=false;
+  if(r.error)throw new Error(r.error);
+  if(r.conflict){const sv=JSON.parse(r.state);sv.v=r.v;toastNew(BASE,sv);BASE=sv;S=applyAll();persist();render();
+   if(++RETRY<8)cloudPush();else{RETRY=0;setNet('off','동시 수정 충돌이 계속됩니다. 잠시 후 다시 시도합니다.');setTimeout(cloudPush,3000)}return}
+  RETRY=0;st.v=r.v;BASE=clone(st);PENDING.splice(0,n);S=applyAll();persist();setNet('ok');render();if(PENDING.length)cloudPush();
+ }).catch(e=>{INFLIGHT=false;setNet('off',e&&e.message||String(e));setTimeout(cloudPush,4000)});
+}
+function resetData(){
+ if(!CLOUD){const v=S.v;S=seed();S.v=v+1;persist();render();return}
+ PENDING=[];BOOT=seed();INFLIGHT=true;
+ call({op:'push',force:true,state:JSON.stringify(BOOT),log:[['','시스템','','예시 데이터로 초기화']]}).then(r=>{INFLIGHT=false;BASE=clone(BOOT);BASE.v=r.v;S=clone(BASE);persist();render()}).catch(e=>{INFLIGHT=false;setNet('off',e.message)});
+}
+if(CLOUD)setTimeout(cloudPull,50);
+
+/* ---- 사용자(역할) ---- */
+let ME=null;try{ME=JSON.parse(sessionStorage.getItem(MEKEY)||'null')}catch(e){}
+const MEK=()=>ME?ME.role+':'+ME.name:'';
+const hashRole=decodeURIComponent((location.hash.match(/as=([^&]+)/)||[])[1]||'');
+let LG_ROLE=hashRole&&ROLES.includes(hashRole)?hashRole:(ME?ME.role:'매니저');
+function buildLogin(){
+ const d=document.createElement('div');d.id='login';d.className='ov';d.hidden=true;
+ d.innerHTML='<div class="card ovc"><div class="eyebrow">운영관리를 한큐에</div><h2 style="margin-top:4px">누구로 접속하나요?</h2><p class="sm muted" style="margin-top:6px">모두 같은 화면을 함께 씁니다. 누가 무엇을 바꾸든 다른 사람에게 바로 알림이 가고, 확인 여부가 남습니다. 개별 전달은 필요 없습니다.</p><div class="roles" id="lgRoles"></div><label class="f" for="lgName">이름</label><input id="lgName" style="width:100%" maxlength="12" autocomplete="off"><div class="inl" style="margin-top:14px;justify-content:flex-end"><button class="btn" id="lgGo">입장하기</button></div></div>';
+ document.body.appendChild(d);
+ const draw=()=>{$('lgRoles').innerHTML=ROLES.map(r=>'<button type="button" data-r="'+r+'" class="'+(r===LG_ROLE?'on':'')+'">'+r+'<small>'+RDESC[r]+'</small></button>').join('');
+  $('lgRoles').querySelectorAll('button').forEach(b=>b.onclick=()=>{LG_ROLE=b.dataset.r;$('lgName').value=A.names[LG_ROLE];draw()})};
+ draw();
+ $('lgGo').onclick=()=>{const nm=$('lgName').value.trim()||A.names[LG_ROLE];ME={role:LG_ROLE,name:nm};
+  try{sessionStorage.setItem(MEKEY,JSON.stringify(ME))}catch(e){}
+  if(location.hash)history.replaceState(null,'',location.pathname+location.search);
+  d.hidden=true;commit(ME.role+' '+ME.name+' 님이 접속했습니다','brief',s=>{s.users[MEK()]={role:ME.role,name:ME.name}});beat()};
+ $('lgName').addEventListener('keydown',e=>{if(e.key==='Enter')$('lgGo').click()});
+}
+function openLogin(){$('lgName').value=ME&&ME.role===LG_ROLE?ME.name:A.names[LG_ROLE];$('login').hidden=false;$('lgName').focus()}
+
+/* ---- 접속자 표시 ---- */
+function readP(){try{return JSON.parse(localStorage.getItem(PKEY)||'{}')}catch(e){return{}}}
+function beat(){if(!ME)return;if(CLOUD){rPresence();return}const p=readP(),t=Date.now();p[TAB]={r:ME.role,n:ME.name,t};for(const k in p)if(t-p[k].t>16000)delete p[k];try{localStorage.setItem(PKEY,JSON.stringify(p))}catch(e){}rPresence()}
+setInterval(beat,5000);
+addEventListener('beforeunload',()=>{const p=readP();delete p[TAB];try{localStorage.setItem(PKEY,JSON.stringify(p))}catch(e){}});
+function online(){if(CLOUD)return NET.pres||[];const p=readP(),t=Date.now(),m={};Object.values(p).forEach(x=>{if(t-x.t<16000)m[x.r+':'+x.n]=x});return Object.values(m)}
+function rPresence(){const o=online();if(!$('pres'))return;
+ $('pres').innerHTML=o.map(x=>'<span title="'+esc(x.r+' · '+x.n)+'" style="background:'+(RCOL[x.r]||'#888')+'">'+esc(String(x.n).slice(0,1))+'</span>').join('');
+ const L=CLOUD?{connecting:'☁ 연결 중…',ok:'☁ 클라우드 연동 · '+o.length+'명 접속',off:'☁ 오프라인 · 재시도 중'}[NET.st]:'이 브라우저 연동 · '+o.length+'명';
+ $('syncLbl').textContent=L;$('syncDot').style.background=NET.st==='off'?'var(--bad)':NET.st==='connecting'?'var(--warn)':'var(--ok)';
+ $('syncBtn').title=CLOUD?(NET.err?'오류: '+NET.err:'방(room): '+ROOM+(GAS?' · 구글 웹앱':' · '+SYNC_URL)):'여러 기기 연동 설정';}
+function pulse(){const d=$('syncDot');if(!d)return;d.classList.remove('pulse');void d.offsetWidth;d.classList.add('pulse')}
+
+/* ---- 알림 ---- */
+const isMine=n=>ME&&n.r===ME.role&&n.n===ME.name;
+const acked=n=>!!(S.ack[n.id]&&S.ack[n.id][MEK()]);
+const unread=()=>ME?S.notif.filter(n=>n.r!=='시스템'&&!isMine(n)&&!acked(n)):[];
+function ackLine(n){
+ const us=Object.keys(S.users).filter(k=>k!==n.r+':'+n.n);if(!us.length||n.r==='시스템')return '';
+ return '<span class="acks">확인 '+us.map(k=>{const u=S.users[k],ok=S.ack[n.id]&&S.ack[n.id][k];return ok?'<b>'+esc(u.name)+' ✓</b>':esc(u.name)+' ·대기'}).join(', ')+'</span>';
+}
+function nItem(n,feed){
+ const un=!isMine(n)&&!acked(n)&&n.r!=='시스템';
+ return '<div class="ni'+(un?' unread':'')+'"><div class="meta">'+rb(n.r)+'<b style="color:var(--text)">'+esc(n.n)+'</b><span>'+esc(n.at)+'</span></div><div>'+esc(n.t)+'</div><div class="acts">'+
+  (n.p?'<button class="btn s sm" data-go="'+n.p+'">보러 가기</button>':'')+(un?'<button class="btn sm" data-act="ack" data-id="'+n.id+'">확인했어요</button>':'')+ackLine(n)+'</div></div>';
+}
+function rDrop(){const u=unread();
+ $('drop').innerHTML='<div class="dh"><b>알림 '+u.length+'건 미확인</b><button class="btn s sm" data-act="ackAll"'+(u.length?'':' disabled')+'>모두 확인</button></div>'+
+  (S.notif.slice(0,40).map(n=>nItem(n)).join('')||'<div class="ni muted">알림 없음</div>')}
+let TOASTS=null;
+function toast(n){
+ if(!TOASTS){TOASTS=document.createElement('div');TOASTS.className='toasts';TOASTS.setAttribute('aria-live','polite');document.body.appendChild(TOASTS)}
+ const d=document.createElement('div');d.className='toast';d.style.borderLeftColor=RCOL[n.r]||'var(--acc)';
+ d.innerHTML='<div class="meta">'+(n.r?esc(n.r)+' · '+esc(n.n||'')+' · ':'')+'방금 변경</div>'+esc(n.t)+(n.p?' <button class="linkb" data-go="'+n.p+'">보기</button>':'');
+ TOASTS.appendChild(d);setTimeout(()=>d.remove(),6500);
+}
+
+/* ---- 판정 계산 ---- */
+const stu=id=>S.students.find(s=>s.id===id)||{name:'?'};
+const joinDay=st=>st.join?(COURSE.find(k=>k>=st.join)||null):null;
+function calc(sid){
+ const st=stu(sid),cal=S.cal[sid]||{},jd=joinDay(st);
+ const per=UNITS.map(()=>({d:0,a:0,e:0}));const cnt={absent:0,short:0,sickP:0,sickD:0,late:0,early:0,out:0,pre:0};let used=0;const over=new Set();
+ COURSE.forEach(k=>{const u=unitOf(k);per[u].d++;
+  if(jd&&k<jd){per[u].a++;cnt.pre++;return}
+  const r=cal[k];if(!r)return;
+  if(r.s==='absent'||r.s==='short'){cnt[r.s]++;per[u].a++;return}
+  if(r.s==='sick'){if(r.doc==='done'){cnt.sickD++;if(used<SICK_CAP)used++;else{over.add(k);per[u].a++;return}}else{cnt.sickP++;per[u].a++;return}}
+  ['late','early','out'].forEach(f=>{if(r[f]){cnt[f]++;per[u].e++}});
+ });
+ const units=per.map((p,i)=>{const conv=Math.floor(p.e/3),abs=Math.min(p.d,p.a+conv),rate=p.d?(p.d-abs)/p.d*100:0,max=Math.floor(p.d*0.2+1e-9);
+  return Object.assign({},p,{conv,rest:p.e%3,abs,rate,pay:rate>=80-1e-9,expel:abs>=p.d*0.5,left:max-abs,max})});
+ const sa=per.reduce((s,p)=>s+p.a,0),se=per.reduce((s,p)=>s+p.e,0),A_=Math.min(DT,sa+Math.floor(se/3)),rate=(DT-A_)/DT*100,left=MAXABS-A_;
+ const lv=rate<80-1e-9?3:rate<85?2:rate<90?1:0;
+ return{units,cnt,used,over,sa,se,A:A_,rate,left,jd,stage:{lv,t:['정상','경고','위험','수료 불가'][lv],c:['b-ok','b-warn','b-bad','b-bad'][lv]}};
+}
+function labelOf(r){if(!r)return'정상';const p=[];
+ if(r.s==='absent')p.push('일반결석');if(r.s==='short')p.push('4시간 미만 결석');if(r.s==='sick')p.push('병결('+(r.doc==='done'?'서류완료':'서류대기')+')');
+ if(r.late)p.push('지각');if(r.early)p.push('조퇴');if(r.out)p.push('외출');return p.join('+')||'정상'}
+function dayState(sid,d){
+ const r=(S.cal[sid]||{})[d]||{},ci=(S.checkin[d]||{})[sid],b=(S.bot[d]||{})[sid];
+ if(r.s==='absent'||r.s==='short')return{c:'absent',t:'일반결석',b:'b-bad'};
+ if(r.s==='sick')return r.doc==='done'?{c:'sick',t:'병결·서류완료',b:'b-info'}:{c:'sick',t:'병결·서류대기',b:'b-warn'};
+ if(ci)return r.late?{c:'late',t:'지각 입실 '+ci,b:'b-warn'}:{c:'in',t:'입실 '+ci,b:'b-ok'};
+ if(r.late)return{c:'late',t:'지각(이동 중)',b:'b-warn'};
+ if(b){const m={going:['going','가는 중',''],sent:['wait','응답 대기','b-warn'],noresp:['noresp','미응답·확인 필요','b-bad'],blocked:['noresp','동의 없음·직접 연락','b-bad'],checked:['in','입실','b-ok']}[b.st];if(m)return{c:m[0],t:m[1],b:m[2]}}
+ return{c:'none',t:'확인 전',b:''};
+}
+function sickList(){const out=[];S.students.forEach(s=>{Object.entries(S.cal[s.id]||{}).forEach(([k,r])=>{if(r.s==='sick')out.push({sid:s.id,name:s.name,k,doc:r.doc,src:r.src,due:docDue(k)})})});return out.sort((a,b)=>a.k<b.k?1:-1)}
+
+/* ---- 화면 상태(창마다 따로) ---- */
+let PG='brief',DAY=DEF_DAY,SEL='s1',SELD=null,MODE='pick',SELM='top',SELB='s1',DOCF='pending',SIMT='09:00',INQ_LAST=null;
+
+/* ---- 상단 ---- */
+const PAGES=[['brief','1. 운영브리핑'],['org','2. 운영조직도·주간루프'],['att','3. 출결달력·판정'],['bot','4. 출결관리봇']];
+function buildTop(){
+ const h=document.createElement('header');h.className='top';
+ h.innerHTML='<div class="topIn"><div class="brand">운영관리를 <em>한큐에</em><small>'+esc(A.sub)+'</small></div>'+
+  '<nav class="tabs" aria-label="페이지">'+PAGES.map(p=>'<button data-pg="'+p[0]+'">'+p[1]+'</button>').join('')+'</nav>'+
+  '<div class="tools"><button class="ibtn sync" id="syncBtn" type="button"><i class="dot" id="syncDot"></i><span class="lbl" id="syncLbl">실시간 연동</span> ⚙</button><span class="pres" id="pres"></span>'+
+  '<input type="date" id="dayIn" min="'+COURSE[0]+'" max="'+COURSE[COURSE.length-1]+'" title="기준일" aria-label="기준일">'+
+  '<button class="ibtn" id="whoBtn" title="역할 바꾸기"></button>'+(GAS?'':'<button class="ibtn" id="newWin" title="다른 역할로 새 창 열기 (동시 협업 테스트)">＋ 다른 역할 창</button>')+
+  '<button class="ibtn" id="bellBtn" aria-label="알림">🔔 알림<span class="cnt" id="bellCnt" hidden></span></button></div></div>';
+ document.body.prepend(h);
+ const dr=document.createElement('div');dr.id='drop';dr.className='drop';dr.hidden=true;document.body.appendChild(dr);
+ h.querySelectorAll('[data-pg]').forEach(b=>b.onclick=()=>go(b.dataset.pg));
+ $('dayIn').value=DAY;$('dayIn').onchange=e=>{if(e.target.value){DAY=e.target.value;render()}};
+ $('whoBtn').onclick=openLogin;$('syncBtn').onclick=openSync;
+if($('newWin'))$('newWin').onclick=()=>{const nx=ROLES[(ROLES.indexOf(ME?ME.role:'매니저')+1)%3];window.open(location.href.split('#')[0]+'#as='+encodeURIComponent(nx),'_blank','width=1280,height=860')};
+ $('bellBtn').onclick=e=>{e.stopPropagation();const d=$('drop');d.hidden=!d.hidden;if(!d.hidden)rDrop()};
+ document.addEventListener('click',e=>{const d=$('drop');if(!d.hidden&&!d.contains(e.target)&&e.target!==$('bellBtn'))d.hidden=true});
+}
+function rTop(){
+ document.querySelectorAll('[data-pg]').forEach(b=>b.classList.toggle('on',b.dataset.pg===PG));
+ $('whoBtn').innerHTML=ME?'<span class="dot" style="background:'+RCOL[ME.role]+'"></span> '+esc(ME.role)+' · '+esc(ME.name):'접속하기';
+ const u=unread().length;$('bellCnt').hidden=!u;$('bellCnt').textContent=u;
+ document.title=(u?'('+u+') ':'')+A.title;
+ if(!$('drop').hidden)rDrop();rPresence();
+}
+function go(p){PG=p;document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id==='pg-'+p));$('drop').hidden=true;render();window.scrollTo(0,0)}
+
+/* ---- 1. 운영브리핑 ---- */
+const kpi=(l,v,s,t)=>'<div class="card kpi'+(t?' t-'+t:'')+'"><div class="sm muted">'+l+'</div><div class="v">'+v+'</div><div class="xs muted">'+s+'</div></div>';
+function weekItems(){const wk=mondayOf(DAY),st=S.loop[wk]||{};const all=[];A.loop.forEach((d,i)=>{const dk=addDays(wk,i);d.items.forEach(it=>all.push({it,d:d.d,dk,done:st[it.id]}))});return{wk,all}}
+function autoIssues(){
+ const out=[],u=unitOf(DAY);
+ S.students.forEach(s=>{const c=calc(s.id);
+  if(c.stage.lv)out.push({p:c.stage.lv>=2?'high':'mid',cat:'출결',t:s.name+' 수료 '+c.stage.t+' · 환산 결석 '+c.A+'일, 여유 '+Math.max(0,c.left)+'일',o:'매니저',a:'1:1 상담',pg:'att',sid:s.id});
+  if(u>=0&&c.stage.lv<3&&c.units[u].left<=1)out.push({p:'mid',cat:'수당',t:s.name+' '+UNITS[u].n+' 참여수당 위험 · 단위기간 결석 여유 '+Math.max(0,c.units[u].left)+'일',o:'매니저',a:'수당 기준 안내',pg:'att',sid:s.id});
+  if(!s.consent)out.push({p:'mid',cat:'누락',t:s.name+' 알림 수신 동의 누락 → 출결봇 발송 불가',o:'현장운영진',a:'동의서 받기',pg:'bot'});
+ });
+ const sp=sickList().filter(x=>x.doc!=='done');
+ if(sp.length){const late=sp.filter(x=>DAY>x.due).length;out.push({p:late?'high':'mid',cat:'서류',t:'병결 서류 미제출 '+sp.length+'건'+(late?' (기한 경과 '+late+'건)':'')+' · '+[...new Set(sp.map(x=>x.name))].join(', '),o:'현장운영진',a:'제출 안내',pg:'bot'})}
+ const b=S.bot[DAY]||{},nr=Object.keys(b).filter(k=>b[k].st==='noresp'||b[k].st==='blocked');
+ if(nr.length)out.push({p:'high',cat:'출결',t:md(DAY)+' 출결봇 미응답·연락 불가 '+nr.length+'명 · '+nr.map(k=>stu(k).name).join(', '),o:'현장운영진',a:'확인 전화',pg:'bot'});
+ const w=weekItems(),od=w.all.filter(x=>!x.done&&x.dk<DAY);
+ if(od.length)out.push({p:'low',cat:'루프',t:'주간 운영루프 지연 '+od.length+'건 · '+od.slice(0,2).map(x=>x.d+' '+x.it.t).join(', ')+(od.length>2?' 외':''),o:'매니저',a:'담당자 확인',pg:'org'});
+ const pr={high:0,mid:1,low:2};return out.sort((a,b)=>pr[a.p]-pr[b.p]);
+}
+const ISS_ST={open:['접수','st-open'],doing:['처리 중','st-doing'],done:['완료','st-done']};
+function upcoming(){
+ const ev=[];UNITS.forEach(u=>ev.push({k:u.b,t:u.n+' 단위기간 종료 · 수당 판정'}));
+ HOLI.forEach(k=>ev.push({k,t:'휴강'}));ev.push({k:COURSE[COURSE.length-1],t:'과정 종료 · 수료 판정'});
+ (A.events||[]).forEach(e=>ev.push(e));
+ S.issues.filter(i=>i.due&&i.st!=='done').forEach(i=>ev.push({k:i.due,t:'[이슈 기한] '+i.t}));
+ sickList().filter(x=>x.doc!=='done').forEach(x=>ev.push({k:x.due,t:'[서류 기한] '+x.name+' '+md(x.k)+' 병결'}));
+ const end=addDays(DAY,14);return ev.filter(e=>e.k>=DAY&&e.k<=end).sort((a,b)=>a.k<b.k?-1:1);
+}
+function rBrief(){
+ const L=S.students.map(s=>({s,c:calc(s.id),t:dayState(s.id,DAY)}));
+ const g={in:[],late:[],sick:[],absent:[],wait:[],none:[]};
+ L.forEach(x=>{const c=x.t.c;(c==='in'?g.in:c==='late'?g.late:c==='sick'?g.sick:c==='absent'?g.absent:c==='none'?g.none:g.wait).push(x.s.name)});
+ const docs=sickList(),dP=docs.filter(d=>d.doc!=='done');
+ const st=[0,0,0,0];L.forEach(x=>st[x.c.stage.lv]++);
+ const open=S.issues.filter(i=>i.st!=='done');
+ $('kpis').innerHTML=kpi('재원 인원',S.students.length+'명','알림 수신 동의 '+S.students.filter(s=>s.consent).length+'명')+
+  kpi(md(DAY)+'('+wd(DAY)+') 출결',(g.in.length+g.late.length)+'명 입실','지각 '+g.late.length+' · 결석 '+(g.sick.length+g.absent.length)+' · 미확인 '+(g.wait.length+g.none.length),g.wait.length?'warn':'')+
+  kpi('병결 서류 미제출',dP.length+'건','제출완료 '+(docs.length-dP.length)+'건',dP.length?'warn':'')+
+  kpi('수료 위험군',(st[1]+st[2]+st[3])+'명','경고 '+st[1]+' · 위험 '+st[2]+' · 불가 '+st[3],st[2]+st[3]?'bad':'')+
+  kpi('열린 이슈',open.length+'건','처리 중 '+open.filter(i=>i.st==='doing').length+'건');
+ const ai=autoIssues();
+ $('autoIss').innerHTML=ai.length?ai.map(x=>'<div class="row"><span class="pri p-'+x.p+'">'+({high:'긴급',mid:'주의',low:'확인'})[x.p]+'</span><div class="grow"><b class="sm">'+esc(x.t)+'</b><div class="xs muted">'+x.cat+' · 담당 '+x.o+' · 할 일: '+x.a+'</div></div><button class="btn s sm" data-go="'+x.pg+'"'+(x.sid?' data-sid="'+x.sid+'"':'')+'>보기</button></div>').join(''):'<p class="muted sm">자동 감지된 문제가 없습니다.</p>';
+ $('autoCnt').textContent=ai.length+'건 자동 감지';
+ const iss=S.issues.slice().sort((a,b)=>(a.st==='done')-(b.st==='done'));
+ $('issList').innerHTML=iss.length?iss.map(i=>'<div class="row'+(i.st==='done'?' done':'')+'"><span class="badge">'+esc(i.cat)+'</span><div class="grow"><b class="sm">'+esc(i.t)+'</b><div class="xs muted">담당 '+rb(i.owner)+(i.due?' · 기한 '+md(i.due)+(i.st!=='done'&&i.due<DAY?' <span class="no">지남</span>':''):'')+' · '+esc(i.by)+' '+esc(i.at)+'</div></div><button class="btn s sm '+ISS_ST[i.st][1]+'" data-act="iss" data-id="'+i.id+'" title="눌러서 상태 변경">'+ISS_ST[i.st][0]+'</button><button class="x" data-act="issDel" data-id="'+i.id+'" aria-label="삭제">×</button></div>').join(''):'<p class="muted sm">등록된 이슈가 없습니다.</p>';
+ // 현황 구조
+ const segs=[['in','입실','#3f9a62'],['late','지각','#d6a63a'],['sick','병결','#ff9f4d'],['absent','결석','#e0605f'],['wait','응답 대기·미응답','#8a7cf0'],['none','확인 전','#aab3c0']];
+ const N=S.students.length||1;
+ const cats={};S.issues.filter(i=>i.st!=='done').forEach(i=>cats[i.cat]=(cats[i.cat]||0)+1);
+ const u=unitOf(DAY),pay=u>=0?L.filter(x=>x.c.units[u].pay).length:0;
+ const ups=upcoming();
+ $('statusGrid').innerHTML=
+  '<div class="card"><h3>오늘 출결 흐름</h3><div class="bar">'+segs.map(s=>g[s[0]].length?'<i style="width:'+(g[s[0]].length/N*100)+'%;background:'+s[2]+'" title="'+s[1]+'"></i>':'').join('')+'</div><div class="leg">'+segs.map(s=>'<span><i style="background:'+s[2]+'"></i>'+s[1]+' '+g[s[0]].length+'</span>').join('')+'</div>'+
+   segs.filter(s=>s[0]!=='in'&&g[s[0]].length).map(s=>'<div class="xs muted" style="margin-top:6px">'+s[1]+'</div><div class="chips">'+g[s[0]].map(n=>'<span class="chip">'+esc(n)+'</span>').join('')+'</div>').join('')+'</div>'+
+  '<div class="card"><h3>수료 · 참여수당</h3>'+['정상','경고','위험','수료 불가'].map((t,i)=>'<div class="row" style="padding:6px 0"><span class="badge '+['b-ok','b-warn','b-bad','b-bad'][i]+'">'+t+'</span><span class="grow sm">'+L.filter(x=>x.c.stage.lv===i).map(x=>esc(x.s.name)).join(', ')+'</span><b>'+st[i]+'</b></div>').join('')+
+   (u>=0?'<p class="xs muted" style="margin-top:8px">'+UNITS[u].n+' 단위기간 수당 기준(80%) 충족 <b style="color:var(--text)">'+pay+'/'+S.students.length+'명</b> · 종료 '+md(UNITS[u].b)+'</p>':'')+'</div>'+
+  '<div class="card"><h3>서류 · 문의 · 요청</h3><div class="row" style="padding:6px 0"><span class="grow sm">병결 서류 대기</span><b class="'+(dP.length?'wn':'ok')+'">'+dP.length+'건</b></div><div class="row" style="padding:6px 0"><span class="grow sm">병결 서류 완료</span><b>'+(docs.length-dP.length)+'건</b></div>'+
+   ['문의','요청','서류','일정','기타'].map(c=>'<div class="row" style="padding:6px 0"><span class="grow sm">열린 '+c+'</span><b>'+(cats[c]||0)+'건</b></div>').join('')+'</div>'+
+  '<div class="card"><h3>다가오는 일정 · 기한 <span class="xs muted">14일</span></h3>'+(ups.length?ups.slice(0,8).map(e=>{const dd=Math.round((fromKey(e.k)-fromKey(DAY))/864e5);return'<div class="ev"><b>'+md(e.k)+'('+wd(e.k)+')</b><span class="grow">'+esc(e.t)+'</span><span class="badge '+(dd<=1?'b-bad':dd<=3?'b-warn':'')+'">'+(dd?'D-'+dd:'오늘')+'</span></div>'}).join(''):'<p class="muted sm">14일 안에 일정이 없습니다.</p>')+'</div>';
+ // 반복업무 자동화
+ const bt=S.bot[DAY]||{},sent=Object.values(bt).filter(x=>x.st!=='blocked').length,resp=Object.values(bt).filter(x=>['going','late','sick','absent'].includes(x.st)).length;
+ const w=weekItems(),wd_=w.all.filter(x=>x.done).length,inq=S.issues.filter(i=>i.st!=='done'&&(i.cat==='문의'||i.cat==='요청')).length,nc=S.students.filter(s=>!s.consent).length;
+ const AU=[['출결 · 참여자 현황 확인','데이터 집계 · 단순 분류','오늘 봇 알림 '+sent+'건 · 응답 '+resp+'건이 출결달력에 자동 반영','출결봇 열기','data-go="bot"'],
+  ['수강생 문의 · 요청 정리','단순 분류 · 안내 초안','열린 문의·요청 '+inq+'건 · 문의를 넣으면 분류와 답변 초안 생성','문의 초안 쓰기','data-act="scroll" data-t="inqCard"'],
+  ['교육 일정 · 운영 현황','일정 · 기한 안내','이번 주 운영루프 '+wd_+'/'+w.all.length+' 완료 · 14일 내 일정 '+ups.length+'건','주간 루프 보기','data-go="org"'],
+  ['각종 제출서류 확인','누락 1차 확인','병결 서류 미제출 '+dP.length+'건 · 수신 동의 누락 '+nc+'명','미제출자 일괄 안내','data-act="docAll"'+(dP.length?'':' disabled')],
+  ['운영 · 성과자료 취합','데이터 집계','출결·위험군·수당·서류·이슈를 한 번에 모아 주간 보고 초안 작성','보고 초안 만들기','data-act="report"']];
+ $('autoPanel').innerHTML=AU.map((a,i)=>'<div class="card auto"><div class="tag">0'+(i+1)+' · AI: '+a[1]+'</div><h3>'+a[0]+'</h3><div class="stat">'+a[2]+'</div><button class="btn s sm" '+a[4]+'>'+a[3]+'</button></div>').join('');
+ $('feed').innerHTML=S.notif.slice(0,12).map(n=>nItem(n,1)).join('');
+}
+/* 문의 분류 + 안내 초안 */
+const INQ=[
+ {k:'서류',re:/서류|진단서|증빙|진료|공가|예비군|면접|소견|확인서/,o:'현장운영진',a:'병결·공가 증빙은 결석일로부터 3교육일 안에 LMS로 제출해 주세요(진단서·진료확인서 등, 접수확인서는 인정되지 않아요). 질병 결석은 과정 전체 '+SICK_CAP+'일까지 출석으로 인정될 수 있고, 인정 여부는 확인 후 안내드릴게요.'},
+ {k:'수당',re:/수당|지급|입금|돈|장려금/,o:'매니저',a:'참여수당은 단위기간(1차 10/26~11/25, 2차 11/26~12/25, 3차 12/26~1/7)마다 출석률 80% 이상이면 월 50만 원이 지급돼요. 단위기간이 끝난 뒤 지급까지 최대 한 달 정도 걸릴 수 있어요.'},
+ {k:'출결',re:/지각|결석|출석|조퇴|외출|출결|입실|퇴실/,o:'현장운영진',a:'09:10까지 입실하면 정상 출석, 09:11부터 지각이에요. 17:50 전 퇴실은 조퇴, 수업 중 10분 이상 자리를 비우면 외출이에요. 지각·조퇴·외출 3회는 결석 1일로 계산돼요.'},
+ {k:'수료',re:/수료|제적|탈락|중도|포기/,o:'매니저',a:'전체 교육일수('+DT+'일)의 80% 이상 출석하면 수료예요. 결석은 최대 '+MAXABS+'일까지 가능해요. 개인 현황이 궁금하면 상담을 요청해 주세요.'},
+ {k:'일정',re:/일정|시간|휴강|언제|강의실|장소|특강|종료|방학/,o:'현장운영진',a:'수업은 평일 09:00~18:00(점심 13~14시)이고 12/25·1/1은 휴강, 과정 종료는 1/7(목)이에요. 바뀌는 일정은 공지로 안내드릴게요.'},
+ {k:'학습',re:/과제|수업|강의|진도|실습|질문|어려|코드|프로젝트/,o:'강사',a:'학습 관련 질문은 담당 강사님께 전달했어요. 수업 시간이나 질의응답 채널에서 답변드릴게요.'}];
+function inqRun(){const t=$('inqText').value.trim();if(!t){$('inqOut').innerHTML='<p class="sm wn" style="margin-top:8px">문의 내용을 넣어 주세요.</p>';return}
+ const m=INQ.find(x=>x.re.test(t))||{k:'기타',o:'매니저',a:'문의 주셔서 감사합니다. 담당자가 확인한 뒤 오늘 안에 답변드릴게요.'};
+ const who=$('inqWho').value;INQ_LAST={t,m,who};
+ $('inqOut').innerHTML='<div class="out"><div class="inl"><span class="badge b-acc">분류: '+m.k+'</span><span class="sm muted">추천 담당</span>'+rb(m.o)+'</div><textarea id="inqDraft" rows="5" style="margin-top:8px">안녕하세요'+(who?' '+esc(who)+'님':'')+', 운영팀입니다.\n'+esc(m.a)+'</textarea><div class="inl" style="margin-top:8px"><button class="btn s sm" data-act="copy" data-t="inqDraft">답변 복사</button><button class="btn sm" data-act="inqReg">이슈로 등록 (담당자에게 알림)</button></div><p class="xs muted" style="margin:6px 0 0">AI 초안입니다. 보내기 전에 꼭 확인하세요.</p></div>'}
+function report(){
+ const wk=mondayOf(DAY),days=COURSE.filter(k=>k>=wk&&k<=DAY);let ab=0,sk=0,skp=0,ev=0;
+ S.students.forEach(s=>days.forEach(k=>{const r=(S.cal[s.id]||{})[k];if(!r)return;if(r.s==='absent'||r.s==='short')ab++;if(r.s==='sick'){sk++;if(r.doc!=='done')skp++}['late','early','out'].forEach(f=>{if(r[f])ev++})}));
+ const L=S.students.map(s=>({s,c:calc(s.id)})),u=unitOf(DAY),w=weekItems(),open=S.issues.filter(i=>i.st!=='done');
+ const lst=lv=>L.filter(x=>x.c.stage.lv===lv).map(x=>x.s.name).join(', ')||'없음';
+ $('reportOut').value='[주간 운영 보고 초안] '+md(wk)+'~'+md(DAY)+' (기준일 '+md(DAY)+')\n'+
+  '1. 출결: 재원 '+S.students.length+'명 · 이번 주 일반결석 '+ab+'건, 병결 '+sk+'건(서류 대기 '+skp+'), 지각·조퇴·외출 '+ev+'회\n'+
+  '2. 수료 위험군: 경고 '+lst(1)+' / 위험 '+lst(2)+' / 수료 불가 '+lst(3)+'\n'+
+  (u>=0?'3. 참여수당('+UNITS[u].n+'): 기준 충족 '+L.filter(x=>x.c.units[u].pay).length+'명, 위험 '+L.filter(x=>x.c.units[u].left<=1).length+'명\n':'')+
+  '4. 서류: 병결 서류 미제출 '+sickList().filter(x=>x.doc!=='done').length+'건\n'+
+  '5. 이슈: 열린 '+open.length+'건 ('+['문의','요청','서류','일정','기타'].map(c=>c+' '+open.filter(i=>i.cat===c).length).join(', ')+'), 이번 주 완료 '+S.issues.filter(i=>i.st==='done').length+'건\n'+
+  '6. 주간 운영루프: '+w.all.filter(x=>x.done).length+'/'+w.all.length+' 완료\n'+
+  '※ 자동 집계 초안입니다. 수치는 확인 후 보고하세요.';
+ $('reportOut').scrollIntoView({block:'center'});
+}
+
+/* ---- 2. 운영조직도 · 주간루프 ---- */
+function rOrg(){
+ const o=S.org;
+ $('orgChart').innerHTML='<div class="org"><button class="onode'+(SELM==='top'?' on':'')+'" data-act="mem" data-id="top"><div class="xs muted">총괄</div><b>'+esc(o.top.name)+'</b><div class="xs muted">'+esc(o.top.role)+'</div></button><div class="ostem"></div>'+
+  '<div class="obranch" style="--n:'+o.groups.length+'">'+o.groups.map(g=>'<div class="ogroup"><div class="ogh" style="--gc:'+g.color+'">'+esc(g.name)+' <span class="xs muted">'+g.members.length+'</span></div>'+
+  g.members.map(m=>'<button class="omem'+(SELM===m.id?' on':'')+'" data-act="mem" data-id="'+m.id+'"><span class="av" style="background:'+g.color+'">'+esc(m.name.slice(0,1))+'</span><span class="grow"><b class="sm">'+esc(m.name)+'</b><span class="xs muted d">'+esc(m.role)+'</span></span></button>').join('')+'</div>').join('')+'</div></div>';
+ let m=null,g=null;if(SELM==='top')m=o.top;else o.groups.forEach(x=>{const f=x.members.find(y=>y.id===SELM);if(f){m=f;g=x}});
+ if(!m){m=o.top;SELM='top'}
+ $('orgDetail').innerHTML='<div class="ch"><h2>'+esc(m.name)+' <span class="sm muted">'+esc(m.role)+'</span></h2>'+(g?'<span class="badge" style="background:'+g.color+'22;color:'+g.color+'">'+esc(g.name)+'</span>':'<span class="badge b-acc">총괄</span>')+'</div><p class="sm">'+esc(m.duty)+'</p>'+
+  (g?'<button class="btn s sm" data-act="memDel" data-id="'+m.id+'">조직도에서 빼기</button>':'<p class="xs muted">모든 변경은 한큐 화면에 기록되고, 강사·현장운영진에게 자동 알림이 갑니다.</p>');
+ const sel=$('memGroup');if(sel&&document.activeElement!==sel){const v=sel.value;sel.innerHTML=o.groups.map(x=>'<option value="'+x.id+'">'+esc(x.name)+'</option>').join('');if(v)sel.value=v}
+ const w=weekItems(),done=w.all.filter(x=>x.done).length,late=w.all.filter(x=>!x.done&&x.dk<DAY).length;
+ $('loopProg').innerHTML='<div class="inl" style="justify-content:space-between"><span class="sm"><b>'+md(w.wk)+' 주</b> · 완료 '+done+'/'+w.all.length+(late?' · <span class="no">지연 '+late+'건</span>':'')+'</span><span class="xs muted">카드를 누르면 완료 표시 → 모두에게 알림</span></div><div class="prog" style="margin-top:6px"><i style="width:'+(w.all.length?done/w.all.length*100:0)+'%"></i></div>';
+ $('loopBoard').innerHTML=A.loop.map((d,i)=>{const dk=addDays(w.wk,i);return'<div class="lday'+(dk===DAY?' today':'')+'"><h3><span>'+d.d+'요일 <span class="xs muted">'+md(dk)+'</span></span>'+(dk===DAY?'<span class="badge b-acc">오늘</span>':'')+'</h3>'+
+  d.items.map(it=>{const x=(S.loop[w.wk]||{})[it.id],lt=!x&&dk<DAY;return'<button class="litem'+(x?' done':'')+(lt?' late':'')+'" data-act="loop" data-id="'+it.id+'"><span class="ck">'+(x?'✓':'')+'</span><span class="grow"><span class="lt">'+esc(it.t)+'</span><span class="xs muted">'+rb(it.o)+(x?' '+esc(x.by)+' '+esc(x.at):lt?' <span class="no">지연</span>':'')+'</span>'+(it.d?'<span class="xs muted" style="display:block">'+esc(it.d)+'</span>':'')+'</span></button>'}).join('')+'</div>'}).join('');
+}
+
+/* ---- 3. 출결달력 · 판정 ---- */
+const MODES=[['pick','날짜 선택만',''],['clear','정상(지우기)',''],['absent','일반결석','결'],['sickP','병결·서류대기','병!'],['sickD','병결·서류완료','병✓'],['short','4시간 미만','4h'],['late','지각','지'],['early','조퇴','조'],['out','외출','외']];
+function rModes(){$('modeBar').innerHTML=MODES.map(([m,l,t])=>'<button type="button" class="modeBtn'+(m===MODE?' on':'')+'" data-act="mode" data-m="'+m+'">'+(t?'<span class="mk m-'+m+'">'+t+'</span>':'')+l+'</button>').join('')}
+function payTxt(c,k){return c.expel?'<b class="no">0원 · 제적 기준</b>':c.pay?(k===2?'<b class="wn">지급액 미정</b>':'<b class="ok">500,000원</b>'):'<b class="no">0원</b>'}
+function rAtt(){
+ if(!S.students.find(s=>s.id===SEL))SEL=S.students[0].id;
+ const st=stu(SEL),c=calc(SEL),u=unitOf(DAY);
+ $('stuList').innerHTML='<table><thead><tr><th>참여자</th><th>'+md(DAY)+' 출결</th><th>환산 결석</th><th>출석률</th><th>수료 여유</th><th>단계</th><th>'+(u>=0?UNITS[u].n+' 수당':'수당')+'</th><th>서류대기</th></tr></thead><tbody>'+
+  S.students.map(s=>{const x=calc(s.id),t=dayState(s.id,DAY),cu=u>=0?x.units[u]:null;return'<tr class="click'+(s.id===SEL?' sel':'')+'" data-act="stu" data-id="'+s.id+'"><td><b>'+esc(s.name)+'</b>'+(s.join?' <span class="badge b-vio">추가합격</span>':'')+'</td><td><span class="badge '+t.b+'">'+t.t+'</span></td><td>'+x.A+'일</td><td>'+x.rate.toFixed(1)+'%</td><td>'+(x.left>=0?x.left+'일':'<span class="no">'+(-x.left)+'일 초과</span>')+'</td><td><span class="badge '+x.stage.c+'">'+x.stage.t+'</span></td><td>'+(cu?payTxt(cu,u):'-')+'</td><td>'+(x.cnt.sickP?'<span class="wn">'+x.cnt.sickP+'건</span>':'-')+'</td></tr>'}).join('')+'</tbody></table>';
+ $('calTitle').textContent=st.name+' 개인 출결 달력';
+ $('selInfo').innerHTML=SELD?'선택한 날: <b>'+md(SELD)+'('+wd(SELD)+')</b> · '+esc(labelOf((S.cal[SEL]||{})[SELD])):'날짜를 누르면 선택됩니다';
+ if($('joinIn')&&document.activeElement!==$('joinIn'))$('joinIn').value=st.join||'';
+ // 달력
+ const months=[[2026,9],[2026,10],[2026,11],[2027,0]],cal=S.cal[SEL]||{},JD=c.jd;
+ $('calWrap').innerHTML=months.map(([y,m])=>{const first=new Date(y,m,1),days=new Date(y,m+1,0).getDate(),lead=(first.getDay()+6)%7;let cells='';
+  for(let i=0;i<lead;i++)cells+='<div class="cd empty"></div>';
+  for(let d=1;d<=days;d++){const k=y+'-'+pad(m+1)+'-'+pad(d);
+   if(!CSET.has(k)){cells+='<div class="cd off'+(HOLI.has(k)?' holi':'')+'"><span class="dn">'+d+'</span>'+(HOLI.has(k)?'<span class="hl">휴강</span>':'')+'</div>';continue}
+   const cls='cd u'+unitOf(k)+(k===DAY?' today':'')+(k===SELD?' sel':'');
+   if(JD&&k<JD){cells+='<button class="'+cls+' pre" data-act="day" data-k="'+k+'" aria-label="'+(m+1)+'월 '+d+'일 입소 전"><span class="dn">'+d+'</span><span class="mks"><span class="mk m-pre">입소전</span></span></button>';continue}
+   const r=cal[k]||{};let mk='';
+   if(r.s==='absent')mk+='<span class="mk m-absent">결</span>';if(r.s==='short')mk+='<span class="mk m-short">4h</span>';
+   if(r.s==='sick')mk+=r.doc==='done'?'<span class="mk m-sickD'+(c.over.has(k)?' over':'')+'">병✓</span>':'<span class="mk m-sickP">병!</span>';
+   ['late','early','out'].forEach(f=>{if(r[f])mk+='<span class="mk m-'+f+'">'+{late:'지',early:'조',out:'외'}[f]+'</span>'});
+   cells+='<button class="'+cls+(r.src==='bot'||r.src==='checkin'?' bot':'')+'" data-act="day" data-k="'+k+'" aria-label="'+(m+1)+'월 '+d+'일 '+labelOf(r)+'" title="'+labelOf(r)+(r.src==='bot'?' · 출결봇 자동 입력':r.src==='checkin'?' · 입실 기록 자동 입력':'')+'"><span class="dn">'+d+'</span><span class="mks">'+(JD&&k===JD?'<span class="mk m-join">입소</span>':'')+mk+'</span></button>'}
+  return'<div class="month"><div class="mh">'+y+'년 '+(m+1)+'월</div><div class="wk"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div><div class="grid7">'+cells+'</div></div>'}).join('');
+ const n=c.cnt;
+ $('calSum').innerHTML=(n.pre?'<span class="mk m-pre">입소전</span> 자동 결석 <b>'+n.pre+'</b> · ':'')+'<span class="mk m-absent">결</span> 일반결석 <b>'+n.absent+'</b> · <span class="mk m-sickP">병!</span> 병결 서류대기 <b>'+n.sickP+'</b> · <span class="mk m-sickD">병✓</span> 병결 서류완료 <b>'+Math.min(n.sickD,SICK_CAP)+'</b>/'+SICK_CAP+'일'+(c.over.size?' <span class="no">('+c.over.size+'일 한도 초과 → 결석)</span>':'')+' · <span class="mk m-short">4h</span> 4시간 미만 <b>'+n.short+'</b> · <span class="mk m-late">지</span> <b>'+n.late+'</b> · <span class="mk m-early">조</span> <b>'+n.early+'</b> · <span class="mk m-out">외</span> <b>'+n.out+'</b> · <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--info)"></span> 출결봇·입실기록 자동 입력';
+ // 단위기간 + 수료
+ $('unitBody').innerHTML=c.units.map((x,k)=>'<tr><td><b>'+UNITS[k].n+'</b>'+(k===u?' <span class="badge b-acc">진행 중</span>':'')+'<div class="xs muted">'+md(UNITS[k].a)+'~'+md(UNITS[k].b)+'</div></td><td>'+x.d+'일</td><td>'+x.a+'일</td><td>'+x.e+'회'+(x.rest?'<div class="xs muted">남은 '+x.rest+'회 수당 계산 제외</div>':'')+'</td><td>'+x.abs+'일</td><td><b class="'+(x.pay?'ok':'no')+'">'+x.rate.toFixed(1)+'%</b></td><td>'+payTxt(x,k)+'</td><td>'+(x.left>=0?'결석 <b>'+x.left+'일</b> 더 가능':'<span class="no">'+(-x.left)+'일 초과</span>')+'</td></tr>').join('');
+ const msg=c.left>=0?'수료까지 결석 <b>'+c.left+'일</b> 더 가능합니다. 지각·조퇴·외출은 '+(3-c.se%3)+'회 더 쌓이면 결석 1일이 늘어납니다.':'수료 기준(결석 '+MAXABS+'일 이하)을 '+(-c.left)+'일 넘었습니다. 기관 확정 전까지는 경보로만 다룹니다.';
+ $('finalRes').className='result'+(c.stage.lv>=2?' risk':c.stage.lv?' warn':'');
+ $('finalRes').innerHTML='<div class="big">'+c.stage.t+' · '+c.rate.toFixed(1)+'%</div><div class="sm">결석 '+c.sa+'일 + 지각·조퇴·외출 '+c.se+'회(환산 '+Math.floor(c.se/3)+'일) = '+c.A+'일 / '+DT+'일 · 허용 결석 '+MAXABS+'일</div><p style="margin:8px 0 0" class="sm">'+msg+'</p>';
+ const cntN=f=>[...Array(DT+1).keys()].filter(f).length,n90=cntN(x=>(DT-x)/DT>=0.9),n85=cntN(x=>(DT-x)/DT>=0.85),n80=cntN(x=>(DT-x)/DT>=0.8-1e-9);
+ const parts=[n90,n85-n90,n80-n85,DT+1-n80];$('meter').style.gridTemplateColumns=$('meterLab').style.gridTemplateColumns=parts.map(p=>Math.max(p,0.6)+'fr').join(' ');
+ const lab=(a,b)=>a>b?'—':a===b?a+'일':a+'~'+b+'일';
+ $('meterLab').innerHTML='<span>정상 '+lab(0,n90-1)+'</span><span>경고 '+lab(n90,n85-1)+'</span><span>위험 '+lab(n85,n80-1)+'</span><span>불가 '+n80+'일+</span>';
+}
+function clickDay(k){
+ const st=stu(SEL),c=calc(SEL);
+ if(c.jd&&k<c.jd){toast({t:md(k)+'은 입소 전이라 자동 결석입니다. 바꿀 수 없어요.'});return}
+ SELD=k;
+ if(MODE==='pick'){render();return}
+ const cur=(S.cal[SEL]||{})[k];let r=Object.assign({},cur||{});delete r.src;
+ if(MODE==='clear')r={};
+ else if(MODE==='absent'||MODE==='short'){if(r.s===MODE){delete r.s}else{r={s:MODE}}}
+ else if(MODE==='sickP'||MODE==='sickD'){const doc=MODE==='sickD'?'done':'pending';if(r.s==='sick'&&r.doc===doc){delete r.s;delete r.doc}else r={s:'sick',doc}}
+ else{r[MODE]=!r[MODE];if(r[MODE]&&r.s&&!(r.s==='sick'&&r.doc==='done')){delete r.s;delete r.doc}}
+ const empty=!r.s&&!r.late&&!r.early&&!r.out;if(empty&&!cur){render();return}
+ commit(st.name+' '+md(k)+'('+wd(k)+') 출결 → '+labelOf(empty?null:r),'att',s=>{const cl=s.cal[SEL]=s.cal[SEL]||{};if(empty)delete cl[k];else cl[k]=r});
+}
+/* 하루 판정기 */
+const GRACE=550,LUNCH_S=780,LUNCH_E=840,END=1080,EARLY=1070,HALF=240,START=540;
+const ov=(a,b,c,d)=>Math.max(0,Math.min(b,d)-Math.max(a,c));
+const hm=m=>Math.floor(m/60)+'시간'+(m%60?' '+(m%60)+'분':'');
+function judgeDay(tin,tout,away){const i=toMin(tin),o=toMin(tout);away=Math.max(0,Number(away)||0);
+ if(!Number.isFinite(i)||!Number.isFinite(o)||o<=i)return{err:'입실보다 늦은 퇴실 시각을 넣어 주세요.'};
+ const att=Math.max(0,ov(i,o,START,LUNCH_S)+ov(i,o,LUNCH_E,END)-away),late=i>GRACE,early=o<EARLY,out=away>=10;
+ if(att<HALF)return{absent:true,att};return{absent:false,att,late,early,out,ev:(late?1:0)+(early?1:0)+(out?1:0)}}
+let JD_R=null;
+function buildDlg(){const d=document.createElement('dialog');d.id='dayDlg';
+ d.innerHTML='<div class="ch"><h2>🧮 하루 판정기</h2><button class="x" id="dlgX" aria-label="닫기">×</button></div><p class="sm muted" id="dlgWho"></p><div class="f3"><div><label class="f" for="dIn">입실</label><input id="dIn" type="time" value="09:11"></div><div><label class="f" for="dOut">퇴실</label><input id="dOut" type="time" value="18:00"></div><div><label class="f" for="dAway">외출(분)</label><input id="dAway" type="number" min="0" max="540" step="5" value="0"></div></div>'+
+  '<div class="inl" style="margin-top:8px"><span class="xs muted">빠른 입력</span><button class="btn s sm" data-q="09:00,18:00,0">정상</button><button class="btn s sm" data-q="09:25,18:00,0">지각</button><button class="btn s sm" data-q="09:00,16:30,0">조퇴</button><button class="btn s sm" data-q="09:00,18:00,40">외출</button><button class="btn s sm" data-q="14:30,18:00,0">4시간 미만</button></div>'+
+  '<div class="result" id="dRes" role="status"></div><div class="inl" style="margin-top:12px;justify-content:flex-end"><button class="btn s" id="dlgC">닫기</button><button class="btn" id="dApply">출결달력에 반영</button></div>';
+ document.body.appendChild(d);
+ const upd=()=>{const r=judgeDay($('dIn').value,$('dOut').value,$('dAway').value),el=$('dRes');JD_R=r;$('dApply').disabled=!!r.err;
+  if(r.err){el.className='result risk';el.textContent=r.err;return}
+  if(r.absent){el.className='result risk';el.innerHTML='<div class="big">결석 1일</div><div class="sm">수강 '+hm(r.att)+' / 8시간 · 4시간 미만이라 결석</div>';return}
+  if(!r.ev){el.className='result';el.innerHTML='<div class="big">정상 출석</div><div class="sm">수강 '+hm(r.att)+' / 8시간</div>';return}
+  el.className='result warn';el.innerHTML='<div class="big">'+[r.late?'지각':'',r.early?'조퇴':'',r.out?'외출':''].filter(Boolean).join(' + ')+' · '+r.ev+'회</div><div class="sm">수강 '+hm(r.att)+' / 8시간 · 출석 인정, 횟수만 쌓입니다 (3회 = 결석 1일)</div>'};
+ ['dIn','dOut','dAway'].forEach(i=>$(i).addEventListener('input',upd));
+ d.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const q=b.dataset.q.split(',');$('dIn').value=q[0];$('dOut').value=q[1];$('dAway').value=q[2];upd()});
+ $('dlgX').onclick=$('dlgC').onclick=()=>d.close();
+ $('dApply').onclick=()=>{if(!JD_R||JD_R.err)return;const k=SELD,st=stu(SEL);let r=JD_R.absent?{s:'short'}:{late:JD_R.late,early:JD_R.early,out:JD_R.out};const empty=!r.s&&!r.late&&!r.early&&!r.out;
+  commit(st.name+' '+md(k)+' 하루 판정기 결과 반영 → '+labelOf(empty?null:r)+' ('+$('dIn').value+'~'+$('dOut').value+')','att',s=>{const cl=s.cal[SEL]=s.cal[SEL]||{};if(empty)delete cl[k];else cl[k]=r});d.close()};
+ upd();
+}
+function openJudge(){if(!SELD||!CSET.has(SELD)){SELD=CSET.has(DAY)?DAY:null}if(!SELD){toast({t:'먼저 달력에서 교육일을 선택하세요.'});return}
+ $('dlgWho').innerHTML='<b>'+esc(stu(SEL).name)+'</b> · '+md(SELD)+'('+wd(SELD)+') · 현재 '+esc(labelOf((S.cal[SEL]||{})[SELD]));render();const d=$('dayDlg');if(d.showModal)d.showModal();else d.setAttribute('open','')}
+
+/* ---- 4. 출결관리봇 ---- */
+const BST={sent:['알림 발송 · 응답 대기','b-warn'],going:['가는 중',''],late:['지각 응답','b-warn'],sick:['병결 결석 응답','b-info'],absent:['일반 결석 응답','b-bad'],noresp:['미응답 · 확인 필요','b-bad'],blocked:['동의 없음 · 직접 연락','b-bad'],checked:['입실 확인','b-ok']};
+const CHOICES=[['going','🚶 가는 중'],['late','⏰ 지각'],['sick','🤒 병결 결석'],['absent','📅 일반 결석']];
+function botMsg(st,d){return'[출결 알림] '+st.name+'님, 오늘('+md(d)+' '+wd(d)+') 09:00 기준 입실 체크가 확인되지 않았어요.\n09:10까지 입실하면 정상 출석, 09:11부터 지각이에요.\n지금 상황을 아래에서 골라 주세요.'+(st.kakao?'':'\n(문자 답장: 1 가는 중 / 2 지각 / 3 병결 결석 / 4 일반 결석)')}
+function botRun(){
+ const d=DAY;if(!CSET.has(d)){toast({t:'교육일이 아닙니다.'});return}let msg='';
+ commit(()=>msg,'bot',s=>{const b=s.bot[d]=s.bot[d]||{},ci=s.checkin[d]||{};let k=0,sm=0,bl=0;
+  s.students.forEach(st=>{if(ci[st.id]||b[st.id])return;const r=(s.cal[st.id]||{})[d];if(r&&r.s)return;
+   if(!st.consent){b[st.id]={st:'blocked',ch:'-',hist:[{w:'sys',t:'09:00 · 수신 동의 없음 → 발송하지 않음',at:'09:00'}]};bl++;return}
+   const ch=st.kakao?'카톡':'문자';b[st.id]={st:'sent',ch,hist:[{w:'sys',t:'09:00 · '+(st.kakao?'카카오 알림톡':'문자(SMS)')+' 자동 발송',at:'09:00'},{w:'bot',t:botMsg(st,d),at:'09:00'}]};
+   s.sendlog.unshift({at:md(d)+' 09:00',to:st.name,ch,t:'미입실 확인 · 상황 선택 요청'});st.kakao?k++:sm++});
+  if(s.sendlog.length>80)s.sendlog.length=80;(s.botRun[d]=s.botRun[d]||{}).run=nowHM();
+  msg=k+sm+bl?'09:00 출결 자동 점검: 미입실 '+(k+sm)+'명에게 알림 발송 (카톡 '+k+' · 문자 '+sm+')'+(bl?' · 수신 동의 없음 '+bl+'명은 직접 연락 필요':''):'09:00 출결 자동 점검: 알림 보낼 대상 없음 (모두 입실·처리됨)'},BOT);
+}
+function botReply(sid,v){
+ const d=DAY;let txt='';
+ commit(()=>txt,'bot',s=>{const b=(s.bot[d]||{})[sid];if(!b)return;const st=s.students.find(x=>x.id===sid),cl=s.cal[sid]=s.cal[sid]||{};
+  b.hist.push({w:'me',t:CHOICES.find(c=>c[0]===v)[1],at:SIMT});b.st=v;
+  if(v==='going'){b.hist.push({w:'bot',t:'알겠어요. 09:10까지 입실 체크하면 정상 출석이에요. 09:11이 지나면 지각으로 자동 기록돼요. 조심히 오세요!',at:SIMT});txt=st.name+' 응답: 가는 중 → 09:10까지 입실 대기';return}
+  if(v==='late'){const r=cl[d]||{};delete r.s;delete r.doc;r.late=true;r.src='bot';cl[d]=r}
+  if(v==='sick')cl[d]={s:'sick',doc:'pending',src:'bot'};
+  if(v==='absent')cl[d]={s:'absent',src:'bot'};
+  const c=calc(sid),u=unitOf(d),due=docDue(d);
+  const rep={late:'지각으로 출결달력에 기록했어요. 이번 단위기간 지각·조퇴·외출은 '+c.units[u].e+'회예요(3회 = 결석 1일). 오후 2시 전에 도착하면 4시간 이상 수강이라 출석은 인정돼요.',
+   sick:'병결 결석으로 기록했어요. 진단서나 진료확인서를 '+md(due)+'('+wd(due)+')까지 LMS에 내면 출석 인정 검토를 받아요(과정 전체 '+SICK_CAP+'일 한도). 내기 전까지는 \'서류 대기\'로 표시돼요. 몸조리 잘하세요.',
+   absent:'일반 결석으로 기록했어요. 수료까지 결석 여유가 '+Math.max(0,c.left)+'일 남았어요. 상담이 필요하면 담당자에게 연락 주세요.'}[v];
+  b.hist.push({w:'bot',t:rep,at:SIMT});
+  txt=st.name+' 응답: '+{late:'지각',sick:'병결 결석',absent:'일반 결석'}[v]+' → 출결달력 자동 입력'+(v==='sick'?' (서류 대기, 기한 '+md(due)+')':'')},BOT);
+}
+function checkIn(sid){const d=DAY,t=SIMT,late=toMin(t)>GRACE,st=stu(sid);
+ commit(st.name+' 입실 체크 '+t+(late?' → 09:10 이후라 지각 자동 반영':''),'bot',s=>{(s.checkin[d]=s.checkin[d]||{})[sid]=t;const b=(s.bot[d]||{})[sid];if(b){b.hist.push({w:'sys',t:t+' · 입실 체크 확인',at:t});b.st='checked'}
+  const cl=s.cal[sid]=s.cal[sid]||{},r=cl[d];if(late&&!(r&&r.s)){const x=r||{};x.late=true;if(!x.src)x.src='checkin';cl[d]=x}})}
+function unCheck(sid){const d=DAY;commit(stu(sid).name+' 입실 체크 취소','bot',s=>{delete (s.checkin[d]||{})[sid];const cl=s.cal[sid]||{};if(cl[d]&&cl[d].src==='checkin')delete cl[d];const b=(s.bot[d]||{})[sid];if(b&&b.st==='checked')b.st='sent'})}
+function botClose(){const d=DAY;let msg='';
+ commit(()=>msg,'bot',s=>{const b=s.bot[d]||{},ci=s.checkin[d]||{};let a=0,n=0;
+  Object.keys(b).forEach(sid=>{const x=b[sid];if(ci[sid])return;
+   if(x.st==='going'){const cl=s.cal[sid]=s.cal[sid]||{},r=cl[d]||{};r.late=true;r.src='bot';cl[d]=r;x.st='late';x.hist.push({w:'sys',t:'09:11 · 미입실 → 지각 자동 반영',at:'09:11'});a++}
+   else if(x.st==='sent'){x.st='noresp';x.hist.push({w:'sys',t:'09:11 · 응답 없음 → 담당자 확인 필요',at:'09:11'});n++}});
+  (s.botRun[d]=s.botRun[d]||{}).close=nowHM();msg='09:11 출결 마감: 가는 중→지각 '+a+'명 · 미응답 '+n+'명 확인 전화 필요'},BOT);
+}
+function botReset(){if(!confirm(md(DAY)+' 출결봇 기록(발송·응답·입실 체크·자동 입력)을 지울까요? 데모 반복용입니다.'))return;const d=DAY;
+ commit(md(DAY)+' 출결봇 기록 초기화 (데모)','bot',s=>{delete s.bot[d];delete s.checkin[d];delete s.botRun[d];Object.values(s.cal).forEach(cl=>{if(cl[d]&&(cl[d].src==='bot'||cl[d].src==='checkin'))delete cl[d]})})}
+function docToggle(sid,k){const st=stu(sid),r=(S.cal[sid]||{})[k];if(!r)return;const to=r.doc==='done'?'pending':'done';
+ commit(st.name+' '+md(k)+' 병결 서류 '+(to==='done'?'제출완료 → 출석 인정(한도 '+SICK_CAP+'일)':'미제출로 되돌림'),'bot',s=>{s.cal[sid][k].doc=to})}
+function docRemind(list){if(!list.length)return;
+ commit('병결 서류 제출 안내 발송 '+list.length+'건 · '+list.map(x=>x.name+' '+md(x.k)).join(', '),'bot',s=>{list.forEach(x=>s.sendlog.unshift({at:stamp(),to:x.name,ch:stu(x.sid).kakao?'카톡':'문자',t:md(x.k)+' 병결 서류 제출 안내 (기한 '+md(x.due)+')'}));if(s.sendlog.length>80)s.sendlog.length=80})}
+function voiceCall(sid){const st=stu(sid),t='안녕하세요, 출결 알림입니다. '+st.name+'님, 아직 입실 체크가 확인되지 않았어요. 9시 10분까지 체크하면 정상 출석입니다. 가는 중, 지각, 병결 결석, 일반 결석 중에 알려 주세요.';
+ try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ko-KR';speechSynthesis.speak(u)}catch(e){}
+ commit(st.name+' AI 음성 전화 안내 (09:05)','bot',s=>{const b=(s.bot[DAY]||{})[sid];if(b)b.hist.push({w:'call',t:'📞 '+t,at:'09:05'})},BOT)}
+function rBot(){
+ const d=DAY,b=S.bot[d]||{},ci=S.checkin[d]||{},run=S.botRun[d]||{};
+ $('botInfo').innerHTML='기준일 <b>'+md(d)+'('+wd(d)+')</b>'+(CSET.has(d)?'':' <span class="no">교육일 아님</span>')+' · 09:00 점검 '+(run.run?'<span class="ok">실행됨</span>':'<span class="muted">대기</span>')+' · 09:11 마감 '+(run.close?'<span class="ok">실행됨</span>':'<span class="muted">대기</span>');
+ $('botBoard').innerHTML='<table><thead><tr><th>참여자</th><th>채널</th><th>입실</th><th>봇 상태</th><th>출결달력 반영</th><th></th></tr></thead><tbody>'+S.students.map(s=>{const x=b[s.id],r=(S.cal[s.id]||{})[d],t=ci[s.id];
+  return'<tr class="click'+(s.id===SELB?' sel':'')+'" data-act="view" data-id="'+s.id+'"><td><b>'+esc(s.name)+'</b></td><td>'+(s.consent?(s.kakao?'<span class="badge b-warn">카톡</span>':'<span class="badge">문자</span>'):'<span class="badge b-bad">동의 없음</span>')+'</td><td>'+(t?'<b class="'+(toMin(t)>GRACE?'wn':'ok')+'">'+t+'</b>':'<span class="muted">—</span>')+'</td><td>'+(x?'<span class="badge '+BST[x.st][1]+'">'+BST[x.st][0]+'</span>':'<span class="muted xs">발송 전</span>')+'</td><td>'+(r?'<span class="sm">'+labelOf(r)+'</span>'+(r.src?' <span class="badge b-info">자동</span>':''):'<span class="muted xs">—</span>')+'</td><td style="white-space:nowrap">'+(t?'<button class="btn s sm" data-act="uncheck" data-id="'+s.id+'">취소</button>':'<button class="btn s sm" data-act="checkin" data-id="'+s.id+'">입실 체크</button>')+'</td></tr>'}).join('')+'</tbody></table>';
+ // 휴대폰
+ const st=stu(SELB),x=b[SELB];
+ $('phoneHead').innerHTML='<span>'+(x&&x.ch==='문자'?'💬 문자':'💛 출결 알림 채널')+'</span><small>'+esc(st.name)+' · '+SIMT+'</small>';
+ let body='';if(!x)body='<div class="pempty">'+(ci[SELB]?esc(st.name)+'님은 '+ci[SELB]+' 입실 체크 완료.<br>알림을 보내지 않습니다.':'아직 보낸 알림이 없습니다.<br>왼쪽의 <b>09:00 자동 점검</b>을 실행하세요.')+'</div>';
+ else{body=x.hist.map(h=>h.w==='sys'?'<div class="ksys">'+esc(h.t)+'</div>':'<div class="kb'+(h.w==='me'?' me':h.w==='call'?' call':'')+'">'+(h.w==='bot'?'<div class="kh">출결 알림봇 · '+esc(h.at)+'</div>':'')+esc(h.t)+'</div>').join('');
+  const open=x.st==='sent'||x.st==='going'||x.st==='noresp';
+  if(x.st!=='blocked'&&x.st!=='checked')body+='<div class="kb"><div class="kh">지금 상황 선택</div><div class="kbtns">'+CHOICES.map(c=>'<button data-act="reply" data-id="'+SELB+'" data-v="'+c[0]+'"'+(open&&!(x.st==='going'&&c[0]==='going')?'':' disabled')+'>'+c[1]+'</button>').join('')+'</div>'+(open?'':'<div class="xs" style="margin-top:6px;color:#5a6472">응답 완료 · 변경은 담당자에게 요청</div>')+'</div>'}
+ $('phoneBody').innerHTML=body;$('phoneBody').scrollTop=1e6;
+ if($('callBtn'))$('callBtn').disabled=!(x&&(x.st==='sent'||x.st==='noresp'));
+ // 서류
+ const all=sickList(),list=all.filter(y=>DOCF==='all'||(DOCF==='done'?y.doc==='done':y.doc!=='done'));
+ document.querySelectorAll('[data-act="docf"]').forEach(bt=>bt.classList.toggle('on',bt.dataset.f===DOCF));
+ $('docCnt').innerHTML='서류대기 <b class="wn">'+all.filter(y=>y.doc!=='done').length+'</b> · 서류완료 <b class="ok">'+all.filter(y=>y.doc==='done').length+'</b>';
+ $('docTable').innerHTML=list.length?'<table><thead><tr><th>참여자</th><th>병결일</th><th>입력</th><th>서류 상태</th><th>제출 기한</th><th></th></tr></thead><tbody>'+list.map(y=>'<tr><td><b>'+esc(y.name)+'</b></td><td>'+md(y.k)+'('+wd(y.k)+')</td><td>'+(y.src==='bot'?'<span class="badge b-info">출결봇</span>':'<span class="badge">수동</span>')+'</td><td>'+(y.doc==='done'?'<span class="badge b-info">병✓ 서류완료</span>':'<span class="badge b-warn">병! 서류대기</span>')+'</td><td>'+md(y.due)+(y.doc!=='done'&&DAY>y.due?' <span class="no">기한 지남</span>':'')+'</td><td style="white-space:nowrap"><button class="btn sm'+(y.doc==='done'?' s':'')+'" data-act="doc" data-id="'+y.sid+'" data-k="'+y.k+'">'+(y.doc==='done'?'되돌리기':'제출완료 처리')+'</button>'+(y.doc!=='done'?' <button class="btn s sm" data-act="docOne" data-id="'+y.sid+'" data-k="'+y.k+'">안내 발송</button>':'')+'</td></tr>').join('')+'</tbody></table>':'<p class="muted sm">해당 항목이 없습니다.</p>';
+ $('sendLog').innerHTML=S.sendlog.length?S.sendlog.slice(0,15).map(l=>'<div class="ev"><b>'+esc(l.at)+'</b><span class="badge'+(l.ch==='카톡'?' b-warn':'')+'">'+esc(l.ch)+'</span><span class="grow">'+esc(l.to)+' · '+esc(l.t)+'</span></div>').join(''):'<p class="muted sm">발송 기록 없음 (시뮬레이션 · 실제 발송 없음)</p>';
+}
+/* 실제 시계 자동 실행 (이 창이 열려 있을 때) */
+const AUTOK='hq_'+A.id+'_auto';
+setInterval(()=>{let on=false;try{on=localStorage.getItem(AUTOK)==='1'}catch(e){}if(!on||!ME)return;const k=keyOf(new Date()),t=nowHM(),r=S.botRun[k]||{};if(!CSET.has(k))return;
+ const sv=[DAY,SIMT];if(t>='09:00'&&!r.run){DAY=k;SIMT='09:00';botRun();[DAY,SIMT]=sv}else if(t>='09:11'&&r.run&&!r.close){DAY=k;botClose();DAY=sv[0]}},20000);
+
+/* ---- 공통 클릭 처리 ---- */
+document.addEventListener('click',e=>{
+ const g=e.target.closest('[data-go]');if(g){if(g.dataset.sid)SEL=g.dataset.sid;go(g.dataset.go);return}
+ const a=e.target.closest('[data-act]');if(!a||a.disabled)return;const id=a.dataset.id,me=ME?ME.name:'';
+ switch(a.dataset.act){
+  case'ack':commit(null,'',s=>{(s.ack[id]=s.ack[id]||{})[MEK()]=1});break;
+  case'ackAll':{const ids=unread().map(n=>n.id);commit(null,'',s=>{ids.forEach(i=>{(s.ack[i]=s.ack[i]||{})[MEK()]=1})});break}
+  case'iss':{const i=S.issues.find(x=>x.id===id);if(!i)return;const nx={open:'doing',doing:'done',done:'open'}[i.st];commit('이슈 '+ISS_ST[nx][0]+' · '+i.t,'brief',s=>{const x=s.issues.find(y=>y.id===id);if(x)x.st=nx});break}
+  case'issDel':{const i=S.issues.find(x=>x.id===id);if(!i||!confirm('이슈를 삭제할까요?\n'+i.t))return;commit('이슈 삭제 · '+i.t,'brief',s=>{s.issues=s.issues.filter(y=>y.id!==id)});break}
+  case'scroll':{const t=$(a.dataset.t);if(t){t.scrollIntoView({block:'start'});const f=t.querySelector('textarea,input');if(f)f.focus({preventScroll:true})}break}
+  case'copy':{const t=$(a.dataset.t);if(t){t.select();try{navigator.clipboard.writeText(t.value)}catch(err){document.execCommand('copy')}a.textContent='복사됨 ✓'}break}
+  case'inqReg':{if(!INQ_LAST)return;const L=INQ_LAST,t=(L.who?L.who+': ':'')+L.t.slice(0,60);commit('문의 접수 · ['+L.m.k+'] '+t+' → 담당 '+L.m.o,'brief',s=>{s.issues.unshift({id:'i'+Date.now(),cat:'문의',t,owner:L.m.o,st:'open',due:DAY,by:me,at:stamp()})});$('inqOut').innerHTML='<p class="sm ok" style="margin-top:8px">이슈로 등록하고 '+L.m.o+'에게 알렸습니다.</p>';$('inqText').value='';break}
+  case'report':report();break;
+  case'docAll':docRemind(sickList().filter(x=>x.doc!=='done'));break;
+  case'docOne':{const x=sickList().find(y=>y.sid===id&&y.k===a.dataset.k);if(x)docRemind([x]);break}
+  case'doc':docToggle(id,a.dataset.k);break;
+  case'docf':DOCF=a.dataset.f;render();break;
+  case'mem':SELM=id;render();break;
+  case'memDel':{let nm='';S.org.groups.forEach(g=>{const m=g.members.find(x=>x.id===id);if(m)nm=m.name});if(!confirm(nm+'을(를) 조직도에서 뺄까요?'))return;SELM='top';commit('조직도 변경 · '+nm+' 제외','org',s=>{s.org.groups.forEach(g=>{g.members=g.members.filter(x=>x.id!==id)})});break}
+  case'loop':{const w=mondayOf(DAY),it=[].concat(...A.loop.map(d=>d.items.map(x=>Object.assign({d:d.d},x)))).find(x=>x.id===id),done=(S.loop[w]||{})[id];
+   commit('주간 루프 '+(done?'완료 취소':'✓ 완료')+' · '+it.d+'요일 '+it.t,'org',s=>{const l=s.loop[w]=s.loop[w]||{};if(done)delete l[id];else l[id]={by:me,at:stamp()}});break}
+  case'stu':SEL=id;SELD=null;render();break;
+  case'day':clickDay(a.dataset.k);break;
+  case'mode':MODE=a.dataset.m;rModes();break;
+  case'judge':openJudge();break;
+  case'view':SELB=id;render();break;
+  case'checkin':e.stopPropagation();checkIn(id);break;
+  case'uncheck':e.stopPropagation();unCheck(id);break;
+  case'reply':botReply(id,a.dataset.v);break;
+  case'botRun':botRun();break;
+  case'botClose':botClose();break;
+  case'botReset':botReset();break;
+  case'call':voiceCall(SELB);break;
+  case'resetAll':if(confirm('모든 데이터를 예시 상태로 되돌릴까요? 연동된 모든 창·기기에 적용됩니다.'))resetData();break;
+ }
+});
+
+/* ---- 정적 폼 (한 번만 그림: 다른 사람이 바꿔도 입력 중인 내용이 지워지지 않게) ---- */
+function buildForms(){
+ const f=$('issForm');if(f){f.innerHTML='<div><label class="f" for="isCat">분류</label><select id="isCat" style="width:100%"><option>문의</option><option>요청</option><option>서류</option><option>일정</option><option>기타</option></select></div><div class="full"><label class="f" for="isT">내용</label><input id="isT" style="width:100%" placeholder="예) 2차 단위기간 수당 기준 문의" maxlength="80"></div><div><label class="f" for="isO">담당</label><select id="isO" style="width:100%">'+ROLES.map(r=>'<option>'+r+'</option>').join('')+'</select></div><div><label class="f" for="isD">기한</label><input id="isD" type="date" style="width:100%"></div><div><button class="btn" id="isAdd" style="width:100%">등록 + 알림</button></div>';
+  const add=()=>{const t=$('isT').value.trim();if(!t){$('isT').focus();return}const it={id:'i'+Date.now(),cat:$('isCat').value,t,owner:$('isO').value,st:'open',due:$('isD').value,by:ME.name,at:stamp()};
+   commit('새 이슈 등록 · ['+it.cat+'] '+t+' → 담당 '+it.owner,'brief',s=>{s.issues.unshift(it)});$('isT').value='';$('isD').value=''};
+  $('isAdd').onclick=add;$('isT').addEventListener('keydown',e=>{if(e.key==='Enter')add()})}
+ if($('inqBox')){$('inqBox').innerHTML='<div class="inl" style="margin-bottom:8px"><label class="f" for="inqWho" style="margin:0">보낸 사람</label><select id="inqWho"><option value="">(선택 안 함)</option>'+S.students.map(s=>'<option>'+esc(s.name)+'</option>').join('')+'</select></div><textarea id="inqText" rows="3" placeholder="예) 어제 병원 다녀와서 결석했는데 진단서는 언제까지 내야 하나요?"></textarea><div class="inl" style="margin-top:8px"><button class="btn" id="inqRun">분류 + 안내 초안 만들기</button><span class="xs muted">키워드 규칙 기반 (실운영 시 AI 모델로 교체)</span></div><div id="inqOut"></div>';$('inqRun').onclick=inqRun}
+ if($('memForm')){$('memForm').innerHTML='<div class="f3"><div><label class="f" for="memGroup">소속</label><select id="memGroup" style="width:100%"></select></div><div><label class="f" for="memName">이름</label><input id="memName" maxlength="14"></div><div><label class="f" for="memRole">역할</label><input id="memRole" maxlength="20" placeholder="예) 보조강사"></div></div><label class="f" for="memDuty" style="margin-top:8px">맡은 일</label><input id="memDuty" style="width:100%" maxlength="80"><div class="inl" style="margin-top:8px"><button class="btn sm" id="memAdd">조직도에 추가 + 알림</button></div>';
+  $('memAdd').onclick=()=>{const n=$('memName').value.trim();if(!n){$('memName').focus();return}const gid=$('memGroup').value,m={id:'m'+Date.now(),name:n,role:$('memRole').value.trim()||'구성원',duty:$('memDuty').value.trim()||'-'};
+   commit('조직도 변경 · '+n+'('+m.role+') 추가','org',s=>{const g=s.org.groups.find(x=>x.id===gid);if(g)g.members.push(m)});SELM=m.id;['memName','memRole','memDuty'].forEach(i=>$(i).value='')}}
+ if($('botCtrl')){$('botCtrl').innerHTML='<div class="inl"><label class="f" for="simT" style="margin:0">지금 시각(시뮬레이션)</label><select id="simT">'+['08:50','09:00','09:05','09:10','09:11','09:25','10:30','14:30'].map(t=>'<option'+(t===SIMT?' selected':'')+'>'+t+'</option>').join('')+'</select></div>'+
+  '<div class="inl" style="margin-top:10px"><button class="btn" data-act="botRun">▶ 09:00 자동 점검 · 알림 발송</button><button class="btn s" data-act="botClose">⏱ 09:11 마감 처리</button><button class="btn s sm" data-act="botReset">오늘 기록 초기화</button></div>'+
+  '<label class="sm" style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="autoOn" style="width:auto"> 실제 시계로 자동 실행 (교육일 09:00 점검, 09:11 마감 · 이 창이 열려 있을 때)</label><p class="xs muted" id="botInfo" style="margin:8px 0 0"></p>';
+  $('simT').onchange=e=>{SIMT=e.target.value;render()};
+  try{$('autoOn').checked=localStorage.getItem(AUTOK)==='1'}catch(e){}$('autoOn').onchange=e=>{try{localStorage.setItem(AUTOK,e.target.checked?'1':'0')}catch(err){}}}
+ const ji=$('joinIn');if(ji)ji.onchange=()=>{const v=ji.value,st=stu(SEL);commit(st.name+' 추가합격 입소일 '+(v?md(v)+' 지정 → 이전 교육일 자동 결석':'해제'),'att',s=>{const x=s.students.find(y=>y.id===SEL);if(x)x.join=v})};
+}
+
+/* ---- 여러 기기 연동 설정 ---- */
+function openSync(){
+ let d=$('syncDlg');
+ if(!d){d=document.createElement('dialog');d.id='syncDlg';document.body.appendChild(d)}
+ const st=CLOUD?(NET.st==='ok'?'<span class="badge b-ok">연결됨</span>':NET.st==='off'?'<span class="badge b-bad">오프라인</span>':'<span class="badge b-warn">연결 중</span>'):'<span class="badge">이 브라우저만</span>';
+ d.innerHTML='<div class="ch"><h2>☁ 여러 기기 연동</h2><button class="x" id="syX" aria-label="닫기">×</button></div>'+
+  '<p class="sm">현재 상태 '+st+(CLOUD?' · 방 <b>'+esc(ROOM)+'</b> · 접속 '+online().length+'명':'')+'</p>'+(NET.err?'<p class="xs no">'+esc(NET.err)+'</p>':'')+
+  (GAS?'<div class="out sm">구글 웹앱으로 실행 중입니다. 지금 연 <b>웹앱 주소(…/exec)</b>를 강사·현장운영진에게 공유하면 PC·휴대폰 어디서나 같은 화면을 함께 씁니다. 변경 이력은 연결된 구글 시트의 <b>변경이력</b> 탭에도 쌓입니다.</div>':
+  '<label class="f" for="syUrl" style="margin-top:10px">연동 서버 주소 (구글 앱스 스크립트 웹앱 URL)</label><input id="syUrl" style="width:100%" placeholder="https://script.google.com/macros/s/…/exec" value="'+esc(SYNC_URL)+'">'+
+  '<label class="f" for="syRoom" style="margin-top:8px">방 이름 (같은 방끼리 데이터 공유)</label><input id="syRoom" style="width:100%" maxlength="40" value="'+esc(ROOM)+'">'+
+  '<div class="inl" style="margin-top:12px"><button class="btn s" id="syTest">연결 테스트</button><button class="btn" id="sySave">저장하고 다시 열기</button>'+(SYNC_URL?'<button class="btn s" id="syOff">이 브라우저만 쓰기</button>':'')+'</div><p class="sm" id="syMsg" style="margin:8px 0 0"></p>'+
+  '<div class="out xs" style="margin-top:12px"><b>설치 3단계</b> (자세한 내용은 <code>apps-script/설치_안내.md</code>)<br>① 구글 시트 새로 만들기 → 확장 프로그램 → Apps Script<br>② <code>Code.gs</code> 붙여넣기 + HTML 파일 A·B 추가<br>③ 배포 → 웹 앱 → 웹앱 주소를 팀에 공유 (또는 여기에 붙여넣기)</div>')+
+  '<p class="xs muted" style="margin-top:10px">참여자 실명·전화번호는 넣지 마세요(가명·집계만, C안). 웹앱 접근 권한을 "모든 사용자"로 열면 주소를 아는 사람은 누구나 보고 고칠 수 있습니다.</p>';
+ $('syX').onclick=()=>d.close();
+ if(!GAS){
+  const msg=(t,c)=>{$('syMsg').className='sm '+(c||'');$('syMsg').textContent=t};
+  $('syTest').onclick=()=>{const u=$('syUrl').value.trim();if(!/^https?:\/\//.test(u)){msg('주소를 넣어 주세요.','no');return}msg('확인 중…');
+   call({op:'pull',since:-2,room:$('syRoom').value.trim()||A.id},u).then(r=>{if(r.error)throw new Error(r.error);msg(r.empty?'연결 성공 · 빈 방입니다. 저장하면 지금 데이터로 시작합니다.':'연결 성공 · 버전 '+r.v+', 접속 '+((r.pres||[]).length)+'명','ok')}).catch(e=>msg('연결 실패: '+(e.message||e)+' · 배포 권한이 "모든 사용자"인지 확인하세요.','no'))};
+  $('sySave').onclick=()=>{const u=$('syUrl').value.trim();if(u&&!/^https?:\/\//.test(u)){msg('주소 형식을 확인해 주세요.','no');return}lsSet('hq_sync_url',u||null);lsSet('hq_room_'+A.id,($('syRoom').value.trim().replace(/[^\w-]/g,''))||null);location.reload()};
+  if($('syOff'))$('syOff').onclick=()=>{lsSet('hq_sync_url',null);location.reload()};
+ }
+ if(d.showModal)d.showModal();else d.setAttribute('open','');
+}
+function render(){if(!$('kpis'))return;rTop();
+ if(PG==='brief')rBrief();if(PG==='org')rOrg();if(PG==='att')rAtt();if(PG==='bot')rBot();
+ if(A.onRender)A.onRender(PG);}
+
+/* ---- 시작 ---- */
+buildTop();buildLogin();buildDlg();buildForms();rModes();
+if(hashRole||!ME)openLogin();else{beat();if(!S.users[MEK()])commit(null,'',s=>{s.users[MEK()]={role:ME.role,name:ME.name}})}
+go('brief');
+window.HQ={get S(){return S},commit,go,toast,md};
+})();
+</script>
+</body></html>
+
+</body></html>

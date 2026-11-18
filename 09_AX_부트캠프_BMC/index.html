@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AX 부트캠프 BMC 모음</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap">
+<style>
+  :root { --ink:#1f2328; --quiet:#5f6670; --line:#e3e1dc; --bg:#f7f6f3; --accent:#1b2a6b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:'Noto Sans KR',sans-serif; line-height:1.6; }
+  main { max-width:1100px; margin:0 auto; padding:48px 24px 72px; }
+  h1 { font-size:30px; font-weight:800; margin:0 0 6px; letter-spacing:-0.5px; }
+  .lead { color:var(--quiet); margin:0 0 40px; }
+  section { background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px; margin-bottom:32px; }
+  .tag { display:inline-block; font-size:13px; font-weight:600; color:var(--accent); background:#e8ebf6; border-radius:999px; padding:2px 12px; margin-bottom:10px; }
+  h2 { font-size:22px; margin:0 0 6px; }
+  p.desc { color:var(--quiet); margin:0 0 20px; }
+  a.img { display:block; border-radius:10px; overflow:hidden; border:1px solid var(--line); }
+  a.img img { display:block; width:100%; height:auto; }
+  .hint { font-size:13px; color:var(--quiet); margin-top:10px; }
+  footer { color:var(--quiet); font-size:14px; }
+  footer a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>AX 부트캠프 비즈니스모델캔버스(BMC)</h1>
+  <p class="lead">교육운영PM이 정리한 BMC 두 장입니다. 하나는 부트캠프 운영 구조, 하나는 이번 팀 프로젝트인 운영관리사이트를 다룹니다.</p>
+
+  <section id="site">
+    <span class="tag">최신 · Version 3</span>
+    <h2>운영관리사이트 BMC</h2>
+    <p class="desc">운영매니저의 반복 행정을 줄이는 운영관리사이트. 1차 MVP는 ① 출결·결석 서류 ② 공지·문의 ③ 행정처리이고, ④ 성과자료 취합은 2차입니다.</p>
+    <a class="img" href="site_bmc.jpg" target="_blank" rel="noopener"><img src="site_bmc.jpg" alt="운영관리사이트 비즈니스모델캔버스 초안"></a>
+    <p class="hint">이미지를 누르면 원본 크기로 볼 수 있어요.</p>
+  </section>
+
+  <section id="bootcamp">
+    <span class="tag">참고 · 운영 구조 파악</span>
+    <h2>AX 부트캠프 운영구조 BMC</h2>
+    <p class="desc">부트캠프 프로그램 자체의 구조를 정리한 첫 초안입니다. 대한상공회의소, CJ올리브네트웍스, 그린컴퓨터아트학원, 고용노동관서 등 이해관계자와 정부 성과지표 중심의 수익 구조를 담았습니다.</p>
+    <a class="img" href="bootcamp_bmc.jpg" target="_blank" rel="noopener"><img src="bootcamp_bmc.jpg" alt="AX 부트캠프 운영구조 비즈니스모델캔버스 손글씨 초안"></a>
+    <p class="hint">이미지를 누르면 원본 크기로 볼 수 있어요.</p>
+  </section>
+
+  <footer>기능과 화면, 유저 플로우는 <a href="https://claude.ai/artifact/NYSHuYjLBHnqcBBgZzwWVh">운영관리사이트 PRD (초안)</a>에 정리되어 있습니다.</footer>
+</main>
+</body>
+</html>

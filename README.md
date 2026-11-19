@@ -71,10 +71,14 @@ AX 부트캠프 팀 프로젝트에서 교육운영 PM으로 기획한 운영관
 
 - `운영관리를_한큐에.html`: 최신 MVP
 - `운영관리를_한큐에_초안.html`: 첫 초안
-- PRD(문서): 운영관리사이트 PRD (초안) https://claude.ai/artifact/NYSHuYjLBHnqcBBgZzwWVh
+- `운영관리를_한큐에_1119.html`: 11/19 중간 저장본
+- PRD(문서): 운영관리사이트 PRD v0.1 (MVP: 출결관리·증빙서류 현황) https://claude.ai/artifact/Q4841f9G6sLgKUJ4HugjRU
+- PRD(문서, 이전): 운영관리사이트 PRD (초안) https://claude.ai/artifact/NYSHuYjLBHnqcBBgZzwWVh
+- 설계안(문서): 운영진·수강생 랜딩페이지 설계안 https://claude.ai/artifact/XTGdNB4ej7vQZZgeQzjHHN
 
 ## 09. AX 부트캠프 BMC
 
 교육운영 PM이 정리한 비즈니스 모델 캔버스 두 장이에요. 부트캠프 자체의 BMC와 운영관리 사이트의 BMC를 담았어요.
 
 - `index.html` (+ `bootcamp_bmc.jpg`, `site_bmc.jpg`)
+- `운영관리사이트_BMC_초안.html`: 운영관리 사이트 BMC 웹 정리본

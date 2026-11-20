@@ -71,6 +71,7 @@ AX 부트캠프 팀 프로젝트에서 교육운영 PM으로 기획한 운영관
 
 - `운영관리를_한큐에.html`: 최신 MVP
 - `운영관리를_한큐에_초안.html`: 첫 초안
+- `운영관리를_한큐에_1120.html`: 11/20 날짜별 고정본
 - `운영관리를_한큐에_1119.html`: 11/19 중간 저장본
 - PRD(문서): 운영관리사이트 PRD v0.1 (MVP: 출결관리·증빙서류 현황) https://claude.ai/artifact/Q4841f9G6sLgKUJ4HugjRU
 - PRD(문서, 이전): 운영관리사이트 PRD (초안) https://claude.ai/artifact/NYSHuYjLBHnqcBBgZzwWVh

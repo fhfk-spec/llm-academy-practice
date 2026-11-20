@@ -574,6 +574,140 @@ p.guide{margin:6px 0 0;padding:8px 12px;border-radius:10px;background:var(--pane
 .attR .row{padding:6px 0}.attR .row b{font-size:13px}
 @media(max-width:900px){.attgrid{grid-template-columns:1fr}.attR>.card{max-height:none}}
 .row .grow>.xs.muted.open,.trow .grow>.xs.muted.open{-webkit-line-clamp:unset;display:block}
+/* ==== 학생관리 (강사) ==== */
+.minibar{display:inline-block;width:70px;height:6px;border-radius:4px;background:var(--line);vertical-align:middle;margin-right:6px;overflow:hidden}.minibar i{display:block;height:100%;background:var(--acc)}
+.mhead{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}.mhead h2{margin:0 0 2px;font-size:20px}
+.av.big{width:52px;height:52px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:22px;font-weight:800;flex:none}
+.mstat{display:flex;gap:6px}.mstat>div{min-width:72px;text-align:center;border:1px solid var(--line);border-radius:10px;padding:6px 8px}.mstat span{display:block;font-size:11px;color:var(--muted)}.mstat b{font-size:15px}
+.kv{display:flex;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13px}.kv span{width:70px;color:var(--muted);flex:none}
+.lmat td,.lmat th{text-align:center}.lmat td:first-child,.lmat th:first-child{text-align:left}
+.lcell{display:inline-block;min-width:38px;padding:3px 6px;border-radius:7px;font-size:12px;font-weight:700;border:1px solid transparent;background:transparent}
+.lcell.d{background:var(--okbg,#e6f6ee);color:var(--ok,#1d8a55);cursor:pointer}.lcell.d.hard{background:#fdecec;color:#c0392b}.lcell.d.on{border-color:var(--acc)}
+.lcell.ab{background:var(--hover);color:var(--muted)}.lcell.miss{color:var(--muted)}
+@media(max-width:900px){.mhead{flex-wrap:wrap}.mstat{flex-wrap:wrap}}
+/* ==== 학생관리: 목록 안 상세 펼침 + 상담 기록 월별 달력 ==== */
+tr.minl>td{background:var(--bg);padding:12px 12px 14px;border-top:0}tr.minl:hover td{background:var(--bg)}
+.minlw{max-width:100%}.mname{white-space:nowrap}
+.ccwrap{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);gap:14px;margin-top:8px}
+.ccw,.ccg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.ccw b{font-size:11px;color:var(--muted);text-align:center;padding:2px 0}
+.ccd{min-height:66px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:4px 5px;text-align:left;display:flex;flex-direction:column;gap:2px;overflow:hidden;cursor:pointer;font:inherit}
+.ccd:hover{border-color:var(--acc)}.ccd.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--accbg)}.ccd.off{background:var(--hover);opacity:.75}
+.ccd .dn{font-size:12px;font-weight:700}.ccd.today .dn{color:#fff;background:var(--acc);border-radius:10px;padding:0 6px;align-self:flex-start}
+.cci,.ccf{font-style:normal;font-size:10.5px;line-height:1.3;border-radius:4px;padding:1px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.cci.done{opacity:.6;text-decoration:line-through}.ccf{color:var(--muted);border:1px dashed var(--line)}.ccf.late{color:#c0392b;border-color:#e3a39b}
+.ccside{border-left:1px solid var(--line);padding-left:14px}.ccrec{border:1px solid var(--line);border-radius:9px;padding:8px;margin-bottom:6px;background:var(--panel)}.ccrec .inl{gap:6px;align-items:center}
+.ccform{border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}.ccform textarea,.ccform input,.ccform select{width:100%}
+@media(max-width:900px){.ccwrap{grid-template-columns:1fr}.ccside{border-left:0;padding-left:0}}
+/* 즉시수정①: 홈 요약카드 .num 스타일이 표(.ttab) 숫자칸에 새던 문제 */
+.ttab th.num,.ttab td.num{display:table-cell;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;padding:8px 6px;text-align:right;white-space:nowrap}
+.ttab td.num b{font-size:14px;font-weight:800;letter-spacing:0}.ttab tr.tot td.num{border-top:2px solid var(--text);border-bottom:0;font-size:16px}.ttab tr.tot td.num b{font-size:16px}
+.ttab thead th{font-size:11.5px;color:var(--muted);font-weight:700;padding:4px 6px;border-bottom:1px solid var(--line);text-align:left}.ttab thead th.num{text-align:right}
+/* 즉시수정②: 모바일 상단 탭 — 글자 끊김 없이 5칸×2줄, 누르기 쉬운 높이 */
+@media(max-width:900px){
+ .tabs{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+ body.stu .tabs{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .tabs button{min-height:46px;padding:5px 2px;white-space:nowrap}
+ .tabs .tt{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;font-size:11.5px;letter-spacing:-.3px}
+}
+.nrow.t-idle{border-left-color:var(--line)}.nrow.t-idle b{color:var(--muted);font-weight:800}
+@media(max-width:900px){#mList td,#mList th,#mCo td,#mCo th{white-space:nowrap}}
+/* ==== 랜딩 보완 (전문가 점검) ==== */
+/* 오늘 요약: 한 줄형으로 줄여 검색창 아래 빈 공간 제거 */
+.topgrid{grid-template-columns:minmax(0,1fr) 150px}
+.topgrid .numcol #hNums{gap:3px}
+.topgrid .nrow{flex-direction:row;align-items:center;justify-content:space-between;padding:4px 8px;min-height:27px}
+.topgrid .nrow .nl{font-size:11.5px}.topgrid .nrow b{font-size:13px}
+.hero-l h1{font-size:24px}
+/* 위험·긴급 카드: 빨간 면 대신 왼쪽 선만 (경보 피로 줄이기) */
+.home3 .card.risk,.home3 .card.urgent{border:1px solid var(--line)}
+.home3 .card.risk h2{color:var(--text)}
+.home3 .rk.lv2,.home3 .rk.lv1{background:none;border-radius:0;padding:8px 0 8px 10px;margin:0;border-bottom:1px solid var(--line)}
+.home3 .rk.lv2{box-shadow:inset 3px 0 0 var(--bad)}.home3 .rk.lv1{box-shadow:inset 3px 0 0 var(--warn)}
+.home3{align-items:stretch}
+.clipBtn{display:block;margin:8px auto 0;font-weight:700}
+/* 학생 이름 → 상세 링크 */
+.slink{cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}.slink:hover{color:var(--acc);text-decoration-color:var(--acc)}
+/* ==== 디자인 통일 v1 (3순위) ====
+   글자 단계: 12 보조 · 13 작게 · 14 본문 · 16 카드 제목 · 20 강조 · 24 페이지 제목 (12px 미만 없음)
+   버튼 3종: 주요(.btn) · 보조(.btn.s) · 글자(.linkb) / 높이 36(기본)·32(작게) / 모서리 8px */
+.xs,.badge,.pri,.eyebrow,small,.linkb,.chip,.cci,.ccf{font-size:12px!important}
+.sm{font-size:13px}
+.page .ph h1,.hero-l h1{font-size:24px!important;letter-spacing:-.6px}
+.card h2,.card h3,.card .ch h2,.card .ch h3{font-size:16px!important;letter-spacing:-.2px}
+.mhead h2{font-size:20px!important}
+.topgrid .nrow .nl{font-size:12px!important}
+.btn{min-height:36px;border-radius:8px!important;font-size:13px!important}
+.btn.sm{min-height:32px;padding-top:4px;padding-bottom:4px}
+.chip.cbtn,.qbtn,.modeBtn,.pbtn,.tck,.seg{border-radius:8px!important}
+.linkb{min-height:28px;padding:4px 4px;display:inline-flex;align-items:center}
+.x{min-width:28px;min-height:28px;display:inline-flex;align-items:center;justify-content:center}
+.tck{min-height:30px;min-width:30px}
+.infoBtn{min-height:26px}
+.tabs .ti{display:inline-flex;align-items:center}.tabs .ti svg{display:block}
+.tree .tic svg,.tree svg{width:16px;height:16px;vertical-align:-3px}
+@media(max-width:900px){.btn{min-height:40px}.btn.sm{min-height:36px}.x{min-width:36px;min-height:36px}.linkb{min-height:36px}.tck{min-height:36px;min-width:36px}}
+/* 되돌리기 토스트 */
+.undoT{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:80;display:flex;align-items:center;gap:12px;background:var(--text);color:var(--panel);padding:10px 12px 10px 16px;border-radius:12px;box-shadow:var(--shadow);font-size:13px}
+.undoT b{color:inherit}.undoT .btn{background:var(--panel);color:var(--text)}
+/* 테마 버튼 */
+#themeBtn{min-width:36px}
+.page th,.ttab thead th{font-size:12px!important}.mk{font-size:11px!important}
+/* ==== 가독성 · 시인성 v1 (사용자 기준 재설계) ====
+   1) 한글은 단어 중간에서 줄바꿈하지 않음 (keep-all)
+   2) 보조 글씨는 12.5~13px + 더 진한 회색 (대비 7:1 이상)
+   3) 줄 간격 넉넉하게, 표는 행 높이·머리줄 배경으로 줄 따라 읽기 쉽게
+   4) 버튼보다 내용(제목)이 먼저 눈에 띄게: 반복되는 버튼은 보조(테두리)형
+   5) 키보드 이동 시 위치가 보이게 포커스 테두리 */
+:root:not([data-theme="dark"]){--muted:#4f5a6b}
+body{word-break:keep-all;overflow-wrap:anywhere}
+.xs{font-size:12.5px!important;line-height:1.5}
+.sm{font-size:13.5px}
+.linkb{font-size:13px!important}
+.badge,.pri{font-weight:700;letter-spacing:0}
+.row{padding:11px 0}
+.row .grow>b{line-height:1.45}
+.row .grow>.xs{margin-top:2px}
+table{font-size:14px}
+.page th{font-size:12.5px!important;background:var(--panel2);color:var(--muted);font-weight:700}
+th,td{padding:11px 10px}
+tbody tr:hover td{background:var(--hover)}
+/* 홈 카드: 제목 2줄까지, 넘치면 … (전체는 마우스 올리면) */
+.home3 .row .grow>b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14.5px}
+.urow .pri{min-width:62px;text-align:center}
+.home3 .row .btn{flex:none}
+/* 숫자는 고정폭 숫자로 정렬 */
+.nrow b,.mstat b,td.num,.ttab td{font-variant-numeric:tabular-nums}
+/* 키보드 포커스 */
+:focus-visible{outline:2.5px solid var(--acc);outline-offset:2px;border-radius:6px}
+/* 링크 학생 이름: 밑줄을 조금 더 보이게 */
+.slink{text-decoration-color:color-mix(in srgb,var(--muted) 45%,transparent)}
+/* 안내 문단 */
+.guide,.bbody,.ntb{line-height:1.7}
+@media(max-width:900px){body{font-size:15.5px}.xs{font-size:13px!important}}
+/* 모바일 홈 가독성: 검색창 꽉 차게 · 요약 2칸 · 추천어 한 줄 가로 스크롤 */
+@media(max-width:900px){
+ .hero-l .search{display:flex;width:100%;box-sizing:border-box}.hero-l .search input{flex:1;min-width:0;width:auto}
+ .topgrid .numcol #hNums{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px}
+ .topgrid .nrow{gap:8px;padding:7px 10px;min-height:38px}.topgrid .nrow .nl{white-space:nowrap}
+ .hero-l .aiex{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent)}
+ .hero-l .aiex::-webkit-scrollbar{display:none}.hero-l .aiex .chip{flex:none}
+}
+@media(max-width:900px){.topgrid{grid-template-columns:1fr!important}}
+/* 홈 아래 줄: 오늘 일정 | 상황별 매뉴얼 | 최근 변경 — 윗줄 3단과 같은 폭 */
+.homeLow>.card{min-width:0}
+.homeLow .tli .grow,.homeLow .feed .ni{min-width:0}
+.homeLow .feed .ni{padding:8px 0}
+.homeLow .feed .ni .btn{min-height:26px!important;padding:2px 10px;font-size:12px!important;margin-top:4px}
+/* 수강생 진도 막대: 상태(안정·경고·위험)와 같은 색 */
+.pbar.lv-ok i{background:var(--ok)}.pbar.lv-warn i{background:var(--warn)}.pbar.lv-bad i{background:var(--bad)}
+/* 운영브리핑 문제 목록: 필터 + 우선순위는 왼쪽 선 */
+.bfilter{display:flex;flex-wrap:wrap;margin:2px 0 8px}.bfilter button[disabled]{opacity:.4;cursor:default}
+.row.bi{padding-left:10px}.row.bi.phigh{box-shadow:inset 3px 0 0 var(--bad)}.row.bi.pmid{box-shadow:inset 3px 0 0 var(--warn)}.row.bi.plow{box-shadow:inset 3px 0 0 var(--line)}
+#autoIss .row .grow>b{font-size:14.5px}
+/* 최근 변경: 줄 전체 누르기 */
+.feed .ni.nlink{cursor:pointer;border-radius:8px;padding-left:6px;padding-right:6px;margin:0 -6px}.feed .ni.nlink:hover{background:var(--hover)}
+.feed .ni .ngo{margin-left:auto;color:var(--muted);font-size:18px;line-height:1}
+.feed .ni .acts:empty{display:none}
 .agentGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .agent{background:var(--panel2);text-align:left;border:1px solid var(--line);border-radius:10px;padding:12px}
 .agent:hover,.agent.on{border-color:var(--acc)}
@@ -599,19 +733,17 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
  <div id="aiOut" class="aiout"></div>
  <div class="g c3 mt home3">
   <div class="card"><h2 style="margin-bottom:10px">⚡ 빠른 실행</h2><div class="quick" id="hQuick"></div></div>
-  <div class="card risk" id="hRiskCard"><div class="ch"><h2>🚩 위험 알림</h2><span class="badge" id="hRiskCnt"></span></div><div id="hRisk"></div></div>
+  <div class="card risk" id="hRiskCard"><div class="ch"><h2>🚩 이탈 위험 알림</h2><span class="badge" id="hRiskCnt"></span></div><div id="hRisk"></div></div>
   <div class="card urgent"><div class="ch"><h2>🚨 긴급 운영 이슈</h2><span class="badge" id="urgCnt"></span></div><div id="urgent"></div></div>
  </div>
- <div class="g c2e mt">
+ <div class="g c3 mt home3 homeLow">
   <div class="card"><div class="ch"><h2>🕘 오늘 일정</h2><span class="xs muted" id="hSchedDay"></span></div><div id="hSched"></div>
-   <details class="more set"><summary>＋ 일정 추가</summary><div class="setIn"><div class="f3" style="grid-template-columns:90px 90px 1fr"><input id="scT" type="time" value="15:00"><input id="scE" type="time" value="16:00"><input id="scTitle" placeholder="예) 취업 특강"></div><div class="f3" style="grid-template-columns:1fr 1fr auto;margin-top:6px"><input id="scWho" placeholder="담당"><input id="scRoom" placeholder="강의실"><button class="btn sm" id="scAdd">추가</button></div></div></details></div>
+   <details class="more set"><summary>+ 일정 추가</summary><div class="setIn"><div class="f3" style="grid-template-columns:90px 90px 1fr"><input id="scT" type="time" value="15:00"><input id="scE" type="time" value="16:00"><input id="scTitle" placeholder="예) 취업 특강"></div><div class="f3" style="grid-template-columns:1fr 1fr auto;margin-top:6px"><input id="scWho" placeholder="담당"><input id="scRoom" placeholder="강의실"><button class="btn sm" id="scAdd">추가</button></div></div></details></div>
   <div class="card"><h2 style="margin-bottom:10px">📘 상황별 대응 매뉴얼</h2><div id="hManual"></div></div>
+  <div class="card"><div class="ch"><h2>🔄 최근 변경 · 확인 현황</h2><span class="xs muted" title="누가 무엇을 바꿨고, 누가 확인했는지">누가 바꾸고 확인했는지</span></div><div class="feed" id="feed"></div></div>
  </div>
- <details class="more"><summary>확인이 필요한 항목 <span class="badge" id="watchCnt" style="margin-left:4px"></span></summary><div class="mi" id="watch"></div></details>
+ <details class="more"><summary>그 밖에 살펴볼 항목 (주의·확인 단계) <span class="badge" id="watchCnt" style="margin-left:4px"></span></summary><div class="mi" id="watch"></div></details>
  <div id="kpis" hidden></div>
- <div class="lower">
-  <div class="sec"><h2>최근 변경 · 확인 현황</h2><span class="xs muted">누가 무엇을 바꿨고, 누가 확인했는지</span></div><div class="card"><div class="feed" id="feed"></div></div>
- </div>
 </div></section>
 
 <!-- 수강생 홈 -->
@@ -712,7 +844,7 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
    <div class="inl" style="margin-top:12px"><button class="btn" id="dtAdd">과제 등록 + 안내 공지 자동 게시</button></div></div>
  </div>
  <div class="sub" data-sub="d-absent">
-  <div class="ph"><div><div class="eyebrow">서류·행정</div><h1>서류제출관리</h1><p class="muted" id="drStat">수강생이 낸 서류를 분류별로 받아 확인합니다. 카톡 출결봇·수강생 화면에서 받은 파일도 여기로 모입니다</p></div><button class="btn" data-act="drCatAdd">＋ 추가 항목</button></div>
+  <div class="ph"><div><div class="eyebrow">서류·행정</div><h1>서류제출관리</h1><p class="muted" id="drStat">수강생이 낸 서류를 분류별로 받아 확인합니다. 카톡 출결봇·수강생 화면에서 받은 파일도 여기로 모입니다</p></div><button class="btn" data-act="drCatAdd">+ 추가 항목</button></div>
   <div class="seg dcats" id="drCats"></div>
   <div class="card mt tw" id="drBody"></div>
   <details class="more" id="drFormWrap"><summary id="drFormSum">서류 등록</summary><div class="mi"><div class="f3" style="grid-template-columns:160px 1fr 140px;align-items:end"><div><label class="f" for="drWho">수강생</label><select id="drWho" style="width:100%"></select></div><div><label class="f" for="drTitle">서류 이름</label><input id="drTitle" maxlength="60" placeholder="예) 교통비 영수증"></div><div><label class="f" for="drAmt">금액 (선택)</label><input id="drAmt" inputmode="numeric" placeholder="원"></div></div>
@@ -763,6 +895,34 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
  </div>
 </section>
 
+<!-- 학생관리 (강사) -->
+<section class="page" id="pg-mgmt">
+ <div class="sub" data-sub="m-list">
+  <div class="ph"><div><div class="eyebrow">학생관리</div><h1>학생 목록</h1><p class="muted">학생 이름(줄)을 누르면 그 자리에서 1인 상세가 펼쳐져요. 상세의 📅 상담기록 버튼으로 한 달 달력에서 날짜별 상담을 기록·관리합니다.</p></div><div class="seg"><button data-act="mf" data-f="all">전체</button><button data-act="mf" data-f="risk">주의·위험</button><button data-act="mf" data-f="1조">1조</button><button data-act="mf" data-f="2조">2조</button></div></div>
+  <div class="card tw" id="mList"></div>
+ </div>
+ <div class="sub" data-sub="m-stu">
+  <div class="ph"><div><div class="eyebrow">학생관리</div><h1>학생 상세</h1><p class="muted">프로필·학습로그·상담 기록·제작물을 한 화면에서 보고 강사 메모를 남겨요.</p></div><select id="mStuSel" aria-label="학생 선택" style="max-width:220px"></select></div>
+  <div id="mDetail"></div>
+ </div>
+ <div class="sub" data-sub="m-counsel">
+  <div class="ph"><div><div class="eyebrow">학생관리</div><h1>상담 목록</h1><p class="muted" id="mCoStat"></p></div></div>
+  <details class="more" id="coForm"><summary>+ 상담 기록 등록</summary><div class="mi">
+   <div class="f3" style="grid-template-columns:1fr 150px 120px"><div><label class="f" for="coWho">학생</label><select id="coWho"></select></div><div><label class="f" for="coDate">상담일</label><input type="date" id="coDate"></div><div><label class="f" for="coType">유형</label><select id="coType"><option>학습</option><option>진로</option><option>출결</option><option>생활</option></select></div></div>
+   <label class="f" for="coTitle" style="margin-top:8px">제목</label><input id="coTitle" maxlength="60" placeholder="예) 파이썬 실습 보충">
+   <label class="f" for="coBody" style="margin-top:8px">상담 내용</label><textarea id="coBody" rows="3"></textarea>
+   <div class="f3" style="grid-template-columns:1fr 150px;margin-top:8px"><div><label class="f" for="coNext">후속 조치</label><input id="coNext" maxlength="80"></div><div><label class="f" for="coFollow">후속 일정</label><input type="date" id="coFollow"></div></div>
+   <div class="inl" style="margin-top:8px"><button class="btn" id="coAdd">등록 + 알림</button></div>
+  </div></details>
+  <div class="card tw mt" id="mCo"></div>
+ </div>
+ <div class="sub" data-sub="m-log">
+  <div class="ph"><div><div class="eyebrow">학생관리</div><h1>학습로그 · 제작물 현황</h1><p class="muted">최근 5일 학습로그 작성 현황이에요. ✓를 누르면 내용을 보고 피드백을 남길 수 있어요. 빨간 ✓는 '어려움' 이상.</p></div></div>
+  <div class="card tw" id="mLog"></div>
+  <div id="mLogDet"></div>
+ </div>
+</section>
+
 <!-- 학습 (운영진·강사) -->
 <section class="page" id="pg-learn">
  <div class="sub" data-sub="l-logs">
@@ -805,6 +965,8 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
 <section class="page" id="pg-att">
  <div class="sub" data-sub="a-calc">
   <div class="ph"><div><div class="eyebrow">출결달력</div><h1>출결달력 계산기</h1><p class="muted">추가입소 · 일반결석 · 병결 · 4시간 미만 · 지각 · 조퇴 · 외출을 모두 합산해서 판정합니다</p></div><button class="btn s" data-act="judge">🧮 하루 판정기</button></div>
+  <div class="calcGrid">
+   <div class="calcL">
   <div class="card cform">
    <div class="jform"><div class="jn"><label class="f" for="cName">참여자 이름</label><input id="cName" type="text" list="cNames" autocomplete="off" placeholder="명단 이름 또는 새 이름"><datalist id="cNames"></datalist></div>
     <label class="jchk"><input id="cOn" type="checkbox"> 추가 입소자</label>
@@ -812,17 +974,17 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
     <div class="inl"><button class="btn enter" id="cEnter" title="계산해서 기록에 저장 (키보드 Enter와 같음)">↵ 엔터</button><button class="btn s" id="cNew">새로 입력</button></div></div>
    <p class="sm" id="cMode" style="margin:10px 0 0"></p>
   </div>
-  <div class="calcGrid mt">
-   <div class="card">
+   <div class="card mt">
     <div class="pager"><button class="pbtn" id="cPrev" aria-label="이전 단위기간">‹</button><div class="ptitle" id="cPage"></div><button class="pbtn" id="cNext" aria-label="다음 단위기간">›</button></div>
     <div class="modeBar" id="modeBar"></div>
     <p class="xs muted" style="margin:8px 0 10px">종류를 고르고 날짜를 누르세요. 같은 표시를 다시 누르면 지워집니다.</p>
     <div id="cCal"></div>
    </div>
-   <div>
-    <div class="card"><h2 style="margin-bottom:8px">총 합계</h2><div id="cTotal"></div></div>
-    <div class="cres mt" id="cResult"></div>
+   </div>
+   <div class="calcR">
+    <div class="cres" id="cResult"></div>
     <div class="card mt" id="cUnit"></div>
+    <div class="card mt"><h2 style="margin-bottom:8px">총 합계</h2><div id="cTotal"></div></div>
    </div>
   </div>
   <div class="card mt"><div class="ch"><h2>계산 기록 <span class="xs muted" id="jCnt"></span></h2><button class="linkb" data-act="jClear">기록 모두 지우기</button></div>
@@ -883,7 +1045,7 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
  </div>
 </section>
 
-<footer class="foot"><span>운영관리를 한큐에 · AX CONTROL 통합판</span><span class="xs">데이터 없음 ≠ 0 · 참여자는 가명 예시</span></footer>
+<footer class="foot"><span>운영관리를 한큐에 · AX CONTROL 통합판</span><span class="xs">데이터 없음 ≠ 0 · 실제 명단 28명</span></footer>
 </main>
 <script>
 window.APP={id:'b',title:'운영관리를 한큐에',sub:'AX 취업교육 운영',names:{'매니저':'CJ 총괄PM','강사':'담당 강사','현장운영진':'학원 출결담당'},
@@ -891,32 +1053,63 @@ window.APP={id:'b',title:'운영관리를 한큐에',sub:'AX 취업교육 운영
   groups:[{id:'g1',name:'CJ 운영팀',color:'#3fae6a',members:[{id:'m1',name:'CJ 운영매니저',role:'상담 창구',duty:'슬랙 상담, 대시보드, 보고, 기관 조율'},{id:'m2',name:'AI 에이전트 11',role:'전문 역할',duty:'선발·점검·커뮤니케이션·데이터·검수 (에이전트 페이지)'}]},
    {id:'g2',name:'그린컴퓨터아트학원',color:'#d4932a',members:[{id:'m3',name:'담당 강사',role:'강사',duty:'수업, 면담 기록, 학습 문의'},{id:'m4',name:'학원 출결담당',role:'현장운영진',duty:'출석 체크, 현장 관리, 개인 안내 발송, 병결 서류 확인'}]},
    {id:'g3',name:'대한상공회의소',color:'#7f6cf0',members:[{id:'m5',name:'사업 담당',role:'협력기관',duty:'선발 기준, 자격 검증, 취업 성과, 중도이탈 행정 처리'}]},
-   {id:'g4',name:'참여자',color:'#3aa6c4',members:[{id:'m6',name:'참여자 (예시 8)',role:'수강생',duty:'출결봇 응답, 증빙 제출, 체크인 설문'}]}]},
+   {id:'g4',name:'참여자',color:'#3aa6c4',members:[{id:'m6',name:'참여자 28명',role:'수강생',duty:'출결봇 응답, 증빙 제출, 체크인 설문'}]}]},
  loop:[{d:'월',items:[{id:'b1',t:'학원 집계 수령',o:'현장운영진',time:'10:00'},{id:'b2',t:'대시보드 갱신',o:'매니저',time:'12:00'},{id:'b3',t:'주간 점검 (경고·위험)',o:'매니저'},{id:'b5',t:'본인 안내 발송',o:'현장운영진'},{id:'b7',t:'처분 확인 (기관 확정 뒤)',o:'매니저'},{id:'b8',t:'결정 기록 · 보고',o:'매니저'}]},
   {d:'화',items:[{id:'b9',t:'체크인 설문 (4·6·9주차)',o:'매니저'},{id:'b10',t:'강사 면담 기록 공유',o:'강사'}]},
   {d:'수',items:[{id:'b11',t:'병결·공가 서류 마감 확인',o:'현장운영진',time:'18:00'}]},
   {d:'목',items:[{id:'b12',t:'대한상공회의소 회신 확인',o:'매니저'},{id:'b13',t:'진도·과제 점검',o:'강사',time:'17:00'}]},
   {d:'금',items:[{id:'b14',t:'수당·수료 판정 점검',o:'매니저'},{id:'b15',t:'주간 보고 · 성과자료 취합',o:'매니저'}]}],
- events:[{k:'2026-11-17',t:'CJ 체크인 (4주차)'},{k:'2026-11-20',t:'대한상공회의소 회신 희망일'},{k:'2026-12-01',t:'CJ 체크인 (6주차)'},{k:'2026-12-22',t:'CJ 체크인 (9주차)'},{k:'2027-01-11',t:'마감 집계'}],
- seedHook(s){const x=s.students.find(y=>y.id==='s8');x.join='2026-10-29';x.notice='2026-10-28';
+ events:[{k:'2026-11-02',t:'확정자 신고 (10시)'},{k:'2026-11-05',t:'CH2 Lifestyle 시작'},{k:'2026-11-19',t:'CH3 Modeling 시작'},{k:'2026-11-25',t:'1차 단위기간 종료'},{k:'2026-12-07',t:'CH4 실전 AX 프로젝트 시작'},{k:'2026-12-25',t:'2차 단위기간 종료 · 공휴일'},{k:'2027-01-07',t:'수료 · 3차 단위기간 종료'}],
+ seedHook(s){/* 실제 운영 데이터 기준 (가짜 예시 데이터 제거) · 출처: L.L.M Academy OT 자료 · 과정 오리엔테이션(출석·행정) 자료 · 수기 출석부 */
+  s.docCats=["결석","지원금","영수증","기타"];s.docRecs=[];
+  s.links={timetable:'',github:''};
+  s.curriculum=[['1주차','CH1 온보딩 & Local','OT · 과정 온보딩|지역 자산 조사 방법론|지역 자산 인벤토리 작성'],
+   ['2주차','CH1 Local → CH2 Lifestyle (11/5~)','로컬 브랜드 페르소나 · 세계관 설계|디지털 내러티브 스토리보드 제작|K-라이프스타일 산업 밸류체인 분석 시작'],
+   ['3주차','CH2 Lifestyle','산업 밸류체인 맵핑 · 페인포인트 도출|AX 비즈니스 모델 캔버스|AX 수익 모델 · 서비스 시나리오'],
+   ['4주차','CH2 Lifestyle → CH3 Modeling (11/19~)','MVP 제작 실습 (~11/18)|LLM · 멀티모달 AI의 특성 이해'],
+   ['5주차','CH3 Modeling','프롬프트 설계 실습|AI 기반 산업 리포트 자동 생성'],
+   ['6주차','CH3 Modeling (~12/3) · 취창업 및 심리지원','브랜드 비주얼 셋 제작|바이브 코딩으로 App 만들기|개인별 AI 워크플로우 구축'],
+   ['7주차','CH4 실전 AX 프로젝트','트랙: AX 크리에이티브(콘텐츠 · 뷰티) / AX 데이터·서비스(푸드 · 리테일)|프로젝트 기획'],
+   ['8주차','CH4 실전 AX 프로젝트','최종 MVP 구현|결과 보고서'],
+   ['9주차','해커톤','해커톤 (12/25 공휴일 제외)'],
+   ['10주차','성과공유회 · 인사이트 특강','성과공유회|인사이트 특강 (1/1 공휴일 제외)'],
+   ['11주차','수료','수료 (1/7 목)']].map((w,i)=>{const a=['2026-10-26','2026-11-02','2026-11-09','2026-11-16','2026-11-23','2026-11-30','2026-12-07','2026-12-14','2026-12-21','2026-12-28','2027-01-04'][i];return{id:'w'+(i+1),n:w[0],title:w[1],topics:w[2].split('|').join(String.fromCharCode(10)),a,b:['2026-10-30','2026-11-06','2026-11-13','2026-11-20','2026-11-27','2026-12-04','2026-12-11','2026-12-18','2026-12-24','2026-12-31','2027-01-07'][i],mats:[]}});
+  s.deliv=[];s.logs={};s.docTasks=[];s.tasks=[];s.jhist=[];
+  s.faq=[{id:'f1',cat:'수당',q:'참여수당은 언제, 얼마나 들어오나요?',a:'단위기간(1차 10/26~11/25, 2차 11/26~12/25, 3차 12/26~1/7)마다 출석률 80% 이상이면 월 50만 원이 지급돼요. 단위기간이 끝난 뒤 바로 지급되지 않고 최대 한 달 이상 걸릴 수 있어요. 실업급여를 받는 중이거나 소득이 생기면 지급되지 않아요.',kw:'수당,장려금,입금,지급,돈',hits:0},
+   {id:'f2',cat:'출결',q:'지각·조퇴·외출 기준이 어떻게 되나요?',a:'09:11부터 입실하면 지각, 17:50 이전 퇴실은 조퇴, 수업 중 10분 이상 자리를 비우면 외출이에요. 지각·조퇴·외출 3회는 결석 1일이고, 하루에 지각과 조퇴가 함께 생기면 2회로 셉니다. 하루 수업의 50% 미만만 들으면 결석이에요.',kw:'지각,몇 시,입실,조퇴,외출',hits:0},
+   {id:'f3',cat:'서류',q:'아파서 결석했어요. 출석 인정되나요?',a:'질병·입원은 전체 훈련일수의 10%(5일)까지 출석으로 인정돼요. 진료일자와 질병명(또는 코드)이 보이는 진료확인서·입퇴원확인서를 LMS 출석인정요청으로 제출해 주세요. 처방전만 내거나 일반건강검진은 인정되지 않아요.',kw:'병결,진단서,진료,아파,병원',hits:0},
+   {id:'f4',cat:'서류',q:'예비군·면접·시험은 출석 인정되나요?',a:'예비군·민방위, 기업 채용 시험·면접, 과정 관련 자격시험은 공가로 인정돼요. 응시확인서·면접확인서 등을 LMS로 제출해 주세요(접수확인서, 메일·문자만 단독 제출은 불가). 수업 시간 밖에도 볼 수 있는 일정이면 인정되지 않아요.',kw:'예비군,민방위,면접,공가,시험',hits:0},
+   {id:'f5',cat:'수업',q:'수료·제적 기준이 어떻게 되나요?',a:'전체 교육일수(52일)의 80% 이상 출석하면 수료예요. 단위기간의 50% 이상 결석하거나 총 결석이 전체의 20%를 넘으면 제적돼요. 참여수당은 단위기간별, 수료는 전체 기간 기준으로 따로 계산해요.',kw:'수료,제적,탈락,몇 번',hits:0},
+   {id:'f6',cat:'일정',q:'수업 시간과 휴일은요?',a:'평일 09:00~18:00(점심 13~14시)이에요. 12/25·1/1은 공휴일로 쉬고, 과정은 1/7(목)에 끝나요.',kw:'휴강,종료,방학,끝나,시간',hits:0}];
+  s.notices=[{id:'n1',title:'출결 규정 안내 (OT 자료)',body:'· 지각: 09:11 이후 입실 / 조퇴: 17:50 이전 퇴실 / 외출: 수업 중 10분 이상 이탈\n· 지각·조퇴·외출 3회 = 결석 1일 (하루에 두 가지면 2회)\n· 하루 50% 미만 참여 = 결석\n· 수료: 전체 80% 이상 출석 / 참여수당: 단위기간 출석률 80% 이상 시 50만 원',to:'수강생',pin:true,by:'CJ 총괄PM',at:'10/26 10:00',reads:{}},
+   {id:'n2',title:'입·퇴실은 LMS(모바일)로, 슬랙 #06 출석체크 스레드에도 공유',body:'입·퇴실 체크는 반드시 모바일로 해 주세요. 체크하지 않으면 결석으로 처리돼요.\n슬랙 #06-출석체크 채널의 데일리 출석체크 스레드에 댓글로 입·퇴실을 공유해 주세요.',to:'수강생',pin:false,by:'CJ 총괄PM',at:'10/26 10:10',reads:{}},
+   {id:'n3',title:'출석 인정(공가·병결) 증빙은 LMS 출석인정요청으로',body:'사유가 생기면 담당자에게 먼저 알리고, 증빙을 LMS 출석인정요청으로 제출해 주세요.\n· 시험: 응시확인서(접수확인서 불가)\n· 질병: 진료확인서·입퇴원확인서 (처방전 단독 불가)\n· 예비군: 참여 증빙',to:'수강생',pin:false,by:'CJ 총괄PM',at:'10/26 10:20',reads:{}}];
+ }};
+</script>
+<script>
+/* ==== 예시판(공개용) 전용: 가명 8명 · 가상 데이터 ====
+   실제판(비공개)에는 들어가지 않습니다. build.sh 가 예시판을 만들 때만 VARIANT 자리에 넣습니다. */
+window.APP.demo=true;
+window.APP.demoBase=function(){const ab=()=>({s:'absent'});
+ const names=[['s1','김하늘',1,1],['s2','이준호',1,1],['s3','박서연',1,1],['s4','최민재',1,1],['s5','정다은',0,1],['s6','강도윤',1,1],['s7','윤지아',1,0],['s8','한서준',1,1]];
+ const students=names.map(([id,name,kakao,consent],i)=>({id,name,phone:'010-0000-01'+String(i+1).padStart(2,'0'),kakao:!!kakao,consent:!!consent,join:''}));
+ const cal={s1:{'2026-10-29':{late:true},'2026-11-03':ab()},s2:{'2026-11-05':{late:true,early:true},'2026-11-10':{s:'sick',doc:'done'},'2026-11-12':{out:true},'2026-11-13':{s:'sick',doc:'pending'}},s3:{'2026-10-27':ab(),'2026-10-28':ab(),'2026-11-02':ab(),'2026-11-04':{late:true},'2026-11-06':{late:true},'2026-11-09':ab(),'2026-11-11':ab(),'2026-11-16':ab()},s4:{'2026-10-30':ab(),'2026-11-03':ab(),'2026-11-04':ab(),'2026-11-06':ab(),'2026-11-10':ab(),'2026-11-11':ab(),'2026-11-13':ab(),'2026-11-16':ab()},s6:{'2026-11-09':{s:'sick',doc:'pending'},'2026-11-11':{late:true}},s8:{'2026-11-06':{early:true}}};
+ const issues=[{id:'i1',cat:'문의',t:'1차 단위기간 참여수당 지급일 문의 (3명)',owner:'매니저',st:'open',due:'2026-11-18',by:'김매니저',at:'11/16 10:20'},{id:'i2',cat:'서류',t:'공가 증빙(예비군 통지서) 원본 확인',owner:'현장운영진',st:'doing',due:'2026-11-19',by:'최운영',at:'11/16 14:05'},{id:'i3',cat:'일정',t:'11/24 특강 강의실 변경 공지',owner:'강사',st:'open',due:'2026-11-21',by:'박강사',at:'11/16 16:40'},{id:'i4',cat:'요청',t:'실습실 3번 자리 모니터 교체 요청',owner:'현장운영진',st:'open',due:'',by:'최운영',at:'11/17 08:40'}];
+ return{students,cal,issues}};
+(function(){const realHook=window.APP.seedHook;window.APP.seedHook=function(s){realHook(s);
+const x=s.students.find(y=>y.id==='s8');x.join='2026-10-29';x.notice='2026-10-28';
   s.docCats=["결석","지원금","영수증","기타"];s.docRecs=[{id:"dr1",cat:"지원금",who:"김하늘",title:"훈련장려금 계좌 사본 확인",amt:"",memo:"계좌번호는 가리고 제출",st:"확인",by:"학원 출결담당",at:"11/17 10:20",files:[]},{id:"dr2",cat:"영수증",who:"",title:"피칭 데이 다과 영수증",amt:"48000",memo:"운영비",st:"접수",by:"CJ 총괄PM",at:"11/18 17:30",files:[]}];s.port={s1:[{id:"p1",date:"2026-11-16",title:"스킬 파일 실습 v1",url:"https://github.com/LLM-Academy/daejeon_01",at:"11/16 18:00"}]};
   ['s1','s2','s3','s4'].forEach(id=>s.students.find(x=>x.id===id).team='1조');['s5','s6','s7','s8'].forEach(id=>s.students.find(x=>x.id===id).team='2조');
-  s.links={timetable:'',github:'https://github.com/LLM-Academy/daejeon_01'};
-  s.curriculum=[['1주차','오리엔테이션 · AI 도구 첫걸음','OT, 출결·수당 규정 안내|생성형 AI 도구 체험|깃허브 Fork와 첫 커밋'],['2주차','프롬프트 엔지니어링','역할·형식·예시를 주는 프롬프트|업무 자동화 프롬프트 실습'],['3주차','시장 조사 · 현장 리서치','현장 투어와 리뷰|퍼소나 분석 · 고객여정지도'],['4주차','AI 에이전트 · 스킬 만들기','에이전트 구조 이해|스킬 파일 만들기 실습'],['5주차','Local & Lifestyle 프로젝트 ①','팀 구성 · 문제 정의|데일리 스크럼 시작'],['6주차','Local & Lifestyle 프로젝트 ②','인터랙티브 발표 만들기|피칭 데이'],['7주차','데이터 · 자동화','스프레드시트·문서 자동화|업무 흐름 설계'],['8주차','웹 결과물 만들기','아티팩트로 웹 페이지 만들기|배포와 공유'],['9주차','최종 프로젝트 ①','기획 · 역할 분담'],['10주차','최종 프로젝트 ②','구현 · 중간 점검'],['11주차','최종 발표 · 수료','최종 발표 · 회고 · 수료']].map((w,i)=>{const a=['2026-10-26','2026-11-02','2026-11-09','2026-11-16','2026-11-23','2026-11-30','2026-12-07','2026-12-14','2026-12-21','2026-12-28','2027-01-04'][i];return{id:'w'+(i+1),n:w[0],title:w[1]+' (예시)',topics:w[2].split('|').join(String.fromCharCode(10)),a,b:['2026-10-30','2026-11-06','2026-11-13','2026-11-20','2026-11-27','2026-12-04','2026-12-11','2026-12-18','2026-12-25','2027-01-01','2027-01-07'][i],mats:i===0?[{t:'실습 깃허브 이용 방법',url:'https://github.com/LLM-Academy/daejeon_01'}]:[]}});
   s.deliv=[{id:'dv1',title:'Lifestyle 피칭 데이 - 인터랙티브 발표',due:'2026-11-18',desc:'필수: 조별 발표 자료 1건(PDF로 저장 후 제출), 조별 산출물 1건(가급적 GitHub 링크) / 선택: 개인 산출물',req:[{key:'deck',label:'발표자료',kind:'file'},{key:'link',label:'결과물 링크 (GitHub 등)',kind:'link'}],subs:{team:{'2조':{deck:{v:'https://drive.google.com/example-deck',by:'정다은',at:'11/18 15:40'},link:{v:'https://github.com/example/daejeon_01',by:'정다은',at:'11/18 15:41'}}},personal:{}}}];
   s.logs={s1:{'2026-11-16':{diff:'보통',speed:'적당함',sum:'에이전트 구조와 스킬 파일의 역할을 배웠다.',prac:'스킬 파일을 직접 만들어 보고 동작을 확인했다.',retro:'좋았던 부분: 실습이 바로 이어져서 이해가 쉬웠다 / 어려웠던 부분: 폴더 구조가 헷갈렸다',st:'done',at:'11/16 18:05',fb:{t:'스킬 파일을 직접 만들어 본 점이 좋았어요. 폴더 구조는 다음 시간에 한 번 더 같이 정리해요.',by:'담당 강사',at:'11/17 09:10'}},'2026-11-17':{diff:'어려움',speed:'빠름',sum:'고객여정지도로 문제점과 해결책을 정리했다.',prac:'퍼소나 3개를 만들고 한 명의 여정을 그렸다.',retro:'어려웠던 부분: 세부 타겟 정하기',st:'done',at:'11/17 18:20'}},s2:{'2026-11-17':{diff:'보통',speed:'적당함',sum:'피칭 구성(문제-해결-근거)을 배웠다.',prac:'발표 초안 작성',retro:'',st:'done',at:'11/17 18:30'}}};
-  s.faq=[{id:'f1',cat:'수당',q:'참여수당(훈련장려금)은 언제 들어오나요?',a:'단위기간(1차 10/26~11/25, 2차 11/26~12/25, 3차 12/26~1/7)마다 출석률 80% 이상이면 월 50만 원이 지급돼요. 단위기간이 끝난 뒤 지급까지 최대 한 달 정도 걸릴 수 있어요.',kw:'수당,장려금,입금,지급,돈',hits:2},
-   {id:'f2',cat:'출결',q:'몇 시까지 오면 지각이 아닌가요?',a:'09:10까지 입실하면 정상 출석, 09:11부터 지각이에요. 17:50 전 퇴실은 조퇴, 수업 중 10분 이상 자리를 비우면 외출이고, 지각·조퇴·외출 3회는 결석 1일로 계산돼요.',kw:'지각,몇 시,입실,조퇴,외출',hits:1},
-   {id:'f3',cat:'서류',q:'병결 서류는 언제까지 내나요?',a:'결석일로부터 3교육일 안에 진단서나 진료확인서를 LMS로 제출해 주세요(접수 확인서는 불인정). 질병 결석은 과정 전체 10%인 5일까지만 출석으로 인정돼요.',kw:'병결,진단서,진료,아파,병원',hits:1},
-   {id:'f4',cat:'서류',q:'예비군·면접은 출석 인정되나요?',a:'예비군 통지서, 채용 면접 안내 등 증빙을 미리 담당자에게 알리고 LMS로 내면 공가로 출석 인정돼요. 수업 시간 밖에도 볼 수 있는 일정이면 인정되지 않아요.',kw:'예비군,민방위,면접,공가,시험',hits:0},
-   {id:'f5',cat:'수업',q:'수료 기준이 어떻게 되나요?',a:'전체 교육일수(52일)의 80% 이상 출석하면 수료예요. 결석은 최대 10일까지 가능하고, 내 출결 화면에서 남은 결석 가능일을 볼 수 있어요.',kw:'수료,제적,탈락,몇 번',hits:0},
-   {id:'f6',cat:'일정',q:'휴강일과 종료일은 언제인가요?',a:'12/25·1/1은 휴강이고, 과정 종료는 1/7(목)이에요. 수업은 평일 09:00~18:00(점심 13~14시)입니다.',kw:'휴강,종료,방학,끝나',hits:0}];
   s.docTasks=[{id:'dt1',name:'훈련장려금 계좌 확인서',how:'LMS 과제란 업로드',due:'2026-11-20',target:'all',subs:{s1:{st:'ok',at:'11/17 10:00'},s2:{st:'sub',at:'11/18 09:12'},s3:{st:'ok',at:'11/17 11:30'},s5:{st:'ok',at:'11/18 08:40'},s6:{st:'sub',at:'11/18 09:30'}},by:'CJ 총괄PM',at:'11/16 10:00'},
    {id:'dt2',name:'개인정보 수집·이용 동의서',how:'원본을 학원 데스크에 제출',due:'2026-11-17',target:'all',subs:{s1:{st:'ok'},s2:{st:'ok'},s3:{st:'ok'},s4:{st:'ok'},s5:{st:'ok'},s6:{st:'ok'},s8:{st:'ok'}},by:'학원 출결담당',at:'11/12 14:00'}];
   s.cal.s8=s.cal.s8||{};s.cal.s8['2026-11-12']={s:'off',doc:'pending',sub:'11/13 09:20'};
-  s.notices=[{id:'n1',title:'11/24(화) 특강 강의실 변경 안내',body:'11/24 특강은 3층 세미나실에서 진행합니다.\n노트북을 꼭 지참해 주세요.',to:'수강생',pin:true,by:'CJ 총괄PM',at:'11/17 09:30',reads:{}},{id:'n2',title:'병결 서류는 결석일로부터 3교육일 안에 LMS로 제출',body:'진단서·진료확인서만 인정됩니다(접수 확인서 불인정). 기한이 지나면 결석으로 계산됩니다.',to:'전체',pin:false,by:'학원 출결담당',at:'11/16 17:00',reads:{}},{id:'n3',title:'[운영진] 이번 주 수요일 서류 마감 점검',body:'수요일 18:00까지 병결 서류 대기 건을 모두 확인해 주세요.',to:'운영진',pin:false,by:'CJ 총괄PM',at:'11/16 18:10',reads:{}}];
   s.issues.forEach(i=>{if(i.id==='i1')i.who='박서연';if(i.id==='i4')i.who='한서준'});s.issues.push({id:'i5',cat:'문의',kind:'서류',who:'이준호',t:'병원 다녀와서 결석했는데 진단서는 언제까지 내나요?',owner:'현장운영진',st:'open',due:'2026-11-19',draft:'안녕하세요 이준호님, 운영팀입니다.\n병결 증빙은 결석일로부터 3교육일 안에 LMS로 제출해 주세요.',by:'학원 출결담당',at:'11/18 08:50'},{id:'i6',cat:'요청',who:'김하늘',t:'노트북 충전기 대여 요청',owner:'현장운영진',st:'doing',due:'2026-11-19',by:'학원 출결담당',at:'11/18 09:20'});
-  s.tasks=[{id:'t1',t:'중간 과제 피드백 업로드',o:'강사',due:'2026-11-19',time:'12:00',done:null},{id:'t2',t:'2차 체크인 설문 문항 확정',o:'매니저',due:'2026-11-20',time:'17:00',done:null},{id:'t3',t:'11/24 특강 강의실 세팅',o:'현장운영진',due:'2026-11-23',time:'18:00',done:null},{id:'t4',t:'1주차 이탈·승계 기록 정리',o:'매니저',due:'2026-11-17',time:'18:00',done:{by:'CJ 총괄PM',at:'11/17 16:40'}}];s.jhist=[{id:'j1',name:'한서준',on:true,notice:'2026-10-28',entry:'2026-10-29',pre:3,A:3,left:7,pay1:true,lv:'안정권',cls:'ok',by:'CJ 총괄PM',at:'10/28 17:10'},{id:'j2',name:'예비 A',on:true,notice:'2026-11-06',entry:'2026-11-09',pre:10,A:10,left:0,pay1:false,lv:'위험권',cls:'bad',by:'CJ 총괄PM',at:'11/17 10:20'}];s.notif[0].t='운영관리를 한큐에 시작 · 예시 데이터(참여자 8명, 가명 · 추가합격 1명) 로드'}};
+  s.tasks=[{id:'t1',t:'중간 과제 피드백 업로드',o:'강사',due:'2026-11-19',time:'12:00',done:null},{id:'t2',t:'2차 체크인 설문 문항 확정',o:'매니저',due:'2026-11-20',time:'17:00',done:null},{id:'t3',t:'11/24 특강 강의실 세팅',o:'현장운영진',due:'2026-11-23',time:'18:00',done:null},{id:'t4',t:'1주차 이탈·승계 기록 정리',o:'매니저',due:'2026-11-17',time:'18:00',done:{by:'CJ 총괄PM',at:'11/17 16:40'}}];s.jhist=[{id:'j1',name:'한서준',on:true,notice:'2026-10-28',entry:'2026-10-29',pre:3,A:3,left:7,pay1:true,lv:'안정권',cls:'ok',by:'CJ 총괄PM',at:'10/28 17:10'},{id:'j2',name:'예비 A',on:true,notice:'2026-11-06',entry:'2026-11-09',pre:10,A:10,left:0,pay1:false,lv:'위험권',cls:'bad',by:'CJ 총괄PM',at:'11/17 10:20'}];s.notif[0].t='운영관리를 한큐에 시작 · 예시 데이터(참여자 8명, 가명 · 추가합격 1명) 로드'
+ s.notif[0].t='운영관리를 한큐에 시작 · 예시 데이터(참여자 8명, 가명)를 불러왔습니다';}})();
+(function(){const g=(window.APP.org.groups||[]).find(x=>x.id==='g4');if(g&&g.members[0])g.members[0].name='참여자 (예시 8)';
+ document.addEventListener('DOMContentLoaded',()=>{const f=document.querySelector('.foot .xs');if(f)f.textContent='데이터 없음 ≠ 0 · 참여자는 가명 예시'})})();
 </script>
 <script>
 (function(){
@@ -943,7 +1136,7 @@ const UNITS=[{n:'1차',a:'2026-10-26',b:'2026-11-25'},{n:'2차',a:'2026-11-26',b
 const unitOf=k=>UNITS.findIndex(u=>k>=u.a&&k<=u.b);
 const DT=COURSE.length,MAXABS=Math.floor(DT*0.2+1e-9),SICK_CAP=Math.floor(DT*0.1+1e-9);
 const NOWK=keyOf(new Date());
-const DEF_DAY=CSET.has(NOWK)?NOWK:(COURSE.find(k=>k>=NOWK)||COURSE[COURSE.length-1]);
+const DEF_DAY=(A.asOf&&CSET.has(A.asOf))?A.asOf:CSET.has(NOWK)?NOWK:(COURSE.find(k=>k>=NOWK)||COURSE[COURSE.length-1]);
 const docDue=k=>{const i=COURSE.findIndex(x=>x>=k);return COURSE[Math.min(COURSE.length-1,i+3)]};
 const mondayOf=k=>{const d=fromKey(k);d.setDate(d.getDate()-((d.getDay()+6)%7));return keyOf(d)};
 let ROLES=['매니저','강사','현장운영진'];
@@ -955,25 +1148,12 @@ const rb=r=>'<span class="badge '+(RBADGE[r]||'')+'">'+esc(r)+'</span>';
 
 /* ---- 시드 데이터 ---- */
 function seed(){
- const names=[['s1','김하늘',1,1],['s2','이준호',1,1],['s3','박서연',1,1],['s4','최민재',1,1],['s5','정다은',0,1],['s6','강도윤',1,1],['s7','윤지아',1,0],['s8','한서준',1,1]];
- const students=names.map(([id,name,kakao,consent],i)=>({id,name,phone:'010-0000-01'+pad(i+1),kakao:!!kakao,consent:!!consent,join:''}));
- const ab=()=>({s:'absent'});
- const cal={
-  s1:{'2026-10-29':{late:true},'2026-11-03':ab()},
-  s2:{'2026-11-05':{late:true,early:true},'2026-11-10':{s:'sick',doc:'done'},'2026-11-12':{out:true},'2026-11-13':{s:'sick',doc:'pending'}},
-  s3:{'2026-10-27':ab(),'2026-10-28':ab(),'2026-11-02':ab(),'2026-11-04':{late:true},'2026-11-06':{late:true},'2026-11-09':ab(),'2026-11-11':ab(),'2026-11-16':ab()},
-  s4:{'2026-10-30':ab(),'2026-11-03':ab(),'2026-11-04':ab(),'2026-11-06':ab(),'2026-11-10':ab(),'2026-11-11':ab(),'2026-11-13':ab(),'2026-11-16':ab()},
-  s6:{'2026-11-09':{s:'sick',doc:'pending'},'2026-11-11':{late:true}},
-  s8:{'2026-11-06':{early:true}}
- };
- const issues=[
-  {id:'i1',cat:'문의',t:'1차 단위기간 참여수당 지급일 문의 (3명)',owner:'매니저',st:'open',due:'2026-11-18',by:'김매니저',at:'11/16 10:20'},
-  {id:'i2',cat:'서류',t:'공가 증빙(예비군 통지서) 원본 확인',owner:'현장운영진',st:'doing',due:'2026-11-19',by:'최운영',at:'11/16 14:05'},
-  {id:'i3',cat:'일정',t:'11/24 특강 강의실 변경 공지',owner:'강사',st:'open',due:'2026-11-21',by:'박강사',at:'11/16 16:40'},
-  {id:'i4',cat:'요청',t:'실습실 3번 자리 모니터 교체 요청',owner:'현장운영진',st:'open',due:'',by:'최운영',at:'11/17 08:40'}
- ];
+ /* 명단·출결: 실제판은 real.js(비공개 빌드에만 포함), 예시판은 demo.js(가명 8명) */
+ let students=[],cal={},issues=[];
+ const b=A.demo&&A.demoBase?A.demoBase():A.realBase?A.realBase():null;if(b){students=b.students;cal=b.cal;issues=b.issues||[]}
  const s={v:1,seq:1,students,cal,checkin:{},bot:{},botRun:{},issues,org:clone(A.org),loop:{},sendlog:[],ack:{},users:{},
-  notif:[{id:1,at:stamp(),r:'시스템',n:'',tab:'',t:'운영관리를 한큐에 시작 · 예시 데이터(참여자 8명, 가명)를 불러왔습니다',p:'brief'}]};
+  notif:[{id:1,at:stamp(),r:'시스템',n:'',tab:'',t:'운영관리를 한큐에 시작 · 실제 명단 28명과 수기 출석부(10/26~11/18)를 불러왔습니다',p:'att'}]};
+ if(!A.demo){s.realData=1;s.mgmtSeeded=1}
  if(A.seedHook)A.seedHook(s);
  return s;
 }
@@ -1104,8 +1284,9 @@ function ackLine(n){
 }
 function nItem(n,feed){
  const un=!isMine(n)&&!acked(n)&&n.r!=='시스템';
- return '<div class="ni'+(un?' unread':'')+'"><div class="meta">'+rb(n.r)+'<b style="color:var(--text)">'+esc(n.n)+'</b><span>'+esc(n.at)+'</span></div><div>'+esc(n.t)+'</div><div class="acts">'+
-  (n.p?'<button class="btn s sm" data-go="'+n.p+'">보러 가기</button>':'')+(un?'<button class="btn sm" data-act="ack" data-id="'+n.id+'">확인했어요</button>':'')+ackLine(n)+'</div></div>';
+ const fl=feed&&n.p;/* 최근 변경 카드: 줄 전체를 누르면 해당 화면으로 (버튼 줄 제거) */
+ return '<div class="ni'+(un?' unread':'')+(fl?' nlink':'')+'"'+(fl?' data-feedgo="'+n.p+'" title="눌러서 해당 화면으로" tabindex="0" role="link"':'')+'><div class="meta">'+rb(n.r)+'<b style="color:var(--text)">'+esc(n.n)+'</b><span>'+esc(n.at)+'</span>'+(fl?'<span class="ngo" aria-hidden="true">›</span>':'')+'</div><div>'+esc(n.t)+'</div><div class="acts">'+
+  (n.p&&!feed?'<button class="btn s sm" data-go="'+n.p+'">보러 가기</button>':'')+(un?'<button class="btn sm" data-act="ack" data-id="'+n.id+'">확인했어요</button>':'')+ackLine(n)+'</div></div>';
 }
 function rDrop(){const u=unread();
  $('drop').innerHTML='<div class="dh"><b>알림 '+u.length+'건 미확인</b><button class="btn s sm" data-act="ackAll"'+(u.length?'':' disabled')+'>모두 확인</button></div>'+
@@ -1165,6 +1346,7 @@ let NAV=[
  {id:'notice',ic:'📢',t:'공지사항',subs:[['n-board','공지 게시판'],['n-inq','수강생 문의 · FAQ']]},
  {id:'docs',ic:'📂',t:'서류·행정',subs:[['d-board','제출 현황판'],['d-new','제출 과제 등록'],['d-absent','서류제출관리']]},
  {id:'learn',ic:'📚',t:'학습',subs:[['l-logs','학습로그 · 피드백'],['l-git','깃허브 · 제작물 현황'],['l-cur','커리큘럼 · 학습자료']]},
+ {id:'mgmt',ic:'🧑‍🏫',t:'학생관리',subs:[['m-list','학생 목록'],['m-stu','학생 상세'],['m-counsel','상담 목록'],['m-log','학습로그 · 제작물 현황']]},
  {id:'org',ic:'🧭',t:'조직 · 루프',subs:[['o-main','조직 · 주간루프'],['o-agent','에이전트 · 규칙']]},
  {id:'att',ic:'📅',t:'출결달력',subs:[['a-calc','출결달력 계산기'],['a-list','참여자 목록'],['a-judge','수료 · 수당 판정']]},
  {id:'bot',ic:'🤖',t:'출결봇',subs:[['t-board','오늘 출결 보드'],['t-log','발송 기록'],['t-conn','연결 안내']]}];
@@ -1175,7 +1357,7 @@ const TREE=new Set(['home']);
 const mobile=()=>matchMedia('(max-width:900px)').matches;
 let SIDE=lsGet('hq_side')!=='0';
 function setSide(open){SIDE=open;document.body.classList.toggle('sideClosed',!open);if(!mobile())lsSet('hq_side',open?'1':'0')}
-function setTheme(t){document.documentElement.dataset.theme=t;lsSet('hq_theme',t);const b=$('themeBtn');if(b)b.textContent=t==='dark'?'☀️ 밝게':'🌙 어둡게'}
+function setTheme(t){document.documentElement.dataset.theme=t;lsSet('hq_theme',t);const b=$('themeBtn');if(b){b.textContent=t==='dark'?'☀️':'🌙';b.title=b.ariaLabel=t==='dark'?'밝은 화면으로 바꾸기':'어두운 화면으로 바꾸기'}}
 function buildTop(){
  const h=document.createElement('header');h.className='top';
  h.innerHTML='<div class="topIn"><button class="ibtn sideTg" id="sideTg" aria-label="세부 목록 열기·접기">☰</button><div class="brand">운영관리를 <em>한큐에</em><small>'+esc(A.sub)+'</small></div>'+
@@ -1185,10 +1367,10 @@ function buildTop(){
  const sd=document.createElement('aside');sd.className='side';sd.id='side';
  sd.innerHTML='<div class="sideHead"><b class="sm">세부 목록</b><button class="x" id="sideFold" title="옆 목록 접기" aria-label="옆 목록 접기">«</button></div><nav class="tree" id="tree"></nav>'+
   '<div class="sideBottom"><div class="me"><span class="av" id="meAv"></span><div class="grow"><b class="sm" id="meName"></b><div class="xs muted" id="meRole"></div></div><button class="btn s sm" id="whoBtn">변경</button></div>'+
-  '<label class="f" for="dayIn" style="margin-top:10px">기준일</label><input type="date" id="dayIn" min="'+COURSE[0]+'" max="'+COURSE[COURSE.length-1]+'" style="width:100%">'+
+  ''+
   '<button class="syncRow" id="syncBtn" type="button"><i class="dot" id="syncDot"></i><span class="grow xs" id="syncLbl">실시간 연동</span><span class="pres" id="pres"></span></button>'+
-  '<details class="more set"><summary>⚙ 설정</summary><div class="setIn"><div class="xs muted">역할 목록</div><div class="chips" id="roleChips"></div><div class="inl" style="margin-top:6px"><input id="roleIn" placeholder="역할 이름 (예: 취업코치)" maxlength="10" style="flex:1"></div><div class="inl" style="margin-top:6px"><input id="roleDesc" placeholder="하는 일 한 줄 (예: 이력서·면접 지원)" maxlength="24" style="flex:1"><button class="btn sm" id="roleAdd">추가</button></div>'+
-  '<div class="inl" style="margin-top:10px">'+(GAS?'':'<button class="btn s sm" id="newWin">＋ 다른 역할 창</button>')+'<button class="btn s sm" id="syncSet">☁ 연동 설정</button></div><button class="linkb" data-act="resetAll" style="margin-top:8px">예시 데이터로 초기화</button></div></details></div>';
+  '<details class="more set"><summary>⚙ 설정</summary><div class="setIn"><label class="f" for="dayIn">기준일 <span class="xs muted">· 지난 날짜 다시 보기·테스트용</span></label><input type="date" id="dayIn" min="'+COURSE[0]+'" max="'+COURSE[COURSE.length-1]+'" style="width:100%;margin-bottom:10px"><div class="xs muted">역할 목록</div><div class="chips" id="roleChips"></div><div class="inl" style="margin-top:6px"><input id="roleIn" placeholder="역할 이름 (예: 취업코치)" maxlength="10" style="flex:1"></div><div class="inl" style="margin-top:6px"><input id="roleDesc" placeholder="하는 일 한 줄 (예: 이력서·면접 지원)" maxlength="24" style="flex:1"><button class="btn sm" id="roleAdd">추가</button></div>'+
+  '<div class="inl" style="margin-top:10px">'+(GAS?'':'<button class="btn s sm" id="newWin">+ 다른 역할 창</button>')+'<button class="btn s sm" id="syncSet">☁ 연동 설정</button></div><button class="linkb" data-act="resetAll" style="margin-top:8px">예시 데이터로 초기화</button></div></details></div>';
  document.body.appendChild(sd);
  const sc=document.createElement('div');sc.className='scrim';sc.id='scrim';document.body.appendChild(sc);
  const dr=document.createElement('div');dr.id='drop';dr.className='drop';dr.hidden=true;document.body.appendChild(dr);
@@ -1223,17 +1405,17 @@ function rTop(){
  document.title=(u?'('+u+') ':'')+A.title;
  if(!$('drop').hidden)rDrop();rPresence();rTree();
 }
-function go(p,sub){if(ME&&ME.role==='수강생'&&!STU_NAV.some(n=>n.id===p)){p={home:'shome',notice:'sask',docs:'sdocs',att:'satt',bot:'satt',learn:'slearn'}[p]||'snotice';sub=null}PG=p;if(sub)SUB[p]=sub;TREE.add(p);
+function go(p,sub){if(ME&&ME.role==='수강생'&&!STU_NAV.some(n=>n.id===p)){p={home:'shome',notice:'sask',docs:'sdocs',att:'satt',bot:'satt',learn:'slearn',mgmt:'shome'}[p]||'snotice';sub=null}PG=p;if(sub)SUB[p]=sub;TREE.add(p);
  document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id==='pg-'+p));
  const pg=$('pg-'+p);if(pg)pg.querySelectorAll('.sub').forEach(x=>x.classList.toggle('on',x.dataset.sub===SUB[p]));
  $('drop').hidden=true;if(mobile()&&sub)setSide(false);render();window.scrollTo(0,0);ctag()}
 function applyRoleInfo(){const I=S.roleInfo||{};Object.keys(I).forEach(r=>{if(I[r].color)RCOL[r]=I[r].color;RDESC[r]=I[r].desc||'추가 역할';if(!A.names[r])A.names[r]=r})}
 function buildTabs(){const t=$('tabsNav');if(!t)return;t.style.setProperty('--nt',NAV.length);
  t.innerHTML=NAV.map(n=>'<button data-pg="'+n.id+'"><span class="ti">'+n.ic+'</span><span class="tt">'+n.t+'</span></button>').join('');
- t.querySelectorAll('[data-pg]').forEach(b=>b.onclick=()=>{go(b.dataset.pg);TREE.add(b.dataset.pg);setSide(true);rTree()})}
+ t.querySelectorAll('[data-pg]').forEach(b=>b.onclick=()=>{go(b.dataset.pg);TREE.add(b.dataset.pg);if(!mobile())setSide(true);rTree()})}
 /* 역할에 따라 화면 구성 바꾸기: 수강생은 자기 화면 4개만 */
 function roleChanged(){const stu=!!(ME&&ME.role==='수강생');document.body.classList.toggle('stu',stu);
- NAV=stu?STU_NAV:STAFF_NAV;buildTabs();TREE.clear();TREE.add(NAV[0].id);
+ NAV=stu?STU_NAV:STAFF_NAV.slice();if(ME&&ME.role==='강사'){const i=NAV.findIndex(n=>n.id==='mgmt');if(i>1)NAV.splice(1,0,NAV.splice(i,1)[0])}buildTabs();TREE.clear();TREE.add(NAV[0].id);
  go(NAV.some(n=>n.id===PG)?PG:NAV[0].id)}
 /* Microsoft Clarity 사용자 동향 태그 (Clarity가 없는 화면에서는 아무 일도 하지 않음)
    role = 매니저/강사/현장운영진/수강생 · page = 상단 목록 · sub = 세부 페이지 → Clarity 필터에서 역할·화면별로 나눠 봄 */
@@ -1279,7 +1461,7 @@ function rBrief(){
   kpi('수료 위험군',(st[1]+st[2]+st[3])+'명','경고 '+st[1]+' · 위험 '+st[2]+' · 불가 '+st[3],st[2]+st[3]?'bad':'')+
   kpi('열린 이슈',open.length+'건','처리 중 '+open.filter(i=>i.st==='doing').length+'건');
  const ai=autoIssues();
- $('autoIss').innerHTML=ai.length?ai.map(x=>'<div class="row"><span class="pri p-'+x.p+'">'+({high:'긴급',mid:'주의',low:'확인'})[x.p]+'</span><div class="grow"><b class="sm">'+esc(x.t)+'</b><div class="xs muted">'+x.cat+' · 담당 '+x.o+' · 할 일: '+x.a+'</div></div><button class="btn s sm" data-go="'+x.pg+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+(x.sid?' data-sid="'+x.sid+'"':'')+'>보기</button></div>').join(''):'<p class="muted sm">자동 감지된 문제가 없습니다.</p>';
+ $('autoIss').innerHTML=ai.length?briefIssues(ai):'<p class="muted sm">자동 감지된 문제가 없습니다.</p>';
  $('autoCnt').textContent=ai.length+'건 자동 감지';
  const iss=S.issues.slice().sort((a,b)=>(a.st==='done')-(b.st==='done'));
  $('issList').innerHTML=iss.length?iss.map(i=>'<div class="row'+(i.st==='done'?' done':'')+'"><span class="badge">'+esc(i.cat)+'</span><div class="grow"><b class="sm">'+esc(i.t)+'</b><div class="xs muted">담당 '+rb(i.owner)+(i.due?' · 기한 '+md(i.due)+(i.st!=='done'&&i.due<DAY?' <span class="no">지남</span>':''):'')+' · '+esc(i.by)+' '+esc(i.at)+'</div></div><button class="btn s sm '+ISS_ST[i.st][1]+'" data-act="iss" data-id="'+i.id+'" title="눌러서 상태 변경">'+ISS_ST[i.st][0]+'</button><button class="x" data-act="issDel" data-id="'+i.id+'" aria-label="삭제">×</button></div>').join(''):'<p class="muted sm">등록된 이슈가 없습니다.</p>';
@@ -1446,12 +1628,14 @@ setInterval(()=>{let on=false;try{on=localStorage.getItem(AUTOK)==='1'}catch(e){
 
 /* ---- 홈: 긴급 이슈 · 검색 ---- */
 function rHome(){
- const ai=autoIssues(),urg=ai.filter(x=>x.p==='high');
+ const ai=autoIssues(),RL0=riskList(),urg=ai.filter(x=>x.p==='high'&&!(x.sid&&RL0.some(r=>r.s.id===x.sid)));
  S.issues.filter(i=>i.st!=='done'&&i.due&&i.due<=DAY).forEach(i=>urg.push({p:'high',cat:i.cat,t:'[기한 '+(i.due<DAY?'지남':'오늘')+'] '+i.t,o:i.owner,a:'이슈 처리',pg:'brief',sub:'b-issue'}));
  const idx=COURSE.indexOf(DAY);
  $('homeSub').textContent=md(DAY)+'('+wd(DAY)+')'+(idx>=0?' · 교육 '+(idx+1)+'일차 / '+DT+'일':' · 교육일 아님');
  $('urgCnt').textContent=urg.length?urg.length+'건':'없음';$('urgCnt').className='badge '+(urg.length?'b-bad':'b-ok');
- const row=x=>'<div class="row"><span class="pri p-'+x.p+'">'+({high:'긴급',mid:'주의',low:'확인'})[x.p]+'</span><div class="grow"><b>'+esc(x.t)+'</b><div class="xs muted">담당 '+esc(x.o)+' · 할 일: '+esc(x.a)+'</div></div><button class="btn sm" data-go="'+x.pg+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+(x.sid?' data-sid="'+x.sid+'"':'')+'>처리하기</button></div>';
+ /* 가독성: 카드 제목이 이미 '긴급'이라 줄마다 '긴급' 대신 무슨 일인지(기한 지남·서류·문의) 태그로, 제목 앞 [기한 지남] 꼬리표는 태그로 옮겨 제목을 짧게 */
+ const row=x=>{let t=x.t,tag=x.cat||({high:'긴급',mid:'주의',low:'확인'})[x.p],tc='p-'+x.p;const m=t.match(/^\[기한 (지남|오늘)\]\s*/);if(m){tag=m[1]==='지남'?'기한 지남':'오늘 마감';tc=m[1]==='지남'?'p-high':'p-mid';t=t.slice(m[0].length)}else if(/마감 지남/.test(t)){tag='마감 지남';tc='p-high';t=t.replace(/\s*마감 지남\s*/,' ').replace(/^\[(.+?)\]\s*·?\s*/,'$1 · ')}
+  return'<div class="row urow"><span class="pri '+tc+'">'+esc(tag)+'</span><div class="grow"><b title="'+esc(t)+'">'+esc(t)+'</b><div class="xs muted">'+esc(x.o)+' · '+esc(x.a)+'</div></div><button class="btn s sm" data-go="'+x.pg+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+(x.sid?' data-sid="'+x.sid+'"':'')+'>처리 →</button></div>'};
  $('urgent').innerHTML=urg.length?urg.map(row).join(''):'<p class="ok" style="margin:6px 0"><b>✓ 지금 긴급한 문제가 없습니다.</b></p>';
  const rest=ai.filter(x=>x.p!=='high');
  $('watchCnt').textContent=rest.length+'건';
@@ -1537,8 +1721,8 @@ function rJoin(){}
 const MK={absent:['결석','m-absent'],short:['4h 미만','m-short'],late:['지각','m-late'],early:['조퇴','m-early'],out:['외출','m-out']};
 function rAtt(){
  const u=unitOf(DAY);
- if($('stuList'))$('stuList').innerHTML='<table><thead><tr><th>참여자</th><th>'+md(DAY)+' 출결</th><th>환산 결석</th><th>출석률</th><th>수료 여유</th><th>판정</th><th>'+(u>=0?UNITS[u].n+' 수당':'수당')+'</th></tr></thead><tbody>'+
-  S.students.map(s=>{const x=calc(s.id),t=dayState(s.id,DAY),lv=cLevel(x),cu=u>=0?x.units[u]:null;return'<tr class="click'+(s.id===CALC.sid?' sel':'')+'" data-act="stu" data-id="'+s.id+'"><td><b>'+esc(s.name)+'</b>'+(s.join?' <span class="badge b-vio">추가입소</span>':'')+'</td><td><span class="badge '+t.b+'">'+t.t+'</span></td><td>'+x.A+'일</td><td>'+x.rate.toFixed(1)+'%</td><td>'+(x.left>=0?x.left+'일':'<span class="no">'+(-x.left)+'일 초과</span>')+'</td><td><span class="lvDot lv-'+lv[1]+'">'+lv[0]+'</span></td><td>'+(cu?payTxt(cu,u):'-')+'</td></tr>'}).join('')+'</tbody></table>';
+ if($('stuList'))$('stuList').innerHTML='<table><thead><tr><th>참여자</th><th>'+md(DAY)+' 출결</th><th>환산 결석</th><th title="출석부와 같은 방식: 기준일까지 출석한 날 ÷ 단위기간 소정훈련일수">'+(u>=0?UNITS[u].n:'')+' 현재 출석</th><th title="기준일 이후는 모두 출석한다고 가정한 전체 출석률">예상 출석률</th><th>수료 여유</th><th>판정</th><th>'+(u>=0?UNITS[u].n+' 수당':'수당')+'</th></tr></thead><tbody>'+
+  S.students.map(s=>{const x=calc(s.id),t=dayState(s.id,DAY),lv=cLevel(x),cu=u>=0?x.units[u]:null;return'<tr class="click'+(s.id===CALC.sid?' sel':'')+'" data-act="stu" data-id="'+s.id+'"><td><b>'+esc(s.name)+'</b>'+(s.join?' <span class="badge b-vio">추가입소</span>':'')+'</td><td><span class="badge '+t.b+'">'+t.t+'</span></td><td>'+x.A+'일</td><td>'+(u>=0?(n=>'<b>'+n.p+'</b>/'+n.d+'일 · '+n.r.toFixed(1)+'%')(unitNow(s,u)):'-')+'</td><td>'+x.rate.toFixed(1)+'%</td><td>'+(x.left>=0?x.left+'일':'<span class="no">'+(-x.left)+'일 초과</span>')+'</td><td><span class="lvDot lv-'+lv[1]+'">'+lv[0]+'</span></td><td>'+(cu?payTxt(cu,u):'-')+'</td></tr>'}).join('')+'</tbody></table>';
  if(!$('cCal'))return;
  if(CALC.sid&&!cStu())CALC.sid=null;
  const nm=cName(),j=cJoinInfo(),c=cCalc(),lv=cLevel(c),n=c.cnt,cal=cCal();
@@ -1571,7 +1755,7 @@ function rAtt(){
  const ev=n.late+n.early+n.out,sickOk=Math.min(n.sickD,SICK_CAP),sickOver=n.sickD-sickOk;
  const R=[['추가입소 전 자동 결석',n.pre+'일',n.pre],['일반결석',n.absent+'일',n.absent],['병결 · 서류대기',n.sickP+'일',n.sickP],['예비군·공가 · 서류대기',n.offP+'일',n.offP],['예비군·공가 · 인정',n.offD+'일',0,'증빙 확인 시 출석 인정 (병결 10% 한도와 별개)'],['병결 · 서류완료',n.sickD+'일',sickOver,'출석 인정 '+sickOk+'일'+(sickOver?' · '+sickOver+'일 한도 초과':'')],['4시간 미만 수강',n.short+'일',n.short],
   ['지각',n.late+'회',null],['조퇴',n.early+'회',null],['외출',n.out+'회',null],['지각·조퇴·외출 합계',ev+'회',Math.floor(ev/3),'3회 = 결석 1일'+(ev%3?' · 나머지 '+ev%3+'회':'')]];
- $('cTotal').innerHTML='<table class="ttab"><tbody>'+R.map(x=>'<tr'+(x[0].includes('합계')?' class="sumrow"':'')+'><td>'+x[0]+(x[3]?'<div class="xs muted">'+x[3]+'</div>':'')+'</td><td class="num">'+x[1]+'</td><td class="num">'+(x[2]===null?'<span class="muted">→ 아래 합계</span>':(x[2]?'<b>+'+x[2]+'일</b>':'<span class="muted">0</span>'))+'</td></tr>').join('')+
+ $('cTotal').innerHTML='<table class="ttab"><thead><tr><th>구분</th><th class="num">횟수</th><th class="num">결석 환산</th></tr></thead><tbody>'+R.map(x=>'<tr'+(x[0].includes('합계')?' class="sumrow"':'')+'><td>'+x[0]+(x[3]?'<div class="xs muted">'+x[3]+'</div>':'')+'</td><td class="num">'+x[1]+'</td><td class="num">'+(x[2]===null?'<span class="muted">→ 아래 합계</span>':(x[2]?'<b>+'+x[2]+'일</b>':'<span class="muted">0</span>'))+'</td></tr>').join('')+
   '<tr class="tot"><td>총 환산 결석</td><td></td><td class="num"><b>'+c.A+'일</b> / '+MAXABS+'일</td></tr></tbody></table>';
  // 병결 인정 한도 (전체 교육일 10%) + 총 환산 결석 계산식
  const capRaw=(DT*0.1).toFixed(1),sickLeft=Math.max(0,SICK_CAP-sickOk);
@@ -1632,6 +1816,10 @@ function rUnitPay(){const el=$('cUnit');if(!el)return;
   '<tr class="tot"><td>출석률</td><td class="num"><b class="'+(sg[1]==='ok'?'ok':sg[1]==='warn'?'wn':'no')+'">'+x.rate.toFixed(1)+'%</b> <span class="badge '+(sg[1]==='ok'?'b-ok':sg[1]==='warn'?'b-warn':'b-bad')+'">'+sg[0]+'</span></td></tr></tbody></table>'+
   (rm.pay>=0&&x.e%3?'<p class="xs muted" style="margin:8px 0 0">지각·조퇴·외출은 '+(3-x.rest)+'회 더 쌓이면 결석 1일이 늘어납니다.</p>':'');
 }
+/* 출석부(LMS)와 같은 방식의 단위기간 현재 출석: 기준일까지 실제 출석한 날(지각·조퇴·외출 3회=1일 차감) ÷ 단위기간 소정훈련일수 */
+function unitNow(s,u){const ds=COURSE.filter(k=>unitOf(k)===u),c=S.cal[s.id]||{};let p=0,e=0;
+ ds.forEach(k=>{if(k>DAY)return;if(s.join&&k<s.join)return;const r=c[k];if(r&&(r.s==='absent'||r.s==='short'||((r.s==='sick'||r.s==='off')&&r.doc!=='done')))return;p++;if(r)['late','early','out'].forEach(f=>{if(r[f])e++})});
+ p=Math.max(0,p-Math.floor(e/3));return{p,d:ds.length,r:ds.length?p/ds.length*100:0}}
 
 /* ---- 조직 · 주간 운영루프 (담당별 할 일 + 완료 체크 + 데드라인) ---- */
 const dlTxt=(dk,t)=>md(dk)+'('+wd(dk)+') '+(t||'18:00');
@@ -1933,9 +2121,9 @@ function rLearnStaff(){if(!$('llList'))return;if(!LLD||!CSET.has(LLD))LLD=CSET.h
  if(document.activeElement!==$('llDate'))$('llDate').value=LLD;
  const L=S.students.map(s=>({s,l:logOf(s.id,LLD)})),done=L.filter(x=>x.l&&x.l.st==='done');
  const avg=(arr,key,sc)=>{const v=done.map(x=>sc.indexOf(x.l[key])).filter(i=>i>=0);return v.length?sc[Math.round(v.reduce((a,b)=>a+b,0)/v.length)]:'-'};
- $('llSum').innerHTML='<b>'+md(LLD)+'('+wd(LLD)+')</b> 제출 <b class="ok">'+done.length+'</b>/'+L.length+'명 · 평균 난이도 <b>'+avg(0,'diff',LV5)+'</b> · 평균 속도 <b>'+avg(0,'speed',SP5)+'</b> · 미제출 '+L.filter(x=>!x.l||x.l.st!=='done').map(x=>esc(x.s.name)).join(', ');
+ $('llSum').innerHTML='<b>'+md(LLD)+'('+wd(LLD)+')</b> 제출 <b class="ok">'+done.length+'</b>/'+L.length+'명 · 평균 난이도 <b>'+avg(0,'diff',LV5)+'</b> · 평균 속도 <b>'+avg(0,'speed',SP5)+'</b> · '+(LLD===DAY?'아직 작성 전 ':'미제출 ')+L.filter(x=>!x.l||x.l.st!=='done').map(x=>esc(x.s.name)).join(', ');
  $('llList').innerHTML=done.length?done.map(({s,l})=>'<details class="qi"'+(l.fb?'':' open')+'><summary><b class="grow">'+esc(s.name)+'</b><span class="badge">난이도 '+esc(l.diff)+'</span><span class="badge">속도 '+esc(l.speed)+'</span>'+(l.fb?'<span class="badge b-ok">피드백 완료</span>':'<span class="badge b-warn">피드백 대기</span>')+'</summary><div class="ntb"><p><b>오늘 배운 내용</b><br>'+esc(l.sum).replace(/\n/g,'<br>')+'</p><p><b>실습 내용 및 결과</b><br>'+esc(l.prac||'-').replace(/\n/g,'<br>')+'</p><p><b>수업 회고</b><br>'+esc(l.retro||'-').replace(/\n/g,'<br>')+'</p>'+
-  '<label class="f">강사 피드백</label><textarea id="fb_'+s.id+'" rows="3">'+esc(l.fb?l.fb.t:'')+'</textarea><div class="inl" style="margin-top:6px"><button class="btn sm" data-act="fbSave" data-id="'+s.id+'">피드백 저장 + 알림</button></div></div></details>').join(''):'<p class="muted sm">이 날 제출된 학습로그가 없습니다.</p>';
+  '<label class="f">강사 피드백</label><textarea id="fb_'+s.id+'" rows="3">'+esc(l.fb?l.fb.t:'')+'</textarea><div class="inl" style="margin-top:6px"><button class="btn sm" data-act="fbSave" data-id="'+s.id+'">피드백 저장 + 알림</button></div></div></details>').join(''):(LLD===DAY?'<p class="muted sm">오늘 학습로그는 수업이 끝난 뒤 작성돼요. 제출되면 여기에 바로 보여요.</p>':'<p class="muted sm">이 날 제출된 학습로그가 없습니다.</p>');
  // 깃허브·제작물 현황
  const D=S.deliv||[];
  $('lgTable').innerHTML='<table><thead><tr><th>수강생</th><th>조</th><th>깃허브</th><th>마지막 업로드</th><th>밀린 학습로그</th>'+D.map(d=>'<th>'+esc(d.title)+'</th>').join('')+'</tr></thead><tbody>'+S.students.map(s=>{const g=(S.git||{})[s.id],C=GITC[s.id],m=missingLogs(s.id).length;if(g&&g.repo)gitLoad(s.id);
@@ -2005,7 +2193,7 @@ function rDR(){if(!$('drBody'))return;const cats=dCats();if(!cats.includes(DRC))
  if(DRC==='결석')html+='<h3 style="margin:0 0 8px">결석 증빙 (병결·예비군) <span class="xs muted">출결달력 · 카톡 출결봇 · 수강생 화면에서 자동으로 들어와요</span></h3>'+(absL.length?'<table><thead><tr><th>수강생</th><th>결석일</th><th>종류</th><th>파일</th><th>상태</th><th>기한</th><th></th></tr></thead><tbody>'+absL.map(y=>'<tr><td><b>'+esc(y.name)+'</b></td><td>'+md(y.k)+'('+wd(y.k)+')</td><td>'+y.kind+'</td><td>'+((y.files||[]).map(fileChip).join(' ')||'<span class="muted xs">없음</span>')+'</td><td>'+(y.doc==='done'?'<span class="badge b-info">인정 · 출석 반영</span>':y.sub?'<span class="badge b-warn">제출됨 · 확인 대기</span>':'<span class="badge b-bad">서류대기</span>')+'</td><td>'+md(y.due)+(y.doc!=='done'&&DAY>y.due?' <span class="no">지남</span>':'')+'</td><td style="white-space:nowrap">'+(y.doc==='done'?'<button class="btn s sm" data-act="doc" data-id="'+y.sid+'" data-k="'+y.k+'">되돌리기</button>':'<button class="btn sm" data-act="doc" data-id="'+y.sid+'" data-k="'+y.k+'">확인 · 인정</button> <button class="btn s sm" data-act="docOne" data-id="'+y.sid+'" data-k="'+y.k+'">요청 안내</button>')+'</td></tr>').join('')+'</tbody></table>':'<p class="muted sm">결석 증빙이 없습니다.</p>')+(mine.length?'<h3 style="margin:16px 0 8px">기타 결석 관련 서류</h3>':'');
  if(mine.length||DRC!=='결석')html+=mine.length?'<table><thead><tr><th>수강생</th><th>서류</th><th>금액</th><th>파일</th><th>상태</th><th>등록</th><th></th></tr></thead><tbody>'+mine.map(r=>'<tr><td><b>'+esc(r.who||'-')+'</b></td><td>'+esc(r.title)+(r.memo?'<div class="xs muted">'+esc(r.memo)+'</div>':'')+'</td><td>'+(r.amt?Number(r.amt).toLocaleString()+'원':'—')+'</td><td>'+((r.files||[]).map(fileChip).join(' ')||'<span class="muted xs">없음</span>')+'</td><td><button class="btn s sm" data-act="drSt" data-id="'+r.id+'"><span class="badge '+DR_ST[r.st]+'">'+r.st+'</span></button></td><td class="xs">'+esc(r.by)+'<br>'+esc(r.at)+'</td><td><button class="x" data-act="drDel" data-id="'+r.id+'" aria-label="삭제">×</button></td></tr>').join('')+'</tbody></table>'+(DRC==='영수증'?'<p class="sm" style="margin:8px 0 0">합계 <b>'+mine.reduce((a,r)=>a+(Number(r.amt)||0),0).toLocaleString()+'원</b> · 확인 '+mine.filter(r=>r.st==='확인').reduce((a,r)=>a+(Number(r.amt)||0),0).toLocaleString()+'원</p>':''):'<p class="muted sm">\''+esc(DRC)+'\' 분류에 등록된 서류가 없습니다. 아래 \'서류 등록\'으로 추가하세요.</p>';
  $('drBody').innerHTML=html;
- $('drFormSum').textContent='＋ '+DRC+' 서류 등록';
+ $('drFormSum').textContent='+ '+DRC+' 서류 등록';
  const w=$('drWho');if(w&&document.activeElement!==w&&w.options.length!==S.students.length+1){w.innerHTML='<option value="">(운영 내부)</option>'+S.students.map(s=>'<option>'+esc(s.name)+'</option>').join('')}
 }
 /* ---- 카톡 출결봇: 증빙 파일 받기 버튼 ---- */
@@ -2056,7 +2244,7 @@ function buildDocsForms(){
 
 /* ==== 랜딩페이지 설계안 반영: 운영진 관제 화면 · 수강생 안내 화면 ==== */
 /* ---- 공통: 오늘 일정 (기본 시간표 + 추가 일정) ---- */
-function defSched(k){if(!CSET.has(k))return[];return[{t:'09:00',e:'12:50',title:'오전 강의',who:'담당 강사',room:'301호',type:'강의'},{t:'13:00',e:'14:00',title:'점심',who:'',room:'',type:'휴식'},{t:'14:00',e:'17:30',title:'실습 · 프로젝트',who:'담당 강사',room:'301호',type:'실습'},{t:'17:30',e:'18:00',title:'데일리 회고 · 학습로그',who:'현장운영진',room:'301호',type:'회고'}]}
+function defSched(k){if(!CSET.has(k))return[];return[{t:'09:00',e:'13:00',title:'강의 및 실습',who:'담당 강사',room:'',type:'강의'},{t:'13:00',e:'14:00',title:'점심',who:'',room:'',type:'휴식'},{t:'14:00',e:'16:00',title:'강의 및 실습',who:'담당 강사',room:'',type:'실습'},{t:'16:00',e:'18:00',title:'개별 학습 · 팀 활동 (학습일지 · 과제 · 멘토링)',who:'',room:'',type:'회고'}]}
 const schedOf=k=>defSched(k).concat(((S.schedule||{})[k]||[])).sort((a,b)=>a.t<b.t?-1:1);
 function cweek(k){const C=S.curriculum||[];const i=C.findIndex(w=>k>=w.a&&k<=w.b);return i<0?null:{i,w:C[i],day:COURSE.filter(x=>x>=C[i].a&&x<=k).length}}
 function csvSave(name,rows){const esc2=v=>{v=String(v==null?'':v);return/[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};saveFile(name,new Blob(['﻿'+rows.map(r=>r.map(esc2).join(',')).join('\r\n')],{type:'text/csv'}))}
@@ -2075,8 +2263,9 @@ function riskList(){const out=[];
 function rHome2(){
  const g=todayGroups(),N=S.students.length||1,mt=missingTasks(),qOpen=S.issues.filter(i=>i.cat==='문의'&&i.st!=='done'),dP=sickList().filter(x=>x.doc!=='done');
  const rate=Math.round((g.in.length+g.late.length)/N*100);
- const nums=[['오늘 출석률',CSET.has(DAY)?rate+'%':'—',(g.in.length+g.late.length)+'/'+S.students.length+'명 입실',rate>=90?'ok':rate>=80?'warn':'bad','ai:오늘 출석 현황'],
-  ['지각 · 결석',g.late.length+' · '+g.abs.length+'명','확인 전 '+g.wait.length+'명',g.abs.length?'bad':g.late.length?'warn':'ok','ai:오늘 결석자 명단'],
+ const none=g.wait.length===S.students.length;
+ const nums=[['오늘 출석률',!CSET.has(DAY)?'수업 없음':none?'체크 전':rate+'%',none?'09:00 출결 판정 후 표시':(g.in.length+g.late.length)+'/'+S.students.length+'명 입실 · 확인 전 '+g.wait.length+'명',!CSET.has(DAY)||none?'idle':rate>=90?'ok':rate>=80?'warn':'bad','ai:오늘 출석 현황'],
+  ['지각 · 결석',none?'체크 전':g.late.length+' · '+g.abs.length+'명','확인 전 '+g.wait.length+'명',none?'idle':g.abs.length?'bad':g.late.length?'warn':'ok','ai:오늘 결석자 명단'],
   ['미제출 과제',mt.length+'건',[...new Set(mt.map(x=>x.t.name))].length+'개 과제',mt.length?'warn':'ok','go:docs:d-board'],
   ['미처리 문의',qOpen.length+'건','AI 답변 못 한 문의',qOpen.length?'warn':'ok','go:notice:n-inq'],
   ['서류 확인 대기',dP.length+'건','결석 증빙',dP.length?'warn':'ok','go:docs:d-absent']];
@@ -2090,7 +2279,7 @@ function rHome2(){
  const sc=schedOf(DAY);$('hSched').innerHTML=sc.length?sc.map(x=>{const cur=now&&x.t<=now&&now<x.e;return'<div class="tli'+(cur?' cur':'')+(now&&now>=x.e?' past':'')+'"><b>'+x.t+'</b><div class="grow"><div class="tt2">'+esc(x.title)+(cur?' <span class="badge b-acc">진행 중</span>':'')+'</div><div class="xs muted">'+[x.who,x.room].filter(Boolean).map(esc).join(' · ')+(x.e?' · ~'+x.e:'')+'</div></div>'+(x.id?'<button class="x" data-act="scDel" data-id="'+x.id+'" aria-label="삭제">×</button>':'')+'</div>'}).join(''):'<p class="muted sm">수업이 없는 날이에요.</p>';
  // 매뉴얼
  if(!$('hManual').dataset.built){$('hManual').dataset.built='1';$('hManual').innerHTML=MANUALS.map(m=>'<details class="man"><summary>'+m[0]+'</summary><ol>'+m[1].map(x=>'<li>'+x+'</li>').join('')+'</ol></details>').join('')}
- if(!$('aiEx').dataset.built){$('aiEx').dataset.built='1';$('aiEx').innerHTML=['오늘 결석자 명단','지각자','위험 수강생','미제출 과제','답변 대기 문의','서류 대기','1조 공지 초안 써줘','오늘 일정'].map(t=>'<button class="chip cbtn" data-act="aiAsk" data-q="'+t+'">'+t+'</button>').join('')}
+ if(!$('aiEx').dataset.built){$('aiEx').dataset.built='1';$('aiEx').innerHTML=['오늘 결석자 명단','위험 수강생','미제출 과제','답변 대기 문의','1조 공지 초안 써줘'].map(t=>'<button class="chip cbtn" data-act="aiAsk" data-q="'+t+'">'+t+'</button>').join('')}
 }
 const MANUALS=[
  ['강사가 결강할 때',['담당 강사에게 사유·복귀 일정 확인','대체 강사 또는 자습 과제 결정 (매니저)','수강생 공지 작성 → 강의실 안내','출결은 정상 처리, 운영 일지에 기록']],
@@ -2144,10 +2333,10 @@ function rSHome(){const me=myStu();if(!me||!$('sHello'))return;const cw=cweek(DA
  // 내 진도 (막대 하나)
  const T=(S.docTasks||[]).filter(t=>tTargets(t).includes(me)&&t.due<=DAY),sub=T.filter(t=>tSt(t,me.id)).length,subRate=T.length?Math.round(sub/T.length*100):100;
  const msg=c.left<0?'출석 기준을 조금 넘었어요. 운영진이 함께 방법을 찾아 드릴게요. 문의하기로 편하게 이야기해 주세요.':c.left<=2?'수료까지 결석은 '+c.left+'일만 남았어요. 남은 기간 조금만 더 힘내요!':T.length&&sub<T.length?'과제 '+(T.length-sub)+'개만 더 내면 다 따라온 거예요!':'잘 따라오고 있어요. 이대로만 가면 수료예요 👍';
- $('sProg').innerHTML='<div class="ch"><h2>내 진도</h2><span class="badge '+(lv[1]==='ok'?'b-ok':lv[1]==='warn'?'b-warn':'b-bad')+'">'+lv[0]+'</span></div><div class="pbar"><i style="width:'+Math.min(100,c.rate)+'%"></i><em style="left:80%" title="수료 기준 80%"></em></div><div class="pleg"><span>출석률 <b>'+c.rate.toFixed(1)+'%</b></span><span>수료 기준 80%</span></div>'+
+ $('sProg').innerHTML='<div class="ch"><h2>내 진도</h2><span class="badge '+(lv[1]==='ok'?'b-ok':lv[1]==='warn'?'b-warn':'b-bad')+'">'+lv[0]+'</span></div><div class="pbar lv-'+lv[1]+'"><i style="width:'+Math.min(100,c.rate)+'%"></i><em style="left:80%" title="수료 기준 80%"></em></div><div class="pleg"><span>출석률 <b>'+c.rate.toFixed(1)+'%</b></span><span>수료 기준 80%</span></div>'+
   '<div class="pnums"><div><span>과제 제출</span><b>'+subRate+'%</b></div><div><span>앞으로 결석 가능</span><b>'+Math.max(0,c.left)+'일</b></div><div><span>남은 교육일</span><b>'+COURSE.filter(k=>k>DAY).length+'일</b></div></div><p class="sm" style="margin:10px 0 0">'+msg+'</p>';
  // 주차 카드
- const C=S.curriculum||[];$('sWeeks').innerHTML=C.map((w,i)=>{const cur=cw&&cw.i===i;return'<div class="wkc'+(cur?' cur':'')+(DAY>w.b?' past':'')+'"'+(cur?' id="wkCur"':'')+'><div class="xs muted">'+w.n+' · '+md(w.a)+'~'+md(w.b)+(cur?' · <b style="color:var(--acc)">이번 주</b>':'')+'</div><b>'+esc(w.title)+'</b><ul>'+String(w.topics||'').split('\n').filter(Boolean).slice(0,3).map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>'+((w.mats||[]).length?(w.mats||[]).slice(0,2).map(m=>'<a class="mat" href="'+esc(m.url)+'" target="_blank" rel="noopener">📄 '+esc(m.t)+'</a>').join(''):'<span class="xs muted">자료 준비 중</span>')+'</div>'}).join('');
+ const C=S.curriculum||[];$('sWeeks').innerHTML=C.map((w,i)=>{const cur=cw&&cw.i===i;return'<div class="wkc'+(cur?' cur':'')+(DAY>w.b?' past':'')+'"'+(cur?' id="wkCur"':'')+'><div class="xs muted">'+w.n+' · '+md(w.a)+'~'+md(w.b)+(cur?' · <b style="color:var(--acc)">이번 주</b>':'')+'</div><b>'+esc(w.title)+'</b><ul>'+String(w.topics||'').split('\n').filter(Boolean).slice(0,3).map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>'+((w.mats||[]).length?(w.mats||[]).slice(0,2).map(m=>'<a class="mat" href="'+esc(m.url)+'" target="_blank" rel="noopener">📄 '+esc(m.t)+'</a>').join(''):(cur?'<span class="xs muted">자료가 올라오면 알림으로 알려드려요</span>':''))+'</div>'}).join('');
  if(!$('sWeeks').dataset.sc){$('sWeeks').dataset.sc='1';setTimeout(()=>{const e=$('wkCur');if(e)$('sWeeks').scrollLeft=e.offsetLeft-$('sWeeks').offsetLeft-12},50)}
  // 공지 (최신 5개, 고정 먼저)
  const N=(S.notices||[]).filter(n=>n.to!=='운영진').sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||(a.at<b.at?1:-1)).slice(0,5);
@@ -2213,11 +2402,205 @@ function attLayout(){const el=$('sAtt');if(!el||el.querySelector('.attgrid'))ret
  const g=document.createElement('div');g.className='attgrid';const L=document.createElement('div');L.className='attL';const R=document.createElement('div');R.className='attR';
  L.appendChild(k[2]);R.append(k[0],k[1],k[3]);g.append(L,R);el.appendChild(g)}
 
+/* ==== 강사 · 학생관리: 학생 목록 · 학생 상세 · 상담 목록 · 학습로그 & 제작물 현황 (가상 데이터 포함) ==== */
+const PROF={s1:['데이터 분석가','마케팅 2년','엑셀·기획','코딩이 처음이라 속도가 걱정'],s2:['AI 서비스 기획자','경영학 전공','발표·문서 작성','파이썬 실습에서 자주 막힘'],s3:['UX 리서처','디자인 전공','사용자 인터뷰','출결 관리, 아르바이트 병행'],s4:['백엔드 개발자','정보처리 비전공','끈기','결석이 잦음 · 생활 리듬'],s5:['콘텐츠 마케터','영상 편집 1년','콘텐츠 기획','팀 프로젝트 역할 고민'],s6:['데이터 엔지니어','공대 졸업','논리적 사고','건강 문제로 병결'],s7:['프로덕트 매니저','스타트업 인턴','커뮤니케이션','알림 수신 동의 미제출'],s8:['AI 교육 콘텐츠 개발자','교육학 전공','설명력','추가 입소로 진도 따라잡기']};
+const LOGSUM=['프롬프트 구조(역할·형식·예시)를 정리했다.','에이전트가 도구를 고르는 흐름을 이해했다.','고객여정지도로 문제점을 찾았다.','팀 피칭 자료를 웹 페이지로 만들었다.','스킬 파일로 반복 작업을 자동화해 봤다.'];
+const DIFFS=['쉬움','보통','보통','어려움','매우 어려움'],SPDS=['느림','적당함','적당함','빠름','매우 빠름'];
+function seedMgmt(s){if(!A.demo){s.mgmtSeeded=1;return}
+ s.profile=s.profile||{};Object.keys(PROF).forEach((id,i)=>{if(!s.profile[id]){const p=PROF[id];s.profile[id]={goal:p[0],bg:p[1],strength:p[2],concern:p[3],memo:'',mbti:['ENFP','ISTJ','INFJ','ESTP','ENTP','ISFJ','ENTJ','INTP'][i]}}});
+ s.logs=s.logs||{};const days=['2026-11-12','2026-11-13','2026-11-16','2026-11-17','2026-11-18','2026-11-19'];
+ s.students.forEach((st,i)=>{const L=s.logs[st.id]=s.logs[st.id]||{};days.forEach((k,j)=>{if(L[k])return;if((i*7+j*3)%5===0)return;const r=(s.cal[st.id]||{})[k];if(r&&(r.s==='absent'||r.s==='sick'))return;
+  L[k]={diff:DIFFS[(i+j)%5],speed:SPDS[(i*2+j)%5],sum:LOGSUM[(i+j)%5],prac:['실습을 끝까지 완료했다.','중간에 막혀서 강사님께 질문했다.','팀원과 나눠서 진행했다.'][(i+j)%3],retro:['좋았던 부분: 바로 써먹을 수 있었다','어려웠던 부분: 속도가 빨랐다','다음엔 예제를 더 해 보고 싶다'][(i+j)%3],st:'done',at:md(k)+' 18:'+pad(10+i*3),fb:(j%2===0&&i%2===0)?{t:['핵심을 잘 정리했어요. 다음엔 막힌 부분을 구체적으로 적어 주세요.','실습 결과를 캡처해 두면 포트폴리오에 바로 쓸 수 있어요.','질문해 준 덕분에 다른 분들도 도움이 됐어요.'][(i+j)%3],by:'담당 강사',at:md(addDays(k,1))+' 09:20'}:null}})});
+ s.counsel=s.counsel||[
+  {id:'c1',sid:'s4',date:'2026-11-17',type:'출결',title:'결석 누적 상담 (8일)',body:'아침 기상 문제로 결석이 이어짐. 수료 기준(결석 10일)까지 2일 남은 상황을 함께 확인함.',next:'출결봇 알림 수신 확인, 다음 주 월요일 재상담',follow:'2026-11-23',by:'CJ 총괄PM',st:'진행'},
+  {id:'c2',sid:'s3',date:'2026-11-16',type:'출결',title:'아르바이트 병행 일정 조정',body:'주 2회 저녁 아르바이트로 피로 누적. 1차 단위기간 수당 기준 미달 가능성 안내.',next:'2차 단위기간 결석 0일 목표, 주간 체크',follow:'2026-11-25',by:'CJ 총괄PM',st:'진행'},
+  {id:'c3',sid:'s2',date:'2026-11-14',type:'학습',title:'파이썬 실습 보충',body:'함수·반복문 실습에서 자주 막힘. 보충 자료와 예제 3개 제공.',next:'금요일 실습 시간에 1:1 코드 리뷰',follow:'2026-11-21',by:'담당 강사',st:'진행'},
+  {id:'c4',sid:'s5',date:'2026-11-13',type:'진로',title:'팀 프로젝트 역할 상담',body:'콘텐츠 기획 강점을 살려 피칭 자료 담당을 제안함. 본인도 동의.',next:'피칭 데이 이후 회고',follow:'',by:'담당 강사',st:'완료'},
+  {id:'c5',sid:'s6',date:'2026-11-10',type:'생활',title:'건강 문제 · 병결 서류 안내',body:'병결 서류 제출 방법과 인정 한도(5일) 안내. 무리하지 않도록 권함.',next:'서류 제출 확인',follow:'2026-11-12',by:'학원 출결담당',st:'완료'},
+  {id:'c6',sid:'s8',date:'2026-11-05',type:'학습',title:'추가 입소 진도 따라잡기',body:'1~2주차 핵심 자료와 녹화본을 공유. 하루 30분 복습 계획을 세움.',next:'3주차 말 진도 점검',follow:'2026-11-13',by:'담당 강사',st:'완료'},
+  {id:'c7',sid:'s1',date:'2026-11-18',type:'진로',title:'데이터 분석가 포트폴리오 방향',body:'마케팅 경력을 살린 데이터 분석 프로젝트 주제를 함께 고민함.',next:'최종 프로젝트 주제 초안 가져오기',follow:'2026-11-26',by:'담당 강사',st:'진행'},
+  {id:'c8',sid:'s7',date:'2026-11-19',type:'생활',title:'알림 수신 동의 · 연락 방법',body:'출결 알림 수신 동의가 없어 봇 알림이 가지 않는 상황 안내.',next:'동의서 제출받기',follow:'2026-11-20',by:'학원 출결담당',st:'진행'}];
+ s.deliv=s.deliv||[];const d=s.deliv[0];if(d){d.subs=d.subs||{};d.subs.personal=d.subs.personal||{};[['s1','https://github.com/example-s1/daejeon_01/tree/pitch'],['s3','https://claude.ai/artifact/example-s3'],['s5','https://www.notion.so/example-s5-portfolio'],['s6','https://github.com/example-s6/daejeon_01']].forEach(([id,u])=>{if(!(d.subs.personal[id]||[]).length)d.subs.personal[id]=[{v:u,at:'11/18 17:'+pad(10+id.charCodeAt(1)%40)}]})}
+ s.mgmtSeeded=1;
+}
+
+
+let MSID='s1',MF='all',MLOG=null,MCO=null;
+const recentDays=()=>COURSE.filter(k=>k<=DAY).slice(-5);
+function logRate(sid){const D=COURSE.filter(k=>k<DAY&&k>=(stu(sid).join||COURSE[0])).slice(-10);return D.length?Math.round(D.filter(k=>{const l=logOf(sid,k);return l&&l.st==='done'}).length/D.length*100):0}
+function lastCounsel(sid){return (S.counsel||[]).filter(c=>c.sid===sid).sort((a,b)=>a.date<b.date?1:-1)[0]}
+function delivCount(sid){let n=0;(S.deliv||[]).forEach(d=>{n+=(((d.subs||{}).personal||{})[sid]||[]).length;const T=((d.subs||{}).team||{})[teamOf(sid)]||{};(d.req||[]).forEach(r=>{if(T[r.key])n++})});return n}
+const CO_T={'학습':'b-acc','진로':'b-vio','출결':'b-warn','생활':'b-info'};
+/* 학생 1인 상세 (목록 펼침 · 상세 페이지 공용) + 상담 기록 월별 달력 */
+let MOPEN=null,MCAL=null,MCM=null,MCD=null;
+function ymAdd(ym,d){const[y,m]=ym.split('-').map(Number),t=new Date(y,m-1+d,1);return t.getFullYear()+'-'+pad(t.getMonth()+1)}
+function coCal(sid){if(!MCM)MCM=DAY.slice(0,7);if(!MCD||MCD.slice(0,7)!==MCM)MCD=MCM===DAY.slice(0,7)?DAY:MCM+'-01';
+ const all=(S.counsel||[]).filter(x=>x.sid===sid),mon=all.filter(x=>x.date.slice(0,7)===MCM),fol=all.filter(x=>x.follow&&x.follow.slice(0,7)===MCM&&x.st==='진행');
+ const days=[];for(let k=MCM+'-01';k.slice(0,7)===MCM;k=addDays(k,1))days.push(k);
+ const lead=(new Date(days[0]+'T00:00').getDay()+6)%7;
+ const g='<div class="ccal"><div class="ccw">'+['월','화','수','목','금','토','일'].map(x=>'<b>'+x+'</b>').join('')+'</div><div class="ccg">'+'<span></span>'.repeat(lead)+days.map(k=>{const it=mon.filter(x=>x.date===k),fu=fol.filter(x=>x.follow===k),wk=COURSE.includes(k);
+  return'<button class="ccd'+(k===MCD?' on':'')+(k===DAY?' today':'')+(wk?'':' off')+'" data-act="mCd" data-id="'+k+'"><span class="dn">'+Number(k.slice(8))+'</span>'+it.map(x=>'<i class="cci '+CO_T[x.type]+(x.st==='완료'?' done':'')+'">'+esc(x.type)+' · '+esc(x.title)+'</i>').join('')+fu.map(x=>'<i class="ccf'+(k<DAY?' late':'')+'">↪ 후속 · '+esc(x.title)+'</i>').join('')+'</button>'}).join('')+'</div></div>';
+ const di=all.filter(x=>x.date===MCD),df=all.filter(x=>x.follow===MCD&&x.st==='진행');
+ const side='<div class="ccside"><h3 style="margin:0 0 6px">'+md(MCD)+'('+wd(MCD)+') 상담</h3>'+
+  (di.length?di.map(x=>'<div class="ccrec"><div class="inl"><span class="badge '+CO_T[x.type]+'">'+x.type+'</span><b class="grow">'+esc(x.title)+'</b><button class="btn s sm" data-act="mCoSt" data-id="'+x.id+'"><span class="badge '+(x.st==='완료'?'b-ok':'b-warn')+'">'+x.st+'</span></button><button class="linkb" data-act="mCoDel" data-id="'+x.id+'">삭제</button></div><div class="sm">'+esc(x.body||'')+'</div><div class="xs muted">후속: '+esc(x.next||'-')+(x.follow?' · '+md(x.follow):'')+' · '+esc(x.by||'')+'</div></div>').join(''):'<p class="muted sm">이날 상담 기록이 없어요.</p>')+
+  (df.length?'<div class="xs" style="margin:6px 0"><b>이날 후속 예정</b> · '+df.map(x=>esc(x.title)+' ('+md(x.date)+' 상담)').join(', ')+'</div>':'')+
+  '<div class="ccform"><b class="sm">+ '+md(MCD)+' 상담 기록 추가</b><div class="f3" style="grid-template-columns:100px 1fr;margin-top:6px"><label class="f" for="ccType" style="grid-column:1">유형</label><label class="f" for="ccTitle" style="grid-column:2;grid-row:1">제목</label><select id="ccType"><option>학습</option><option>진로</option><option>출결</option><option>생활</option></select><input id="ccTitle" maxlength="60" placeholder="제목"></div><label class="f" for="ccBody" style="margin-top:6px">상담 내용</label><textarea id="ccBody" rows="2"></textarea><div class="f3" style="grid-template-columns:1fr 140px;margin-top:6px"><label class="f" for="ccNext">후속 조치</label><label class="f" for="ccFollow">후속 일정</label><input id="ccNext" maxlength="80" placeholder="후속 조치"><input type="date" id="ccFollow" title="후속 일정"></div><button class="btn sm" data-act="ccAdd" data-id="'+sid+'" style="margin-top:6px">기록 저장 + 알림</button></div></div>';
+ return'<div class="card mt ccbox"><div class="ch"><h3 style="margin:0">📅 상담 기록 · 월별</h3><div class="inl"><button class="btn s sm" data-act="mCm" data-id="-1" aria-label="이전 달">‹</button><b>'+MCM.replace('-','년 ')+'월</b><button class="btn s sm" data-act="mCm" data-id="1" aria-label="다음 달">›</button></div><span class="xs muted grow" style="text-align:right">이번 달 상담 '+mon.length+'건 · 진행 중 '+mon.filter(x=>x.st==='진행').length+'건 · 후속 예정 '+fol.length+'건</span><button class="x" data-act="mCoCal" data-id="'+sid+'" aria-label="닫기">×</button></div><div class="ccwrap">'+g+side+'</div></div>'}
+function detailHtml(sid){const s=stu(sid),p=(S.profile||{})[sid]||{},c=calc(sid),lv=cLevel(c),g=(S.git||{})[sid];
+ const logs=Object.keys((S.logs||{})[sid]||{}).sort().reverse().slice(0,6).map(k=>[k,S.logs[sid][k]]);
+ const co=(S.counsel||[]).filter(x=>x.sid===sid).sort((a,b)=>a.date<b.date?1:-1);
+ const dl=[];(S.deliv||[]).forEach(d=>{const T=((d.subs||{}).team||{})[teamOf(sid)]||{};(d.req||[]).forEach(r=>{if(T[r.key])dl.push(['조별 · '+d.title,r.label,T[r.key].v,T[r.key].at])});(((d.subs||{}).personal||{})[sid]||[]).forEach(v=>dl.push(['개인 · '+d.title,'개인 제출',v.v,v.at]))});
+ return'<div class="mhead"><span class="av big" style="background:'+(['#5b6bd6','#2a9d8f','#d9467a','#c25b1f'][S.students.indexOf(s)%4])+'">'+esc(s.name.slice(0,1))+'</span><div class="grow"><h2>'+esc(s.name)+' <span class="xs muted">'+esc(s.team||'')+' · '+esc(p.mbti||'')+'</span></h2><div class="sm muted">목표: <b style="color:var(--text)">'+esc(p.goal||'-')+'</b> · 배경: '+esc(p.bg||'-')+'</div></div><div class="mstat"><div><span>판정</span><b class="'+(lv[1]==='ok'?'ok':lv[1]==='warn'?'wn':'no')+'">'+lv[0]+'</b></div><div><span>출석률</span><b>'+c.rate.toFixed(1)+'%</b></div><div><span>결석 여유</span><b>'+Math.max(0,c.left)+'일</b></div><div><span>학습로그</span><b>'+logRate(sid)+'%</b></div><div><span>제작물</span><b>'+dl.length+'건</b></div></div><button class="btn'+(MCAL===sid?'':' s')+'" data-act="mCoCal" data-id="'+sid+'">📅 상담기록</button></div>'+
+  (MCAL===sid?coCal(sid):'')+
+  '<div class="g c3 mt">'+
+  '<div class="card"><h3>프로필</h3><div class="kv"><span>강점</span><b>'+esc(p.strength||'-')+'</b></div><div class="kv"><span>고민·주의</span><b>'+esc(p.concern||'-')+'</b></div><div class="kv"><span>깃허브</span><b>'+(g&&g.repo?'<a href="'+esc(g.repo)+'" target="_blank" rel="noopener">'+esc(repoPath(g.repo))+'</a>':'미연결')+'</b></div><label class="f" style="margin-top:8px">강사 메모</label><textarea id="mMemo" rows="3" placeholder="수업 중 관찰한 점을 적어 두세요">'+esc(p.memo||'')+'</textarea><button class="btn s sm" data-act="mMemoSave" style="margin-top:6px">메모 저장</button></div>'+
+  '<div class="card"><div class="ch"><h3 style="margin:0">학습로그</h3><span class="xs muted">최근 6개</span></div>'+(logs.length?logs.map(([k,l])=>'<details class="qi"><summary><b class="grow">'+md(k)+'('+wd(k)+')</b><span class="badge">'+esc(l.diff)+'</span>'+(l.fb?'<span class="badge b-ok">피드백</span>':'')+'</summary><div class="ntb sm">'+esc(l.sum)+'<br><span class="muted">'+esc(l.prac||'')+'</span>'+(l.fb?'<div class="fb">'+esc(l.fb.t)+'</div>':'')+'</div></details>').join(''):'<p class="muted sm">작성한 학습로그가 없어요.</p>')+'</div>'+
+  '<div class="card"><div class="ch"><h3 style="margin:0">최근 상담</h3><button class="btn sm" data-act="mCoCal" data-id="'+sid+'">📅 월별 관리</button></div>'+(co.length?co.slice(0,4).map(x=>'<details class="qi"><summary><span class="badge '+CO_T[x.type]+'">'+x.type+'</span><b class="grow">'+esc(x.title)+'</b><span class="xs muted">'+md(x.date)+'</span></summary><div class="ntb sm">'+esc(x.body)+'<div class="xs" style="margin-top:4px"><b>후속:</b> '+esc(x.next||'-')+(x.follow?' · '+md(x.follow):'')+' · '+esc(x.by)+'</div></div></details>').join(''):'<p class="muted sm">상담 기록이 없어요.</p>')+'</div></div>'+
+  '<div class="card mt"><h3>제작물</h3>'+(dl.length?'<table><tbody>'+dl.map(x=>'<tr><td><span class="badge">'+esc(x[0])+'</span></td><td>'+esc(x[1])+'</td><td class="sm"><a href="'+esc(x[2])+'" target="_blank" rel="noopener">'+esc(x[2])+'</a></td><td class="xs muted">'+esc(x[3])+'</td></tr>').join('')+'</tbody></table>':'<p class="muted sm">제출한 제작물이 없어요.</p>')+'</div>'}
+function rMgmt(){if(!$('mList'))return;if(!S.mgmtSeeded&&ME&&ME.role!=='수강생'){setTimeout(()=>{if(!S.mgmtSeeded)commit(null,'',seedMgmt)},0)}
+ if(!S.students.find(s=>s.id===MSID))MSID=S.students[0].id;
+ const R=riskList(),rs=id=>R.find(r=>r.s.id===id);
+ // 학생 목록
+ document.querySelectorAll('[data-act="mf"]').forEach(b=>b.classList.toggle('on',b.dataset.f===MF));
+ const L=S.students.filter(s=>MF==='all'||(MF==='risk'?!!rs(s.id):s.team===MF));
+ const sub=SUB.mgmt||'m-list',inl=sub==='m-list';
+ $('mList').innerHTML='<table><thead><tr><th>이름</th><th>조</th><th>목표 직무</th><th>출석률 · 판정</th><th>학습로그(최근 10일)</th><th>제작물</th><th>최근 상담</th><th>신호</th></tr></thead><tbody>'+L.map(s=>{const c=calc(s.id),lv=cLevel(c),p=(S.profile||{})[s.id]||{},lc=lastCounsel(s.id),r=rs(s.id),lr=logRate(s.id),op=inl&&MOPEN===s.id;
+  return'<tr class="click'+(op?' sel':'')+'" data-act="mOpen" data-id="'+s.id+'"><td><b class="mname">'+(op?'▾ ':'▸ ')+esc(s.name)+'</b></td><td>'+esc(s.team||'-')+'</td><td class="sm">'+esc(p.goal||'-')+'</td><td>'+c.rate.toFixed(1)+'% <span class="lvDot lv-'+lv[1]+'">'+lv[0]+'</span></td><td><div class="minibar"><i style="width:'+lr+'%"></i></div><span class="xs">'+lr+'%</span></td><td>'+delivCount(s.id)+'건</td><td class="xs">'+(lc?md(lc.date)+' · '+esc(lc.type):'<span class="muted">없음</span>')+'</td><td>'+(r?'<span class="badge '+(r.lv===2?'b-bad':'b-warn')+'">'+(r.lv===2?'위험':'주의')+'</span>':'<span class="badge b-ok">안정</span>')+'</td></tr>'+
+  (op?'<tr class="minl"><td colspan="8"><div class="minlw">'+detailHtml(s.id)+'</div></td></tr>':'')}).join('')+'</tbody></table>';
+ // 학생 상세 (목록 안에서 펼쳐 볼 때는 상세 페이지 쪽을 비움: 같은 입력칸이 두 번 생기지 않게)
+ $('mStuSel').innerHTML=S.students.map(x=>'<option value="'+x.id+'"'+(x.id===MSID?' selected':'')+'>'+esc(x.name)+' ('+esc(x.team||'-')+')</option>').join('');
+ $('mDetail').innerHTML=inl?'':detailHtml(MSID);
+ // 상담 목록
+ const C=(S.counsel||[]).slice().sort((a,b)=>a.date<b.date?1:-1);
+ $('mCoStat').textContent='전체 '+C.length+'건 · 진행 중 '+C.filter(x=>x.st==='진행').length+'건 · 후속 일정 지남 '+C.filter(x=>x.st==='진행'&&x.follow&&x.follow<DAY).length+'건';
+ $('mCo').innerHTML='<table><thead><tr><th>날짜</th><th>학생</th><th>유형</th><th>제목</th><th>담당</th><th>후속 일정</th><th>상태</th></tr></thead><tbody>'+C.map(x=>{const op=MCO===x.id;return'<tr'+(op?' class="sel"':'')+'><td>'+md(x.date)+'</td><td><b>'+esc(stu(x.sid).name)+'</b></td><td><span class="badge '+CO_T[x.type]+'">'+x.type+'</span></td><td><button class="linkb" data-act="mCoOpen" data-id="'+x.id+'" aria-expanded="'+op+'">'+(op?'▾ ':'▸ ')+esc(x.title)+'</button></td><td class="xs">'+esc(x.by)+'</td><td class="xs">'+(x.follow?md(x.follow)+(x.st==='진행'&&x.follow<DAY?' <span class="no">지남</span>':''):'—')+'</td><td><button class="btn s sm" data-act="mCoSt" data-id="'+x.id+'"><span class="badge '+(x.st==='완료'?'b-ok':'b-warn')+'">'+x.st+'</span></button></td></tr>'+
+  (op?'<tr class="brow"><td></td><td colspan="6"><div class="bbody"><b>상담 내용</b><br>'+esc(x.body)+'<br><b>후속 조치</b> '+esc(x.next||'-')+'<div class="inl" style="margin-top:8px"><button class="btn s sm" data-act="mStu" data-id="'+x.sid+'">학생 상세 보기</button><button class="linkb" data-act="mCoDel" data-id="'+x.id+'">삭제</button></div></div></td></tr>':'')}).join('')+'</tbody></table>';
+ const cw=$('coWho');if(cw&&document.activeElement!==cw&&cw.options.length!==S.students.length){cw.innerHTML=S.students.map(x=>'<option value="'+x.id+'">'+esc(x.name)+'</option>').join('');cw.value=MSID}
+ // 학습로그 & 제작물 현황
+ const D=recentDays();
+ $('mLog').innerHTML='<table class="lmat"><thead><tr><th>학생</th>'+D.map(k=>'<th>'+md(k)+'<div class="xs muted">'+wd(k)+'</div></th>').join('')+'<th>작성률</th><th>제작물</th><th>마지막 제출</th></tr></thead><tbody>'+S.students.map(st=>{let last='';const dd=[];(S.deliv||[]).forEach(d=>{(((d.subs||{}).personal||{})[st.id]||[]).forEach(v=>{dd.push(v.at)})});
+  return'<tr><td><b class="click" data-act="mStu" data-id="'+st.id+'">'+esc(st.name)+'</b></td>'+D.map(k=>{const l=logOf(st.id,k),r=(S.cal[st.id]||{})[k],on=MLOG===st.id+'|'+k;if(l&&l.st==='done')return'<td><button class="lcell d'+(DIFFS.indexOf(l.diff)>=3?' hard':'')+(on?' on':'')+'" data-act="mLogOpen" data-id="'+st.id+'|'+k+'" title="'+esc(l.diff)+'">✓'+(l.fb?'💬':'')+'</button></td>';
+   if(r&&(r.s==='absent'||r.s==='sick'||r.s==='short'))return'<td><span class="lcell ab">결석</span></td>';return'<td><span class="lcell miss">—</span></td>'}).join('')+
+   '<td>'+logRate(st.id)+'%</td><td>'+delivCount(st.id)+'건</td><td class="xs">'+(dd.sort().reverse()[0]||'—')+'</td></tr>'}).join('')+'</tbody></table>';
+ if(MLOG){const[sid,k]=MLOG.split('|'),l=logOf(sid,k);$('mLogDet').innerHTML=l?'<div class="card mt"><div class="ch"><h3 style="margin:0">'+esc(stu(sid).name)+' · '+md(k)+'('+wd(k)+') 학습로그</h3><span class="badge">난이도 '+esc(l.diff)+'</span><span class="badge">속도 '+esc(l.speed)+'</span><button class="x" data-act="mLogOpen" data-id="" aria-label="닫기">×</button></div><p class="sm"><b>배운 내용</b> '+esc(l.sum)+'</p><p class="sm"><b>실습</b> '+esc(l.prac||'-')+'</p><p class="sm"><b>회고</b> '+esc(l.retro||'-')+'</p><label class="f">강사 피드백</label><textarea id="mFb" rows="2">'+esc(l.fb?l.fb.t:'')+'</textarea><button class="btn sm" data-act="mFbSave" data-id="'+MLOG+'" style="margin-top:6px">피드백 저장 + 알림</button></div>':''}else $('mLogDet').innerHTML='';
+}
+function mgmtAct(act,id,a){const me=ME?ME.name:'';
+ switch(act){
+  case'mf':MF=a.dataset.f;render();return true;
+  case'mOpen':MOPEN=MOPEN===id?null:id;if(MOPEN)MSID=id;if(MCAL&&MCAL!==id)MCAL=null;render();return true;
+  case'mCoCal':MCAL=MCAL===id?null:id;MSID=id;MCM=null;MCD=null;render();setTimeout(()=>{const b=document.querySelector('.ccbox');if(b)b.scrollIntoView({block:'nearest',behavior:'smooth'})},30);return true;
+  case'mCm':MCM=ymAdd(MCM||DAY.slice(0,7),Number(id));MCD=null;render();return true;
+  case'mCd':MCD=id;render();setTimeout(()=>{const t=$('ccTitle');if(t)t.focus({preventScroll:true})},30);return true;
+  case'ccAdd':{const t=$('ccTitle').value.trim();if(!t){$('ccTitle').focus();return true}const x={id:'c'+Date.now(),sid:id,date:MCD,type:$('ccType').value,title:t,body:$('ccBody').value.trim(),next:$('ccNext').value.trim(),follow:$('ccFollow').value,by:me,st:'진행'};
+   commit('🗣 상담 기록 등록 · '+stu(id).name+' · '+md(x.date)+' '+t,'mgmt',s=>{(s.counsel=s.counsel||[]).unshift(x)});return true}
+  case'mStu':MSID=id;go('mgmt','m-stu');return true;
+  case'mMemoSave':{const v=$('mMemo').value;commit('학생 메모 저장 · '+stu(MSID).name,'mgmt',s=>{((s.profile=s.profile||{})[MSID]=s.profile[MSID]||{}).memo=v});return true}
+  case'mNewCo':go('mgmt','m-counsel');setTimeout(()=>{const d=$('coForm');if(d)d.open=true;if($('coWho'))$('coWho').value=MSID;if($('coTitle'))$('coTitle').focus()},50);return true;
+  case'mCoOpen':MCO=MCO===id?null:id;render();return true;
+  case'mCoSt':{const x=(S.counsel||[]).find(y=>y.id===id);if(x)commit('상담 '+(x.st==='진행'?'완료':'다시 진행')+' · '+stu(x.sid).name+' '+x.title,'mgmt',s=>{const y=s.counsel.find(z=>z.id===id);y.st=y.st==='진행'?'완료':'진행'});return true}
+  case'mCoDel':{const x=(S.counsel||[]).find(y=>y.id===id);if(x&&confirm('상담 기록을 지울까요?\n'+x.title))commit('상담 기록 삭제 · '+x.title,'mgmt',s=>{s.counsel=s.counsel.filter(y=>y.id!==id)});return true}
+  case'mLogOpen':MLOG=id&&MLOG!==id?id:null;render();return true;
+  case'mFbSave':{const[sid,k]=id.split('|'),t=$('mFb').value.trim();if(!t)return true;commit('@stu:'+sid+'|💬 '+md(k)+' 학습로그에 강사 피드백 · '+stu(sid).name,'mgmt',s=>{const l=((s.logs||{})[sid]||{})[k];if(l)l.fb={t,by:me,at:stamp()}});return true}
+ }
+ return false;
+}
+function buildMgmtForms(){
+ if($('mStuSel'))$('mStuSel').onchange=e=>{MSID=e.target.value;render()};
+ if($('coAdd'))$('coAdd').onclick=()=>{const t=$('coTitle').value.trim();if(!t){$('coTitle').focus();return}const x={id:'c'+Date.now(),sid:$('coWho').value,date:$('coDate').value||DAY,type:$('coType').value,title:t,body:$('coBody').value.trim(),next:$('coNext').value.trim(),follow:$('coFollow').value,by:ME?ME.name:'',st:'진행'};
+  commit('🗣 상담 기록 등록 · '+stu(x.sid).name+' · '+t,'mgmt',s=>{(s.counsel=s.counsel||[]).unshift(x)});['coTitle','coBody','coNext','coFollow'].forEach(i=>$(i).value='')};
+}
+
+/* ==== UX 보완 (전문가 점검 반영) ====
+   ① 긴 목록은 5개까지만 보이고 '+ n건 더 보기'로 펼침
+   ② 학생 이름은 어느 화면에서든 누르면 학생 상세(학생관리)로 → '← 돌아가기'로 원래 화면 복귀
+   ③ 출결봇 화면을 '출결' 메뉴 안으로 합침 (상단 메뉴 9 → 8) */
+const CLIPOPEN=new Set();
+function clipList(id,n,unit){const el=$(id);if(!el)return;const k=[...el.children].filter(c=>!c.classList.contains('clipBtn'));el.querySelectorAll(':scope>.clipBtn').forEach(b=>b.remove());
+ if(k.length<=n){k.forEach(c=>c.hidden=false);return}const open=CLIPOPEN.has(id);k.forEach((c,i)=>c.hidden=!open&&i>=n);
+ const b=document.createElement('button');b.type='button';b.className='linkb clipBtn';b.dataset.clip=id;b.textContent=open?'접기 ▴':'+ '+(k.length-n)+(unit||'건')+' 더 보기 ▾';el.appendChild(b)}
+document.addEventListener('click',e=>{const b=e.target.closest('.clipBtn');if(!b)return;const id=b.dataset.clip;CLIPOPEN.has(id)?CLIPOPEN.delete(id):CLIPOPEN.add(id);uxAfter()});
+
+/* 학생 이름 → 학생 상세 */
+let BACK=null;
+function stuLinks(){if(!ME||ME.role==='수강생')return;const names={};S.students.forEach(s=>names[s.name]=s.id);
+ document.querySelectorAll('.page.on b, .page.on td, .page.on strong').forEach(el=>{if(el.dataset.stu||el.children.length)return;const t=el.textContent.trim().replace(/^[▸▾]\s*/,'');const sid=names[t];if(!sid)return;
+  if(el.closest('#pg-mgmt,[data-act],[data-go],button,a,label,tr.click,select,.searchRes,.slink'))return;el.dataset.stu=sid;el.classList.add('slink');el.title='학생 상세 보기'})}
+document.addEventListener('click',e=>{const el=e.target.closest('.slink[data-stu]');if(!el)return;e.preventDefault();e.stopPropagation();
+ BACK={pg:PG,sub:SUB[PG],y:window.scrollY};MSID=el.dataset.stu;MOPEN=null;go('mgmt','m-stu')},true);
+function backBar(){const d=$('mDetail');if(!d||PG!=='mgmt'||SUB.mgmt!=='m-stu')return;const old=$('mBack');if(old)old.remove();if(!BACK||BACK.pg==='mgmt')return;
+ const lb=(NAV.find(n=>n.id===BACK.pg)||{}).t||'이전 화면';const b=document.createElement('button');b.id='mBack';b.type='button';b.className='btn s sm';b.style.marginBottom='8px';b.textContent='← '+lb+'(으)로 돌아가기';
+ b.onclick=()=>{const k=BACK;BACK=null;go(k.pg,k.sub);setTimeout(()=>window.scrollTo(0,k.y||0),30)};d.before(b)}
+
+/* 출결봇 → '출결' 메뉴 안으로 */
+(function mergeBot(){const att=$('pg-att'),bot=$('pg-bot');if(att&&bot)[...bot.querySelectorAll(':scope>.sub')].forEach(s=>att.appendChild(s));
+ const i=STAFF_NAV.findIndex(n=>n.id==='bot'),a=STAFF_NAV.find(n=>n.id==='att');if(i>=0&&a){a.t='출결';a.subs=a.subs.concat([['t-board','오늘 출결 보드 · 봇'],['t-log','봇 발송 기록'],['t-conn','봇 연결 안내']]);STAFF_NAV.splice(i,1)}})();
+const _go=go;go=function(p,sub){if(p==='bot'&&!(ME&&ME.role==='수강생')){p='att';if(!sub||!/^t-/.test(sub))sub='t-board'}
+ if(NAV.some(n=>n.id===p)){TREE.clear()}return _go(p,sub)};
+
+function uxAfter(){if(PG==='home'){clipList('urgent',5);clipList('hRisk',5,'명');clipList('feed',5)}
+ if(PG==='att'&&/^t-/.test(SUB.att||''))rBot();
+ stuLinks();backBar();labelInputs()}
+
+/* ==== 3순위: 메뉴 아이콘을 한 세트(선 아이콘)로 — 이모지는 기기마다 모양이 달라서 ==== */
+const SVGI=p=>'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';
+const ICONS={
+ home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+ mgmt:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.3c2.1.6 3.5 2.6 3.5 5.7"/>',
+ brief:'<rect x="5" y="4" width="14" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M9 11h6M9 15h4"/>',
+ notice:'<path d="M3.5 10.5v3a1 1 0 0 0 1 1H7l6 4.5v-14L7 9.5H4.5a1 1 0 0 0-1 1z"/><path d="M16.5 9a4 4 0 0 1 0 6"/><path d="M19 6.5a7.5 7.5 0 0 1 0 11"/>',
+ docs:'<path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2h8.5A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/>',
+ learn:'<path d="M3.5 5h5.5a3 3 0 0 1 3 3v12a2.5 2.5 0 0 0-2.5-2.5H3.5z"/><path d="M20.5 5H15a3 3 0 0 0-3 3v12a2.5 2.5 0 0 1 2.5-2.5h6z"/>',
+ org:'<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2.5h12V16"/>',
+ att:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/>',
+ ask:'<path d="M4 5h16v11H10l-5 4v-4H4z"/><path d="M8.5 10.5h7"/>'};
+ICONS.shome=ICONS.home;ICONS.snotice=ICONS.notice;ICONS.slearn=ICONS.learn;ICONS.satt=ICONS.att;ICONS.sdocs=ICONS.docs;ICONS.sask=ICONS.ask;ICONS.bot=ICONS.att;
+STAFF_NAV.concat(STU_NAV).forEach(n=>{if(ICONS[n.id])n.ic=SVGI(ICONS[n.id])});
+
+/* ==== 4순위: 삭제는 확인창 없이 바로 → 6초 동안 '되돌리기' (전체 초기화처럼 큰 일만 확인창 유지) ==== */
+const _nativeConfirm=window.confirm.bind(window);
+window.confirm=function(msg){msg=String(msg||'');if(/모두|모든|전부/.test(msg))return _nativeConfirm(msg);
+ const before=JSON.parse(JSON.stringify(S)),label=(msg.includes('\n')?msg.split('\n').pop():msg.replace(/\s*(을\(를\)|을|를)?\s*(조직도에서|목록에서)?\s*(뺄|지울|삭제할)까요\?$/,'')).slice(0,40)||'삭제';
+ setTimeout(()=>{const keys=Object.keys(before).filter(k=>!/^(notif|ack|v|seq|rev|log)$/.test(k)&&JSON.stringify(before[k])!==JSON.stringify(S[k]));if(keys.length)undoToast(label,keys,before)},0);return true};
+let UNDO_T=null;
+function undoToast(label,keys,before){let el=$('undoT');if(!el){el=document.createElement('div');el.id='undoT';el.className='undoT';el.setAttribute('role','status');document.body.appendChild(el)}
+ el.innerHTML='<span>🗑 삭제했어요 · <b>'+esc(label)+'</b></span><button type="button" class="btn s sm" id="undoBtn">되돌리기</button>';el.hidden=false;
+ clearTimeout(UNDO_T);UNDO_T=setTimeout(()=>{el.hidden=true},6000);
+ $('undoBtn').onclick=()=>{clearTimeout(UNDO_T);el.hidden=true;commit('↩ 삭제 되돌리기 · '+label,PG,s=>{keys.forEach(k=>{s[k]=JSON.parse(JSON.stringify(before[k]))})})}}
+
+/* ==== 4순위: 안내 문구만 있는 입력칸에 이름표(스크린리더) 붙이기 ==== */
+function labelInputs(){document.querySelectorAll('input:not([type=hidden]):not([type=checkbox]):not([type=radio]),textarea,select').forEach(i=>{if(i.getAttribute('aria-label')||(i.labels&&i.labels.length))return;const t=i.placeholder||i.title;if(t)i.setAttribute('aria-label',t)})}
+
+/* ==== A·B 보완 ==== */
+/* 최근 변경: 줄 누르면 이동 (확인 버튼 등은 제외) */
+document.addEventListener('click',e=>{const r=e.target.closest('[data-feedgo]');if(!r||e.target.closest('button,a,input'))return;go(r.dataset.feedgo)});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const r=e.target.closest&&e.target.closest('[data-feedgo]');if(r&&e.target===r)go(r.dataset.feedgo)});
+/* 예전 데이터에 남은 '(예시)' 꼬리표 정리 (한 번만) */
+/* 가짜 예시 데이터로 저장돼 있던 화면(브라우저·클라우드)은 실제 데이터로 한 번 교체. 역할·조직·확인 기록은 유지 */
+let MIG_REAL=false;
+function migrateData(){if(!A.demo&&!S.realData&&!MIG_REAL){MIG_REAL=true;setTimeout(()=>{if(S.realData)return;commit('실제 명단 28명 · 수기 출석부(10/26~11/18)로 교체 · 예시 데이터 삭제','att',s=>{const n=seed();
+  ['profile','counsel','git','checkin','bot','botRun','sendlog','schedule','inquiries'].forEach(k=>{delete s[k]});
+  Object.keys(n).forEach(k=>{if(!/^(v|seq|users|org|loop|roles|roleInfo)$/.test(k))s[k]=n[k]});s.notif=(n.notif||[]).map(x=>Object.assign({},x,{id:(s.seq=(s.seq||1)+1)}));s.ack={};Object.keys(s.users||{}).forEach(k=>{if(/^수강생:/.test(k))delete s.users[k]});
+  s.checkin={};s.bot={};s.botRun={};s.sendlog=[];s.realData=1;s.mgmtSeeded=1})},0);return}
+ if((S.curriculum||[]).some(w=>/\s*\(예시\)$/.test(String(w.title||''))))setTimeout(()=>commit(null,'',s=>(s.curriculum||[]).forEach(w=>{w.title=String(w.title||'').replace(/\s*\(예시\)$/,'')})),0)}
+/* 운영브리핑 '지금 처리할 문제': 홈과 같은 줄 모양 + 필터 */
+let BF='all';
+function issTag(x){let t=x.t,tag=x.cat||'확인',tc='p-'+x.p;const m=t.match(/^\[기한 (지남|오늘)\]\s*/);
+ if(m){tag=m[1]==='지남'?'기한 지남':'오늘 마감';tc=m[1]==='지남'?'p-high':'p-mid';t=t.slice(m[0].length)}
+ else if(/마감 지남/.test(t)){tag='마감 지남';tc='p-high';t=t.replace(/\s*마감 지남\s*/,' ').replace(/^\[(.+?)\]\s*·?\s*/,'$1 · ')}
+ return{t,tag,tc}}
+function briefIssues(ai){const me=ME?ME.role:'';const F=[['all','전체'],['mine','내 담당'],['high','긴급만']].concat(['출결','수당','서류','문의'].filter(c=>ai.some(x=>x.cat===c)).map(c=>[c,c]));
+ if(!F.some(f=>f[0]===BF))BF='all';
+ const pass=x=>BF==='all'||(BF==='mine'?x.o===me:BF==='high'?x.p==='high':x.cat===BF);const L=ai.filter(pass).sort((a,b)=>(a.p==='high'?0:a.p==='mid'?1:2)-(b.p==='high'?0:b.p==='mid'?1:2));
+ const bar='<div class="seg bfilter" role="group" aria-label="문제 거르기">'+F.map(f=>{const n=ai.filter(x=>f[0]==='all'||(f[0]==='mine'?x.o===me:f[0]==='high'?x.p==='high':x.cat===f[0])).length;return'<button type="button" data-bf="'+f[0]+'" class="'+(BF===f[0]?'on':'')+'"'+(n?'':' disabled')+'>'+f[1]+' <span class="xs">'+n+'</span></button>'}).join('')+'</div>';
+ const rows=L.map(x=>{const g=issTag(x);return'<div class="row urow bi p'+x.p+'"><span class="pri '+g.tc+'">'+esc(g.tag)+'</span><div class="grow"><b title="'+esc(g.t)+'">'+esc(g.t)+'</b><div class="xs muted">'+esc(x.o)+' · '+esc(x.a)+'</div></div><button class="btn s sm" data-go="'+x.pg+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+(x.sid?' data-sid="'+x.sid+'"':'')+'>처리 →</button></div>'}).join('');
+ return bar+(rows||'<p class="muted sm" style="margin:10px 0">이 조건에 해당하는 문제가 없어요.</p>')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-bf]');if(!b)return;BF=b.dataset.bf;render()});
+
 /* ---- 공통 클릭 처리 ---- */
 document.addEventListener('click',e=>{
  const g=e.target.closest('[data-go]');if(g){if(g.dataset.sid){calcSelect(g.dataset.sid);SELB=g.dataset.sid}if(g.dataset.mid)SELM=g.dataset.mid;go(g.dataset.go,g.dataset.sub);if(g.dataset.jid)jLoad(g.dataset.jid);if($('searchRes'))$('searchRes').hidden=true;return}
  const a=e.target.closest('[data-act]');if(!a||a.disabled)return;const id=a.dataset.id,me=ME?ME.name:'';
- if(noticeAct(a.dataset.act,id,a)||prdAct(a.dataset.act,id,a)||learnAct(a.dataset.act,id,a)||docsAct(a.dataset.act,id,a)||landAct(a.dataset.act,id,a))return;
+ if(noticeAct(a.dataset.act,id,a)||prdAct(a.dataset.act,id,a)||learnAct(a.dataset.act,id,a)||docsAct(a.dataset.act,id,a)||landAct(a.dataset.act,id,a)||mgmtAct(a.dataset.act,id,a))return;
  switch(a.dataset.act){
   case'ack':commit(null,'',s=>{(s.ack[id]=s.ack[id]||{})[MEK()]=1});break;
   case'ackAll':{const ids=unread().map(n=>n.id);commit(null,'',s=>{ids.forEach(i=>{(s.ack[i]=s.ack[i]||{})[MEK()]=1})});break}
@@ -2298,12 +2681,12 @@ function openSync(){
  }
  if(d.showModal)d.showModal();else d.setAttribute('open','');
 }
-function render(){if(!$('kpis'))return;rTop();const io=$('isO');if(io&&document.activeElement!==io){const v=io.value;io.innerHTML=ROLES.map(r=>'<option>'+esc(r)+'</option>').join('');if(ROLES.includes(v))io.value=v}if(PG==='home'){rBrief();rHome();rHome2()}if(PG==='att')rJoin();
- if(PG==='brief'){rBrief();rNotice()}if(PG==='org')rOrg();if(PG==='att'){rAtt();rJudge()}if(PG==='bot')rBot();if(PG==='notice'){rNotice();rFaq()}if(PG==='docs'){rDocs();rDR()}if(PG==='learn'||PG==='slearn')rLearn();if(STU()){rStu();attLayout();if(PG==='shome')rSHome()}
+function render(){if(!$('kpis'))return;rTop();migrateData();const io=$('isO');if(io&&document.activeElement!==io){const v=io.value;io.innerHTML=ROLES.map(r=>'<option>'+esc(r)+'</option>').join('');if(ROLES.includes(v))io.value=v}if(PG==='home'){rBrief();rHome();rHome2()}if(PG==='att')rJoin();
+ if(PG==='brief'){rBrief();rNotice()}if(PG==='org')rOrg();if(PG==='att'){rAtt();rJudge()}if(PG==='bot')rBot();if(PG==='notice'){rNotice();rFaq()}if(PG==='docs'){rDocs();rDR()}if(PG==='learn'||PG==='slearn')rLearn();if(PG==='mgmt')rMgmt();if(STU()){rStu();attLayout();if(PG==='shome')rSHome()}else uxAfter();
  if(A.onRender)A.onRender(PG);}
 
 /* ---- 시작 ---- */
-foldGuides();buildTop();buildLogin();buildDlg();buildForms();buildNoticeForms();buildPrdForms();buildLearnForms();buildDocsForms();buildLandForms();rModes();
+foldGuides();buildTop();buildLogin();buildDlg();buildForms();buildNoticeForms();buildPrdForms();buildLearnForms();buildDocsForms();buildLandForms();buildMgmtForms();rModes();
 if(hashRole||!ME)openLogin();else{beat();if(!S.users[MEK()])commit(null,'',s=>{s.users[MEK()]={role:ME.role,name:ME.name}})}
 if(ME)roleChanged();else go('home');
 window.HQ={get S(){return S},commit,go,toast,md};

@@ -1,256 +1,43 @@
 {
  "ep": 3,
+ "format": "single",
  "axis": "서사+AI",
  "series": "뿌뿌의 취준 재도전기",
- "title": "내 캐릭터인데\\n그릴수록 이상해진다",
- "title_hl": "그릴수록 이상해진다",
- "subtitle": "AI로 인스타툰 1화 만들기까지 🤖",
- "caption_title": "내 캐릭터인데 그릴수록 이상해진다 🤖",
+ "title": "내 캐릭터인데\\n그릴수록 못생겨진다",
+ "title_hl": "못생겨진다",
+ "subtitle": "엎고, 다시, 결국 유료 결제한 썰 🎨",
+ "caption_title": "내 캐릭터인데 그릴수록 못생겨진다 🎨",
  "hashtags": [
   "인스타툰",
+  "일상툰",
   "AI툰",
-  "AI공부",
-  "AI그림",
-  "생성형AI",
-  "캐릭터디자인",
-  "챗GPT",
-  "부트캠프",
-  "취준툰",
   "성장툰",
+  "공감툰",
   "뿌뿌",
-  "공감툰"
- ],
- "cards": [
-  {
-   "type": "cover",
-   "name": "표지",
-   "bg": "yellow",
-   "sticker": "face_shock",
-   "size": 720,
-   "props": [
-    {
-     "emoji": "❓",
-     "x": 160,
-     "y": 760,
-     "size": 110,
-     "rot": -12
-    },
-    {
-     "emoji": "🎨",
-     "x": 820,
-     "y": 780,
-     "size": 110
-    }
-   ]
-  },
-  {
-   "type": "panels",
-   "name": "시안",
-   "panels": [
-    {
-     "narration": "직접 만든 뿌뿌 시안을 AI에게 보여줬다",
-     "sticker": "pose_sulky_sit",
-     "pos": "right",
-     "dx": 140,
-     "bubbles": [
-      {
-       "text": "이 느낌 그대로\n그려줘!",
-       "x": 60,
-       "y": 160
-      }
-     ]
-    },
-    {
-     "narration": "그런데 고치면 고칠수록…",
-     "sticker": "face_suspicious",
-     "pos": "right",
-     "dx": 140,
-     "bubbles": [
-      {
-       "text": "…이거 누구세요?",
-       "x": 60,
-       "y": 170
-      }
-     ],
-     "props": [
-      {
-       "emoji": "❓",
-       "x": 420,
-       "y": 330,
-       "size": 90
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "type": "panels",
-   "name": "리셋",
-   "panels": [
-    {
-     "narration": "색 바꾸고, 비율 바꾸고, 또 바꾸고",
-     "fx": "gloom",
-     "sticker": "laptop_despair",
-     "pos": "right",
-     "dx": 120,
-     "bubbles": [
-      {
-       "text": "원본이 제일\n나았잖아…",
-       "kind": "think",
-       "x": 60,
-       "y": 160
-      }
-     ]
-    },
-    {
-     "narration": "결국 처음 시안으로!",
-     "fx": "lines",
-     "sticker": "face_fighting",
-     "pos": "right",
-     "dx": 110,
-     "bubbles": [
-      {
-       "text": "전부 리셋!",
-       "kind": "shout",
-       "x": 50,
-       "y": 140,
-       "size": 90
-      },
-      {
-       "text": "일단 대충이라도\n다시 하자.",
-       "x": 60,
-       "y": 330,
-       "size": 38
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "type": "info",
-   "name": "배운점",
-   "bg": "mint",
-   "label": "🤖 AI 나눔 | 내가 배운 것",
-   "title": "AI로 캐릭터 그릴 때\n**이것만은 지키자**",
-   "points": [
-    "원본 시안을 매번 같이 보여주기",
-    "바꿀 건 한 번에 하나만",
-    "\"원본 그대로\"를 글로 딱 못 박기"
-   ],
-   "box": "💡 고칠수록 좋아지는 게 아니라\n원본에서 멀어질 수 있어요",
-   "sticker": "point_left",
-   "size": 400,
-   "theme": "info"
-  },
-  {
-   "type": "panels",
-   "name": "API",
-   "panels": [
-    {
-     "narration": "다음 관문: API",
-     "sticker": "face_soul_out",
-     "pos": "right",
-     "dx": 140,
-     "size": 360,
-     "bubbles": [
-      {
-       "text": "결제, 인증, 키…\n이게 다 뭔데…",
-       "x": 40,
-       "y": 100
-      }
-     ],
-     "props": [
-      {
-       "emoji": "🔑",
-       "x": 520,
-       "y": 250,
-       "size": 80
-      }
-     ]
-    },
-    {
-     "narration": "하나씩 따라 하다 보니",
-     "sticker": "laptop_typing",
-     "pos": "right",
-     "dx": 100,
-     "size": 340,
-     "bubbles": [
-      {
-       "text": "인증… 완료!\n키… 연결!",
-       "x": 40,
-       "y": 100
-      }
-     ],
-     "props": [
-      {
-       "emoji": "✅",
-       "x": 540,
-       "y": 250,
-       "size": 80
-      }
-     ]
-    },
-    {
-     "narration": "드디어 1화 완성!!",
-     "fx": "rays",
-     "sticker": "cheer",
-     "pos": "right",
-     "dx": 110,
-     "size": 370,
-     "bubbles": [
-      {
-       "text": "내 뿌뿌가\n돌아왔다!!",
-       "x": 40,
-       "y": 100
-      }
-     ],
-     "props": [
-      {
-       "emoji": "🎉",
-       "x": 560,
-       "y": 240,
-       "size": 80
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "type": "panels",
-   "name": "기절_예고",
-   "panels": [
-    {
-     "narration": "그리고 그날 밤",
-     "sticker": "desk_nap_pillow",
-     "pos": "right",
-     "dx": 120,
-     "bubbles": [
-      {
-       "text": "(완성하자마자 기절)",
-       "kind": "inner",
-       "x": 60,
-       "y": 180,
-       "tail": false
-      }
-     ],
-     "props": [
-      {
-       "emoji": "🌙",
-       "x": 120,
-       "y": 360,
-       "size": 90
-      }
-     ]
-    },
-    {
-     "narration": "다음 화 예고",
-     "title": "돈 안 쓰고 인스타툰\n**자동 제작**이 될까?",
-     "sticker": "hold_sign",
-     "size": 330,
-     "pos": "center"
-    }
-   ]
-  }
+  "뿌뿌툰",
+  "캐릭터디자인",
+  "캐릭터그리기",
+  "AI그림",
+  "AI이미지",
+  "생성형AI",
+  "챗GPT",
+  "ChatGPT",
+  "OpenAI",
+  "API",
+  "AI공부",
+  "AI활용",
+  "그림그리기",
+  "인스타툰제작",
+  "인스타툰작가",
+  "신인툰작가",
+  "취준툰",
+  "부트캠프",
+  "AI부트캠프",
+  "비전공자",
+  "인스타툰추천",
+  "그림일기",
+  "일러스트",
+  "소통"
  ],
  "style": {
   "theme": "story",
@@ -259,5 +46,247 @@
    "title": "jua",
    "body": "pretendard"
   }
- }
+ },
+ "cards": [
+  {
+   "type": "cover",
+   "name": "표지",
+   "sticker": "ep3_cover",
+   "size": 660
+  },
+  {
+   "type": "flow",
+   "name": "첫시안",
+   "items": [
+    {
+     "label": "인스타툰을 시작하던 날",
+     "x": 60,
+     "y": 60
+    },
+    {
+     "img": "scene:scenes/ep03/ep3_s1_sketch.png",
+     "x": 20,
+     "y": 110,
+     "w": 620,
+     "rot": -2
+    },
+    {
+     "text": "내가 직접 만든\n**뿌뿌 첫 시안**",
+     "x": 660,
+     "y": 190,
+     "size": 52,
+     "mw": 390
+    },
+    {
+     "img": "scene:scenes/ep03/ep3_s2_request.png",
+     "x": 430,
+     "y": 660,
+     "w": 620,
+     "rot": 2
+    },
+    {
+     "text": "AI한테 보여주고\n조금씩 고쳐달라고\n했다",
+     "x": 60,
+     "y": 760,
+     "size": 44,
+     "mw": 380
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "이 느낌 그대로\n그려줘!",
+     "x": 60,
+     "y": 1070,
+     "size": 40,
+     "to": [
+      640,
+      900
+     ]
+    }
+   ]
+  },
+  {
+   "type": "flow",
+   "name": "점점",
+   "items": [
+    {
+     "text": "그런데 고치면 고칠수록…",
+     "x": 60,
+     "y": 90,
+     "size": 56
+    },
+    {
+     "img": "scene:scenes/ep03/ep3_s3_worse.png",
+     "x": 20,
+     "y": 230,
+     "w": 1040
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "얼굴 좀 더 크게…\n옷 색도 바꿔볼까…",
+     "kind": "think",
+     "x": 70,
+     "y": 1080,
+     "size": 36,
+     "tail": false
+    },
+    {
+     "text": "어…?",
+     "kind": "inner",
+     "x": 760,
+     "y": 1110,
+     "size": 44,
+     "tail": false
+    }
+   ]
+  },
+  {
+   "type": "flow",
+   "name": "누구세요_한도초과",
+   "items": [
+    {
+     "img": "scene:scenes/ep03/ep3_s4_stare.png",
+     "x": 20,
+     "y": 40,
+     "w": 600,
+     "rot": -2
+    },
+    {
+     "img": "scene:scenes/ep03/ep3_s5_limit.png",
+     "x": 440,
+     "y": 640,
+     "w": 620,
+     "rot": 2
+    },
+    {
+     "label": "설상가상",
+     "x": 60,
+     "y": 730
+    },
+    {
+     "text": "채팅창으로 그리다가\n**이미지 한도 초과**",
+     "x": 60,
+     "y": 790,
+     "size": 44,
+     "mw": 380
+    },
+    {
+     "text": "돈 안 쓰고\n해보려던 건데…",
+     "x": 60,
+     "y": 1050,
+     "size": 38,
+     "mw": 380
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "…이거\n누구세요?",
+     "x": 680,
+     "y": 230,
+     "size": 50,
+     "to": [
+      440,
+      300
+     ]
+    }
+   ]
+  },
+  {
+   "type": "flow",
+   "name": "리셋_결제",
+   "items": [
+    {
+     "img": "scene:scenes/ep03/ep3_s6_reset.png",
+     "x": 20,
+     "y": 60,
+     "w": 600,
+     "rot": -2
+    },
+    {
+     "text": "원본이 제일 나았다.\n**처음 시안으로!**",
+     "x": 640,
+     "y": 380,
+     "size": 44,
+     "mw": 410
+    },
+    {
+     "img": "scene:scenes/ep03/ep3_s7_pay.png",
+     "x": 330,
+     "y": 700,
+     "w": 730,
+     "rot": 2
+    },
+    {
+     "text": "ChatGPT\n**유료(API)**를\n결제하고 연결했다",
+     "x": 60,
+     "y": 730,
+     "size": 42,
+     "mw": 300
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "전부 리셋!",
+     "kind": "shout",
+     "x": 650,
+     "y": 170,
+     "size": 80
+    },
+    {
+     "text": "일단 대충이라도\n다시 하자.",
+     "x": 50,
+     "y": 1080,
+     "size": 38,
+     "to": [
+      620,
+      960
+     ]
+    }
+   ]
+  },
+  {
+   "type": "flow",
+   "name": "완성",
+   "mood": "happy",
+   "tone": "pink",
+   "items": [
+    {
+     "text": "드디어\n**내 뿌뿌가 돌아왔다!!**",
+     "x": 70,
+     "y": 80,
+     "size": 64,
+     "mw": 940,
+     "align": "center"
+    },
+    {
+     "img": "scene:scenes/ep03/ep3_s8_done.png",
+     "x": 190,
+     "y": 300,
+     "w": 700
+    },
+    {
+     "text": "고칠수록 좋아지는 게 아니라\n**원본에서 멀어질 수도 있다.**",
+     "x": 70,
+     "y": 1110,
+     "size": 42,
+     "mw": 940,
+     "align": "center"
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "역시 처음\n그 느낌이야…",
+     "kind": "inner",
+     "x": 760,
+     "y": 360,
+     "size": 34,
+     "to": [
+      600,
+      520
+     ]
+    }
+   ]
+  }
+ ]
 }

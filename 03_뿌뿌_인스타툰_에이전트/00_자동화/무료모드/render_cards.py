@@ -206,6 +206,11 @@ def gloomy_svg():
 
 
 MOOD_CSS = """
+.chat{position:absolute;display:flex;flex-direction:column;gap:16px;font-family:inherit;font-weight:700;line-height:1.38}
+.cr{display:flex;flex-direction:column;max-width:84%}.cr.me{align-self:flex-end;align-items:flex-end}.cr.ai{align-self:flex-start}
+.cr .who{font-size:20px;color:#999;margin:0 10px 4px;font-weight:700}
+.cb{padding:16px 26px;border-radius:30px;border:3px solid #3A2E28;white-space:pre-line}
+.cr.me .cb{background:#FFE4DA;border-bottom-right-radius:8px}.cr.ai .cb{background:#DDEEFC;border-bottom-left-radius:8px}
 .mood{position:absolute;inset:0;z-index:0;pointer-events:none}
 .mood-urgent{background:radial-gradient(ellipse 40% 34% at 50% 46%,#fff 0 60%,rgba(255,255,255,0) 100%),
  repeating-conic-gradient(from 0deg at 50% 46%,#C9CACF 0deg .8deg,#F1F1F3 .8deg 14deg),#F1F1F3}
@@ -367,6 +372,10 @@ def card_flow(c, ep):
                        f'text-align:{it.get("align", "left")};{"width:%dpx;" % it.get("mw", 900) if it.get("align") == "center" else ""}">{rich(it["text"])}</div>')
         elif 'label' in it:
             out.append(f'<div class="flabel" style="{st}">{rich(it["label"])}</div>')
+        elif 'chat' in it:  # 메신저 대화: [["me"|"ai", "문장"], ...]
+            rows = ''.join(f'<div class="cr {who}"><span class="who">{"뿌뿌" if who == "me" else "AI"}</span>'
+                           f'<div class="cb">{rich(t)}</div></div>' for who, t in it['chat'])
+            out.append(f'<div class="chat" style="{st};width:{it.get("w", 960)}px;font-size:{it.get("size", 34)}px">{rows}</div>')
     out.append(props_html(c.get('props')))
     for b in c.get('bubbles', []):
         out.append(bubble_html(b))

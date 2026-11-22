@@ -1,0 +1,266 @@
+{
+ "ep": 5,
+ "format": "single",
+ "axis": "AI",
+ "series": "뿌뿌의 AI 왕초보 사전",
+ "title": "API가 뭔데요?\\n식당으로 이해하기",
+ "title_hl": "식당으로 이해하기",
+ "subtitle": "AI 1도 모르던 뿌뿌가 정리한 왕초보 설명 🤖",
+ "caption_title": "API가 뭔데요? 식당으로 이해하기 🍽️",
+ "hashtags": [
+  "인스타툰",
+  "정보툰",
+  "AI툰",
+  "AI공부",
+  "AI활용",
+  "AI초보",
+  "API",
+  "API란",
+  "API키",
+  "생성형AI",
+  "챗GPT",
+  "ChatGPT",
+  "OpenAI",
+  "클로드",
+  "Claude",
+  "코딩초보",
+  "비전공자",
+  "IT용어",
+  "IT상식",
+  "개발용어",
+  "바이브코딩",
+  "부트캠프",
+  "AI부트캠프",
+  "취준생",
+  "성장툰",
+  "뿌뿌",
+  "뿌뿌툰",
+  "인스타툰추천",
+  "인스타툰작가",
+  "소통"
+ ],
+ "style": {
+  "theme": "info",
+  "cover_layout": "center",
+  "fonts": {
+   "title": "jua",
+   "body": "pretendard"
+  }
+ },
+ "cards": [
+  {
+   "type": "cover",
+   "name": "표지",
+   "sticker": "face_hmm",
+   "size": 620
+  },
+  {
+   "type": "flow",
+   "name": "그단어",
+   "items": [
+    {
+     "label": "4화에서 나를 괴롭힌 그 단어",
+     "x": 60,
+     "y": 60
+    },
+    {
+     "text": "API…\n**대체 뭔데?**",
+     "x": 60,
+     "y": 130,
+     "size": 64,
+     "mw": 520
+    },
+    {
+     "img": "phone_puzzled",
+     "x": 660,
+     "y": 80,
+     "w": 320,
+     "rot": 3
+    },
+    {
+     "blob": "#F0F7FE",
+     "x": 50,
+     "y": 770,
+     "w": 980,
+     "h": 520
+    },
+    {
+     "label": "한 줄로 말하면",
+     "x": 100,
+     "y": 810
+    },
+    {
+     "text": "내 프로그램이\nAI한테 **대신 주문하는 창구**",
+     "x": 100,
+     "y": 880,
+     "size": 48,
+     "mw": 560
+    },
+    {
+     "img": "bust_hehe",
+     "x": 690,
+     "y": 820,
+     "w": 300,
+     "rot": 3
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "채팅창이랑\n뭐가 다른데…?",
+     "kind": "think",
+     "x": 80,
+     "y": 420,
+     "size": 38,
+     "to": [
+      700,
+      380
+     ]
+    }
+   ]
+  },
+  {
+   "type": "compare",
+   "name": "채팅vsAPI",
+   "label": "🤖 AI 나눔 | 비교",
+   "title": "채팅창 vs API\n**뭐가 달라?**",
+   "left": {
+    "head": "💬 채팅창",
+    "items": [
+     "내가 직접 들어가서 입력",
+     "한 번에 하나씩 대화",
+     "무료 한도 / 월 구독"
+    ]
+   },
+   "right": {
+    "head": "🔌 API",
+    "items": [
+     "내 프로그램이 대신 주문",
+     "자동으로 여러 번 가능",
+     "쓴 만큼만 결제"
+    ]
+   },
+   "verdict": "채팅 = 가게 가서 직접 주문 / API = 주방 직통 주문서",
+   "sticker": "notebook_study",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "식당비유",
+   "label": "🤖 AI 나눔 | 식당으로 비유하면",
+   "title": "API를 식당으로\n**바꿔 보면**",
+   "points": [
+    "나 = 손님 (원하는 걸 말함)",
+    "API = 주문서 (주문을 정확히 전달)",
+    "AI 서버 = 주방 (실제로 만들어 줌)",
+    "API 키 = 회원카드 (누가 주문했는지 확인)"
+   ],
+   "box": "💡 그래서 키가 없거나 틀리면\n'주문 거절(401 오류)'이 떠요",
+   "sticker": "point_left",
+   "size": 360,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "활용예시",
+   "label": "🤖 AI 나눔 | 이렇게 써먹어요",
+   "title": "API로 할 수 있는 일\n**반복 작업 자동화**",
+   "points": [
+    "인스타툰 그림 여러 장 한 번에 생성 (내가 실제로 함)",
+    "자소서 하나로 직무별 버전 여러 개 만들기",
+    "엑셀 표 데이터를 한 번에 요약·분류",
+    "내 웹사이트에 AI 기능 붙이기 (챗봇·추천)"
+   ],
+   "box": "💡 '매번 똑같이 반복하는 일'이\nAPI 자동화 1순위 후보예요",
+   "sticker": "laptop_typing",
+   "size": 340,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "시작1_키만들기",
+   "label": "🤖 따라하기 ① | OpenAI 기준",
+   "title": "API 키\n**만드는 순서**",
+   "points": [
+    "platform.openai.com 가입·로그인",
+    "Settings → Billing에서 결제수단 등록·충전",
+    "API keys → 'Create new secret key'",
+    "키는 딱 한 번만 보여요 → 바로 메모장에 저장"
+   ],
+   "box": "💡 처음엔 최소 금액만 충전해서\n연습해도 충분해요",
+   "sticker": "clipboard_serious",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "시작2_안전연결",
+   "label": "🤖 따라하기 ② | 안전장치 + 연결",
+   "title": "돈 새지 않게\n**이것부터 걸고 쓰기**",
+   "points": [
+    "Limits → 'Set Budget'으로 월 사용 한도 걸기",
+    "Usage 메뉴에서 쓴 금액 수시로 확인",
+    "AI(Claude 등)에게 \"이 키로 ○○ 자동화해줘\"",
+    "키는 채팅창 말고 내 폴더 파일에 저장해 연결"
+   ],
+   "box": "💡 내 경우: 인스타툰 그림 1장 = 약 36원",
+   "sticker": "thumbs_up",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "키지키기",
+   "label": "🤖 AI 나눔 | 이것만 지키자",
+   "title": "API 키는\n**비밀번호처럼**",
+   "points": [
+    "남한테 보여주지 않기",
+    "캡처해서 SNS에 올리지 않기",
+    "쓴 만큼 돈이 나가니 사용 한도 걸어두기",
+    "유출된 것 같으면 바로 삭제 후 새로 만들기"
+   ],
+   "box": "💡 키 = 내 카드로 결제되는 회원카드!",
+   "sticker": "face_pokerface",
+   "size": 340,
+   "theme": "info"
+  },
+  {
+   "type": "flow",
+   "name": "정리",
+   "items": [
+    {
+     "label": "오늘의 정리",
+     "x": 60,
+     "y": 80
+    },
+    {
+     "text": "**API**는\n내 프로그램이 AI한테\n대신 주문하는 창구!",
+     "x": 70,
+     "y": 160,
+     "size": 60,
+     "mw": 940,
+     "align": "center"
+    },
+    {
+     "img": "jump_joy",
+     "x": 330,
+     "y": 520,
+     "w": 420
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "이제 401 떠도 안 무서워…\n(사실 조금 무서움)",
+     "kind": "inner",
+     "x": 540,
+     "y": 1170,
+     "size": 36,
+     "to": [
+      620,
+      1080
+     ]
+    }
+   ]
+  }
+ ]
+}

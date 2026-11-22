@@ -1,0 +1,253 @@
+{
+ "ep": 6,
+ "format": "single",
+ "axis": "AI",
+ "series": "뿌뿌의 AI 왕초보 사전",
+ "title": "MCP가 뭔데요?\\nAI에게 손발 달아주기",
+ "title_hl": "손발 달아주기",
+ "subtitle": "4화의 그 'MCP 연결 실패', 드디어 이해함 🔌",
+ "caption_title": "MCP가 뭔데요? AI에게 손발 달아주기 🔌",
+ "hashtags": [
+  "인스타툰",
+  "정보툰",
+  "AI툰",
+  "AI공부",
+  "AI활용",
+  "AI초보",
+  "MCP",
+  "MCP란",
+  "ModelContextProtocol",
+  "AI에이전트",
+  "에이전트",
+  "클로드",
+  "Claude",
+  "Anthropic",
+  "생성형AI",
+  "챗GPT",
+  "API",
+  "IT용어",
+  "IT상식",
+  "코딩초보",
+  "비전공자",
+  "바이브코딩",
+  "업무자동화",
+  "부트캠프",
+  "AI부트캠프",
+  "성장툰",
+  "뿌뿌",
+  "뿌뿌툰",
+  "인스타툰추천",
+  "소통"
+ ],
+ "style": {
+  "theme": "info",
+  "cover_layout": "center",
+  "fonts": {
+   "title": "jua",
+   "body": "pretendard"
+  }
+ },
+ "cards": [
+  {
+   "type": "cover",
+   "name": "표지",
+   "sticker": "face_sparkle_eyes",
+   "size": 620
+  },
+  {
+   "type": "flow",
+   "name": "말만잘함",
+   "items": [
+    {
+     "label": "AI를 써보다 알게 된 사실",
+     "x": 60,
+     "y": 60
+    },
+    {
+     "text": "AI는 말은 잘하는데\n**내 파일·지도·캘린더는\n직접 못 만진다**",
+     "x": 60,
+     "y": 130,
+     "size": 46,
+     "mw": 560
+    },
+    {
+     "img": "shrug",
+     "x": 640,
+     "y": 110,
+     "w": 380,
+     "rot": 3
+    },
+    {
+     "text": "그래서 나온 게\n**MCP**",
+     "x": 60,
+     "y": 800,
+     "size": 60,
+     "mw": 440
+    },
+    {
+     "img": "laptop_typing",
+     "x": 520,
+     "y": 740,
+     "w": 500,
+     "rot": -2
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "그럼 누가\n대신 눌러줘…?",
+     "kind": "think",
+     "x": 80,
+     "y": 470,
+     "size": 38,
+     "to": [
+      700,
+      400
+     ]
+    }
+   ]
+  },
+  {
+   "type": "info",
+   "name": "한줄정리",
+   "label": "🤖 AI 나눔 | 한 줄 정리",
+   "title": "MCP =\n**AI용 USB-C 포트**",
+   "points": [
+    "AI와 다른 프로그램을 잇는 '공통 연결 규칙'",
+    "Model Context Protocol의 줄임말",
+    "2024년 말 Anthropic(Claude 만든 회사)이 공개",
+    "지금은 여러 AI·앱이 함께 쓰는 표준"
+   ],
+   "box": "💡 USB-C처럼, 규칙만 맞으면\n어떤 도구든 AI에 꽂을 수 있어요",
+   "sticker": "point_left",
+   "size": 360,
+   "theme": "info"
+  },
+  {
+   "type": "compare",
+   "name": "API vs MCP",
+   "label": "🤖 AI 나눔 | 비교",
+   "title": "API랑 MCP\n**뭐가 달라?**",
+   "left": {
+    "head": "🔌 API",
+    "items": [
+     "서비스마다 연결법이 제각각",
+     "하나하나 코드로 따로 연결",
+     "주로 개발자가 직접 연결"
+    ]
+   },
+   "right": {
+    "head": "🧩 MCP",
+    "items": [
+     "연결 규칙이 하나로 통일",
+     "한 번 연결하면 AI가 바로 사용",
+     "이미 만든 연결을 골라 쓰기"
+    ]
+   },
+   "verdict": "API가 집집마다 다른 열쇠라면, MCP는 공용 출입 규칙",
+   "sticker": "notebook_study",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "활용예시",
+   "label": "🤖 AI 나눔 | 이렇게 써먹어요",
+   "title": "MCP 연결하면\n**AI가 직접 해줘요**",
+   "points": [
+    "캘린더 연결 → \"이번 주 일정 정리해줘\"",
+    "구글 드라이브·노션 → \"회의록 찾아서 요약해줘\"",
+    "지도·웹 도구 → \"이 근처 식당 정리해줘\"",
+    "내 컴퓨터 폴더 → 결과물 자동 저장 (내가 쓰는 방법)"
+   ],
+   "box": "💡 '복사해서 AI에 붙여넣기'를\n안 해도 되는 게 핵심!",
+   "sticker": "phone_sparkle",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "연결방법",
+   "label": "🤖 따라하기 | Claude 기준",
+   "title": "커넥터(MCP)\n**연결하는 순서**",
+   "points": [
+    "claude.ai → Customize → Connectors 메뉴",
+    "원하는 서비스 찾아서 'Connect' 클릭",
+    "로그인 + 권한 허용 버튼 누르기",
+    "채팅창 '+' → Connectors에서 켜고 바로 질문"
+   ],
+   "box": "💡 목록에 없는 도구는 '+ Add →\nAdd custom connector' (무료 플랜은 1개)",
+   "sticker": "clipboard_serious",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "주의할점",
+   "label": "🤖 AI 나눔 | 이것만 조심",
+   "title": "연결할 때\n**꼭 기억할 4가지**",
+   "points": [
+    "필요한 권한만 허용하기",
+    "민감한 개인·회사 파일은 한 번 더 생각",
+    "AI가 보내기·삭제하기 전엔 꼭 확인",
+    "안 쓰는 연결은 'Disconnect'로 끊기"
+   ],
+   "box": "💡 손발을 달아준 만큼\n'확인 버튼'은 내가 누르기!",
+   "sticker": "face_pokerface",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "info",
+   "name": "내경험",
+   "label": "🤖 AI 나눔 | 내가 겪은 MCP",
+   "title": "'MCP 연결 실패'\n**뜨면 이렇게 했어요**",
+   "points": [
+    "AI가 도구를 쓰려면 'MCP 서버'를 연결해야 함",
+    "연결이 끊기면 'MCP 연결 실패'가 떠요",
+    "대부분 재연결·설정 수정으로 해결",
+    "내가 할 일: 로그인·권한 허용 버튼 누르기"
+   ],
+   "box": "💡 모르면 AI한테 \"어디 눌러야 해?\"\n라고 물어보는 게 제일 빨랐어요",
+   "sticker": "face_touched_tear",
+   "size": 330,
+   "theme": "info"
+  },
+  {
+   "type": "flow",
+   "name": "정리",
+   "items": [
+    {
+     "label": "오늘의 정리",
+     "x": 60,
+     "y": 80
+    },
+    {
+     "text": "**MCP**는\nAI가 다른 프로그램을\n쓸 수 있게 해주는 **공통 플러그**!",
+     "x": 60,
+     "y": 160,
+     "size": 56,
+     "mw": 960,
+     "align": "center"
+    },
+    {
+     "img": "cheer",
+     "x": 330,
+     "y": 540,
+     "w": 420
+    }
+   ],
+   "bubbles": [
+    {
+     "text": "다음엔 내가\n직접 연결해본다!",
+     "x": 680,
+     "y": 620,
+     "size": 38,
+     "to": [
+      640,
+      760
+     ]
+    }
+   ]
+  }
+ ]
+}

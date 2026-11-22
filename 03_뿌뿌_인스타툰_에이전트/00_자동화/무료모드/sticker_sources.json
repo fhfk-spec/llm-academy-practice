@@ -742,5 +742,29 @@
   ],
   "desc": "책상에 턱 괴고 녹초, 이마에 파스",
   "kind": "full"
+ },
+ {
+  "id": "ep3_cover",
+  "src": "src/poses/ep3_cover_char.png",
+  "tags": [
+   "시안",
+   "비교",
+   "의심",
+   "그림"
+  ],
+  "desc": "종이 두 장 들고 원본 vs 이상한 그림 비교, 실눈",
+  "kind": "full"
+ },
+ {
+  "id": "ep4_cover",
+  "src": "src/poses/ep4_cover_char.png",
+  "tags": [
+   "전선",
+   "혼란",
+   "노트북",
+   "오류"
+  ],
+  "desc": "엉킨 전선 속 노트북 앞 머리 감싸쥠",
+  "kind": "full"
  }
 ]

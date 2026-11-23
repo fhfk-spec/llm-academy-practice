@@ -708,6 +708,75 @@ tbody tr:hover td{background:var(--hover)}
 .feed .ni.nlink{cursor:pointer;border-radius:8px;padding-left:6px;padding-right:6px;margin:0 -6px}.feed .ni.nlink:hover{background:var(--hover)}
 .feed .ni .ngo{margin-left:auto;color:var(--muted);font-size:18px;line-height:1}
 .feed .ni .acts:empty{display:none}
+/* 참여자 목록: 1·2·3차 수당 신호 (모양+색+글자로 구분) */
+.alf{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 10px}
+th.usig,td.usig{text-align:center;white-space:nowrap}th.usig.cur{color:var(--acc)}
+.sg{display:inline-block;font-weight:800;font-size:13px;padding:3px 9px;border-radius:999px;border:1px solid transparent}
+.sg-ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.sg-warn{color:var(--warn);background:color-mix(in srgb,var(--warn) 14%,transparent);border-color:color-mix(in srgb,var(--warn) 40%,transparent)}
+.sg-bad{color:#fff;background:var(--bad)}
+td.usig .xs{margin-top:2px}
+#stuList tr.rk2>td:first-child{box-shadow:inset 4px 0 0 var(--bad)}#stuList tr.rk1>td:first-child{box-shadow:inset 4px 0 0 var(--warn)}
+/* ==== 점심지도 ==== */
+.lgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:14px;align-items:start}
+.lmapc{padding:0;overflow:hidden;position:sticky;top:calc(var(--topH,60px) + 12px)}
+.lmap{height:520px;width:100%;background:var(--panel2);position:relative}.lmap.picking{cursor:crosshair}.lmap.picking .leaflet-container{cursor:crosshair}
+.llist{max-height:560px;overflow:auto}
+.lcard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer;background:var(--panel)}.lcard:hover{border-color:var(--acc)}.lcard.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--accbg)}
+.lcard .lh{display:flex;align-items:center;gap:8px;justify-content:space-between}.lcard .ln{font-size:15px}
+.lbadges{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0 4px}
+.lacts{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px}
+.lpick{background:var(--accbg);border:1px solid var(--acc);border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:13px;display:flex;align-items:center;gap:8px;justify-content:space-between}
+.lpin{background:none;border:0}.lpin span{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--panel);border:2px solid var(--acc);box-shadow:0 2px 6px rgba(0,0,0,.25);font-size:14px}
+.lpin span{line-height:1}.lpin.home span{border-color:var(--text);background:#fff}.lpin.on span{background:var(--acc);border-color:var(--acc)}
+.lpin span{text-indent:0}.lpin span>*{transform:rotate(45deg)}
+.ltileerr{position:absolute;left:10px;right:10px;bottom:10px;z-index:500;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px}
+@media(max-width:900px){.lgrid{grid-template-columns:1fr}.lmapc{position:static}.lmap{height:320px}.llist{max-height:none}body.stu .tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+.lpin span i{transform:rotate(45deg);font-style:normal;display:block}
+/* ==== 점심지도 추가: 종류 필터 · 상세 ==== */
+.lkf{display:flex;flex-wrap:wrap}.ldet{background:var(--panel2);border-radius:8px;padding:8px 10px;margin:8px 0 4px}.ldet .kv span{width:64px}
+.nvbtn{margin-top:8px;display:inline-flex;gap:6px;color:#03c75a!important;border-color:#03c75a!important;font-weight:800;text-decoration:none}
+/* ==== 복습퀴즈 · 강의 정리집 ==== */
+.lec h3{font-size:15px!important;margin:0 0 6px}.lsum h4{margin:12px 0 4px;font-size:14px;color:var(--acc)}.lsum ul{margin:0;padding-left:18px}.lsum li{margin:3px 0;line-height:1.6}
+.terms{display:grid;gap:4px}.terms>div{display:flex;gap:8px;font-size:13.5px}.terms b{min-width:90px}
+.qz{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;background:var(--panel)}.qz.ok{border-color:color-mix(in srgb,var(--ok) 50%,var(--line))}.qz.no{border-color:color-mix(in srgb,var(--bad) 50%,var(--line))}
+.qq{font-weight:700;line-height:1.5;margin-bottom:6px}.qz ol{margin:0;padding-left:20px}.qz li.ans{color:var(--ok);font-weight:800}
+.qch{display:grid;gap:6px}.qc{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 10px;font:inherit;cursor:pointer}.qc:hover{border-color:var(--acc)}.qc.on{border-color:var(--acc);background:var(--accbg);font-weight:700}
+.qres .big{font-size:22px;color:var(--acc)}.squiz{border:2px solid var(--acc)}
+details.lec>summary{cursor:pointer;list-style:none;display:flex;gap:8px;align-items:center;flex-wrap:wrap}details.lec>summary::-webkit-details-marker{display:none}
+/* ==== 자유소통방 ==== */
+.btabs{display:flex;gap:6px;margin-bottom:10px}.btabs button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px;font-weight:700;font:inherit;cursor:pointer}.btabs button.on{background:var(--text);color:var(--panel);border-color:var(--text)}
+.bcats{display:flex;flex-wrap:wrap;margin-bottom:8px}.blist .row{gap:10px}.blist .bmeta{text-align:right;white-space:nowrap}
+.bpost h2{font-size:19px!important}.bbody2{line-height:1.7;margin:12px 0;font-size:15px}.bcm{border-top:1px solid var(--line);padding:8px 0}.btn.on{border-color:var(--bad);color:var(--bad)}
+.broom{display:flex;flex-direction:column}.bmsgs{height:420px;overflow:auto;background:var(--panel2);border-radius:10px;padding:12px;margin:8px 0;display:flex;flex-direction:column;gap:8px}
+.bmsg{max-width:75%;display:flex;flex-direction:column;align-items:flex-start;gap:2px}.bmsg.me{align-self:flex-end;align-items:flex-end}.bwho{font-size:12px;font-weight:700;color:var(--muted)}
+.bbub{background:var(--panel);border:1px solid var(--line);border-radius:12px 12px 12px 2px;padding:7px 11px;line-height:1.5;white-space:pre-wrap;word-break:break-word}.bmsg.me .bbub{background:var(--acc);color:#fff;border-color:var(--acc);border-radius:12px 12px 2px 12px}
+/* ==== 문의하기: 주제 · 대상 · 키워드 ==== */
+#askBar{border-bottom:1px dashed var(--line);margin-bottom:10px;padding-bottom:6px}.askRow{display:flex;gap:10px;align-items:center;margin:6px 0;flex-wrap:wrap}.askL{width:64px;font-size:13px;font-weight:700;color:var(--muted);flex:none}
+.chip.cbtn.on{background:var(--accbg);border-color:var(--acc);color:var(--acc);font-weight:800}
+/* ==== 홈: 플로팅 메모장 (오른쪽) ==== */
+.memoDock{position:fixed;right:14px;top:calc(var(--topH,60px) + 12px);width:270px;max-height:calc(100vh - var(--topH,60px) - 24px);overflow:auto;z-index:40;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin}
+.memoDock[hidden]{display:none}
+.mdHead{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 8px 6px 12px;box-shadow:var(--shadow)}.mdHead b{flex:1}
+.memo{background:#fffbea;border:1px solid #f0e2a0;border-radius:12px;box-shadow:var(--shadow);padding:8px;color:#141922}
+:root[data-theme="dark"] .memo{background:#2a2617;border-color:#4a4220;color:var(--text)}
+.mTop{display:flex;gap:4px;align-items:center}.mTitle{flex:1;min-width:0;border:0;background:transparent;font-weight:800;font-size:14px;padding:2px 4px;color:inherit}.mType{font-size:12px;padding:2px 4px;border-radius:6px;max-width:66px}
+.mTools{display:flex;flex-wrap:wrap;gap:2px;margin:6px 0;border-top:1px dashed #e6d98f;border-bottom:1px dashed #e6d98f;padding:4px 0}
+.mTools button{border:0;background:transparent;border-radius:6px;min-width:26px;min-height:26px;font-size:12px;cursor:pointer;color:inherit}.mTools button:hover{background:rgba(0,0,0,.07)}
+.mTools .hl{background:#fff26b;padding:0 3px}.mTools .mc i{display:inline-block;width:12px;height:12px;border-radius:50%}
+.medit{min-height:70px;max-height:260px;overflow:auto;outline:none;font-size:14px;line-height:1.6;padding:2px 4px}.medit:empty::before{content:attr(data-ph);color:#9a8f5a}
+.medit ul,.todo{margin:0;padding-left:18px}.todo{list-style:none;padding:0}.todo li{display:flex;gap:6px;align-items:flex-start;padding:2px 0}.todo li.done .tdT{text-decoration:line-through;opacity:.55}.todo .tdT{flex:1;outline:none;line-height:1.5}.todo .x{min-width:22px;min-height:22px;opacity:.5}
+.tdNew{width:100%;border:0;border-top:1px dashed #e6d98f;background:transparent;padding:6px 4px;font-size:13px;color:inherit}
+.memo.min .mTop{opacity:.85}
+body.dockOn .wrap{padding-right:300px!important}
+@media(max-width:1100px){body.dockOn .wrap{padding-right:16px!important}.memoDock{top:auto;bottom:12px;max-height:60vh;width:min(300px,calc(100vw - 24px))}}
+/* ==== 홈: 오늘의 뉴스 (왼쪽 목록 아래) ==== */
+.newsBox{margin:8px 10px;border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--panel2);font-size:13px}
+.nbH{font-weight:800;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline}.nbI{display:flex;gap:6px;padding:5px 0;border-top:1px dashed var(--line)}.nbL{flex:none;width:44px;color:var(--muted);font-weight:700;font-size:12px}.nbI>div{flex:1;min-width:0}
+.nbN{display:block;text-align:left;font-size:12.5px!important;min-height:0;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.memoDock{width:250px}body.dockOn .wrap{padding-right:276px!important}@media(max-width:1100px){body.dockOn .wrap{padding-right:16px!important}}
+.qch{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:700px){.qch{grid-template-columns:1fr}}
+.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(images/layers.png);width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(images/layers-2x.png);background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(images/marker-icon.png)}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 .agentGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .agent{background:var(--panel2);text-align:left;border:1px solid var(--line);border-radius:10px;padding:12px}
 .agent:hover,.agent.on{border-color:var(--acc)}
@@ -749,6 +818,7 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
 <!-- 수강생 홈 -->
 <section class="page" id="pg-shome"><div class="sub" data-sub="s-home">
  <div class="shero" id="sHello"></div>
+ <div class="card mt squiz" id="sQuiz" hidden></div>
  <div class="card mt" id="sTodo"></div>
  <div class="card mt mascot"><div class="ch"><h2><span class="mface">🐥</span> 학습도우미 큐미</h2><span class="xs muted">궁금한 건 편하게 물어봐요</span></div>
   <div class="aibox"><input id="sAiIn" placeholder="예) 어제 배운 내용 다시 알려줘 · 과제 제출 어디서 해?" autocomplete="off"><button class="btn" id="sAiGo">물어보기</button></div>
@@ -827,6 +897,10 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
    <label class="f" for="fqA" style="margin-top:8px">답변</label><textarea id="fqA" rows="3"></textarea><label class="f" for="fqKw" style="margin-top:8px">찾는 말 (쉼표로 구분 · 이 말이 들어간 문의에 AI가 이 답을 씀)</label><input id="fqKw" style="width:100%" placeholder="예) 장려금,수당,입금,지급"><div class="inl" style="margin-top:8px"><button class="btn" id="fqAdd">FAQ 등록</button></div>
    <p class="xs muted" style="margin:6px 0 0">AI는 등록된 FAQ 안에서만 답하고, 맞는 FAQ가 없으면 운영매니저에게 넘깁니다. 돈·서류 관련 답은 꼭 확인해서 등록하세요.</p></div></details>
  </div>
+ <div class="sub" data-sub="n-lunch">
+  <div class="ph"><div><div class="eyebrow">공지사항 · 점심 지원</div><h1>점심지도 · 비플페이</h1><p class="muted">교육 기간 매일 점심은 비플페이로 지원돼요. 비플페이 가맹점 등록 &amp; QR 결제가 되는 식당만 모았어요. 식당을 추가·수정하면 수강생에게 알림이 가요.</p></div></div>
+  <div class="lgrid"><div class="card lmapc"><div class="lmap" id="stMap"></div></div><div class="card llist" id="stList"></div></div>
+ </div>
 </section>
 
 <!-- 서류·행정 -->
@@ -858,6 +932,14 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
  <div class="ph"><div><div class="eyebrow">수강생</div><h1>공지사항</h1><p class="muted">새 공지는 '확인했어요'를 눌러 주세요</p></div></div><div id="sNotice"></div></div></section>
 <section class="page" id="pg-satt" data-clarity-mask="true"><div class="sub" data-sub="s-att">
  <div class="ph"><div><div class="eyebrow">수강생</div><h1>내 출결 · 결석 서류</h1><p class="muted">출석률과 앞으로 결석 가능한 날, 낼 증빙서류</p></div></div><div id="sAtt"></div></div></section>
+<section class="page" id="pg-slunch"><div class="sub" data-sub="s-lunch">
+ <div class="ph"><div><div class="eyebrow">점심 지원</div><h1>점심지도 · 비플페이</h1><p class="muted">교육 기간 점심은 비플페이로 지원돼요. 아래 식당은 모두 비플페이 가맹점 등록 &amp; QR 결제가 가능해요. 식당을 누르면 지도에서 위치를 보여 줘요.</p></div></div>
+ <div class="lgrid"><div class="card lmapc"><div class="lmap" id="suMap"></div></div><div class="card llist" id="suList"></div></div>
+</div></section>
+<section class="page" id="pg-sfree"><div class="sub" data-sub="s-free">
+ <div class="ph"><div><div class="eyebrow">자유소통방</div><h1>자유소통방</h1><p class="muted">함께 듣는 사람들과 자유롭게 이야기해요. 같이 갈 사람·같이 먹을 사람을 모으고 [단톡방 만들기]로 바로 대화하세요. 익명으로도 쓸 수 있어요.</p></div></div>
+ <div id="sfBoard"></div>
+</div></section>
 <section class="page" id="pg-sask"><div class="sub" data-sub="s-ask">
  <div class="ph"><div><div class="eyebrow">수강생</div><h1>문의하기</h1><p class="muted">자주 묻는 질문은 AI가 바로 답하고, 나머지는 운영매니저가 답합니다</p></div></div>
  <div class="card"><textarea id="saText" rows="3" placeholder="예) 훈련장려금 언제 들어와요?"></textarea><div class="inl" style="margin-top:8px"><button class="btn" id="saSend">문의 보내기</button></div><div id="saRes" style="margin-top:10px"></div></div>
@@ -892,6 +974,10 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
   <div class="sec"><h2>날짜별 제작물 · 포트폴리오</h2><span class="xs muted">깃허브 커밋과 제출한 제작물이 날짜별로 자동으로 모여요 · 같은 저장소라도 날짜마다 그날의 버전으로 열려요</span></div>
   <div class="mt" id="sgPort"></div>
   <div class="sec"><h2>제작물 제출</h2></div><div id="sgDeliv"></div>
+ </div>
+ <div class="sub" data-sub="s-sum">
+  <div class="ph"><div><div class="eyebrow">학습</div><h1>강의 정리집</h1><p class="muted">강사님이 올린 강의 내용 정리예요. 홈에서 복습퀴즈를 풀고, 여기서 핵심 내용과 용어를 다시 보며 복습하세요.</p></div></div>
+  <div id="sSumList"></div>
  </div>
 </section>
 
@@ -940,9 +1026,21 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
   <div class="card"><div class="f3" style="grid-template-columns:1fr 1fr auto;align-items:end"><div><label class="f" for="lkTime">교육 시간표 링크</label><input id="lkTime" placeholder="https://docs.google.com/spreadsheets/…"></div><div><label class="f" for="lkGit">실습 깃허브 링크</label><input id="lkGit"></div><button class="btn s" id="lkSave">저장</button></div></div>
   <div class="mt" id="lcCur"></div>
  </div>
+ <div class="sub" data-sub="l-quiz">
+  <div class="ph"><div><div class="eyebrow">학습</div><h1>복습퀴즈 · 강의 정리</h1><p class="muted">강의 녹음본을 텍스트로 바꾼 파일(.txt·.srt·.vtt)을 올리거나 붙여 넣으면, AI가 수강생용 강의 정리집과 복습퀴즈 5문항 초안을 만들어요. 확인한 뒤 '수강생에게 공개'를 누르면 수강생 홈에 바로 떠요.</p></div><span class="badge" id="qzAi"></span></div>
+  <div class="card"><div class="f3" style="grid-template-columns:150px 1fr"><div><label class="f" for="qzDate">강의 날짜</label><input type="date" id="qzDate" min="2026-10-26" max="2027-01-07"></div><div><label class="f" for="qzTitle">강의 제목</label><input id="qzTitle" maxlength="60" placeholder="예) CH3 Modeling · 프롬프트 설계"></div></div>
+   <label class="f" for="qzFile" style="margin-top:8px">강의 녹음본 (텍스트 변환 파일)</label><input type="file" id="qzFile" accept=".txt,.srt,.vtt,.md,text/plain,audio/*">
+   <label class="f" for="qzText" style="margin-top:8px">녹취 텍스트</label><textarea id="qzText" rows="6" placeholder="파일을 올리면 여기에 채워져요. 직접 붙여 넣어도 돼요."></textarea>
+   <div class="inl" style="margin-top:8px"><button class="btn" id="qzGo">🤖 복습퀴즈 + 강의 정리집 만들기</button><span class="sm" id="qzMsg"></span></div></div>
+  <div id="qzList"></div>
+ </div>
 </section>
 
 <!-- 2. 조직 · 루프 -->
+<section class="page" id="pg-free"><div class="sub" data-sub="f-board">
+ <div class="ph"><div><div class="eyebrow">자유소통방</div><h1>자유소통방</h1><p class="muted">강사·운영진·수강생 모두 함께 쓰는 게시판이에요. 팀·과제, 수다, 이모지대회, 점심, 유머, 같이가요 글을 올리고 [단톡방 만들기]로 바로 대화방을 열 수 있어요.</p></div></div>
+ <div id="frBoard"></div>
+</div></section>
 <section class="page" id="pg-org">
  <div class="sub" data-sub="o-main">
   <div class="ph"><div><div class="eyebrow">조직 · 주간 운영루프</div><h1>누가 무엇을, 언제까지</h1><p class="muted">담당별 이번 주 할 일 · 완료 체크 · 마감 시각</p></div><button class="btn" id="orgImgBtn">🖼 조직도 이미지</button></div>
@@ -1110,6 +1208,19 @@ const x=s.students.find(y=>y.id==='s8');x.join='2026-10-29';x.notice='2026-10-28
  s.notif[0].t='운영관리를 한큐에 시작 · 예시 데이터(참여자 8명, 가명)를 불러왔습니다';}})();
 (function(){const g=(window.APP.org.groups||[]).find(x=>x.id==='g4');if(g&&g.members[0])g.members[0].name='참여자 (예시 8)';
  document.addEventListener('DOMContentLoaded',()=>{const f=document.querySelector('.foot .xs');if(f)f.textContent='데이터 없음 ≠ 0 · 참여자는 가명 예시'})})();
+/* 예시판: 복습퀴즈 · 강의 정리집 예시 1건 (가상) */
+(function(){const prev=window.APP.seedHook;window.APP.seedHook=function(s){prev(s);
+ s.lectures=[{id:'lcDemo',date:'2026-11-19',title:'CH3 Modeling · 프롬프트 설계 기초 (예시)',gen:'ai',st:'pub',by:'담당 강사',at:'11/19 18:20',src:'',
+  summary:'좋은 프롬프트는 역할, 맥락, 형식, 예시 네 가지를 분명하게 담는다. 출력 형식을 정해 주면 결과를 그대로 업무에 쓰기 쉽다. 같은 작업을 반복할 때는 프롬프트를 템플릿으로 저장해 재사용한다.',
+  points:['역할을 정해 주면 답의 관점과 말투가 안정된다','맥락(누구를 위해, 왜)을 함께 주면 엉뚱한 답이 줄어든다','출력 형식(표·목록·JSON)을 지정하면 바로 활용할 수 있다','좋은 예시 1~2개가 긴 설명보다 효과적이다','반복 업무는 프롬프트 템플릿으로 만들어 둔다'],
+  sections:[{h:'프롬프트의 4요소',items:['역할: 너는 ○○ 전문가야','맥락: 대상·목적·제약 조건','형식: 표, 목록, 글자 수','예시: 원하는 결과 한두 개']},{h:'실습: 매장 리뷰 요약',items:['리뷰 20개를 붙여 넣고 장단점 표로 요약','형식을 바꿔 가며 결과 비교']},{h:'정리',items:['프롬프트는 한 번에 완성하지 않고 고쳐 가며 다듬는다']}],
+  terms:[{t:'프롬프트',d:'AI에게 주는 지시문'},{t:'퓨샷(Few-shot)',d:'예시를 몇 개 보여 주고 따라 하게 하는 방법'},{t:'템플릿',d:'빈칸만 바꿔 다시 쓰는 틀'}],
+  quiz:[{q:'좋은 프롬프트의 4요소가 아닌 것은?',choices:['역할','맥락','형식','글꼴'],answer:3,explain:'4요소는 역할·맥락·형식·예시예요.'},
+   {q:'결과를 바로 업무에 쓰기 쉽게 하려면 무엇을 지정하면 좋을까요?',choices:['출력 형식','답변 속도','모델 이름','글자 색'],answer:0,explain:'표·목록·JSON 같은 출력 형식을 지정하면 바로 활용할 수 있어요.'},
+   {q:'예시를 몇 개 보여 주고 따라 하게 하는 방법은?',choices:['제로샷','퓨샷','파인튜닝','임베딩'],answer:1,explain:'예시 몇 개(few)를 보여 주는 방법을 퓨샷이라고 해요.'},
+   {q:'같은 작업을 반복할 때 효율적인 방법은?',choices:['매번 새로 쓰기','프롬프트를 템플릿으로 저장','답을 외우기','모델을 바꾸기'],answer:1,explain:'빈칸만 바꿔 다시 쓰는 템플릿이 효율적이에요.'},
+   {q:'역할을 정해 주면 좋아지는 것은?',choices:['답의 관점과 말투','인터넷 속도','파일 크기','화면 밝기'],answer:0,explain:'역할을 주면 관점과 말투가 안정돼요.'}]}];
+ s.quizRes={s1:{lcDemo:{score:4,ans:[3,0,1,1,1],at:'11/20 09:12'}}}}})();
 </script>
 <script>
 (function(){
@@ -1343,15 +1454,16 @@ let PG='home',DAY=DEF_DAY,SEL='s1',SELD=null,MODE='pick',SELM='top',SELB='s1',DO
 let NAV=[
  {id:'home',ic:'🏠',t:'홈',subs:[['h-main','한눈에 보기']]},
  {id:'brief',ic:'📋',t:'운영브리핑',subs:[['b-issue','문제 · 이슈'],['b-status','현황 한눈에'],['b-auto','반복업무 자동화'],['b-plan','기수 일정 · 할 일'],['b-req','요청사항']]},
- {id:'notice',ic:'📢',t:'공지사항',subs:[['n-board','공지 게시판'],['n-inq','수강생 문의 · FAQ']]},
+ {id:'notice',ic:'📢',t:'공지사항',subs:[['n-board','공지 게시판'],['n-inq','수강생 문의 · FAQ'],['n-lunch','점심지도 · 비플페이']]},
  {id:'docs',ic:'📂',t:'서류·행정',subs:[['d-board','제출 현황판'],['d-new','제출 과제 등록'],['d-absent','서류제출관리']]},
- {id:'learn',ic:'📚',t:'학습',subs:[['l-logs','학습로그 · 피드백'],['l-git','깃허브 · 제작물 현황'],['l-cur','커리큘럼 · 학습자료']]},
+ {id:'learn',ic:'📚',t:'학습',subs:[['l-logs','학습로그 · 피드백'],['l-git','깃허브 · 제작물 현황'],['l-cur','커리큘럼 · 학습자료'],['l-quiz','복습퀴즈 · 강의 정리']]},
+ {id:'free',ic:'💬',t:'자유소통방',subs:[['f-board','게시판 · 단톡방']]},
  {id:'mgmt',ic:'🧑‍🏫',t:'학생관리',subs:[['m-list','학생 목록'],['m-stu','학생 상세'],['m-counsel','상담 목록'],['m-log','학습로그 · 제작물 현황']]},
  {id:'org',ic:'🧭',t:'조직 · 루프',subs:[['o-main','조직 · 주간루프'],['o-agent','에이전트 · 규칙']]},
  {id:'att',ic:'📅',t:'출결달력',subs:[['a-calc','출결달력 계산기'],['a-list','참여자 목록'],['a-judge','수료 · 수당 판정']]},
  {id:'bot',ic:'🤖',t:'출결봇',subs:[['t-board','오늘 출결 보드'],['t-log','발송 기록'],['t-conn','연결 안내']]}];
 const STAFF_NAV=NAV;
-const STU_NAV=[{id:'shome',ic:'🏠',t:'홈',subs:[['s-home','오늘']]},{id:'snotice',ic:'📢',t:'공지사항',subs:[['s-notice','공지사항']]},{id:'slearn',ic:'📚',t:'학습',subs:[['s-log','학습로그'],['s-cur','커리큘럼 & 학습자료'],['s-git','깃허브 & 제작물 제출']]},{id:'satt',ic:'📅',t:'내 출결',subs:[['s-att','내 출결 · 결석 서류']]},{id:'sdocs',ic:'📂',t:'내 제출',subs:[['s-docs','내 제출 현황']]},{id:'sask',ic:'💬',t:'문의하기',subs:[['s-ask','문의하기']]}];
+const STU_NAV=[{id:'shome',ic:'🏠',t:'홈',subs:[['s-home','오늘']]},{id:'snotice',ic:'📢',t:'공지사항',subs:[['s-notice','공지사항']]},{id:'slearn',ic:'📚',t:'학습',subs:[['s-log','학습로그'],['s-cur','커리큘럼 & 학습자료'],['s-git','깃허브 & 제작물 제출'],['s-sum','강의 정리집']]},{id:'satt',ic:'📅',t:'내 출결',subs:[['s-att','내 출결 · 결석 서류']]},{id:'sdocs',ic:'📂',t:'내 제출',subs:[['s-docs','내 제출 현황']]},{id:'sfree',ic:'💬',t:'자유소통방',subs:[['s-free','게시판 · 단톡방']]},{id:'slunch',ic:'🍱',t:'점심지도',subs:[['s-lunch','비플페이 식당']]},{id:'sask',ic:'💬',t:'문의하기',subs:[['s-ask','문의하기']]}];
 const SUB={};STAFF_NAV.concat(STU_NAV).forEach(n=>SUB[n.id]=n.subs[0][0]);
 const TREE=new Set(['home']);
 const mobile=()=>matchMedia('(max-width:900px)').matches;
@@ -1721,8 +1833,14 @@ function rJoin(){}
 const MK={absent:['결석','m-absent'],short:['4h 미만','m-short'],late:['지각','m-late'],early:['조퇴','m-early'],out:['외출','m-out']};
 function rAtt(){
  const u=unitOf(DAY);
- if($('stuList'))$('stuList').innerHTML='<table><thead><tr><th>참여자</th><th>'+md(DAY)+' 출결</th><th>환산 결석</th><th title="출석부와 같은 방식: 기준일까지 출석한 날 ÷ 단위기간 소정훈련일수">'+(u>=0?UNITS[u].n:'')+' 현재 출석</th><th title="기준일 이후는 모두 출석한다고 가정한 전체 출석률">예상 출석률</th><th>수료 여유</th><th>판정</th><th>'+(u>=0?UNITS[u].n+' 수당':'수당')+'</th></tr></thead><tbody>'+
-  S.students.map(s=>{const x=calc(s.id),t=dayState(s.id,DAY),lv=cLevel(x),cu=u>=0?x.units[u]:null;return'<tr class="click'+(s.id===CALC.sid?' sel':'')+'" data-act="stu" data-id="'+s.id+'"><td><b>'+esc(s.name)+'</b>'+(s.join?' <span class="badge b-vio">추가입소</span>':'')+'</td><td><span class="badge '+t.b+'">'+t.t+'</span></td><td>'+x.A+'일</td><td>'+(u>=0?(n=>'<b>'+n.p+'</b>/'+n.d+'일 · '+n.r.toFixed(1)+'%')(unitNow(s,u)):'-')+'</td><td>'+x.rate.toFixed(1)+'%</td><td>'+(x.left>=0?x.left+'일':'<span class="no">'+(-x.left)+'일 초과</span>')+'</td><td><span class="lvDot lv-'+lv[1]+'">'+lv[0]+'</span></td><td>'+(cu?payTxt(cu,u):'-')+'</td></tr>'}).join('')+'</tbody></table>';
+ /* 수료(전체)와 별개로 1·2·3차 단위기간별 수당 신호를 한눈에: 안정 / 경고(≤90%) / 위험(≤85%) / 수당 불가(<80%) */
+ const SGI={ok:'●',warn:'▲',bad:'■'};
+ const cell=(y,i)=>{const g=uSig(y),r=uRoom(y),past=UNITS[i]&&UNITS[i].b<DAY;return'<td class="usig"><span class="sg sg-'+g[1]+'" title="'+UNITS[i].n+' 출석률 '+y.rate.toFixed(1)+'% · 수당 기준(80%)까지 결석 여유 '+Math.max(0,r.pay)+'일">'+SGI[g[1]]+' '+g[0]+'</span><div class="xs muted">'+(g[0]==='수당 불가'||g[0]==='제적 기준'?(past?'미지급':'회복 불가'):'여유 '+Math.max(0,r.pay)+'일')+'</div></td>'};
+ const rows=S.students.map(s=>{const x=calc(s.id),bad=x.units.some(y=>uSig(y)[1]!=='ok');return{s,x,bad,worst:Math.max(...x.units.map(y=>({ok:0,warn:1,bad:2})[uSig(y)[1]]))}});
+ const nb=rows.filter(r=>r.bad).length;if(!rows.some(r=>r.bad))ALF='all';
+ if($('stuList'))$('stuList').innerHTML='<div class="alf"><div class="seg" role="group" aria-label="참여자 거르기"><button type="button" data-alf="all" class="'+(ALF==='all'?'on':'')+'">전체 '+rows.length+'</button><button type="button" data-alf="bad" class="'+(ALF==='bad'?'on':'')+'"'+(nb?'':' disabled')+'>수당 경고·위험 '+nb+'</button></div><span class="xs muted">● 안정 · ▲ 경고(90% 이하) · ■ 위험(85% 이하) / 수당 불가(80% 미만) — 단위기간마다 따로 판정, 수료(전체)와 별개</span></div>'+
+  '<table><thead><tr><th>참여자</th><th>'+md(DAY)+' 출결</th><th>환산 결석</th><th title="출석부와 같은 방식: 기준일까지 출석한 날 ÷ 단위기간 소정훈련일수">'+(u>=0?UNITS[u].n:'')+' 현재 출석</th><th>수료 여유</th><th>수료 판정</th>'+UNITS.map((U,i)=>'<th class="usig'+(i===u?' cur':'')+'">'+U.n+' 수당'+(i===u?' <span class="xs">(진행 중)</span>':'')+'</th>').join('')+'</tr></thead><tbody>'+
+  rows.filter(r=>ALF==='all'||r.bad).map(({s,x,worst})=>{const t=dayState(s.id,DAY),lv=cLevel(x);return'<tr class="click'+(s.id===CALC.sid?' sel':'')+(worst===2?' rk2':worst===1?' rk1':'')+'" data-act="stu" data-id="'+s.id+'"><td><b>'+esc(s.name)+'</b>'+(s.join?' <span class="badge b-vio">추가입소</span>':'')+'</td><td><span class="badge '+t.b+'">'+t.t+'</span></td><td>'+x.A+'일</td><td>'+(u>=0?(n=>'<b>'+n.p+'</b>/'+n.d+'일 · '+n.r.toFixed(1)+'%')(unitNow(s,u)):'-')+'</td><td>'+(x.left>=0?x.left+'일':'<span class="no">'+(-x.left)+'일 초과</span>')+'</td><td><span class="lvDot lv-'+lv[1]+'">'+lv[0]+'</span></td>'+x.units.map(cell).join('')+'</tr>'}).join('')+'</tbody></table>';
  if(!$('cCal'))return;
  if(CALC.sid&&!cStu())CALC.sid=null;
  const nm=cName(),j=cJoinInfo(),c=cCalc(),lv=cLevel(c),n=c.cnt,cal=cCal();
@@ -1820,6 +1938,8 @@ function rUnitPay(){const el=$('cUnit');if(!el)return;
 function unitNow(s,u){const ds=COURSE.filter(k=>unitOf(k)===u),c=S.cal[s.id]||{};let p=0,e=0;
  ds.forEach(k=>{if(k>DAY)return;if(s.join&&k<s.join)return;const r=c[k];if(r&&(r.s==='absent'||r.s==='short'||((r.s==='sick'||r.s==='off')&&r.doc!=='done')))return;p++;if(r)['late','early','out'].forEach(f=>{if(r[f])e++})});
  p=Math.max(0,p-Math.floor(e/3));return{p,d:ds.length,r:ds.length?p/ds.length*100:0}}
+let ALF='all';
+document.addEventListener('click',e=>{const b=e.target.closest('[data-alf]');if(!b||b.disabled)return;ALF=b.dataset.alf;render()});
 
 /* ---- 조직 · 주간 운영루프 (담당별 할 일 + 완료 체크 + 데드라인) ---- */
 const dlTxt=(dk,t)=>md(dk)+'('+wd(dk)+') '+(t||'18:00');
@@ -1935,7 +2055,7 @@ function faqMatch(text){const t=String(text||'').toLowerCase();let best=null,bs=
 function newInquiry(who,text,byStu){
  const st=stuOf(who),m=INQ.find(x=>x.re.test(text))||{k:'기타',o:'매니저',a:'담당자가 확인한 뒤 답변드릴게요.'},fm=faqMatch(text);
  const it={id:'i'+Date.now(),cat:'문의',kind:m.k,who:who||'',sid:st?st.id:'',t:text.slice(0,120),owner:m.o,st:fm?'done':'open',ai:!!fm,faq:fm?fm.id:'',answer:fm?fm.a:'',
-  draft:'안녕하세요'+(who?' '+who+'님':'')+', 운영팀입니다.\n'+m.a,due:addDays(DAY,1),by:ME?ME.name:'',at:stamp(),doneBy:fm?'AI':'',doneAt:fm?stamp():''};
+  draft:'안녕하세요'+(who?' '+who+'님':'')+', 운영팀입니다.\n'+m.a,due:addDays(DAY,1),by:ME?ME.name:'',at:stamp(),doneBy:fm?'AI':'',doneAt:fm?stamp():''};if(typeof INQ_OVR!=='undefined'&&INQ_OVR)Object.assign(it,INQ_OVR);
  commit(fm?'🤖 AI 자동 답변 완료 · '+(who?who+': ':'')+it.t+' (FAQ: '+fm.q+')':'💬 새 문의 · 답변 대기 · '+(who?who+': ':'')+it.t+' → 담당 '+m.o,'notice',s=>{s.issues.unshift(it);if(fm){const f=(s.faq||[]).find(x=>x.id===fm.id);if(f)f.hits=(f.hits||0)+1}});
  return it;
 }
@@ -2553,7 +2673,7 @@ const ICONS={
  org:'<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-2.5h12V16"/>',
  att:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/>',
  ask:'<path d="M4 5h16v11H10l-5 4v-4H4z"/><path d="M8.5 10.5h7"/>'};
-ICONS.shome=ICONS.home;ICONS.snotice=ICONS.notice;ICONS.slearn=ICONS.learn;ICONS.satt=ICONS.att;ICONS.sdocs=ICONS.docs;ICONS.sask=ICONS.ask;ICONS.bot=ICONS.att;
+ICONS.slunch='<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/>';ICONS.free='<path d="M4 5h11v8H8l-4 3z"/><path d="M15 9h5v8l-3-2.5h-6v-1.5"/>';ICONS.sfree=ICONS.free;ICONS.shome=ICONS.home;ICONS.snotice=ICONS.notice;ICONS.slearn=ICONS.learn;ICONS.satt=ICONS.att;ICONS.sdocs=ICONS.docs;ICONS.sask=ICONS.ask;ICONS.bot=ICONS.att;
 STAFF_NAV.concat(STU_NAV).forEach(n=>{if(ICONS[n.id])n.ic=SVGI(ICONS[n.id])});
 
 /* ==== 4순위: 삭제는 확인창 없이 바로 → 6초 동안 '되돌리기' (전체 초기화처럼 큰 일만 확인창 유지) ==== */
@@ -2596,11 +2716,328 @@ function briefIssues(ai){const me=ME?ME.role:'';const F=[['all','전체'],['mine
  return bar+(rows||'<p class="muted sm" style="margin:10px 0">이 조건에 해당하는 문제가 없어요.</p>')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-bf]');if(!b)return;BF=b.dataset.bf;render()});
 
+/* ==== 점심지도 · 비플페이 (강사·운영진: 공지사항 › 점심지도 / 수강생: 점심지도) ====
+   비플페이 가맹점 등록 & QR 결제 가능한 식당만. 실제판·예시판 공통(개인정보 없음).
+   지도: Leaflet(cdnjs) + OpenStreetMap 타일. 타일을 못 불러오는 환경이면 목록·카카오맵 링크로 이용.
+   위치를 모르는 식당은 운영진이 '📍 위치 지정' 후 지도를 눌러 핀을 꽂습니다(추측 좌표를 넣지 않음). */
+function lunchSeed(){return{v2:1,
+ center:{name:'교육장 (그린컴퓨터아트학원 대전둔산)',addr:'대전 서구 대덕대로 182 (둔산동 1160)',lat:36.3493,lng:127.3781,approx:true},
+ list:[
+  {id:'L1',name:'두끼',cat:'떡볶이 무한리필',addr:'',lat:null,lng:null,reg:true,qr:true,memo:''},
+  {id:'L2',name:'톳톳',cat:'베트남 음식',addr:'',lat:null,lng:null,reg:true,qr:true,memo:''},
+  {id:'L3',name:'레터버거',cat:'버거',addr:'',lat:null,lng:null,reg:true,qr:true,memo:''},
+  {id:'L4',name:'타츠진우동',cat:'우동',addr:'대전 서구 대덕대로249번길 15 (둔산동)',lat:36.35477,lng:127.37826,reg:true,qr:true,memo:''},
+  {id:'L5',name:'한식뷔페둔산',cat:'한식 뷔페',addr:'',lat:null,lng:null,reg:true,qr:true,memo:''},
+  {id:'L6',name:'선비꼬마김밥',cat:'김밥 · 분식',addr:'',lat:null,lng:null,reg:true,qr:true,memo:''}].concat(LUNCH_ADD2.map(([n,c,k],i)=>({id:'L'+(7+i),name:n,cat:c,kind:k,addr:'',lat:null,lng:null,reg:true,qr:true,memo:''})))}}
+/* 2차 추가 (11/23): 종류는 상호 기준 추정 — 다르면 '수정'으로 고쳐 주세요 */
+const LUNCH_ADD2=[['슬로우캘리','포케 · 샐러드','food'],['보꾸미','식당','food'],['미미식당','식당','food'],['그레이토라멘','라멘','food'],['우리손칼국수','칼국수','food'],['인생곰탕','곰탕','food'],['은하수식당','식당','food'],['우지커피','카페','cafe'],['메가커피','카페','cafe'],['CU','편의점','cvs'],['GS25','편의점','cvs']];
+const lKind=x=>x.kind||(/카페|커피/.test(x.cat||'')?'cafe':/편의점/.test(x.cat||'')?'cvs':'food');
+function lunchMigrate(){if(!S||LUNCH_MIG)return;if(!S.lunch){LUNCH_MIG=true;setTimeout(()=>{if(!S.lunch)commit(null,'',s=>{s.lunch=lunchSeed()})},0);return}
+ if(!S.lunch.v2){LUNCH_MIG=true;setTimeout(()=>commit(null,'',s=>{const have=new Set(s.lunch.list.map(x=>x.name));LUNCH_ADD2.forEach(([n,c,k],i)=>{if(!have.has(n))s.lunch.list.push({id:'L'+(7+i)+'_'+Date.now()%1000,name:n,cat:c,kind:k,addr:'',lat:null,lng:null,reg:true,qr:true,memo:''})});s.lunch.v2=1}),0)}}
+let LKF='all';
+const naverQ=n=>'https://map.naver.com/p/search/'+encodeURIComponent('대전 둔산 '+n);
+let LUNCH_MIG=false;
+const LM={};let LPICK=null,LFOCUS=null;
+const kakaoQ=n=>'https://map.kakao.com/?q='+encodeURIComponent('대전 둔산 '+n);
+const kakaoTo=x=>x.lat!=null?'https://map.kakao.com/link/to/'+encodeURIComponent(x.name)+','+x.lat+','+x.lng:kakaoQ(x.name);
+function distM(a,b){const R=6371000,r=Math.PI/180,dLa=(b.lat-a.lat)*r,dLo=(b.lng-a.lng)*r,h=Math.sin(dLa/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function walkTxt(x,c){if(x.lat==null||!c)return'';const m=distM(c,x)*1.25;return'도보 약 '+Math.max(1,Math.round(m/75))+'분 · '+(m<1000?Math.round(m/10)*10+'m':(m/1000).toFixed(1)+'km')}
+function loadLeaflet(cb){if(window.L&&L.map)return cb();if(loadLeaflet.p)return loadLeaflet.p.push(cb);loadLeaflet.p=[cb];const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=()=>{loadLeaflet.p.forEach(f=>f());loadLeaflet.p=null};s.onerror=()=>{loadLeaflet.p=null;document.querySelectorAll('.lmap').forEach(el=>{el.innerHTML='<p class="muted sm" style="padding:16px">지도를 불러올 수 없는 환경이에요. 오른쪽 목록의 <b>카카오맵</b> 링크로 위치를 확인하세요.</p>'})};document.head.appendChild(s)}
+function rLunch(p){const box=$(p+'List'),mapEl=$(p+'Map');if(!box||!mapEl)return;lunchMigrate();const D=S.lunch;if(!D){box.innerHTML='<p class="muted sm">불러오는 중…</p>';return}
+ const staff=!STU(),c=D.center,L=D.list.filter(x=>LKF==='all'||lKind(x)===LKF).sort((a,b)=>(a.lat==null)-(b.lat==null)||(a.lat!=null&&b.lat!=null?distM(c,a)-distM(c,b):0)),noPin=D.list.filter(x=>x.lat==null).length;
+ const KN={all:'전체',food:'식당',cafe:'카페',cvs:'편의점'},cnt=k=>k==='all'?D.list.length:D.list.filter(x=>lKind(x)===k).length;
+ box.innerHTML=(LPICK?'<div class="lpick">📍 <b>'+esc((D.list.find(x=>x.id===LPICK)||{name:c.name}).name)+'</b> 위치를 지도에서 눌러 주세요 <button class="btn s sm" data-act="lPickOff">취소</button></div>':'')+
+  '<div class="seg lkf" role="group" aria-label="종류">'+Object.keys(KN).map(k=>'<button type="button" data-lkf="'+k+'" class="'+(LKF===k?'on':'')+'">'+KN[k]+' '+cnt(k)+'</button>').join('')+'</div>'+
+  '<div class="xs muted" style="margin:6px 0 8px">모두 <b>비플페이 가맹점 등록 · QR 결제 가능</b>'+(noPin?' · 위치 미지정 '+noPin+'곳'+(staff?' (📍로 지정)':''):'')+' · 식당을 누르면 상세 정보가 열려요</div>'+
+  L.map(x=>'<div class="lcard'+(LFOCUS===x.id?' on':'')+'" data-act="lFocus" data-id="'+x.id+'"><div class="lh"><b class="ln">'+esc(x.name)+'</b><span class="badge">'+esc(x.cat||'식당')+'</span></div>'+
+   (LFOCUS===x.id?'<div class="ldet"><div class="kv"><span>영업시간</span><b>'+esc(x.hours||'—')+'</b></div><div class="kv"><span>전화</span><b>'+(x.tel?'<a href="tel:'+esc(x.tel)+'">'+esc(x.tel)+'</a>':'—')+'</b></div><div class="kv"><span>대표 메뉴</span><b>'+esc(x.menu||'—')+'</b></div><div class="kv"><span>가격대</span><b>'+esc(x.price||'—')+'</b></div>'+
+    '<a class="btn s sm nvbtn" href="'+naverQ(x.name)+'" target="_blank" rel="noopener">N 네이버 지도에서 상세 정보(메뉴·리뷰·영업시간) ↗</a>'+(staff?'<button class="linkb" data-act="lInfo" data-id="'+x.id+'">상세 정보 입력</button>':'')+'</div>':'')+
+   '<div class="lbadges">'+(x.reg?'<span class="badge b-ok">가맹점 등록</span>':'')+(x.qr?'<span class="badge b-acc">QR 결제</span>':'')+(x.lat!=null?'<span class="xs muted">'+walkTxt(x,c)+'</span>':'<span class="xs no">위치 미지정</span>')+'</div>'+
+   (x.addr?'<div class="xs muted">'+esc(x.addr)+'</div>':'')+(x.memo?'<div class="xs">'+esc(x.memo)+'</div>':'')+
+   '<div class="lacts"><a class="linkb" href="'+kakaoTo(x)+'" target="_blank" rel="noopener">카카오맵 '+(x.lat!=null?'길찾기':'검색')+' ↗</a>'+
+   (staff?'<button class="linkb" data-act="lPick" data-id="'+x.id+'">📍 위치 '+(x.lat!=null?'수정':'지정')+'</button><button class="linkb" data-act="lEdit" data-id="'+x.id+'">수정</button><button class="linkb" data-act="lDel" data-id="'+x.id+'">삭제</button>':'')+'</div></div>').join('')+
+  (staff?'<details class="more" id="'+p+'Add"><summary>+ 식당 추가</summary><div class="mi"><div class="f3" style="grid-template-columns:1fr 1fr"><div><label class="f" for="'+p+'N">식당 이름</label><input id="'+p+'N" maxlength="30"></div><div><label class="f" for="'+p+'C">종류</label><input id="'+p+'C" maxlength="20" placeholder="예) 한식, 분식"></div></div><label class="f" for="'+p+'A" style="margin-top:6px">주소 (선택)</label><input id="'+p+'A" maxlength="60"><label class="f" for="'+p+'M" style="margin-top:6px">메모 (선택)</label><input id="'+p+'M" maxlength="60" placeholder="예) 12시 전 도착 추천"><button class="btn sm" data-act="lAdd" data-id="'+p+'" style="margin-top:8px">추가 + 수강생 알림</button><p class="xs muted" style="margin:6px 0 0">추가한 뒤 📍 위치 지정을 누르고 지도를 클릭하면 핀이 꽂혀요.</p></div></details>':'');
+ if(staff&&c.approx)box.insertAdjacentHTML('beforeend','<p class="xs muted" style="margin-top:8px">교육장 핀은 주소 기준 대략 위치예요. <button class="linkb" data-act="lPick" data-id="center">📍 교육장 위치 맞추기</button></p>');
+ if(staff)box.insertAdjacentHTML('beforeend','<details class="more"><summary>🟢 네이버 지도 API 연결 '+(D.naverKey?'<span class="badge b-ok">연결됨</span>':'<span class="badge">미연결</span>')+'</summary><div class="mi"><p class="xs muted" style="margin:0 0 6px">네이버 클라우드 플랫폼 › Maps에서 발급한 <b>Client ID</b>를 넣으면 지도가 네이버 지도로 바뀌어요. 사용할 주소(예: 네트리파이 주소)를 콘솔의 Web 서비스 URL에 등록해야 해요. claude.ai 링크 안에서는 외부 지도 스크립트가 막혀 기본 지도로 보여요.</p><div class="inl"><input id="'+p+'NK" placeholder="Client ID" value="'+esc(D.naverKey||'')+'" style="flex:1" autocomplete="off"><button class="btn s sm" data-act="lNaverKey" data-id="'+p+'">저장</button></div></div></details>');
+ if(D.naverKey&&!NV_FAIL)loadNaver(D.naverKey,ok=>ok?drawNaver(p):loadLeaflet(()=>drawLunch(p)));else loadLeaflet(()=>drawLunch(p))}
+/* 네이버 지도 (Client ID가 있을 때만). 불러오기에 실패하면 기본 지도로 */
+let NV_FAIL=false;const NM={};
+function loadNaver(key,cb){if(window.naver&&naver.maps&&naver.maps.Map)return cb(true);if(loadNaver.p)return loadNaver.p.push(cb);loadNaver.p=[cb];const s=document.createElement('script');s.src='https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId='+encodeURIComponent(key);
+ const done=ok=>{const q=loadNaver.p||[];loadNaver.p=null;if(!ok)NV_FAIL=true;q.forEach(f=>f(ok))};s.onload=()=>setTimeout(()=>done(!!(window.naver&&naver.maps&&naver.maps.Map)),50);s.onerror=()=>done(false);window.navermap_authFailure=()=>{NV_FAIL=true;document.querySelectorAll('.lmap').forEach(el=>el.insertAdjacentHTML('beforeend','<div class="ltileerr">네이버 지도 인증 실패 — Client ID와 등록한 서비스 URL을 확인하세요.</div>'))};document.head.appendChild(s)}
+function drawNaver(p){const el=$(p+'Map');if(!el||!window.naver||!S.lunch)return;const D=S.lunch,c=D.center,nm=naver.maps;
+ let M=NM[p];if(!M||M._el!==el){if(LM[p]){try{LM[p].map.remove()}catch(e){}delete LM[p]}el.innerHTML='';const map=new nm.Map(el,{center:new nm.LatLng(c.lat,c.lng),zoom:16});
+  nm.Event.addListener(map,'click',e=>{if(!LPICK||STU())return;const id=LPICK,ll={lat:e.coord.y,lng:e.coord.x};LPICK=null;
+   commit(id==='center'?'📍 교육장 위치 수정':'@stu|📍 점심지도 · '+(S.lunch.list.find(x=>x.id===id)||{}).name+' 위치 표시','',s=>{const t=id==='center'?s.lunch.center:s.lunch.list.find(y=>y.id===id);if(t){t.lat=+ll.lat.toFixed(6);t.lng=+ll.lng.toFixed(6);if(id==='center')t.approx=false}})});
+  M=NM[p]={map,marks:[],_el:el,key:''}}
+ const key=JSON.stringify(D)+LFOCUS;if(M.key===key)return;M.key=key;M.marks.forEach(m=>m.setMap(null));M.marks=[];
+ const mk=(ll,txt,on)=>new nm.Marker({position:new nm.LatLng(ll.lat,ll.lng),map:M.map,icon:{content:'<div class="lpin '+(on?'on':'')+'"><span><i>'+txt+'</i></span></div>',anchor:new nm.Point(14,30)}});
+ M.marks.push(mk(c,'🏫'));D.list.filter(x=>x.lat!=null).forEach(x=>{const m=mk(x,'🍱',LFOCUS===x.id);nm.Event.addListener(m,'click',()=>{LFOCUS=x.id;render()});M.marks.push(m)});
+ const f=D.list.find(x=>x.id===LFOCUS&&x.lat!=null);if(f)M.map.panTo(new nm.LatLng(f.lat,f.lng))}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lkf]');if(!b)return;LKF=b.dataset.lkf;render()});
+function drawLunch(p){const el=$(p+'Map');if(!el||!window.L||!S.lunch)return;const D=S.lunch,c=D.center;
+ let M=LM[p];if(!M||M._el!==el){if(M)try{M.map.remove()}catch(e){}const map=L.map(el,{zoomControl:true,attributionControl:true}).setView([c.lat,c.lng],16);
+  let errs=0;L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).on('tileerror',()=>{if(++errs===4)el.insertAdjacentHTML('beforeend','<div class="ltileerr">지도 이미지를 불러오지 못했어요. 목록의 카카오맵 링크를 이용하세요.</div>')}).addTo(map);
+  map.on('click',e=>{if(!LPICK||STU())return;const id=LPICK,ll=e.latlng;LPICK=null;
+   commit(id==='center'?'📍 교육장 위치 수정':'@stu|📍 점심지도 · '+(S.lunch.list.find(x=>x.id===id)||{}).name+' 위치 표시','',s=>{if(id==='center'){s.lunch.center.lat=+ll.lat.toFixed(6);s.lunch.center.lng=+ll.lng.toFixed(6);s.lunch.center.approx=false}else{const x=s.lunch.list.find(y=>y.id===id);if(x){x.lat=+ll.lat.toFixed(6);x.lng=+ll.lng.toFixed(6)}}})});
+  M=LM[p]={map,layer:L.layerGroup().addTo(map),_el:el,key:''}}
+ const key=JSON.stringify(D)+LFOCUS+LPICK;el.classList.toggle('picking',!!LPICK);
+ setTimeout(()=>M.map.invalidateSize(),60);if(M.key===key)return;M.key=key;M.layer.clearLayers();
+ const ic=(cls,txt)=>L.divIcon({className:'lpin '+cls,html:'<span><i>'+txt+'</i></span>',iconSize:null,iconAnchor:[14,30]});
+ L.marker([c.lat,c.lng],{icon:ic('home','🏫')}).bindTooltip(esc(c.name)+(c.approx?' (대략 위치)':''),{direction:'top',offset:[0,-28]}).addTo(M.layer);
+ D.list.filter(x=>x.lat!=null).forEach(x=>{const m=L.marker([x.lat,x.lng],{icon:ic(LFOCUS===x.id?'on':'','🍱')}).bindTooltip('<b>'+esc(x.name)+'</b><br>'+esc(x.cat||'')+' · '+walkTxt(x,c),{direction:'top',offset:[0,-28],permanent:LFOCUS===x.id}).addTo(M.layer);m.on('click',()=>{LFOCUS=x.id;render()})});
+ const f=D.list.find(x=>x.id===LFOCUS&&x.lat!=null);if(f)M.map.panTo([f.lat,f.lng]);else{const pts=[[c.lat,c.lng]].concat(D.list.filter(x=>x.lat!=null).map(x=>[x.lat,x.lng]));if(pts.length>1)M.map.fitBounds(pts,{padding:[40,40],maxZoom:17})}}
+function lunchAct(act,id,a){const D=S.lunch;
+ switch(act){
+  case'lFocus':LFOCUS=LFOCUS===id?null:id;render();return true;
+  case'lPick':if(STU())return true;LPICK=id;render();return true;
+  case'lPickOff':LPICK=null;render();return true;
+  case'lNaverKey':{const v=($(id+'NK')||{}).value||'';NV_FAIL=false;commit(v.trim()?'🟢 점심지도 네이버 지도 API 연결':'점심지도 네이버 지도 연결 해제','',s=>{s.lunch.naverKey=v.trim()});return true}
+  case'lInfo':{const x=D.list.find(y=>y.id===id);if(!x)return true;const h=prompt('영업시간 (예: 11:00~21:00, 일 휴무)',x.hours||'');if(h===null)return true;const t=prompt('전화번호',x.tel||'');if(t===null)return true;const mn=prompt('대표 메뉴',x.menu||'');if(mn===null)return true;const pr=prompt('가격대 (예: 8천~1만 원)',x.price||'');if(pr===null)return true;
+   commit('@stu|🍱 점심지도 「'+x.name+'」 상세 정보 업데이트','slunch',s=>{const y=s.lunch.list.find(z=>z.id===id);Object.assign(y,{hours:h.trim(),tel:t.trim(),menu:mn.trim(),price:pr.trim()})});return true}
+  case'lAdd':{const p=id,n=$(p+'N').value.trim();if(!n){$(p+'N').focus();return true}const x={id:'L'+Date.now(),name:n,cat:$(p+'C').value.trim(),addr:$(p+'A').value.trim(),memo:$(p+'M').value.trim(),lat:null,lng:null,reg:true,qr:true};
+   commit('@stu|🍱 점심지도에 「'+n+'」 추가 (비플페이 가능)','slunch',s=>{(s.lunch=s.lunch||lunchSeed()).list.push(x)});LPICK=x.id;return true}
+  case'lEdit':{const x=D.list.find(y=>y.id===id);if(!x)return true;const n=prompt('식당 이름',x.name);if(n===null)return true;const cat=prompt('종류',x.cat||'');if(cat===null)return true;const ad=prompt('주소 (선택)',x.addr||'');if(ad===null)return true;const me=prompt('메모 (선택)',x.memo||'');if(me===null)return true;
+   commit('@stu|🍱 점심지도 「'+n+'」 정보 수정','slunch',s=>{const y=s.lunch.list.find(z=>z.id===id);Object.assign(y,{name:n.trim()||y.name,cat:cat.trim(),addr:ad.trim(),memo:me.trim()})});return true}
+  case'lDel':{const x=D.list.find(y=>y.id===id);if(x&&confirm('점심지도에서 지울까요?\n'+x.name))commit('점심지도에서 「'+x.name+'」 삭제','slunch',s=>{s.lunch.list=s.lunch.list.filter(y=>y.id!==id)});return true}
+ }return false}
+
+/* 운영진이 수강생 알림(slunch)을 눌러도 운영진 화면(공지사항 › 점심지도)으로 */
+const _goL=go;go=function(p,sub){if(p==='slunch'&&!STU()){p='notice';sub='n-lunch'}return _goL(p,sub)};
+
+/* ==== 복습퀴즈 · 강의 정리집 ====
+   강사/운영진: 학습 › 복습퀴즈 · 강의 정리 — 강의 녹취(텍스트 변환본)를 넣으면 AI가 정리집 + 퀴즈 5문항 초안을 만들고, 확인 후 '수강생에게 공개'
+   수강생: 홈 맨 위 '오늘의 복습퀴즈' → 학습 › 강의 정리집에서 추가 복습
+   AI: claude.ai 링크 안에서는 Claude(sample 기능, 보는 사람 계정 사용량), 그 밖(네트리파이 등)에서는 규칙 기반 자동 생성 */
+let SAMPLE;(async()=>{try{SAMPLE=window.claude&&claude.use?await claude.use('sample'):null}catch(e){SAMPLE=null}})();
+const aiOK=()=>!!SAMPLE;
+function aiErr(e){const c=e&&e.code;return c==='not_granted'||c==='sampling_disabled'?'AI 사용이 허용되지 않아 자동 규칙으로 만들어요.':c==='rate_limited'?'AI 사용량이 잠시 많아요. 조금 뒤 다시 눌러 주세요.':c==='prompt_too_large'?'녹취가 너무 길어요. 앞부분만 넣어 주세요.':'AI 연결이 잠시 불안정해요. 다시 눌러 주세요.'}
+/* --- AI 없이 만드는 규칙 기반 초안 --- */
+const STOPW=new Set('그리고 그래서 그러면 그런데 하지만 이제 이렇게 저렇게 이거 저거 그거 여기 거기 오늘 우리 여러분 제가 저는 이것 그것 정도 부분 경우 때문 그냥 진짜 약간 조금 이런 저런 그런 있는 없는 하는 되는 합니다 있습니다 됩니다 같은 다음 먼저 다시 한번 이번 보면 해서 하고 있고 그럼 네 예 음 어 아'.split(' '));
+function localGen(title,txt){const clean=txt.replace(/\r/g,'').replace(/^\d+\s*$/gm,'').replace(/^\d{2}:\d{2}[:,.\d\s\->]*$/gm,'').replace(/WEBVTT.*$/m,'');
+ const sents=clean.split(/(?<=[.?!다요죠])\s+|\n+/).map(s=>s.trim()).filter(s=>s.length>=12&&s.length<=160);
+ const freq={};clean.split(/[^가-힣A-Za-z0-9]+/).forEach(w=>{w=w.replace(/(은|는|이|가|을|를|에|의|로|으로|와|과|도|만|에서|에게|하고|이다|입니다)$/,'');if(w.length<2||STOPW.has(w)||/^\d+$/.test(w)||/(니다|어요|아요|해요|했다|한다|하는|하고|해서|하면|에서|에게|까지|부터|이고|이며|지만|는데|합니|습니|됩니|겠습|하게|하지|해야)$/.test(w)||/^(하|되|있|없|같|좋|바꿔|보여|만들|배웠|정해|주면)/.test(w))return;freq[w]=(freq[w]||0)+1});
+ const kws=Object.keys(freq).sort((a,b)=>freq[b]-freq[a]).slice(0,14);
+ const score=s=>kws.reduce((t,k,i)=>t+(s.includes(k)?(14-i):0),0);
+ const top=sents.map((s,i)=>({s,i,v:score(s)})).sort((a,b)=>b.v-a.v);
+ const points=top.slice(0,6).sort((a,b)=>a.i-b.i).map(x=>x.s);
+ const n=sents.length,part=Math.max(1,Math.ceil(n/3));const sections=[0,1,2].map(k=>{const ch=sents.slice(k*part,(k+1)*part);if(!ch.length)return null;const b=ch.map((s,i)=>({s,v:score(s)})).sort((a,b)=>b.v-a.v).slice(0,3).map(x=>x.s);return{h:['도입','본론','정리'][k]+' — '+(kws.find(w=>ch.join(' ').includes(w))||'핵심'),items:b}}).filter(Boolean);
+ const quiz=[];const used=new Set();
+ for(const t of top){if(quiz.length>=5)break;const k=kws.find(w=>t.s.includes(w)&&!used.has(w));if(!k)continue;used.add(k);const others=kws.filter(w=>w!==k).sort(()=>Math.random()-.5).slice(0,3);if(others.length<3)break;
+  const ch=others.concat([k]).sort(()=>Math.random()-.5);quiz.push({q:'빈칸에 들어갈 말로 알맞은 것은?\n「'+t.s.replace(k,'____')+'」',choices:ch,answer:ch.indexOf(k),explain:'강의 원문: '+t.s})}
+ return{title,summary:points.slice(0,2).join(' '),points,sections,terms:kws.slice(0,5).map(t=>({t,d:'강의에서 '+freq[t]+'번 나온 핵심어'})),quiz,gen:'rule'}}
+async function aiGen(title,txt){const body=txt.slice(0,60000);
+ const prompt='너는 AI·AX 실무 교육 과정의 강의 조교야. 아래 강의 녹취록으로 (1) 수강생이 복습용으로 볼 강의 내용 정리집과 (2) 복습 퀴즈 5문항을 만들어.\n'+
+  '규칙: 녹취록에 나온 내용만 쓰고, 말버릇·잡담·출석 안내 같은 군더더기는 빼. 쉬운 한국어로. 퀴즈는 4지선다, 정답은 하나, 오답도 그럴듯하게, 해설은 한두 문장.\n'+
+  '반드시 JSON 하나로만 답해: {"title":"강의 제목","summary":"3~4문장 요약","points":["핵심 내용 5~7개"],"sections":[{"h":"소제목","items":["설명 2~4개"]}],"terms":[{"t":"용어","d":"쉬운 뜻"}],"quiz":[{"q":"질문","choices":["보기1","보기2","보기3","보기4"],"answer":0,"explain":"해설"}]}\n'+
+  'sections는 3~5개, terms는 3~6개, quiz는 정확히 5개. answer는 0부터 시작하는 정답 번호.\n\n강의 제목: '+title+'\n\n녹취록:\n'+body;
+ const r=await SAMPLE.json(prompt,{modelTier:'default',cache:false});
+ if(!r||!Array.isArray(r.quiz)||!r.quiz.length)throw{code:'invalid_json'};
+ r.quiz=r.quiz.filter(q=>q&&q.q&&Array.isArray(q.choices)&&q.choices.length>=2).slice(0,5).map(q=>({q:String(q.q),choices:q.choices.map(String).slice(0,4),answer:Math.max(0,Math.min(3,+q.answer||0)),explain:String(q.explain||'')}));
+ r.gen='ai';return r}
+/* --- 강사/운영진 화면 --- */
+let QZ_BUSY=false,QZ_MSG='',QSEL={},QOPEN=null,QJUST=null;
+const pubLecs=()=>(S.lectures||[]).filter(l=>l.st==='pub').sort((a,b)=>a.date<b.date?1:-1);
+function lecStats(l){const R=S.quizRes||{};const xs=S.students.map(s=>(R[s.id]||{})[l.id]).filter(Boolean);return{n:xs.length,avg:xs.length?xs.reduce((t,x)=>t+x.score,0)/xs.length:0,tot:(l.quiz||[]).length}}
+function sumHtml(l){return'<div class="lsum">'+(l.summary?'<p class="sm" style="margin:0 0 8px">'+esc(l.summary)+'</p>':'')+
+ ((l.points||[]).length?'<h4>핵심 내용</h4><ul>'+l.points.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>':'')+
+ (l.sections||[]).map(s=>'<h4>'+esc(s.h)+'</h4><ul>'+(s.items||[]).map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul>').join('')+
+ ((l.terms||[]).length?'<h4>용어 정리</h4><div class="terms">'+l.terms.map(t=>'<div><b>'+esc(t.t)+'</b><span>'+esc(t.d)+'</span></div>').join('')+'</div>':'')+'</div>'}
+function rQuizStaff(){const el=$('qzList');if(!el)return;
+ if($('qzDate')&&!$('qzDate').value)$('qzDate').value=DAY;
+ $('qzMsg').innerHTML=QZ_MSG;$('qzAi').textContent=aiOK()?'🤖 Claude AI 연결됨':'⚙️ 자동 규칙 모드 (AI 연결이 없는 환경)';$('qzAi').className='badge '+(aiOK()?'b-ok':'');
+ $('qzGo').disabled=QZ_BUSY;$('qzGo').textContent=QZ_BUSY?'만드는 중… (최대 1~2분)':'🤖 복습퀴즈 + 강의 정리집 만들기';
+ const L=(S.lectures||[]).slice().sort((a,b)=>a.date<b.date?1:-1);
+ el.innerHTML=L.length?L.map(l=>{const st=lecStats(l),op=QOPEN===l.id;return'<div class="card mt lec"><div class="ch"><div class="grow"><b>'+md(l.date)+'('+wd(l.date)+') · '+esc(l.title)+'</b> <span class="badge '+(l.st==='pub'?'b-ok':'b-warn')+'">'+(l.st==='pub'?'수강생 공개':'초안')+'</span> <span class="xs muted">'+(l.gen==='ai'?'AI 생성':'자동 규칙')+' · 퀴즈 '+(l.quiz||[]).length+'문항'+(l.st==='pub'?' · 응시 '+st.n+'/'+S.students.length+'명 · 평균 '+st.avg.toFixed(1)+'/'+st.tot+'점':'')+'</span></div>'+
+  '<button class="btn s sm" data-act="qzOpen" data-id="'+l.id+'">'+(op?'접기':'내용 보기')+'</button>'+(l.st==='pub'?'<button class="btn s sm" data-act="qzUnpub" data-id="'+l.id+'">공개 취소</button>':'<button class="btn sm" data-act="qzPub" data-id="'+l.id+'">수강생에게 공개</button>')+'<button class="linkb" data-act="qzDel" data-id="'+l.id+'">삭제</button></div>'+
+  (op?'<div class="g c2 mt"><div><h3>📘 강의 정리집</h3>'+sumHtml(l)+'</div><div><h3>🧠 복습퀴즈 (정답 표시)</h3>'+(l.quiz||[]).map((q,i)=>'<div class="qz"><div class="qq">'+(i+1)+'. '+esc(q.q).replace(/\n/g,'<br>')+'</div><ol>'+q.choices.map((c,j)=>'<li class="'+(j===q.answer?'ans':'')+'">'+esc(c)+(j===q.answer?' ✓':'')+'</li>').join('')+'</ol><div class="xs muted">'+esc(q.explain||'')+'</div><button class="linkb" data-act="qzQDel" data-id="'+l.id+'|'+i+'">이 문항 빼기</button></div>').join('')+'</div></div>':'')+'</div>'}).join(''):'<p class="muted sm">아직 등록한 강의가 없어요. 위에서 녹취를 넣고 만들어 보세요.</p>'}
+async function qzMake(){if(QZ_BUSY)return;const title=$('qzTitle').value.trim()||'강의',date=$('qzDate').value||DAY,txt=$('qzText').value.trim();
+ if(txt.length<200){QZ_MSG='<span class="no">녹취 텍스트가 너무 짧아요(200자 이상). 파일을 올리거나 붙여 넣어 주세요.</span>';render();return}
+ QZ_BUSY=true;QZ_MSG='Claude가 강의를 읽고 정리하는 중이에요…';render();let r,note='';
+ try{if(!aiOK())throw{code:'none'};r=await aiGen(title,txt)}catch(e){r=localGen(title,txt);note=e&&e.code==='none'?'AI 연결이 없는 환경이라 자동 규칙으로 만들었어요. 내용을 확인한 뒤 공개해 주세요.':aiErr(e)+' 우선 자동 규칙으로 만들었어요.'}
+ QZ_BUSY=false;if(!r.quiz||!r.quiz.length){QZ_MSG='<span class="no">퀴즈를 만들 만한 문장이 부족해요. 녹취를 더 넣어 주세요.</span>';render();return}
+ const lec={id:'lc'+Date.now(),date,title:r.title&&r.gen==='ai'?title:title,summary:r.summary||'',points:r.points||[],sections:r.sections||[],terms:r.terms||[],quiz:r.quiz,gen:r.gen,st:'draft',src:txt.slice(0,20000),by:ME?ME.name:'',at:stamp()};
+ QOPEN=lec.id;QZ_MSG=(note?'<span class="wn">'+esc(note)+'</span> ':'')+'초안이 만들어졌어요. 아래에서 확인하고 <b>수강생에게 공개</b>를 눌러 주세요.';
+ commit('📚 강의 정리 · 복습퀴즈 초안 생성 · '+md(date)+' '+title,'learn',s=>{(s.lectures=s.lectures||[]).push(lec)});['qzText','qzTitle'].forEach(i=>$(i).value='')}
+function quizAct(act,id,a){
+ switch(act){
+  case'qzOpen':QOPEN=QOPEN===id?null:id;render();return true;
+  case'qzPub':{const l=(S.lectures||[]).find(x=>x.id===id);if(l)commit('@stu|🧠 복습퀴즈 · 강의 정리집 공개 · '+md(l.date)+' '+l.title,'slearn',s=>{s.lectures.find(x=>x.id===id).st='pub'});return true}
+  case'qzUnpub':commit('복습퀴즈 공개 취소','learn',s=>{s.lectures.find(x=>x.id===id).st='draft'});return true;
+  case'qzDel':{const l=(S.lectures||[]).find(x=>x.id===id);if(l&&confirm('강의 정리·퀴즈를 지울까요?\n'+l.title))commit('강의 정리 삭제 · '+l.title,'learn',s=>{s.lectures=s.lectures.filter(x=>x.id!==id)});return true}
+  case'qzQDel':{const[lid,i]=id.split('|');commit(null,'',s=>{const l=s.lectures.find(x=>x.id===lid);if(l)l.quiz.splice(+i,1)});return true}
+  case'qzPick':{const[lid,qi,ci]=id.split('|');(QSEL[lid]=QSEL[lid]||{})[qi]=+ci;render();return true}
+  case'qzSubmit':{const me=myStu&&myStu(),l=(S.lectures||[]).find(x=>x.id===id);if(!me||!l)return true;const sel=QSEL[id]||{};if(Object.keys(sel).length<l.quiz.length){alert('모든 문항을 골라 주세요.');return true}
+   const score=l.quiz.reduce((t,q,i)=>t+(sel[i]===q.answer?1:0),0);QJUST=id;commit('🧠 복습퀴즈 제출 · '+me.name+' · '+l.title+' '+score+'/'+l.quiz.length+'점','learn',s=>{((s.quizRes=s.quizRes||{})[me.id]=s.quizRes[me.id]||{})[id]={score,ans:l.quiz.map((q,i)=>sel[i]),at:stamp()}});return true}
+  case'qzRetry':{const me=myStu&&myStu();delete QSEL[id];if(me)commit(null,'',s=>{if(s.quizRes&&s.quizRes[me.id])delete s.quizRes[me.id][id]});return true}
+  case'qzGoSum':QOPEN=id;QJUST=null;go('slearn','s-sum');return true;
+  case'qzNext':QJUST=null;render();return true;
+ }return false}
+function buildQuizForms(){if($('qzGo'))$('qzGo').onclick=qzMake;
+ if($('qzFile'))$('qzFile').onchange=e=>{const f=e.target.files[0];if(!f)return;if(/^audio|^video/.test(f.type)||/\.(mp3|m4a|wav|aac|ogg|mp4|webm)$/i.test(f.name)){QZ_MSG='<span class="wn">🎙 음성 파일('+esc(f.name)+')은 바로 넣을 수 없어요. 클로바노트·네이버 클로바·Whisper 등에서 <b>텍스트(.txt)로 변환</b>한 뒤 올려 주세요.</span>';e.target.value='';render();return}
+  const r=new FileReader();r.onload=()=>{$('qzText').value=String(r.result||'').replace(/^﻿/,'');if(!$('qzTitle').value)$('qzTitle').value=f.name.replace(/\.[^.]+$/,'');QZ_MSG='📄 '+esc(f.name)+' 불러옴 ('+$('qzText').value.length.toLocaleString()+'자)';render()};r.readAsText(f)}}
+/* --- 수강생: 퀴즈 풀기 · 정리집 --- */
+function quizBox(l,me){const res=((S.quizRes||{})[me.id]||{})[l.id],sel=QSEL[l.id]||{};
+ if(res)return'<div class="qres"><b class="big">'+res.score+' / '+l.quiz.length+'점</b> <span class="xs muted">'+esc(res.at)+' 제출</span></div>'+l.quiz.map((q,i)=>{const ok=res.ans[i]===q.answer;return'<div class="qz '+(ok?'ok':'no')+'"><div class="qq">'+(ok?'⭕':'❌')+' '+(i+1)+'. '+esc(q.q).replace(/\n/g,'<br>')+'</div><div class="xs">정답: <b>'+esc(q.choices[q.answer])+'</b>'+(ok?'':' · 내 답: '+esc(q.choices[res.ans[i]]||'-'))+'</div><div class="xs muted">'+esc(q.explain||'')+'</div></div>'}).join('')+'<div class="inl" style="margin-top:8px"><button class="btn s sm" data-act="qzRetry" data-id="'+l.id+'">다시 풀기</button><button class="btn sm" data-act="qzGoSum" data-id="'+l.id+'">📘 강의 정리집 보며 복습 →</button></div>';
+ return l.quiz.map((q,i)=>'<div class="qz"><div class="qq">'+(i+1)+'. '+esc(q.q).replace(/\n/g,'<br>')+'</div><div class="qch">'+q.choices.map((c,j)=>'<button type="button" class="qc'+(sel[i]===j?' on':'')+'" data-act="qzPick" data-id="'+l.id+'|'+i+'|'+j+'">'+'①②③④'[j]+' '+esc(c)+'</button>').join('')+'</div></div>').join('')+'<button class="btn" data-act="qzSubmit" data-id="'+l.id+'" style="margin-top:8px">제출하고 채점하기 ('+Object.keys(sel).length+'/'+l.quiz.length+')</button>'}
+function rQuizStu(){const me=myStu&&myStu();if(!me)return;
+ const box=$('sQuiz');if(box){const P=pubLecs(),todo=P.find(l=>!((S.quizRes||{})[me.id]||{})[l.id]),just=QJUST&&P.find(x=>x.id===QJUST&&((S.quizRes||{})[me.id]||{})[x.id]);if(just){box.hidden=false;box.innerHTML='<div class="ch"><h2>🧠 채점 결과</h2><span class="xs muted">'+md(just.date)+' · '+esc(just.title)+'</span>'+(todo?'<button class="btn sm" data-act="qzNext">다음 퀴즈 풀기 →</button>':'')+'</div>'+quizBox(just,me);}else{const l=todo||P[0];
+  box.hidden=!l;if(l)box.innerHTML='<div class="ch"><h2>🧠 '+(todo?'오늘의 복습퀴즈':'복습퀴즈 완료!')+'</h2><span class="xs muted">'+md(l.date)+' · '+esc(l.title)+' · '+l.quiz.length+'문항</span></div>'+(todo?quizBox(l,me):'<p class="sm" style="margin:4px 0 8px">공개된 퀴즈를 모두 풀었어요. 👏</p>'+quizBox(l,me))}}
+ const sl=$('sSumList');if(sl){const P=pubLecs();sl.innerHTML=P.length?P.map(l=>{const op=QOPEN===l.id||(!QOPEN&&l===P[0]),res=((S.quizRes||{})[me.id]||{})[l.id];return'<details class="card mt lec"'+(op?' open':'')+'><summary><b>'+md(l.date)+'('+wd(l.date)+') · '+esc(l.title)+'</b> '+(res?'<span class="badge b-ok">퀴즈 '+res.score+'/'+l.quiz.length+'</span>':'<span class="badge b-warn">퀴즈 미응시</span>')+'</summary>'+sumHtml(l)+'<details class="more"><summary>🧠 이 강의 퀴즈 '+(res?'다시 보기':'풀기')+'</summary><div class="mi">'+quizBox(l,me)+'</div></details></details>'}).join(''):'<p class="muted sm">아직 공개된 강의 정리집이 없어요. 강사님이 올리면 알림으로 알려드려요.</p>'}}
+
+/* ==== 자유소통방 (모든 역할) — 에브리타임식 게시판 + 단톡방 ====
+   게시판: 팀&과제 / 수다 / 이모지대회 / 점심 / 유머 / 같이가요 · 익명 선택 · 좋아요 · 댓글
+   글에서 '단톡방 만들기' → 참여한 사람끼리 실시간 대화 (앱의 실시간 연동으로 전달) */
+const BCATS=[['all','전체'],['team','팀 & 과제'],['talk','수다'],['emoji','이모지대회'],['lunch','점심'],['humor','유머'],['go','같이가요']];
+const bcName=k=>(BCATS.find(c=>c[0]===k)||[,'기타'])[1];
+let BCAT='all',BOPEN=null,BROOM=null,BTAB='board';
+const meKey=()=>ME?(ME.role==='수강생'?'stu:'+ME.sid:ME.role+':'+ME.name):'';
+const meLabel=()=>ME?(ME.role==='수강생'?ME.name:ME.name+' ('+ME.role+')'):'';
+function boardSeed(demo){const P=[{id:'bp0',cat:'talk',title:'📌 자유소통방 이용 안내',body:'팀·과제 이야기, 점심 같이 먹을 사람, 행사 같이 갈 사람 모두 여기서 모여요!\n· 글마다 [단톡방 만들기]로 바로 대화방을 열 수 있어요.\n· 익명으로 쓸 수 있지만, 서로 존중하는 말로 써 주세요.',by:'운영팀',bk:'sys',anon:false,at:'11/23 09:00',likes:{},cm:[],pin:true}];
+ if(demo)P.push({id:'bp1',cat:'go',title:'테크팀 - 충남대 같이 갈 사람!',body:'금요일 충남대 행사 같이 갈 분 구해요. 대전역에서 모여서 같이 가요 🚌',by:'김하늘',bk:'stu:s1',anon:false,at:'11/23 10:12',likes:{'stu:s2':1,'stu:s5':1},cm:[{by:'이준호',bk:'stu:s2',t:'저요! 몇 시에 모여요?',at:'11/23 10:20'}]},
+  {id:'bp2',cat:'go',title:'콘텐츠 마케팅팀 - 서울 같이 갈 사람',body:'다음 주 서울 박람회 KTX 같이 예매해요. 단톡방 열게요!',by:'정다은',bk:'stu:s5',anon:false,at:'11/23 11:02',likes:{},cm:[],room:'br1'},
+  {id:'bp3',cat:'lunch',title:'점심 우동 같이 먹을 사람!!',body:'12시 10분에 1층에서 출발해요 🍜 (비플페이 됨)',by:'익명',bk:'stu:s3',anon:true,at:'11/23 11:40',likes:{'stu:s4':1},cm:[]},
+  {id:'bp4',cat:'emoji',title:'🏆 이번 주 이모지대회: 오늘 내 기분을 이모지 3개로!',body:'댓글로 이모지 3개만 남겨 주세요. 좋아요 제일 많은 분께 커피 ☕',by:'CJ 총괄PM',bk:'매니저:CJ 총괄PM',anon:false,at:'11/23 09:30',likes:{},cm:[{by:'익명',bk:'stu:s6',t:'😴☕🔥',at:'11/23 09:40'}]});
+ return{posts:P,rooms:demo?[{id:'br1',title:'콘텐츠 마케팅팀 - 서울 같이 갈 사람',post:'bp2',members:{'stu:s5':'정다은'},msgs:[{by:'정다은',bk:'stu:s5',t:'KTX 시간 투표해요! 8시 vs 9시',at:'11/23 11:05'}]}]:[]}}
+function boardMigrate(){if(S&&!S.board&&!boardMigrate.on){boardMigrate.on=1;setTimeout(()=>{if(!S.board)commit(null,'',s=>{s.board=boardSeed(!!A.demo)})},0)}}
+function _rBoard(p){const el=$(p+'Board');if(!el)return;boardMigrate();const B=S.board;if(!B){el.innerHTML='<p class="muted sm">불러오는 중…</p>';return}const me=meKey();
+ const myRooms=B.rooms.filter(r=>r.members&&r.members[me]);
+ const tabs='<div class="btabs"><button type="button" data-btab="board" class="'+(BTAB==='board'?'on':'')+'">📋 게시판</button><button type="button" data-btab="rooms" class="'+(BTAB==='rooms'?'on':'')+'">💬 단톡방 <span class="badge">'+B.rooms.length+'</span></button></div>';
+ if(BTAB==='rooms'||BROOM){const r=B.rooms.find(x=>x.id===BROOM);
+  if(r){const joined=!!(r.members||{})[me];el.innerHTML=tabs+'<div class="card broom"><div class="ch"><button class="linkb" data-act="bRoomBack">← 목록</button><h3 style="margin:0" class="grow">💬 '+esc(r.title)+'</h3><span class="xs muted">'+Object.keys(r.members||{}).length+'명 참여</span>'+(joined?'<button class="linkb" data-act="bLeave" data-id="'+r.id+'">나가기</button>':'')+'</div>'+
+   '<div class="bmsgs" id="'+p+'Msgs">'+(r.msgs||[]).map(m=>'<div class="bmsg'+(m.bk===me?' me':'')+'"><span class="bwho">'+esc(m.by)+'</span><div class="bbub">'+esc(m.t)+'</div><span class="xs muted">'+esc(m.at)+'</span></div>').join('')+'</div>'+
+   (joined?'<div class="inl bsend"><input id="'+p+'Msg" placeholder="메시지 입력 후 Enter" maxlength="300" autocomplete="off" style="flex:1"><button class="btn" data-act="bSend" data-id="'+r.id+'|'+p+'">보내기</button></div>':'<button class="btn" data-act="bJoin" data-id="'+r.id+'">이 단톡방 참여하기</button>')+'</div>';
+   const box=$(p+'Msgs');if(box)box.scrollTop=box.scrollHeight;const inp=$(p+'Msg');if(inp){inp.onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();lunchSafeSend(r.id,p)}};if(BFOCUS)inp.focus()}return}
+  el.innerHTML=tabs+(B.rooms.length?B.rooms.slice().reverse().map(r=>{const last=(r.msgs||[]).slice(-1)[0],j=!!(r.members||{})[me];return'<div class="row click" data-act="bRoom" data-id="'+r.id+'"><span class="av">💬</span><div class="grow"><b>'+esc(r.title)+'</b>'+(j?' <span class="badge b-ok">참여 중</span>':'')+'<div class="xs muted">'+Object.keys(r.members||{}).length+'명 · '+(last?esc(last.by)+': '+esc(last.t.slice(0,40)):'아직 대화 없음')+'</div></div><span class="xs muted">'+(last?esc(last.at):'')+'</span></div>'}).join(''):'<p class="muted sm">아직 단톡방이 없어요. 게시판 글에서 [단톡방 만들기]를 눌러 보세요.</p>');return}
+ if(BOPEN){const x=B.posts.find(y=>y.id===BOPEN);if(x){const liked=!!(x.likes||{})[me],mine=x.bk===me||(!STU()&&ME&&ME.role==='매니저');
+  el.innerHTML=tabs+'<div class="card bpost"><button class="linkb" data-act="bBack">← '+bcName(BCAT)+' 목록</button><div class="ch" style="margin-top:6px"><span class="badge">'+bcName(x.cat)+'</span><h2 class="grow" style="margin:0">'+esc(x.title)+'</h2></div><div class="xs muted">'+esc(x.anon?'익명':x.by)+' · '+esc(x.at)+'</div><p class="bbody2">'+esc(x.body).replace(/\n/g,'<br>')+'</p>'+
+   '<div class="inl"><button class="btn s sm'+(liked?' on':'')+'" data-act="bLike" data-id="'+x.id+'">'+(liked?'❤️':'🤍')+' 좋아요 '+Object.keys(x.likes||{}).length+'</button>'+(x.room?'<button class="btn sm" data-act="bRoom" data-id="'+x.room+'">💬 단톡방 들어가기</button>':'<button class="btn sm" data-act="bMkRoom" data-id="'+x.id+'">💬 단톡방 만들기</button>')+(mine?'<button class="linkb" data-act="bDel" data-id="'+x.id+'">삭제</button>':'')+'</div>'+
+   '<h4 style="margin:14px 0 6px">댓글 '+(x.cm||[]).length+'</h4>'+(x.cm||[]).map(c=>'<div class="bcm"><b class="xs">'+esc(c.by)+'</b> <span class="xs muted">'+esc(c.at)+'</span><div>'+esc(c.t)+'</div></div>').join('')+
+   '<div class="inl" style="margin-top:8px"><input id="'+p+'Cm" placeholder="댓글 달기" maxlength="200" style="flex:1"><label class="xs"><input type="checkbox" id="'+p+'CmA"> 익명</label><button class="btn s sm" data-act="bCm" data-id="'+x.id+'|'+p+'">등록</button></div></div>';return}BOPEN=null}
+ const L=B.posts.filter(x=>BCAT==='all'||x.cat===BCAT).sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)||(a.id<b.id?1:-1));
+ el.innerHTML=tabs+'<div class="seg bcats" role="group" aria-label="게시판 주제">'+BCATS.map(c=>'<button type="button" data-bcat="'+c[0]+'" class="'+(BCAT===c[0]?'on':'')+'">'+c[1]+'</button>').join('')+'</div>'+
+  '<details class="more" id="'+p+'New"><summary>✏️ 글쓰기</summary><div class="mi"><div class="f3" style="grid-template-columns:140px 1fr"><select id="'+p+'Cat" aria-label="주제">'+BCATS.slice(1).map(c=>'<option value="'+c[0]+'"'+(BCAT===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select><input id="'+p+'T" maxlength="60" placeholder="제목 · 예) 점심 칼국수 같이 먹을 사람!!"></div><textarea id="'+p+'B" rows="3" placeholder="내용" style="margin-top:6px"></textarea><div class="inl" style="margin-top:6px"><label class="xs"><input type="checkbox" id="'+p+'A"> 익명으로 쓰기</label><label class="xs"><input type="checkbox" id="'+p+'R"> 단톡방도 같이 만들기</label><button class="btn sm" data-act="bPost" data-id="'+p+'">올리기</button></div></div></details>'+
+  '<div class="card blist">'+(L.length?L.map(x=>'<div class="row click" data-act="bOpen" data-id="'+x.id+'">'+(x.pin?'<span class="badge b-acc">공지</span>':'<span class="badge">'+bcName(x.cat)+'</span>')+'<div class="grow"><b>'+esc(x.title)+'</b><div class="xs muted">'+esc(x.body.split('\n')[0].slice(0,60))+'</div></div><span class="xs muted bmeta">'+esc(x.anon?'익명':x.by)+' · '+esc(x.at)+'<br>❤️ '+Object.keys(x.likes||{}).length+' · 💬 '+(x.cm||[]).length+(x.room?' · 단톡':'')+'</span></div>').join(''):'<p class="muted sm">이 주제의 글이 아직 없어요. 첫 글을 써 보세요!</p>')+'</div>'}
+let BFOCUS=false;
+function lunchSafeSend(rid,p){const inp=$(p+'Msg'),t=inp?inp.value.trim():'';if(!t)return;const by=meLabel(),bk=meKey();BFOCUS=true;
+ commit(null,'',s=>{const r=s.board.rooms.find(x=>x.id===rid);if(r)(r.msgs=r.msgs||[]).push({by:ME.role==='수강생'?ME.name:ME.name,bk,t,at:stamp()})});setTimeout(()=>{BFOCUS=false},300)}
+function boardAct(act,id,a){const me=meKey(),who=meLabel();
+ switch(act){
+  case'bOpen':BOPEN=id;render();return true;
+  case'bBack':BOPEN=null;render();return true;
+  case'bRoom':BROOM=id;BTAB='rooms';BOPEN=null;render();return true;
+  case'bRoomBack':BROOM=null;render();return true;
+  case'bPost':{const p=id,t=$(p+'T').value.trim(),b=$(p+'B').value.trim();if(t){$(p+'T').value='';$(p+'B').value=''}if(!t){$(p+'T').focus();return true}const anon=$(p+'A').checked,mkR=$(p+'R').checked,cat=$(p+'Cat').value;const x={id:'bp'+Date.now(),cat,title:t,body:b,by:anon?'익명':(ME.name),bk:me,anon,at:stamp(),likes:{},cm:[]};
+   let rid=null;if(mkR){rid='br'+Date.now();x.room=rid}BOPEN=x.id;
+   commit('@stu|🗨 자유소통방 · ['+bcName(cat)+'] '+t,'free',s=>{s.board.posts.push(x);if(rid)s.board.rooms.push({id:rid,title:t,post:x.id,members:{[me]:anon?'익명':ME.name},msgs:[]})});return true}
+  case'bLike':commit(null,'',s=>{const x=s.board.posts.find(y=>y.id===id);if(!x)return;x.likes=x.likes||{};if(x.likes[me])delete x.likes[me];else x.likes[me]=1});return true;
+  case'bCm':{const[pid,p]=id.split('|'),t=$(p+'Cm').value.trim();if(!t)return true;const anon=$(p+'CmA').checked;commit(null,'',s=>{const x=s.board.posts.find(y=>y.id===pid);if(x)(x.cm=x.cm||[]).push({by:anon?'익명':ME.name,bk:me,t,at:stamp()})});return true}
+  case'bMkRoom':{const x=S.board.posts.find(y=>y.id===id);if(!x)return true;const rid='br'+Date.now();BROOM=rid;BTAB='rooms';BOPEN=null;commit('@stu|💬 단톡방 열림 · '+x.title,'free',s=>{const y=s.board.posts.find(z=>z.id===id);y.room=rid;s.board.rooms.push({id:rid,title:x.title,post:id,members:{[me]:ME.name},msgs:[{by:'안내',bk:'sys',t:who+'님이 단톡방을 만들었어요. 편하게 이야기 나눠요!',at:stamp()}]})});BROOM=rid;BTAB='rooms';BOPEN=null;return true}
+  case'bJoin':commit(null,'',s=>{const r=s.board.rooms.find(x=>x.id===id);if(r){(r.members=r.members||{})[me]=ME.name;(r.msgs=r.msgs||[]).push({by:'안내',bk:'sys',t:ME.name+'님이 들어왔어요.',at:stamp()})}});return true;
+  case'bLeave':commit(null,'',s=>{const r=s.board.rooms.find(x=>x.id===id);if(r){delete r.members[me];r.msgs.push({by:'안내',bk:'sys',t:ME.name+'님이 나갔어요.',at:stamp()})}});BROOM=null;return true;
+  case'bSend':{const[rid,p]=id.split('|');lunchSafeSend(rid,p);return true}
+  case'bDel':{const x=S.board.posts.find(y=>y.id===id);if(x&&confirm('글을 지울까요?\n'+x.title))commit('자유소통방 글 삭제 · '+x.title,'free',s=>{s.board.posts=s.board.posts.filter(y=>y.id!==id)});BOPEN=null;return true}
+ }return false}
+document.addEventListener('click',e=>{const c=e.target.closest('[data-bcat]');if(c){BCAT=c.dataset.bcat;BOPEN=null;render();return}const t=e.target.closest('[data-btab]');if(t){BTAB=t.dataset.btab;BROOM=null;BOPEN=null;render()}});
+const _goB=go;go=function(p,sub){if(p==='free'&&STU())p='sfree';else if(p==='sfree'&&!STU())p='free';return _goB(p,sub)};
+/* 다시 그릴 때 쓰던 글·열린 글쓰기 상자 유지 (다른 사람 메시지가 와도 입력이 지워지지 않게) */
+function rBoard(p){const keep={};['Msg','Cm','T','B'].forEach(k=>{const i=$(p+k);if(i)keep[k]=[i.value,document.activeElement===i]});const nw=$(p+'New'),open=nw&&nw.open;
+ _rBoard(p);if(BFOCUS)delete keep.Msg;Object.keys(keep).forEach(k=>{const i=$(p+k);if(i){i.value=keep[k][0];if(keep[k][1])i.focus()}});if(open&&$(p+'New'))$(p+'New').open=true}
+
+/* ==== 홈 화면: 오른쪽 플로팅 메모장(최대 3개) · 왼쪽 '오늘의 뉴스' (모든 역할) ====
+   메모는 개인용이라 이 브라우저에만 저장(사람마다 따로). 종류: 메모 / 할 일 / 목록
+   서식: 굵게 · 형광펜 · 글자색 · 글자 크기 · 글머리 목록 */
+const MEMO_MAX=3,MCOL=['#141922','#d23c3c','#2f6fed','#13804b','#a96300'];
+const memoKey=()=>'hq_memo_'+A.id+'_'+meKey();
+function memoLoad(){try{return JSON.parse(localStorage.getItem(memoKey())||'null')||{open:true,list:[]}}catch(e){return{open:true,list:[]}}}
+function memoSave(d){try{localStorage.setItem(memoKey(),JSON.stringify(d))}catch(e){}}
+let MEMO=null,MEMO_OWNER='',MEMO_T=null;
+const onHome=()=>PG==='home'||PG==='shome';
+function memoDock(){let el=$('memoDock');if(!ME){if(el)el.hidden=true;document.body.classList.remove('dockOn');return}
+ if(!el){el=document.createElement('aside');el.id='memoDock';el.className='memoDock';el.setAttribute('aria-label','내 메모장');document.body.appendChild(el);
+  el.addEventListener('input',memoInput);el.addEventListener('click',memoClick);el.addEventListener('change',memoChange);el.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('tdNew')&&!e.isComposing){e.preventDefault();memoAddItem(e.target)}})}
+ if(MEMO_OWNER!==memoKey()){MEMO_OWNER=memoKey();MEMO=memoLoad();if(!MEMO.list.length)MEMO.list.push({id:'m'+Date.now(),type:'todo',title:'오늘 할 일',items:[],html:''});drawMemos()}
+ el.hidden=!onHome();document.body.classList.toggle('dockOn',onHome()&&MEMO.open)}
+function memoBody(m){if(m.type==='todo')return'<ul class="todo">'+m.items.map((t,i)=>'<li class="'+(t.d?'done':'')+'"><input type="checkbox" data-mi="'+i+'"'+(t.d?' checked':'')+' aria-label="완료"><span contenteditable="true" class="tdT" data-mi="'+i+'">'+t.h+'</span><button class="x" data-mdel="'+i+'" aria-label="삭제">×</button></li>').join('')+'</ul><input class="tdNew" placeholder="+ 할 일 입력 후 Enter" maxlength="80">';
+ return'<div class="medit" contenteditable="true" data-ph="'+(m.type==='list'?'목록을 적어 보세요':'자유롭게 메모하세요')+'">'+(m.html||(m.type==='list'?'<ul><li></li></ul>':''))+'</div>'}
+function drawMemos(){const el=$('memoDock');if(!el||!MEMO)return;
+ el.innerHTML='<div class="mdHead"><b>📝 내 메모장</b><span class="xs muted">'+MEMO.list.length+'/'+MEMO_MAX+'</span><button class="btn s sm" data-mact="add"'+(MEMO.list.length>=MEMO_MAX?' disabled':'')+'>+ 새 메모</button><button class="x" data-mact="fold" aria-label="'+(MEMO.open?'메모장 접기':'메모장 펼치기')+'" title="'+(MEMO.open?'접기':'펼치기')+'">'+(MEMO.open?'»':'«')+'</button></div>'+
+  (MEMO.open?MEMO.list.map(m=>'<div class="memo'+(m.min?' min':'')+'" data-mid="'+m.id+'"><div class="mTop"><input class="mTitle" value="'+esc(m.title||'')+'" maxlength="30" aria-label="메모 제목"><select class="mType" aria-label="메모 종류"><option value="note"'+(m.type==='note'?' selected':'')+'>메모</option><option value="todo"'+(m.type==='todo'?' selected':'')+'>할 일</option><option value="list"'+(m.type==='list'?' selected':'')+'>목록</option></select><button class="x" data-mact="min" title="'+(m.min?'펼치기':'접기')+'">'+(m.min?'▾':'▴')+'</button><button class="x" data-mact="del" title="메모 삭제">×</button></div>'+
+   (m.min?'':'<div class="mTools" role="toolbar" aria-label="서식"><button data-cmd="bold" title="굵게"><b>B</b></button><button data-cmd="hilite" title="형광펜"><span class="hl">형</span></button>'+MCOL.map(c=>'<button data-cmd="color" data-v="'+c+'" title="글자색" class="mc"><i style="background:'+c+'"></i></button>').join('')+'<button data-cmd="size" data-v="2" title="작게">가</button><button data-cmd="size" data-v="3" title="보통" style="font-size:14px">가</button><button data-cmd="size" data-v="5" title="크게" style="font-size:17px">가</button><button data-cmd="ul" title="글머리 목록">•≡</button></div><div class="mBody">'+memoBody(m)+'</div>')+'</div>').join(''):'')}
+function curMemo(t){const box=t.closest('.memo');return box&&MEMO.list.find(m=>m.id===box.dataset.mid)}
+function memoPersist(){clearTimeout(MEMO_T);MEMO_T=setTimeout(()=>memoSave(MEMO),250)}
+function memoInput(e){const m=curMemo(e.target);if(!m)return;
+ if(e.target.classList.contains('mTitle'))m.title=e.target.value;else if(e.target.classList.contains('medit'))m.html=e.target.innerHTML;else if(e.target.classList.contains('tdT'))m.items[+e.target.dataset.mi].h=e.target.innerHTML;memoPersist()}
+function memoChange(e){const m=curMemo(e.target);if(!m)return;
+ if(e.target.classList.contains('mType')){const nt=e.target.value;if(nt==='todo'&&m.type!=='todo'){const txt=(m.html||'').replace(/<li>/g,'\n').replace(/<br\s*\/?>/g,'\n').replace(/<\/(div|p)>/g,'\n').replace(/<[^>]+>/g,'').split('\n').map(s=>s.trim()).filter(Boolean);m.items=(m.items||[]).concat(txt.map(h=>({h:esc(h),d:false})))}
+  if(nt!=='todo'&&m.type==='todo')m.html=nt==='list'?'<ul>'+(m.items||[]).map(t=>'<li>'+t.h+'</li>').join('')+'</ul>':(m.items||[]).map(t=>t.h).join('<br>');m.type=nt;m.items=m.items||[];memoSave(MEMO);drawMemos()}
+ else if(e.target.type==='checkbox'&&e.target.dataset.mi!=null){m.items[+e.target.dataset.mi].d=e.target.checked;e.target.closest('li').classList.toggle('done',e.target.checked);memoSave(MEMO)}}
+function memoAddItem(inp){const m=curMemo(inp);const v=inp.value.trim();if(!m||!v)return;m.items.push({h:esc(v),d:false});memoSave(MEMO);drawMemos();const n=document.querySelector('.memo[data-mid="'+m.id+'"] .tdNew');if(n)n.focus()}
+function memoClick(e){const b=e.target.closest('[data-mact],[data-cmd],[data-mdel]');if(!b)return;const m=curMemo(b);
+ if(b.dataset.mact==='add'){if(MEMO.list.length<MEMO_MAX){MEMO.list.push({id:'m'+Date.now(),type:'note',title:'메모 '+(MEMO.list.length+1),html:'',items:[]});MEMO.open=true;memoSave(MEMO);drawMemos();document.body.classList.add('dockOn')}return}
+ if(b.dataset.mact==='fold'){MEMO.open=!MEMO.open;memoSave(MEMO);drawMemos();document.body.classList.toggle('dockOn',MEMO.open);return}
+ if(b.dataset.mact==='min'&&m){m.min=!m.min;memoSave(MEMO);drawMemos();return}
+ if(b.dataset.mact==='del'&&m){if((m.html||m.items.length)&&!_nativeConfirm('이 메모를 지울까요?'))return;MEMO.list=MEMO.list.filter(x=>x!==m);memoSave(MEMO);drawMemos();return}
+ if(b.dataset.mdel!=null&&m){m.items.splice(+b.dataset.mdel,1);memoSave(MEMO);drawMemos();return}
+ if(b.dataset.cmd){e.preventDefault();const c=b.dataset.cmd,v=b.dataset.v;try{document.execCommand('styleWithCSS',false,true)}catch(x){}
+  if(c==='bold')document.execCommand('bold');else if(c==='hilite')document.execCommand('hiliteColor',false,'#fff26b');else if(c==='color')document.execCommand('foreColor',false,v);else if(c==='size')document.execCommand('fontSize',false,v);else if(c==='ul')document.execCommand('insertUnorderedList');
+  const ed=document.activeElement;if(ed&&ed.isContentEditable)ed.dispatchEvent(new Event('input',{bubbles:true}))}}
+document.addEventListener('mousedown',e=>{if(e.target.closest('.mTools button'))e.preventDefault()});/* 서식 버튼을 눌러도 선택한 글자가 풀리지 않게 */
+/* --- 왼쪽: 오늘의 뉴스 --- */
+let WX=null,WX_TRY=false;
+function loadWx(){if(WX_TRY)return;WX_TRY=true;fetch('https://api.open-meteo.com/v1/forecast?latitude=36.351&longitude=127.378&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSeoul&forecast_days=1').then(r=>r.json()).then(j=>{WX=j;newsBox()}).catch(()=>{WX='x';newsBox()})}
+const WXC=c=>c===0?'☀️ 맑음':c<=2?'🌤 구름 조금':c===3?'☁️ 흐림':c<=48?'🌫 안개':c<=57?'🌦 이슬비':c<=67?'🌧 비':c<=77?'🌨 눈':c<=82?'🌧 소나기':'⛈ 뇌우';
+function newsBox(){let el=$('newsBox');const side=$('side');if(!side||!ME)return;
+ if(!el){el=document.createElement('div');el.id='newsBox';el.className='newsBox';const sb=side.querySelector('.sideBottom');side.insertBefore(el,sb)}
+ el.hidden=!onHome();if(el.hidden)return;loadWx();const stu=STU(),me=stu&&myStu&&myStu();
+ const wx=WX&&WX!=='x'&&WX.current?WXC(WX.current.weather_code)+' '+Math.round(WX.current.temperature_2m)+'° <span class="xs muted">('+Math.round(WX.daily.temperature_2m_min[0])+'°/'+Math.round(WX.daily.temperature_2m_max[0])+'°)</span>':WX==='x'?'<a href="https://search.naver.com/search.naver?query='+encodeURIComponent('대전 둔산동 날씨')+'" target="_blank" rel="noopener">대전 둔산동 날씨 보기 ↗</a>':'불러오는 중…';
+ let att;if(stu&&me){const t=dayState(me.id,DAY),c=calc(me.id);att='<span class="badge '+t.b+'">'+t.t+'</span> <span class="xs muted">누적 환산 결석 '+c.A+'일</span>'}else{const g=todayGroups(),none=g.wait.length===S.students.length;att=none?'<span class="xs muted">09:00 판정 전 · '+S.students.length+'명</span>':'결석 <b class="no">'+g.abs.length+'</b> · 지각 <b class="wn">'+g.late.length+'</b> · 확인 전 '+g.wait.length}
+ const ns=(S.notices||[]).slice().sort((a,b)=>(b.pin?1:0)-(a.pin?1:0)).slice(0,2);
+ const dl=[];if(stu&&me){(S.docTasks||[]).forEach(t=>{if(t.due===DAY&&tTargets(t).some(x=>x.id===me.id)&&!tSt(t,me.id))dl.push('📄 '+t.name+' 제출')});if(!logOf(me.id,DAY))dl.push('📝 오늘 학습로그');const q=pubLecs().find(l=>!((S.quizRes||{})[me.id]||{})[l.id]);if(q)dl.push('🧠 복습퀴즈 · '+q.title)}
+ else{(S.tasks||[]).forEach(t=>{if(t.due===DAY&&!t.done&&(!ME||t.o===ME.role||ME.role==='매니저'))dl.push('✅ '+t.t+(t.time?' ~'+t.time:''))});(S.docTasks||[]).forEach(t=>{if(t.due===DAY)dl.push('📄 '+t.name+' 마감')});(S.issues||[]).forEach(i=>{if(i.st!=='done'&&i.due===DAY&&(i.owner===ME.role||ME.role==='매니저'))dl.push('🗂 '+i.t.slice(0,24))})}
+ el.innerHTML='<div class="nbH">📰 오늘의 뉴스 <span class="xs muted">'+md(DAY)+'('+wd(DAY)+')</span></div>'+
+  '<div class="nbI"><span class="nbL">출결</span><div>'+att+'</div></div>'+
+  '<div class="nbI"><span class="nbL">날씨</span><div>'+wx+'</div></div>'+
+  '<div class="nbI"><span class="nbL">공지</span><div>'+(ns.length?ns.map(n=>'<button class="linkb nbN" data-go="'+(stu?'snotice':'notice')+'">'+(n.pin?'📌 ':'')+esc(n.title)+'</button>').join(''):'<span class="xs muted">새 공지 없음</span>')+'</div></div>'+
+  '<div class="nbI"><span class="nbL">오늘 마감</span><div>'+(dl.length?dl.slice(0,4).map(t=>'<div class="xs">'+esc(t)+'</div>').join('')+(dl.length>4?'<div class="xs muted">외 '+(dl.length-4)+'건</div>':''):'<span class="xs ok">✓ 오늘 마감 없음</span>')+'</div></div>'}
+
+/* ==== 문의하기: 주제 · 질문 대상 고르기 + 키워드만 넣으면 문장 자동 완성 ====
+   claude.ai 링크 안에서는 Claude가 문장을 다듬고, 그 밖에서는 주제별 문장 틀로 만듭니다. */
+const ASK_TOPIC=[['출결','📅'],['지원금','💰'],['공부','📚'],['서류','📄'],['시설·생활','🏫'],['기타','💬']];
+const ASK_TO=[['매니저','운영매니저'],['강사','강사'],['현장운영진','현장운영진']];
+let ASK_T='출결',ASK_W='매니저',ASK_BUSY=false,INQ_OVR=null;
+const ASK_DEF={'출결':'매니저','지원금':'매니저','공부':'강사','서류':'현장운영진','시설·생활':'현장운영진','기타':'매니저'};
+function askTemplate(topic,kw,to,name){const k=kw.trim().replace(/\s+/g,' ');const t={
+ '출결':k+' 때문에 출결을 어떻게 처리하면 되는지 궁금합니다. 출석 인정을 받으려면 어떤 증빙을 언제까지 내야 하는지도 알려 주세요.',
+ '지원금':k+' 관련해서 참여수당(지원금) 기준과 지급 일정이 궁금합니다. 제 경우 받을 수 있는지 확인 부탁드립니다.',
+ '공부':'수업에서 다룬 '+k+' 부분이 아직 잘 이해되지 않아 질문드립니다. 추가 설명이나 참고 자료를 받을 수 있을까요?',
+ '서류':k+' 서류는 어디에, 어떤 형식으로, 언제까지 제출하면 되는지 궁금합니다.',
+ '시설·생활':k+' 관련해서 도움이 필요해 문의드립니다. 가능한 방법을 알려 주시면 감사하겠습니다.',
+ '기타':k+'에 대해 문의드립니다. 확인 후 답변 부탁드립니다.'}[topic]||k;
+ return'안녕하세요, '+to+'님. '+(name?name+'입니다. ':'')+t+' 감사합니다!'}
+function askUI(){const c=$('saText');if(!c||$('askBar'))return;const box=c.parentElement;
+ box.insertAdjacentHTML('afterbegin','<div id="askBar"><div class="askRow"><span class="askL">주제</span><div class="chips" id="askTopics"></div></div><div class="askRow"><span class="askL">질문 대상</span><div class="seg" id="askTos"></div></div>'+
+  '<div class="askRow"><span class="askL">키워드</span><div class="inl" style="flex:1"><input id="askKw" placeholder="단어만 넣어 보세요 · 예) 병원, 진단서 / 수당 입금일 / 프롬프트 예시" maxlength="60" style="flex:1" autocomplete="off"><button class="btn s" id="askGen" type="button">✨ 문장 만들기</button></div></div><div class="xs muted" id="askMsg" style="margin:2px 0 8px"></div></div>');
+ $('askGen').onclick=askGen;$('askKw').onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();askGen()}};
+ const send=$('saSend');if(send){const orig=send.onclick;send.onclick=ev=>{INQ_OVR={kind:ASK_T,owner:ASK_W,target:(ASK_TO.find(x=>x[0]===ASK_W)||[])[1]||''};try{orig&&orig.call(send,ev)}finally{INQ_OVR=null}}}}
+function askBar(){askUI();if(!$('askTopics'))return;
+ $('askTopics').innerHTML=ASK_TOPIC.map(([t,i])=>'<button type="button" class="chip cbtn'+(ASK_T===t?' on':'')+'" data-askt="'+t+'">'+i+' '+t+'</button>').join('');
+ $('askTos').innerHTML=ASK_TO.map(([k,l])=>'<button type="button" data-askw="'+k+'" class="'+(ASK_W===k?'on':'')+'">'+l+'</button>').join('');
+ $('askGen').disabled=ASK_BUSY;$('askGen').textContent=ASK_BUSY?'만드는 중…':'✨ 문장 만들기'}
+async function askGen(){const kw=$('askKw').value.trim();if(!kw){$('askKw').focus();return}const me=myStu&&myStu(),to=(ASK_TO.find(x=>x[0]===ASK_W)||[,'운영매니저'])[1],name=me?me.name:'';
+ const ta=$('saText');ta.value=askTemplate(ASK_T,kw,to,name);
+ if(!aiOK()){$('askMsg').textContent='키워드로 문장을 만들었어요. 필요하면 고쳐서 보내세요.';return}
+ ASK_BUSY=true;askBar();$('askMsg').textContent='Claude가 문장을 다듬는 중…';
+ try{const r=await SAMPLE('교육 과정 수강생이 운영진에게 보낼 문의 글을 써 줘. 받는 사람: '+to+', 보내는 사람: '+(name||'수강생')+', 주제: '+ASK_T+', 키워드: '+kw+'.\n조건: 정중하고 간결한 한국어 2~3문장, 인사로 시작해 감사로 끝내기, 키워드의 상황을 자연스럽게 풀어서 무엇을 알고 싶은지 분명하게. 문의 글 본문만 답해.',{modelTier:'quick',cache:false,onText:({text})=>{ta.value=text}});
+  ta.value=r.text.trim();$('askMsg').textContent='Claude가 문장을 만들었어요. 필요하면 고쳐서 보내세요.'}
+ catch(e){if(e&&e.text)ta.value=e.text;$('askMsg').textContent=e&&e.code==='not_granted'?'AI 사용이 허용되지 않아 기본 문장으로 만들었어요.':'기본 문장으로 만들었어요. 필요하면 고쳐서 보내세요.'}
+ finally{ASK_BUSY=false;askBar()}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-askt]');if(t){ASK_T=t.dataset.askt;ASK_W=ASK_DEF[ASK_T]||ASK_W;askBar();return}const w=e.target.closest('[data-askw]');if(w){ASK_W=w.dataset.askw;askBar()}});
+
 /* ---- 공통 클릭 처리 ---- */
 document.addEventListener('click',e=>{
  const g=e.target.closest('[data-go]');if(g){if(g.dataset.sid){calcSelect(g.dataset.sid);SELB=g.dataset.sid}if(g.dataset.mid)SELM=g.dataset.mid;go(g.dataset.go,g.dataset.sub);if(g.dataset.jid)jLoad(g.dataset.jid);if($('searchRes'))$('searchRes').hidden=true;return}
  const a=e.target.closest('[data-act]');if(!a||a.disabled)return;const id=a.dataset.id,me=ME?ME.name:'';
- if(noticeAct(a.dataset.act,id,a)||prdAct(a.dataset.act,id,a)||learnAct(a.dataset.act,id,a)||docsAct(a.dataset.act,id,a)||landAct(a.dataset.act,id,a)||mgmtAct(a.dataset.act,id,a))return;
+ if(noticeAct(a.dataset.act,id,a)||prdAct(a.dataset.act,id,a)||learnAct(a.dataset.act,id,a)||docsAct(a.dataset.act,id,a)||landAct(a.dataset.act,id,a)||mgmtAct(a.dataset.act,id,a)||lunchAct(a.dataset.act,id,a)||quizAct(a.dataset.act,id,a)||boardAct(a.dataset.act,id,a))return;
  switch(a.dataset.act){
   case'ack':commit(null,'',s=>{(s.ack[id]=s.ack[id]||{})[MEK()]=1});break;
   case'ackAll':{const ids=unread().map(n=>n.id);commit(null,'',s=>{ids.forEach(i=>{(s.ack[i]=s.ack[i]||{})[MEK()]=1})});break}
@@ -2682,11 +3119,11 @@ function openSync(){
  if(d.showModal)d.showModal();else d.setAttribute('open','');
 }
 function render(){if(!$('kpis'))return;rTop();migrateData();const io=$('isO');if(io&&document.activeElement!==io){const v=io.value;io.innerHTML=ROLES.map(r=>'<option>'+esc(r)+'</option>').join('');if(ROLES.includes(v))io.value=v}if(PG==='home'){rBrief();rHome();rHome2()}if(PG==='att')rJoin();
- if(PG==='brief'){rBrief();rNotice()}if(PG==='org')rOrg();if(PG==='att'){rAtt();rJudge()}if(PG==='bot')rBot();if(PG==='notice'){rNotice();rFaq()}if(PG==='docs'){rDocs();rDR()}if(PG==='learn'||PG==='slearn')rLearn();if(PG==='mgmt')rMgmt();if(STU()){rStu();attLayout();if(PG==='shome')rSHome()}else uxAfter();
+ if(PG==='brief'){rBrief();rNotice()}if(PG==='org')rOrg();if(PG==='att'){rAtt();rJudge()}if(PG==='bot')rBot();if(PG==='notice'){rNotice();rFaq()}if(PG==='docs'){rDocs();rDR()}if(PG==='learn'||PG==='slearn')rLearn();if(PG==='mgmt')rMgmt();if(PG==='notice'&&SUB.notice==='n-lunch')rLunch('st');if(PG==='slunch')rLunch('su');if(STU()){rStu();attLayout();if(PG==='shome')rSHome()}else uxAfter();memoDock();newsBox();if(PG==='learn'&&SUB.learn==='l-quiz')rQuizStaff();if(PG==='shome'||PG==='slearn')rQuizStu();if(PG==='free')rBoard('fr');if(PG==='sfree')rBoard('sf');if(PG==='sask')askBar();
  if(A.onRender)A.onRender(PG);}
 
 /* ---- 시작 ---- */
-foldGuides();buildTop();buildLogin();buildDlg();buildForms();buildNoticeForms();buildPrdForms();buildLearnForms();buildDocsForms();buildLandForms();buildMgmtForms();rModes();
+foldGuides();buildTop();buildLogin();buildDlg();buildForms();buildNoticeForms();buildPrdForms();buildLearnForms();buildDocsForms();buildLandForms();buildMgmtForms();buildQuizForms();rModes();
 if(hashRole||!ME)openLogin();else{beat();if(!S.users[MEK()])commit(null,'',s=>{s.users[MEK()]={role:ME.role,name:ME.name}})}
 if(ME)roleChanged();else go('home');
 window.HQ={get S(){return S},commit,go,toast,md};

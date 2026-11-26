@@ -788,6 +788,22 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
 @media(max-width:900px){.agentGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script>try{if(localStorage.getItem('hq_theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<style>
+/* ==== AI 버튼 · 보내기 전 확인 (spec.md, 11/26) · 이 칸 안에만 적용 ==== */
+#ai-check{margin:12px 0 4px;padding:12px 14px;border:2px solid var(--acc);border-radius:14px;background:var(--panel);text-align:left;max-width:100%;word-break:keep-all;overflow-wrap:anywhere}
+#ai-check .aic-head{font-size:16px;font-weight:800;margin-bottom:4px}
+#ai-check .aic-lead{font-size:13px;color:var(--muted);margin-bottom:8px;line-height:1.55}
+#ai-check .aic-text{width:100%;font-size:14px;min-height:96px}
+#ai-check .aic-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+#ai-check .aic-done{font-size:13px;font-weight:700;color:var(--ok)}
+#ai-check .aic-msg{font-size:13px;margin-top:6px;font-weight:700;color:var(--warn)}
+#ai-check .aic-msg:empty{display:none}
+#ai-check .aic-note{font-size:12.5px;color:var(--muted);margin-top:6px}
+#ai-check .aic-note a{color:var(--acc)}
+#ai-check .aic-prev{margin-top:6px}
+#ai-check .aic-prev summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--acc)}
+#ai-check .aic-out{width:100%;margin-top:6px;font-size:12.5px;background:var(--panel2)}
+</style>
 </head><body>
 <main class="wrap">
 
@@ -795,6 +811,47 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
 <section class="page" id="pg-home"><div class="sub" data-sub="h-main">
  <div class="topgrid">
   <div class="hero hero-l"><h1>운영관리를 <em>한큐에</em></h1><div class="hs" id="homeSub"></div>
+   <div id="ai-check">
+    <div class="aic-head">AI 보내기 전 확인</div>
+    <div class="aic-lead">운영팀(팀장·동료·부사수)이 수강생·고객에게 안내 문자를 보내기 직전에, 글을 붙이고 눌러 "기준대로 확인해 줘" 글을 복사한 뒤 AI 새 채팅에서 기준별 ✓/고칠 것과 판정을 받는 버튼이에요.</div>
+    <textarea id="aic-text" class="aic-text" rows="4" aria-label="보내기 전 확인할 글" placeholder="[출석 인정 안내] 안녕하세요, 운영팀입니다."></textarea>
+    <div class="aic-row"><button type="button" class="btn" id="aic-copy">AI 확인 글 복사</button><span id="aic-done" class="aic-done" aria-live="polite"></span></div>
+    <div id="aic-msg" class="aic-msg" role="status" aria-live="polite"></div>
+    <div class="aic-note">복사한 글을 Claude나 ChatGPT 새 채팅에 붙여 넣으면 기준마다 ✓와 판정이 와요 · <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai 새 채팅 ↗</a></div>
+    <details id="aic-preview" class="aic-prev"><summary>만들어진 글 펴 보기</summary><textarea id="aic-out" class="aic-out" rows="10" readonly aria-label="AI에게 보낼 확인 글"></textarea></details>
+<script type="text/plain" id="aic-prompt">
+기준대로 확인해 줘. 너는 교육 과정 운영팀의 꼼꼼한 검수 담당이야.
+
+[회사·고객]
+유디임팩트 · 청년 디지털·IT 교육 과정의 수강생과 교육을 맡긴 기관
+
+[참고 자료]
+- 글 종류: 운영매니저가 수강생·고객에게 보낼 안내 문자
+- 받는 사람에게 할 말: 무엇을, 언제까지, 어디서 하면 되는지 한 번에 알게
+- 이번 주 패턴: 없음
+
+[기준]
+① 문구에 넣지 않는 말(최고·1위·100%·완벽·무조건·최저가·역대급·단독·완치·부작용 없음·다른 회사 이름)이 없다.
+② 금액·비율·인원 같은 숫자에는 출처(규정·공지 이름)가 함께 있고, 출처 없는 숫자가 없다. 날짜·시각 같은 일정 안내는 숫자로 치지 않는다.
+③ 효능·결과를 장담하는 말(취업·합격·수료 보장, 건강·체중 같은 효능을 암시하는 말)이 없다.
+④ [지급일](가정)·[할인율](가정) 같은 자리 표시가 남아 있지 않고, 오늘만·마감 임박 같은 기간·수량 한정은 실제 일정이 글에 적혀 있을 때만 쓴다.
+⑤ 실명·연락처·주민번호·병명 같은 개인정보가 없다.
+⑥ 받는 사람이 할 일 하나와 기한·방법(어디서·어떻게)이 분명하고, 존댓말로 끝난다.
+
+[답 모양]
+1) 첫 줄: 잘된 점 한 줄
+2) 기준마다 "① ✓" 또는 "① 고칠 것: 한 줄" (⑥까지)
+3) 고칠 것이 있으면 고친 글 한 번. 새 숫자·효능·행사는 지어내지 말고 [ ](가정) 자리로 둔다.
+4) 마지막 줄 판정 하나:
+   - "판정: 보류(사람 확인)": 출처 없는 숫자, 효능·건강을 암시하는 말, 실제 행사인지 모르는 기간·수량 한정, 자리 표시처럼 사람이 사실을 확인해야 할 것이 하나라도 있으면. 이것이 가장 먼저.
+   - "판정: 고쳐서 다시": 글만 고치면 되는 것이 있으면
+   - "판정: 보내도 돼요": 모두 ✓
+   판정은 확인할 글만 보고 정하고, 네가 고친 글은 판정에 넣지 마.
+
+확인할 글:
+{{글}}
+</script>
+   </div>
    <div class="search gsearch"><input id="searchIn" type="search" placeholder="검색하거나 물어보세요 · 예) 오늘 결석자 명단, 박서연, 1조 공지 초안 써줘" aria-label="검색 · AI 운영비서" autocomplete="off"><button class="gbtn" id="aiGo" aria-label="검색 · AI 운영비서 실행">🔍</button><span class="aitag">AI 운영비서</span><div class="searchRes" id="searchRes" hidden></div></div>
    <div class="chips aiex" id="aiEx"></div></div>
   <div class="numcol"><div class="xs muted" style="font-weight:700;margin:0 0 4px 2px">오늘 요약</div><div id="hNums"></div></div>
@@ -3142,6 +3199,59 @@ function draw(){g.innerHTML=agents.map((a,i)=>'<button class="agent'+(i===sel?' 
  const a=agents[sel];d.innerHTML='<b>'+a[0]+'</b> <span class="xs muted">'+a[1]+'</span><p class="sm" style="margin:6px 0 0">'+a[3]+'</p>';
  g.querySelectorAll('[data-ag]').forEach(b=>b.onclick=()=>{sel=+b.dataset.ag;draw()})}
 draw();
+})();
+</script>
+<script>
+/* ==== AI 버튼 · 보내기 전 확인: 틀(#aic-prompt)에 글을 넣어 복사까지만 (API 키 없음, 자동 발송 없음) ==== */
+(function () {
+  var box = document.getElementById('ai-check');
+  var tpl = document.getElementById('aic-prompt');
+  if (!box || !tpl) return;
+  var input = document.getElementById('aic-text');
+  var btn = document.getElementById('aic-copy');
+  var msg = document.getElementById('aic-msg');
+  var done = document.getElementById('aic-done');
+  var prev = document.getElementById('aic-preview');
+  var out = document.getElementById('aic-out');
+  var doneTimer = null;
+
+  function showDone() {
+    done.textContent = '복사됐어요';
+    clearTimeout(doneTimer);
+    doneTimer = setTimeout(function () { done.textContent = ''; }, 2000);
+  }
+
+  function selectOut() {
+    prev.open = true;
+    out.focus();
+    out.select();
+    try { out.setSelectionRange(0, out.value.length); } catch (e) {}
+  }
+
+  function fallbackCopy() {
+    selectOut();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    if (ok) showDone();
+    else msg.textContent = 'Ctrl+C(맥은 Cmd+C)로 복사해요. 아래 글이 선택돼 있어요.';
+  }
+
+  btn.addEventListener('click', function () {
+    var text = input.value.trim();
+    msg.textContent = '';
+    if (!text) {
+      msg.textContent = '확인할 글을 먼저 붙여요';
+      input.focus();
+      return;
+    }
+    var askText = tpl.textContent.trim().split('{{글}}').join(text);
+    out.value = askText;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(askText).then(showDone, fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  });
 })();
 </script>
 </body></html>

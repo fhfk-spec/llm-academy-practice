@@ -788,6 +788,8 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
 @media(max-width:900px){.agentGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script>try{if(localStorage.getItem('hq_theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<script>/* 11/27: 운영진이 준 연동 링크(?sync=구글 앱스 스크립트 웹앱 주소)로 열면 이 기기도 실시간 연동으로 설정 */try{var hqS=new URLSearchParams(location.search).get("sync");if(hqS&&hqS.indexOf("https://script.google.com/macros/")===0){localStorage.setItem("hq_sync_url",hqS);history.replaceState(null,"",location.pathname)}}catch(e){}</script>
+<style>/* 처음 화면: 위 메뉴·내용이 다 그려진 뒤 한 번에 보이기 (화면 밀림 CLS 줄이기, 11/27) · 3초 뒤엔 무조건 보임 */.wrap{visibility:hidden;animation:hqShow 0s 3s forwards}body.hq-ready .wrap{visibility:visible;animation:none}@keyframes hqShow{to{visibility:visible}}</style>
 <style>
 /* ==== AI 버튼 · 보내기 전 확인 (spec.md, 11/26) · 이 칸 안에만 적용 ==== */
 #ai-check{margin:12px 0 4px;padding:12px 14px;border:2px solid var(--acc);border-radius:14px;background:var(--panel);text-align:left;max-width:100%;word-break:keep-all;overflow-wrap:anywhere}
@@ -811,47 +813,6 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
 <section class="page" id="pg-home"><div class="sub" data-sub="h-main">
  <div class="topgrid">
   <div class="hero hero-l"><h1>운영관리를 <em>한큐에</em></h1><div class="hs" id="homeSub"></div>
-   <div id="ai-check">
-    <div class="aic-head">AI 보내기 전 확인</div>
-    <div class="aic-lead">운영팀(팀장·동료·부사수)이 수강생·고객에게 안내 문자를 보내기 직전에, 글을 붙이고 눌러 "기준대로 확인해 줘" 글을 복사한 뒤 AI 새 채팅에서 기준별 ✓/고칠 것과 판정을 받는 버튼이에요.</div>
-    <textarea id="aic-text" class="aic-text" rows="4" aria-label="보내기 전 확인할 글" placeholder="[출석 인정 안내] 안녕하세요, 운영팀입니다."></textarea>
-    <div class="aic-row"><button type="button" class="btn" id="aic-copy">AI 확인 글 복사</button><span id="aic-done" class="aic-done" aria-live="polite"></span></div>
-    <div id="aic-msg" class="aic-msg" role="status" aria-live="polite"></div>
-    <div class="aic-note">복사한 글을 Claude나 ChatGPT 새 채팅에 붙여 넣으면 기준마다 ✓와 판정이 와요 · <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai 새 채팅 ↗</a></div>
-    <details id="aic-preview" class="aic-prev"><summary>만들어진 글 펴 보기</summary><textarea id="aic-out" class="aic-out" rows="10" readonly aria-label="AI에게 보낼 확인 글"></textarea></details>
-<script type="text/plain" id="aic-prompt">
-기준대로 확인해 줘. 너는 교육 과정 운영팀의 꼼꼼한 검수 담당이야.
-
-[회사·고객]
-유디임팩트 · 청년 디지털·IT 교육 과정의 수강생과 교육을 맡긴 기관
-
-[참고 자료]
-- 글 종류: 운영매니저가 수강생·고객에게 보낼 안내 문자
-- 받는 사람에게 할 말: 무엇을, 언제까지, 어디서 하면 되는지 한 번에 알게
-- 이번 주 패턴: 없음
-
-[기준]
-① 문구에 넣지 않는 말(최고·1위·100%·완벽·무조건·최저가·역대급·단독·완치·부작용 없음·다른 회사 이름)이 없다.
-② 금액·비율·인원 같은 숫자에는 출처(규정·공지 이름)가 함께 있고, 출처 없는 숫자가 없다. 날짜·시각 같은 일정 안내는 숫자로 치지 않는다.
-③ 효능·결과를 장담하는 말(취업·합격·수료 보장, 건강·체중 같은 효능을 암시하는 말)이 없다.
-④ [지급일](가정)·[할인율](가정) 같은 자리 표시가 남아 있지 않고, 오늘만·마감 임박 같은 기간·수량 한정은 실제 일정이 글에 적혀 있을 때만 쓴다.
-⑤ 실명·연락처·주민번호·병명 같은 개인정보가 없다.
-⑥ 받는 사람이 할 일 하나와 기한·방법(어디서·어떻게)이 분명하고, 존댓말로 끝난다.
-
-[답 모양]
-1) 첫 줄: 잘된 점 한 줄
-2) 기준마다 "① ✓" 또는 "① 고칠 것: 한 줄" (⑥까지)
-3) 고칠 것이 있으면 고친 글 한 번. 새 숫자·효능·행사는 지어내지 말고 [ ](가정) 자리로 둔다.
-4) 마지막 줄 판정 하나:
-   - "판정: 보류(사람 확인)": 출처 없는 숫자, 효능·건강을 암시하는 말, 실제 행사인지 모르는 기간·수량 한정, 자리 표시처럼 사람이 사실을 확인해야 할 것이 하나라도 있으면. 이것이 가장 먼저.
-   - "판정: 고쳐서 다시": 글만 고치면 되는 것이 있으면
-   - "판정: 보내도 돼요": 모두 ✓
-   판정은 확인할 글만 보고 정하고, 네가 고친 글은 판정에 넣지 마.
-
-확인할 글:
-{{글}}
-</script>
-   </div>
    <div class="search gsearch"><input id="searchIn" type="search" placeholder="검색하거나 물어보세요 · 예) 오늘 결석자 명단, 박서연, 1조 공지 초안 써줘" aria-label="검색 · AI 운영비서" autocomplete="off"><button class="gbtn" id="aiGo" aria-label="검색 · AI 운영비서 실행">🔍</button><span class="aitag">AI 운영비서</span><div class="searchRes" id="searchRes" hidden></div></div>
    <div class="chips aiex" id="aiEx"></div></div>
   <div class="numcol"><div class="xs muted" style="font-weight:700;margin:0 0 4px 2px">오늘 요약</div><div id="hNums"></div></div>
@@ -906,6 +867,7 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
    <tr><td>체크인 추세</td><td class="wn">4·6·9주차 예정</td><td>CJ D16</td></tr></table>
    <p class="xs muted" style="margin-top:8px">데이터 없음 ≠ 0. 참여자 8명은 가명 예시입니다.</p></div></details>
   <details class="more"><summary>데이터 원칙</summary><div class="mi sm muted">명단·출석 실데이터는 아직 받지 않았습니다. 참여자 8명은 가명 예시이고, "데이터 대기"는 0이 아닙니다. 실명·전화번호는 넣지 않습니다(기관 → CJ는 집계만, C안).</div></details>
+  <div class="card mt"><div class="ch"><h2>📅 기수 일정</h2><span class="xs muted" id="bsTlSub"></span></div><div class="timeline" id="bsTimeline"></div></div>
  </div>
  <div class="sub" data-sub="b-auto">
   <div class="ph"><div><div class="eyebrow">운영브리핑 · 반복업무</div><h1>반복업무 자동화</h1><p class="muted">매일 하던 일을 화면이 먼저 해 둡니다</p></div></div>
@@ -915,20 +877,49 @@ code{color:var(--vio);font-size:12px;overflow-wrap:anywhere}
    <div class="card"><div class="ch"><h2>📑 주간 보고 초안</h2><button class="btn s sm" data-act="report">만들기</button></div><textarea id="reportOut" rows="9" placeholder="'만들기'를 누르면 자동 집계 초안이 생깁니다."></textarea><div class="inl" style="margin-top:8px"><button class="btn s sm" data-act="copy" data-t="reportOut">복사</button></div></div>
   </div>
  </div>
- <div class="sub" data-sub="b-plan">
-  <div class="ph"><div><div class="eyebrow">운영브리핑 · 일정</div><h1>기수 일정 · 지금 할 일</h1><p class="muted">2026-10-26 → 2027-01-07 · 52 교육일</p></div></div>
-  <div class="card"><h2 style="margin-bottom:12px">기수 타임라인</h2><div class="timeline">
-   <div class="time"><b>10/26 개강</b><span>강사 면담 · 참여 의사</span></div><div class="time"><b>10/30</b><span>추가합격 마감</span></div>
-   <div class="time cur"><b>11/16~ 매주 월</b><span>주간 점검</span></div><div class="time"><b>11/17 · 12/1 · 12/22</b><span>CJ 체크인</span></div>
-   <div class="time off"><b>12/25 · 1/1</b><span>휴강</span></div><div class="time"><b>1/7 종료</b><span>수료 판정 · 1/11 마감</span></div></div></div>
-  <div class="card mt"><div class="ch"><h2>지금 할 일</h2><span class="badge b-warn">실행 대기</span></div>
-   <div class="row"><span class="pri p-mid">01</span><div class="grow"><b>메시지 4건 발송</b><div class="xs muted">학원 데이터 요청 · 대한상공회의소 현황 요청 · 강사 면담 집계 · 참여자 출석 계산 카드</div></div><span class="badge">매니저</span></div>
-   <div class="row"><span class="pri p-mid">02</span><div class="grow"><b>CJ 내부 준비</b><div class="xs muted">최종 명부 · 1주차 이탈·승계 기록 · 사유 코드</div></div><span class="badge">CJ 운영매니저</span></div>
-   <div class="row"><span class="pri p-mid">03</span><div class="grow"><b>체크인 고지·동의 검토</b><div class="xs muted">첫 체크인(4주차) 전에</div></div><span class="badge">전문 검토</span></div>
-   <div class="row"><span class="pri p-low">04</span><div class="grow"><b>대한상공회의소 회신 대기 (11/20)</b><div class="xs muted">중도이탈 행정 처리 · 통보 범위 · 수료 기준</div></div><span class="badge">대한상공회의소</span></div></div>
- </div>
  <div class="sub" data-sub="b-req">
   <div class="ph"><div><div class="eyebrow">운영브리핑</div><h1>요청사항</h1><p class="muted" id="rCnt"></p></div></div>
+   <div id="ai-check">
+    <div class="aic-head">AI 보내기 전 확인</div>
+    <div class="aic-lead">운영팀(팀장·동료·부사수)이 수강생·고객에게 안내 문자를 보내기 직전에, 글을 붙이고 눌러 "기준대로 확인해 줘" 글을 복사한 뒤 AI 새 채팅에서 기준별 ✓/고칠 것과 판정을 받는 버튼이에요.</div>
+    <textarea id="aic-text" class="aic-text" rows="4" aria-label="보내기 전 확인할 글" placeholder="[출석 인정 안내] 안녕하세요, 운영팀입니다."></textarea>
+    <div class="aic-row"><button type="button" class="btn" id="aic-copy">AI 확인 글 복사</button><span id="aic-done" class="aic-done" aria-live="polite"></span></div>
+    <div id="aic-msg" class="aic-msg" role="status" aria-live="polite"></div>
+    <div class="aic-note">복사한 글을 Claude나 ChatGPT 새 채팅에 붙여 넣으면 기준마다 ✓와 판정이 와요 · <a href="https://claude.ai/new" target="_blank" rel="noopener">claude.ai 새 채팅 ↗</a></div>
+    <details id="aic-preview" class="aic-prev"><summary>만들어진 글 펴 보기</summary><textarea id="aic-out" class="aic-out" rows="10" readonly aria-label="AI에게 보낼 확인 글"></textarea></details>
+<script type="text/plain" id="aic-prompt">
+기준대로 확인해 줘. 너는 교육 과정 운영팀의 꼼꼼한 검수 담당이야.
+
+[회사·고객]
+유디임팩트 · 청년 디지털·IT 교육 과정의 수강생과 교육을 맡긴 기관
+
+[참고 자료]
+- 글 종류: 운영매니저가 수강생·고객에게 보낼 안내 문자
+- 받는 사람에게 할 말: 무엇을, 언제까지, 어디서 하면 되는지 한 번에 알게
+- 이번 주 패턴: 없음
+
+[기준]
+① 문구에 넣지 않는 말(최고·1위·100%·완벽·무조건·최저가·역대급·단독·완치·부작용 없음·다른 회사 이름)이 없다.
+② 금액·비율·인원 같은 숫자에는 출처(규정·공지 이름)가 함께 있고, 출처 없는 숫자가 없다. 날짜·시각 같은 일정 안내는 숫자로 치지 않는다.
+③ 효능·결과를 장담하는 말(취업·합격·수료 보장, 건강·체중 같은 효능을 암시하는 말)이 없다.
+④ [지급일](가정)·[할인율](가정) 같은 자리 표시가 남아 있지 않고, 오늘만·마감 임박 같은 기간·수량 한정은 실제 일정이 글에 적혀 있을 때만 쓴다.
+⑤ 실명·연락처·주민번호·병명 같은 개인정보가 없다.
+⑥ 받는 사람이 할 일 하나와 기한·방법(어디서·어떻게)이 분명하고, 존댓말로 끝난다.
+
+[답 모양]
+1) 첫 줄: 잘된 점 한 줄
+2) 기준마다 "① ✓" 또는 "① 고칠 것: 한 줄" (⑥까지)
+3) 고칠 것이 있으면 고친 글 한 번. 새 숫자·효능·행사는 지어내지 말고 [ ](가정) 자리로 둔다.
+4) 마지막 줄 판정 하나:
+   - "판정: 보류(사람 확인)": 출처 없는 숫자, 효능·건강을 암시하는 말, 실제 행사인지 모르는 기간·수량 한정, 자리 표시처럼 사람이 사실을 확인해야 할 것이 하나라도 있으면. 이것이 가장 먼저.
+   - "판정: 고쳐서 다시": 글만 고치면 되는 것이 있으면
+   - "판정: 보내도 돼요": 모두 ✓
+   판정은 확인할 글만 보고 정하고, 네가 고친 글은 판정에 넣지 마.
+
+확인할 글:
+{{글}}
+</script>
+   </div>
   <div class="card"><div class="f3" style="grid-template-columns:160px 1fr 140px 150px auto;align-items:end"><div><label class="f" for="rWho">요청자</label><select id="rWho" style="width:100%"></select></div><div><label class="f" for="rText">요청 내용</label><input id="rText" maxlength="120" placeholder="예) 실습실 모니터 교체"></div><div><label class="f" for="rOwner">담당</label><select id="rOwner" style="width:100%"></select></div><div><label class="f" for="rDue">마감</label><input id="rDue" type="date"></div><button class="btn" id="rAdd">등록</button></div></div>
   <div class="card mt" id="rList"></div>
  </div>
@@ -1510,7 +1501,7 @@ let PG='home',DAY=DEF_DAY,SEL='s1',SELD=null,MODE='pick',SELM='top',SELB='s1',DO
 /* ---- 내비게이션: 상단 목록(항상 전부 보임) + 왼쪽 세부목록(노션식 접기) ---- */
 let NAV=[
  {id:'home',ic:'🏠',t:'홈',subs:[['h-main','한눈에 보기']]},
- {id:'brief',ic:'📋',t:'운영브리핑',subs:[['b-issue','문제 · 이슈'],['b-status','현황 한눈에'],['b-auto','반복업무 자동화'],['b-plan','기수 일정 · 할 일'],['b-req','요청사항']]},
+ {id:'brief',ic:'📋',t:'운영브리핑',subs:[['b-status','현황 한눈에'],['b-auto','반복업무 자동화'],['b-req','요청사항']]},
  {id:'notice',ic:'📢',t:'공지사항',subs:[['n-board','공지 게시판'],['n-inq','수강생 문의 · FAQ'],['n-lunch','점심지도 · 비플페이']]},
  {id:'docs',ic:'📂',t:'서류·행정',subs:[['d-board','제출 현황판'],['d-new','제출 과제 등록'],['d-absent','서류제출관리']]},
  {id:'learn',ic:'📚',t:'학습',subs:[['l-logs','학습로그 · 피드백'],['l-git','깃허브 · 제작물 현황'],['l-cur','커리큘럼 · 학습자료'],['l-quiz','복습퀴즈 · 강의 정리']]},
@@ -2450,7 +2441,7 @@ function rHome2(){
  const R=riskList();$('hRiskCnt').textContent=R.length?R.length+'명':'없음';$('hRiskCnt').className='badge '+(R.some(r=>r.lv===2)?'b-bad':R.length?'b-warn':'b-ok');
  $('hRisk').innerHTML=R.length?R.map(r=>'<div class="row rk lv'+r.lv+'"><span class="pri '+(r.lv===2?'p-high':'p-mid')+'">'+(r.lv===2?'위험':'주의')+'</span><div class="grow"><b>'+esc(r.s.name)+'</b><div class="xs muted">'+r.why.map(esc).join(' · ')+'</div></div><button class="btn s sm" data-go="att" data-sub="a-calc" data-sid="'+r.s.id+'">보기</button></div>').join(''):'<p class="ok" style="margin:6px 0"><b>✓ 지금 이탈 위험 수강생이 없어요.</b></p>';
  // 빠른 실행
- $('hQuick').innerHTML=[['✅','출결 체크','go:bot:t-board'],['📢','공지 작성','act:qNotice'],['📝','설문 발송','act:qSurvey'],['🛠','강의실·장비 현황','go:brief:b-req'],['📞','강사 연락','go:org:o-main'],['🖨','출석부 인쇄','act:printAtt'],['⬇️','명단 엑셀','act:csvRoster'],['📂','서류 확인','go:docs:d-absent']].map(q=>{const a=q[2].split(':');return'<button class="qbtn" '+(a[0]==='go'?'data-go="'+a[1]+'" data-sub="'+a[2]+'"':'data-act="'+a[1]+'"')+'><span>'+q[0]+'</span>'+q[1]+'</button>'}).join('');
+ $('hQuick').innerHTML=[['✅','출결 체크','go:bot:t-board'],['📢','공지 작성','act:qNotice'],['📝','설문 발송','act:qSurvey'],['🛠','강의실·장비 현황','go:brief:b-req'],['📞','강사 연락','go:org:o-main'],['🖨','출석부(인쇄용)','act:printAtt'],['📂','서류 확인','go:docs:d-absent']].map(q=>{const a=q[2].split(':');return'<button class="qbtn" '+(a[0]==='go'?'data-go="'+a[1]+'" data-sub="'+a[2]+'"':'data-act="'+a[1]+'"')+'><span>'+q[0]+'</span>'+q[1]+'</button>'}).join('');
  // 오늘 일정
  const now=NOWK===DAY?nowHM():'';$('hSchedDay').textContent=md(DAY)+'('+wd(DAY)+')';
  const sc=schedOf(DAY);$('hSched').innerHTML=sc.length?sc.map(x=>{const cur=now&&x.t<=now&&now<x.e;return'<div class="tli'+(cur?' cur':'')+(now&&now>=x.e?' past':'')+'"><b>'+x.t+'</b><div class="grow"><div class="tt2">'+esc(x.title)+(cur?' <span class="badge b-acc">진행 중</span>':'')+'</div><div class="xs muted">'+[x.who,x.room].filter(Boolean).map(esc).join(' · ')+(x.e?' · ~'+x.e:'')+'</div></div>'+(x.id?'<button class="x" data-act="scDel" data-id="'+x.id+'" aria-label="삭제">×</button>':'')+'</div>'}).join(''):'<p class="muted sm">수업이 없는 날이에요.</p>';
@@ -2502,10 +2493,14 @@ function rSHome(){const me=myStu();if(!me||!$('sHello'))return;const cw=cweek(DA
  (S.docTasks||[]).filter(t=>tTargets(t).includes(me)).sort((a,b)=>a.due<b.due?-1:1).forEach(t=>{const v=tSt(t,me.id);if(!v||t.due>=DAY)todo.push({done:!!v,t:t.name+' 제출',s:(v?'제출했어요':md(t.due)+' 마감 · '+ddTxt(t.due)),go:'sdocs'})});
  (S.deliv||[]).filter(d=>d.due>=DAY).forEach(d=>{const T=((d.subs||{}).team||{})[teamOf(me.id)]||{},ok=(d.req||[]).every(r=>T[r.key]);todo.push({done:ok,t:d.title,s:ok?'조별 제출 완료':md(d.due)+' 제출 · '+ddTxt(d.due),go:'slearn',sub:'s-git'})});
  sickList().filter(x=>x.sid===me.id&&x.doc!=='done'&&!x.sub).forEach(x=>todo.push({done:false,t:md(x.k)+' 결석 증빙 내기',s:md(x.due)+'까지',go:'satt'}));
- const open=todo.filter(x=>!x.done),shown=open.slice(0,3),sc=schedOf(DAY).filter(x=>x.type!=='휴식');
+ /* 11/27: 홈 '오늘 할 일' 하나로 — 복습퀴즈 · 확인 안 한 공지 · 맞춤 복습도 같이 */
+ {const q=(typeof pubLecs==='function'?pubLecs():[]).find(l=>!((S.quizRes||{})[me.id]||{})[l.id]);if(q)todo.push({done:false,t:'복습퀴즈 풀기 · '+q.title,s:q.quiz.length+'문항 · 홈 맨 위에서 바로 풀어요',go:'shome'})}
+ (S.notices||[]).filter(n=>(n.to==='수강생'||n.to==='전체'||!n.to)&&!((n.reads||{})[me.id])).slice(0,2).forEach(n=>todo.push({done:false,t:'새 공지 확인 · '+n.title,s:'읽고 「확인했어요」를 눌러 주세요',go:'snotice'}));
+ {const rv=(S.reviews||{})[me.id];if(rv&&rv.sent)todo.push({done:!!rv.seen,t:'맞춤 복습 보기',s:(rv.by||'강사')+'님이 보낸 복습 '+rv.sent.length+'개',go:'slearn',sub:'s-sum'})}
+ const open=todo.filter(x=>!x.done),shown=open.slice(0,5),sc=schedOf(DAY).filter(x=>x.type!=='휴식');
  $('sTodo').innerHTML='<div class="ch"><h2>오늘 할 일</h2><span class="badge '+(open.length?'b-acc':'b-ok')+'">'+(open.length?open.length+'개 남았어요':'다 했어요 🎉')+'</span></div>'+
-  shown.concat(todo.filter(x=>x.done).slice(0,Math.max(0,3-shown.length))).map(x=>'<button class="todo'+(x.done?' done':'')+'" data-go="'+x.go+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+'><span class="tb">'+(x.done?'✓':'')+'</span><span class="grow"><b>'+esc(x.t)+'</b><span class="xs muted" style="display:block">'+esc(x.s)+'</span></span><span class="muted">›</span></button>').join('')+
-  (open.length>3?'<p class="xs muted" style="margin:6px 0 0">그 밖에 '+(open.length-3)+'개가 더 있어요 · \'내 제출\'에서 볼 수 있어요</p>':'')+
+  shown.concat(todo.filter(x=>x.done).slice(0,Math.max(0,5-shown.length))).map(x=>'<button class="todo'+(x.done?' done':'')+'" data-go="'+x.go+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+'><span class="tb">'+(x.done?'✓':'')+'</span><span class="grow"><b>'+esc(x.t)+'</b><span class="xs muted" style="display:block">'+esc(x.s)+'</span></span><span class="muted">›</span></button>').join('')+
+  (open.length>5?'<p class="xs muted" style="margin:6px 0 0">그 밖에 '+(open.length-5)+'개가 더 있어요</p>':'')+
   (sc.length?'<div class="xs muted" style="margin-top:10px">오늘 수업 · '+sc.map(x=>x.t+' '+esc(x.title)).join(' → ')+'</div>':'');
  // 내 진도 (막대 하나)
  const T=(S.docTasks||[]).filter(t=>tTargets(t).includes(me)&&t.due<=DAY),sub=T.filter(t=>tSt(t,me.id)).length,subRate=T.length?Math.round(sub/T.length*100):100;
@@ -2792,7 +2787,7 @@ const lKind=x=>x.kind||(/카페|커피/.test(x.cat||'')?'cafe':/편의점/.test(
 function lunchMigrate(){if(!S||LUNCH_MIG)return;if(!S.lunch){LUNCH_MIG=true;setTimeout(()=>{if(!S.lunch)commit(null,'',s=>{s.lunch=lunchSeed()})},0);return}
  if(!S.lunch.v2){LUNCH_MIG=true;setTimeout(()=>commit(null,'',s=>{const have=new Set(s.lunch.list.map(x=>x.name));LUNCH_ADD2.forEach(([n,c,k],i)=>{if(!have.has(n))s.lunch.list.push({id:'L'+(7+i)+'_'+Date.now()%1000,name:n,cat:c,kind:k,addr:'',lat:null,lng:null,reg:true,qr:true,memo:''})});s.lunch.v2=1}),0)}}
 let LKF='all';
-const naverQ=n=>'https://map.naver.com/p/search/'+encodeURIComponent('대전 둔산 '+n);
+const naverQ=n=>'https://map.naver.com/p/search/'+encodeURIComponent('대전 둔산 '+n);const naverGo=x=>x&&x.nv?x.nv:naverQ(x.name);
 let LUNCH_MIG=false;
 const LM={};let LPICK=null,LFOCUS=null;
 const kakaoQ=n=>'https://map.kakao.com/?q='+encodeURIComponent('대전 둔산 '+n);
@@ -2808,11 +2803,11 @@ function rLunch(p){const box=$(p+'List'),mapEl=$(p+'Map');if(!box||!mapEl)return
   '<div class="xs muted" style="margin:6px 0 8px">모두 <b>비플페이 가맹점 등록 · QR 결제 가능</b>'+(noPin?' · 위치 미지정 '+noPin+'곳'+(staff?' (📍로 지정)':''):'')+' · 식당을 누르면 상세 정보가 열려요</div>'+
   L.map(x=>'<div class="lcard'+(LFOCUS===x.id?' on':'')+'" data-act="lFocus" data-id="'+x.id+'"><div class="lh"><b class="ln">'+esc(x.name)+'</b><span class="badge">'+esc(x.cat||'식당')+'</span></div>'+
    (LFOCUS===x.id?'<div class="ldet"><div class="kv"><span>영업시간</span><b>'+esc(x.hours||'—')+'</b></div><div class="kv"><span>전화</span><b>'+(x.tel?'<a href="tel:'+esc(x.tel)+'">'+esc(x.tel)+'</a>':'—')+'</b></div><div class="kv"><span>대표 메뉴</span><b>'+esc(x.menu||'—')+'</b></div><div class="kv"><span>가격대</span><b>'+esc(x.price||'—')+'</b></div>'+
-    '<a class="btn s sm nvbtn" href="'+naverQ(x.name)+'" target="_blank" rel="noopener">N 네이버 지도에서 상세 정보(메뉴·리뷰·영업시간) ↗</a>'+(staff?'<button class="linkb" data-act="lInfo" data-id="'+x.id+'">상세 정보 입력</button>':'')+'</div>':'')+
+    '<a class="btn s sm nvbtn" href="'+naverGo(x)+'" target="_blank" rel="noopener">N 네이버 지도에서 상세 정보(메뉴·리뷰·영업시간) ↗</a>'+(staff?'<button class="linkb" data-act="lInfo" data-id="'+x.id+'">상세 정보 입력</button>':'')+'</div>':'')+
    '<div class="lbadges">'+(x.reg?'<span class="badge b-ok">가맹점 등록</span>':'')+(x.qr?'<span class="badge b-acc">QR 결제</span>':'')+(x.lat!=null?'<span class="xs muted">'+walkTxt(x,c)+'</span>':'<span class="xs no">위치 미지정</span>')+'</div>'+
    (x.addr?'<div class="xs muted">'+esc(x.addr)+'</div>':'')+(x.memo?'<div class="xs">'+esc(x.memo)+'</div>':'')+
-   '<div class="lacts"><a class="linkb" href="'+kakaoTo(x)+'" target="_blank" rel="noopener">카카오맵 '+(x.lat!=null?'길찾기':'검색')+' ↗</a>'+
-   (staff?'<button class="linkb" data-act="lPick" data-id="'+x.id+'">📍 위치 '+(x.lat!=null?'수정':'지정')+'</button><button class="linkb" data-act="lEdit" data-id="'+x.id+'">수정</button><button class="linkb" data-act="lDel" data-id="'+x.id+'">삭제</button>':'')+'</div></div>').join('')+
+   '<div class="lacts"><a class="linkb nvlink" href="'+naverGo(x)+'" target="_blank" rel="noopener">N 네이버 지도'+(x.nv?' 바로가기':' 검색')+' ↗</a><a class="linkb" href="'+kakaoTo(x)+'" target="_blank" rel="noopener">카카오맵 '+(x.lat!=null?'길찾기':'검색')+' ↗</a>'+
+   (staff?'<button class="linkb" data-act="lNv" data-id="'+x.id+'">N 링크 '+(x.nv?'수정':'넣기')+'</button><button class="linkb" data-act="lPick" data-id="'+x.id+'">📍 위치 '+(x.lat!=null?'수정':'지정')+'</button><button class="linkb" data-act="lEdit" data-id="'+x.id+'">수정</button><button class="linkb" data-act="lDel" data-id="'+x.id+'">삭제</button>':'')+'</div></div>').join('')+
   (staff?'<details class="more" id="'+p+'Add"><summary>+ 식당 추가</summary><div class="mi"><div class="f3" style="grid-template-columns:1fr 1fr"><div><label class="f" for="'+p+'N">식당 이름</label><input id="'+p+'N" maxlength="30"></div><div><label class="f" for="'+p+'C">종류</label><input id="'+p+'C" maxlength="20" placeholder="예) 한식, 분식"></div></div><label class="f" for="'+p+'A" style="margin-top:6px">주소 (선택)</label><input id="'+p+'A" maxlength="60"><label class="f" for="'+p+'M" style="margin-top:6px">메모 (선택)</label><input id="'+p+'M" maxlength="60" placeholder="예) 12시 전 도착 추천"><button class="btn sm" data-act="lAdd" data-id="'+p+'" style="margin-top:8px">추가 + 수강생 알림</button><p class="xs muted" style="margin:6px 0 0">추가한 뒤 📍 위치 지정을 누르고 지도를 클릭하면 핀이 꽂혀요.</p></div></details>':'');
  if(staff&&c.approx)box.insertAdjacentHTML('beforeend','<p class="xs muted" style="margin-top:8px">교육장 핀은 주소 기준 대략 위치예요. <button class="linkb" data-act="lPick" data-id="center">📍 교육장 위치 맞추기</button></p>');
  if(staff)box.insertAdjacentHTML('beforeend','<details class="more"><summary>🟢 네이버 지도 API 연결 '+(D.naverKey?'<span class="badge b-ok">연결됨</span>':'<span class="badge">미연결</span>')+'</summary><div class="mi"><p class="xs muted" style="margin:0 0 6px">네이버 클라우드 플랫폼 › Maps에서 발급한 <b>Client ID</b>를 넣으면 지도가 네이버 지도로 바뀌어요. 사용할 주소(예: 네트리파이 주소)를 콘솔의 Web 서비스 URL에 등록해야 해요. claude.ai 링크 안에서는 외부 지도 스크립트가 막혀 기본 지도로 보여요.</p><div class="inl"><input id="'+p+'NK" placeholder="Client ID" value="'+esc(D.naverKey||'')+'" style="flex:1" autocomplete="off"><button class="btn s sm" data-act="lNaverKey" data-id="'+p+'">저장</button></div></div></details>');
@@ -2860,6 +2855,13 @@ function lunchAct(act,id,a){const D=S.lunch;
 
 /* 운영진이 수강생 알림(slunch)을 눌러도 운영진 화면(공지사항 › 점심지도)으로 */
 const _goL=go;go=function(p,sub){if(p==='slunch'&&!STU()){p='notice';sub='n-lunch'}return _goL(p,sub)};
+/* 11/27: 가게마다 네이버 지도 '바로가기' 링크 (예: 꾸드뱅 → 네이버 지도의 꾸드뱅 페이지로 바로) */
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-act="lNv"]');if(!b)return;e.stopPropagation();const x=(S.lunch.list||[]).find(y=>y.id===b.dataset.id);if(!x)return;
+ const v=prompt('네이버 지도에서 「'+x.name+'」 가게를 열고 [공유] › 링크 복사한 주소를 붙여 넣어 주세요.\n(예: https://naver.me/… 또는 https://map.naver.com/p/entry/place/…) · 비우면 검색으로 돌아가요',x.nv||'');if(v===null)return;const t=v.trim();
+ if(t&&!/^https:\/\/(naver\.me|m?\.?map\.naver\.com|map\.naver\.com|m\.place\.naver\.com|place\.map\.naver\.com)\//.test(t)){alert('네이버 지도 주소(naver.me 또는 map.naver.com)만 넣을 수 있어요.');return}
+ commit('@stu|🍱 점심지도 「'+x.name+'」 네이버 지도 바로가기 '+(t?'연결':'해제'),'slunch',s=>{const y=s.lunch.list.find(z=>z.id===x.id);if(y)y.nv=t})},true);
+/* 꾸드뱅 추가 (11/27 · 비플페이 가맹 예시로 받은 가게, 종류·위치는 확인 필요) */
+(function(){const _m=lunchMigrate;lunchMigrate=function(){_m();if(S&&S.lunch&&S.lunch.v2&&!S.lunch.v3&&!lunchMigrate.on3){lunchMigrate.on3=1;setTimeout(()=>commit(null,'',s=>{if(!s.lunch.list.some(x=>x.name==='꾸드뱅'))s.lunch.list.push({id:'L18',name:'꾸드뱅',cat:'식당',kind:'food',addr:'',lat:null,lng:null,reg:true,qr:true,memo:'',nv:''});s.lunch.v3=1}),0)}}})();
 
 /* ==== 복습퀴즈 · 강의 정리집 ====
    강사/운영진: 학습 › 복습퀴즈 · 강의 정리 — 강의 녹취(텍스트 변환본)를 넣으면 AI가 정리집 + 퀴즈 5문항 초안을 만들고, 확인 후 '수강생에게 공개'
@@ -3089,6 +3091,342 @@ async function askGen(){const kw=$('askKw').value.trim();if(!kw){$('askKw').focu
  catch(e){if(e&&e.text)ta.value=e.text;$('askMsg').textContent=e&&e.code==='not_granted'?'AI 사용이 허용되지 않아 기본 문장으로 만들었어요.':'기본 문장으로 만들었어요. 필요하면 고쳐서 보내세요.'}
  finally{ASK_BUSY=false;askBar()}}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-askt]');if(t){ASK_T=t.dataset.askt;ASK_W=ASK_DEF[ASK_T]||ASK_W;askBar();return}const w=e.target.closest('[data-askw]');if(w){ASK_W=w.dataset.askw;askBar()}});
+
+/* ==== 출결 계산 규칙 문장: 누르면 자세한 설명이 펼쳐짐 (클러리티 11/27: 설명 글을 버튼처럼 누르는 데드 클릭이 많았음) ====
+   원래 문장은 그대로 두고, 문장마다 '자세히' 칸을 더하기만 함. 함수 하나로 감쌈. */
+(function rulesMore(){
+ const SRC='출처: L.L.M Academy 과정 오리엔테이션 자료(출석·행정)';
+ const MORE=[
+  ['추가 입소자','예) 10/28에 처음 출석했다면 10/26·10/27 두 교육일은 결석으로 계산돼요. 출석부의 단위기간 출석률도 이 날들을 결석으로 넣어 계산해요.','출처: 수기 출석부 계산 방식 (11/20 확인)'],
+  ['결석 1일','결석이 되는 경우: ① 교육일에 출석하지 않음 ② 지각·조퇴·외출 3회 누적 ③ 하루 교육시간의 50% 미만 수강. 입실·퇴실 체크를 하지 않아도 자동 결석이에요.',SRC+' 8쪽·23쪽'],
+  ['병결(서류완료)','질병·입원(본인 및 자녀)은 전체 훈련일수의 10%(5일)까지만 출석으로 인정돼요. 진료일자와 질병명(또는 코드)이 보이는 진료확인서·입퇴원확인서를 LMS 출석인정요청으로 내야 해요(처방전만 내면 불가). 예비군·면접·자격시험 같은 공가는 이 5일과 따로 필요한 날만큼 인정돼요.',SRC+' 9~10쪽'],
+  ['지각·조퇴·외출','지각: 09:11부터 입실 · 조퇴: 17:50 이전 퇴실 · 외출: 수업 중 10분 이상 자리 비움. 하루에 지각과 조퇴가 함께 생기면 2회로 세요. 참여수당은 단위기간마다 따로 세고, 남은 1~2회는 수당 계산에서는 빼고 수료 판정에서는 합산해요.',SRC+' 7~8쪽 · L.L.M Academy OT 자료 10쪽'],
+  ['명단에 있는 이름','명단에 있는 사람의 달력을 고치면 같은 화면을 쓰는 운영진에게 바로 반영돼요. 명단에 없는 이름은 이 브라우저에서만 임시로 계산되고, ↵ 엔터를 눌러야 계산 기록에 남아요.','']];
+ const st=document.createElement('style');
+ st.textContent='.ruleList li.rmore{cursor:pointer;border-radius:8px;padding:4px 6px;margin:0 -6px}.ruleList li.rmore:hover{background:var(--hover)}'+
+  '.ruleList .rcue{margin-left:6px;font-size:12px;font-weight:700;color:var(--acc);white-space:nowrap}'+
+  '.ruleList .rbox{margin:6px 0 4px;padding:8px 10px;border-left:3px solid var(--acc);background:var(--panel2);border-radius:6px;font-size:13.5px;line-height:1.65;cursor:auto}'+
+  '.ruleList .rsrc{display:block;margin-top:4px;font-size:12px;color:var(--muted)}';
+ document.head.appendChild(st);
+ function wire(){document.querySelectorAll('.ruleList li').forEach(li=>{if(li.dataset.rm)return;const m=MORE.find(x=>li.textContent.trim().startsWith(x[0]));if(!m)return;li.dataset.rm='1';li.classList.add('rmore');li.setAttribute('role','button');li.setAttribute('tabindex','0');li.setAttribute('aria-expanded','false');
+  const cue=document.createElement('span');cue.className='rcue';cue.textContent='자세히 ▾';li.appendChild(cue);
+  const box=document.createElement('div');box.className='rbox';box.hidden=true;box.textContent=m[1];if(m[2]){const s=document.createElement('span');s.className='rsrc';s.textContent=m[2];box.appendChild(s)}li.appendChild(box);
+  const flip=e=>{if(e&&e.target.closest('.rbox'))return;box.hidden=!box.hidden;cue.textContent=box.hidden?'자세히 ▾':'접기 ▴';li.setAttribute('aria-expanded',String(!box.hidden))};
+  li.addEventListener('click',flip);li.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}})})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else wire();
+})();
+
+/* ==== 11/27 개선 우선순위 3·4·6·7·8·9 (클러리티 분석 기반) ====
+   3 화면 밀림(CLS) · 4 로그인 단순화 · 6 모바일 운영 UI · 7 클릭 반응(INP) · 8 클러리티 기능 이벤트 · 9 테스트 접속 구분
+   원래 기능은 그대로 두고 더하기만 함. 함수 하나로 감쌈. */
+(function hqUx2(){
+ const isM=()=>matchMedia('(max-width:900px)').matches;
+ const ck=(ev,data)=>{try{if(typeof window.clarity==='function'){window.clarity('event',ev);if(data)Object.keys(data).forEach(k=>window.clarity('set',k,String(data[k])))}}catch(e){}};
+ /* ---------- 스타일 (이 기능에만) ---------- */
+ const st=document.createElement('style');st.textContent=[
+  /* 7: 누르는 즉시 보이는 반응 */
+  '.hq-press{opacity:.55;transition:none}',
+  /* 4: 로그인 바로 입장 */
+  '.lgQuick{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--accbg);border:1px solid var(--acc);border-radius:12px;padding:10px 12px;margin:10px 0 4px}.lgQuick b{font-size:15px}.lgQuick .grow{flex:1;min-width:150px}',
+  /* 6: 모바일 운영 화면 */
+  '#newsM,#newsMS{display:none}',
+  '@media(max-width:900px){',
+  ' #newsM,#newsMS{display:block;margin:10px 0}#newsM .newsBox,#newsMS .newsBox{margin:0}',
+  ' .home3:not(.homeLow){display:flex;flex-direction:column}.home3:not(.homeLow)>.card.urgent{order:-2}.home3:not(.homeLow)>#hRiskCard{order:-1}',
+  ' .memoDock.mClosed{width:auto!important;max-height:none;left:auto}.memoDock.mClosed .memo{display:none}.memoDock.mClosed .mdHead{border-radius:999px;padding:8px 14px;cursor:pointer;min-height:44px}.memoDock.mClosed .mdHead>:not(b){display:none}',
+  ' .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}',
+  ' .tw table th:first-child,.tw table td:first-child{position:sticky;left:0;z-index:1;background:var(--panel);box-shadow:1px 0 0 var(--line)}',
+  ' .tw table thead th:first-child{background:var(--panel2)}',
+  ' #botBoard{overflow-x:auto}',
+  ' .seg button,.chip,.linkb{min-height:40px}.lcard .lacts .linkb{min-height:36px}',
+  ' .page .ph{flex-wrap:wrap;gap:8px}',
+  '}'].join('');
+ document.head.appendChild(st);
+
+ /* ---------- 7: 메뉴·목록 이동은 누른 표시를 먼저 그리고, 화면은 바로 다음에 그림 ---------- */
+ const NAVSEL='#tabsNav [data-pg], #tree button, [data-go]';
+ document.addEventListener('click',e=>{if(e.hqLater)return;const b=e.target.closest&&e.target.closest(NAVSEL);if(!b||b.closest('a[href]')||b.disabled)return;
+  e.stopImmediatePropagation();e.preventDefault();b.classList.add('hq-press');
+  requestAnimationFrame(()=>setTimeout(()=>{b.classList.remove('hq-press');const ev=new MouseEvent('click',{bubbles:true,cancelable:true});ev.hqLater=true;b.dispatchEvent(ev)},0))},true);
+
+ /* ---------- 4: 로그인 — 마지막 접속 기억 · 바로 입장 · 엔터 ---------- */
+ const LK='hq_last_'+(window.APP&&window.APP.id||'b');
+ const lastGet=()=>{try{return JSON.parse(localStorage.getItem(LK)||'null')}catch(e){return null}};
+ function loginBoost(){const card=document.querySelector('#login .ovc');if(!card||card.dataset.hq)return;card.dataset.hq='1';
+  const go=document.getElementById('lgGo');if(go){const orig=go.onclick;go.onclick=ev=>{orig&&orig.call(go,ev);try{if(ME)localStorage.setItem(LK,JSON.stringify({role:ME.role,name:ME.name,sid:ME.sid||''}))}catch(x){}ck('login',{role:ME?ME.role:''})}}
+  const sel=document.getElementById('lgStu');if(sel)sel.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go&&go.click()}});
+  const L=lastGet();if(!L||!L.role)return;
+  const okStu=L.role!=='수강생'||S.students.some(s=>s.id===L.sid);if(!okStu)return;
+  try{LG_ROLE=L.role;if(L.role!=='수강생'&&document.getElementById('lgName'))document.getElementById('lgName').value=L.name||'';if(typeof LGDRAW==='function')LGDRAW();if(L.role==='수강생'&&sel)sel.value=L.sid;if(L.role!=='수강생'&&document.getElementById('lgName'))document.getElementById('lgName').value=L.name||''}catch(x){}
+  const q=document.createElement('div');q.className='lgQuick';const who=L.role==='수강생'?((S.students.find(s=>s.id===L.sid)||{}).name||''):L.name;
+  q.innerHTML='<div class="grow"><div class="xs muted">지난번 접속</div><b></b></div><button type="button" class="btn" id="lgQuickGo">이대로 바로 입장 →</button>';q.querySelector('b').textContent=L.role+' · '+who;
+  const h2=card.querySelector('h2');(h2||card.firstChild).after(q);
+  document.getElementById('lgQuickGo').onclick=()=>{try{LG_ROLE=L.role;if(typeof LGDRAW==='function')LGDRAW();if(L.role==='수강생'){const s2=document.getElementById('lgStu');if(s2)s2.value=L.sid}else{const n=document.getElementById('lgName');if(n)n.value=L.name||''}}catch(x){}ck('login_quick');go&&go.click()}}
+
+ /* ---------- 6: 모바일 — 홈에 오늘의 뉴스 · 메모장은 접힌 단추로 시작 ---------- */
+ function mobileHome(){const nb=document.getElementById('newsBox');
+  const put=(hostSel,id)=>{const host=document.querySelector(hostSel);if(!host)return;let m=document.getElementById(id);if(!m){m=document.createElement('div');m.id=id;host.after(m)}m.innerHTML=nb&&!nb.hidden?'<div class="newsBox">'+nb.innerHTML+'</div>':''};
+  if(PG==='home')put('#pg-home .topgrid','newsM');if(PG==='shome')put('#sHello','newsMS');
+  /* 폰에서는 메모장을 '📝 내 메모장' 단추로만 보이고, 누르면 펼침 (PC 설정은 건드리지 않음) */
+  const dk=document.getElementById('memoDock');if(dk){let mo=false;try{mo=sessionStorage.getItem('hq_memo_m')==='1'}catch(x){}dk.classList.toggle('mClosed',isM()&&!mo);
+   if(!dk.dataset.hqm){dk.dataset.hqm='1';dk.addEventListener('click',e=>{if(!dk.classList.contains('mClosed'))return;if(e.target.closest('.mdHead')){e.stopPropagation();e.preventDefault();try{sessionStorage.setItem('hq_memo_m','1')}catch(x){}dk.classList.remove('mClosed');ck('memo_open_mobile')}},true)}}}
+
+ /* ---------- 8: 클러리티 — 새 기능을 쓰면 이벤트 남김 (12/4 재분석용) ---------- */
+ const EVA={qzSubmit:'quiz_submit',qzPick:'',qzGoSum:'summary_open',qzPub:'quiz_publish',bPost:'board_post',bSend:'chat_send',bMkRoom:'chat_room_make',bJoin:'chat_join',bCm:'board_comment',lFocus:'lunch_open',lInfo:'lunch_info_edit',mOpen:'student_open',mCoCal:'counsel_calendar',ccAdd:'counsel_add',stu:'calc_student',qzRetry:'quiz_retry'};
+ const EVI={qzGo:'quiz_make',askGen:'ask_generate',saSend:'ask_send',cEnter:'calc_enter','aic-copy':'aic_copy',lgQuickGo:''};
+ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-act],[id],[data-mact],[data-lkf],[data-bcat],[data-alf]');if(!a)return;
+  if(a.dataset.act&&EVA[a.dataset.act])return ck(EVA[a.dataset.act]);if(a.id&&EVI[a.id])return ck(EVI[a.id]);
+  if(a.dataset.mact==='add')return ck('memo_add');if(a.dataset.lkf)return ck('lunch_filter');if(a.dataset.bcat)return ck('board_category');if(a.dataset.alf)return ck('att_filter');
+  if(e.target.closest('.ruleList li.rmore'))ck('rule_more')},true);
+
+ /* ---------- 9: 내부 테스트 접속 구분 — 주소 끝에 ?test=1 을 붙여 열면 클러리티에 traffic=test 로 남음 ---------- */
+ function trafficTag(){try{const t=/[?&]test=1\b/.test(location.search);if(t)sessionStorage.setItem('hq_test','1');const on=t||sessionStorage.getItem('hq_test')==='1';
+  if(typeof window.clarity==='function'){window.clarity('set','traffic',on?'test':'user');window.clarity('set','build',window.APP&&window.APP.demo?'demo':'real');window.clarity('set','device',isM()?'mobile':'pc')}}catch(e){}}
+
+ /* ---------- 3: 처음 화면이 다 그려진 뒤에 한 번에 보이기 (위 메뉴가 나중에 끼어들며 본문이 밀리던 문제) ---------- */
+ const _render=render;render=function(){const r=_render.apply(this,arguments);try{if(!STU())loginBoost();mobileHome()}catch(e){}return r};
+ setTimeout(()=>{try{loginBoost();mobileHome();trafficTag()}catch(e){}setTimeout(()=>document.body.classList.add('hq-ready'),60)},0);
+})();
+
+/* ==== 역할별 문제 해결 (11/27 요청) ====
+   매니저: ① 주간 루프 자동 체크 ② 출석부 인쇄(미리보기·파일·엑셀) ③ 학생관리에 명단 엑셀 ④ 자유소통방·문의 → 슬랙 ⑤ 학생 상세 생년월일·연락처
+   강사: 학생별 맞춤 복습 (학습로그·퀴즈 결과·깃허브·구글 시트)
+   수강생: 문의 실시간 전달 상태 표시 (연동 링크 · 슬랙 전달)
+   슬랙·구글 시트는 Apps Script 서버(apps-script/Code.gs)를 거침 — 화면(HTML)에 키·웹훅 주소를 넣지 않음. 함수 하나로 감쌈. */
+(function hqRoleFix(){
+ const ck=ev=>{try{if(typeof window.clarity==='function')window.clarity('event',ev)}catch(e){}};
+ const st=document.createElement('style');st.textContent=[
+  '.hqPrintBox{position:fixed;inset:0;z-index:90;background:rgba(10,14,20,.5);display:flex;align-items:center;justify-content:center;padding:12px}',
+  '.hqPrintBox .pb{background:var(--panel);border-radius:14px;max-width:960px;width:100%;max-height:92vh;display:flex;flex-direction:column;box-shadow:var(--shadow)}',
+  '.hqPrintBox .pbh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line)}.hqPrintBox .pbb{overflow:auto;padding:12px 14px}',
+  '.hqPrintBox table{border-collapse:collapse;width:100%;font-size:12.5px}.hqPrintBox th,.hqPrintBox td{border:1px solid var(--line);padding:5px 6px;text-align:center}.hqPrintBox td:first-child{text-align:left;white-space:nowrap}',
+  '.hqStat{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:0 0 10px;font-size:13px;background:var(--panel2)}.hqStat .dot{width:9px;height:9px;border-radius:50%;display:inline-block}',
+  '.hqSlack{border:1px dashed var(--line);border-radius:10px;padding:8px 10px;margin:8px 0;font-size:13px}.hqSlack label{display:inline-flex;gap:6px;align-items:center;margin-right:12px}',
+  '.rvCard{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:var(--panel)}.rvCard h4{margin:8px 0 4px;font-size:14px;color:var(--acc)}.rvCard ul{margin:0;padding-left:18px}.rvCard li{margin:3px 0;line-height:1.6}',
+  '.rvHead{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rvHead b{font-size:15px}.rvTags{display:flex;gap:4px;flex-wrap:wrap}',
+  '.pii{display:inline-flex;gap:6px;align-items:center}'].join('');
+ document.head.appendChild(st);
+ const isMgr=()=>ME&&ME.role==='매니저';
+ const syncOn=()=>typeof CLOUD!=='undefined'&&CLOUD;
+
+ /* ---------- ① 주간 루프 자동 체크 (데이터·화면 확인으로 자동 완료, 사람이 체크한 건 그대로) ---------- */
+ const inWeek=(k,wk)=>k&&k>=wk&&k<=addDays(wk,6);
+ const parseMD=(at,wk)=>{const m=String(at||'').match(/(\d{1,2})\/(\d{1,2})/);if(!m)return'';return wk.slice(0,4)+'-'+String(m[1]).padStart(2,'0')+'-'+String(m[2]).padStart(2,'0')};
+ const RULES={
+  b1:{why:'이번 주 출결 기록이 들어옴',ok:wk=>Object.keys(S.checkin||{}).some(k=>inWeek(k,wk)&&k<=DAY)||Object.keys(S.botRun||{}).some(k=>inWeek(k,wk))||S.students.some(s=>Object.keys((S.cal||{})[s.id]||{}).some(k=>inWeek(k,wk)&&k<=DAY))},
+  b2:{why:'대시보드는 실시간 자동 갱신 · 이번 주 홈 확인',view:'home'},
+  b3:{why:'이번 주 이탈 위험·문제 목록 확인',view:'risk'},
+  b5:{why:'이번 주 본인 안내 발송 기록',ok:wk=>(S.sendlog||[]).some(x=>inWeek(parseMD(x.at,wk),wk))},
+  b9:{why:'설문 공지 작성',view:'survey'},
+  b10:{why:'이번 주 상담 기록 등록',ok:wk=>(S.counsel||[]).some(c=>inWeek(c.date,wk))},
+  b11:{why:'대기 중인 병결·공가 서류 없음',ok:wk=>DAY>=addDays(wk,2)&&sickList().every(x=>x.doc==='done')},
+  b13:{why:'이번 주 학습·복습퀴즈 확인',view:'learn'},
+  b14:{why:'이번 주 참여자 목록·수료 판정 확인',view:'judge'},
+  b15:{why:'주간 보고 초안 만듦',view:'report'}};
+ let AUTO_BUSY=false;
+ function markView(kind){if(!ME||STU())return;const wk=mondayOf(DAY);if(((S.loopView||{})[wk]||{})[kind])return;commit(null,'',s=>{((s.loopView=s.loopView||{})[wk]=s.loopView[wk]||{})[kind]=stamp()})}
+ function autoLoop(){if(AUTO_BUSY||!ME||STU()||!A.loop)return;const wk=mondayOf(DAY),done=(S.loop||{})[wk]||{},V=(S.loopView||{})[wk]||{},add=[];
+  A.loop.forEach((d,i)=>d.items.forEach(it=>{const r=RULES[it.id];if(!r||done[it.id])return;if(addDays(wk,i)>DAY&&it.id!=='b11')return;const ok=r.view?!!V[r.view]:r.ok(wk);if(ok)add.push([it.id,r.why,d.d+'요일 '+it.t])}));
+  if(!add.length)return;AUTO_BUSY=true;setTimeout(()=>{commit('🤖 주간 루프 자동 체크 · '+add.map(x=>x[2]).join(', '),'org',s=>{const l=(s.loop=s.loop||{})[wk]=s.loop[wk]||{};add.forEach(([id,why])=>{if(!l[id])l[id]={by:'🤖 자동 확인',at:stamp(),auto:why}})});AUTO_BUSY=false},0)}
+ function viewHooks(){if(!ME||STU())return;const sb=SUB[PG]||'';
+  if(PG==='home'){markView('home');markView('risk')}if(PG==='brief'&&(sb==='b-issue'||sb==='b-inbox'))markView('risk');if(PG==='learn')markView('learn');if(PG==='att'&&(sb==='a-list'||sb==='a-judge'))markView('judge')}
+ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-act]');if(!a)return;if(a.dataset.act==='qSurvey')setTimeout(()=>markView('survey'),50);if(a.dataset.act==='report')setTimeout(()=>markView('report'),50)},true);
+ /* 조직·루프 화면에 '자동' 표시 */
+ function autoBadges(){if(PG!=='org')return;document.querySelectorAll('#roleBoard .trow.done').forEach(r=>{if(r.dataset.au)return;const t=r.textContent;if(t.includes('🤖 자동 확인')){r.dataset.au=1;r.title='데이터로 자동 확인됨 — 필요하면 체크를 눌러 취소할 수 있어요'}})}
+
+ /* ---------- ② 출석부 인쇄: 미리보기 창 + [인쇄] + [파일로 받기] + [엑셀] ---------- */
+ function sheetHtml(range){const wk=mondayOf(DAY);let days;if(range==='unit'){const u=unitOf(DAY),U=UNITS[Math.max(0,u)];days=COURSE.filter(k=>k>=U.a&&k<=U.b)}else days=[0,1,2,3,4].map(i=>addDays(wk,i)).filter(k=>CSET.has(k));
+  const mark=(sid,k)=>{const r=(S.cal[sid]||{})[k];if(k>DAY)return'';if(!r)return'○';return r.s==='absent'||r.s==='short'?'결':r.s==='sick'?(r.doc==='done'?'병✓':'병'):r.s==='off'?'공':[r.late?'지':'',r.early?'조':'',r.out?'외':''].join('')||'○'};
+  const title='출석부 · '+(range==='unit'?(UNITS[Math.max(0,unitOf(DAY))].n+' 단위기간'):md(wk)+' 주');
+  return{title,days,html:'<h2 style="margin:0 0 4px">'+title+'</h2><p style="margin:0 0 8px;font-size:12px">'+esc(A.sub||'')+' · 출력 '+stamp()+' · ○ 출석 / 결 결석 / 병 병결 / 공 공가 / 지·조·외 지각·조퇴·외출</p><table><thead><tr><th>이름</th>'+days.map(k=>'<th>'+md(k)+'<br>'+wd(k)+'</th>').join('')+'<th>출석률</th><th>서명</th></tr></thead><tbody>'+S.students.map(s=>'<tr><td>'+esc(s.name)+'</td>'+days.map(k=>'<td>'+mark(s.id,k)+'</td>').join('')+'<td>'+calc(s.id).rate.toFixed(1)+'%</td><td style="min-width:60px"></td></tr>').join('')+'</tbody></table>',rows:[['이름'].concat(days.map(k=>md(k)+'('+wd(k)+')'),['출석률'])].concat(S.students.map(s=>[s.name].concat(days.map(k=>mark(s.id,k)),[calc(s.id).rate.toFixed(1)+'%'])))}}
+ let PR='week';
+ function openPrint(){let box=document.getElementById('hqPrint');if(!box){box=document.createElement('div');box.id='hqPrint';box.className='hqPrintBox';document.body.appendChild(box);
+   box.addEventListener('click',e=>{const b=e.target.closest('[data-pr]');if(e.target===box||(b&&b.dataset.pr==='close')){box.remove();return}if(!b)return;const v=b.dataset.pr;
+    if(v==='week'||v==='unit'){PR=v;openPrint();return}const sh=sheetHtml(PR);
+    if(v==='print'){ck('att_print');let p=document.getElementById('printArea');if(!p){p=document.createElement('div');p.id='printArea';document.body.appendChild(p)}p.innerHTML=sh.html;document.body.classList.add('printing');let ok=true;try{window.print()}catch(x){ok=false}setTimeout(()=>document.body.classList.remove('printing'),600);if(!ok)alert('이 화면에서는 인쇄 창을 열 수 없어요. [파일로 받기]로 내려받아 열면 바로 인쇄할 수 있어요.')}
+    if(v==='file'){ck('att_print_file');const doc='<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>'+sh.title+'</title><style>body{font-family:sans-serif;padding:16px}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #999;padding:4px 6px;text-align:center}td:first-child{text-align:left}@page{size:A4 landscape;margin:12mm}</style></head><body>'+sh.html+'<script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script></body></html>';saveFile(sh.title.replace(/[^\w가-힣]+/g,'_')+'.html',new Blob([doc],{type:'text/html'}))}
+    if(v==='csv'){ck('att_print_csv');csvSave(sh.title.replace(/[^\w가-힣]+/g,'_')+'.csv',sh.rows)}})}
+  const sh=sheetHtml(PR);
+  box.innerHTML='<div class="pb" role="dialog" aria-label="출석부"><div class="pbh"><b class="grow">🖨 출석부</b><div class="seg"><button type="button" data-pr="week" class="'+(PR==='week'?'on':'')+'">이번 주</button><button type="button" data-pr="unit" class="'+(PR==='unit'?'on':'')+'">단위기간 전체</button></div><button type="button" class="btn sm" data-pr="print">인쇄하기</button><button type="button" class="btn s sm" data-pr="file">파일로 받기 (열면 바로 인쇄)</button><button type="button" class="btn s sm" data-pr="csv">출석부 엑셀(CSV)</button><button type="button" class="x" data-pr="close" aria-label="닫기">×</button></div><div class="pbb">'+sh.html+'<p class="xs muted" style="margin-top:8px">인쇄 창이 안 열리는 환경(claude.ai 링크 안 등)에서는 [파일로 받기]를 눌러 내려받은 파일을 열면 바로 인쇄돼요.</p></div></div>'}
+ printAtt=function(){openPrint()};
+
+ /* ---------- ③ 학생관리에 명단 엑셀 ---------- */
+ function mgmtExcel(){const ph=document.querySelector('#pg-mgmt .sub[data-sub="m-list"] .ph');if(!ph||ph.querySelector('[data-hqx]'))return;const b=document.createElement('button');b.type='button';b.className='btn s sm';b.dataset.hqx='1';b.textContent='⬇ 명단·판정표(엑셀)';b.onclick=()=>{ck('roster_excel');rosterX()};ph.appendChild(b)}
+ function rosterX(){csvSave('참여자명단_'+DAY+'.csv',[['이름','조','생년월일','연락처','오늘 출결','출석률','환산 결석','수료 여유','판정','1차','2차','3차']].concat(S.students.map(s=>{const c=calc(s.id),p=(S.profile||{})[s.id]||{};return[s.name,s.team||'',p.birth||'',p.phone||s.phone||'',dayState(s.id,DAY).t,c.rate.toFixed(1)+'%',c.A,c.left,cLevel(c)[0]].concat(c.units.map(y=>uSig(y)[0]))})))}
+
+ /* ---------- ⑤ 학생 상세: 생년월일 · 연락처 (가려서 보이고, 눌러야 전체) ---------- */
+ const mask=v=>v?String(v).replace(/(\d{2,3})[-\s]?(\d{3,4})[-\s]?(\d{4})/,(m,a,b,c)=>a+'-****-'+c):'';
+ let PII_SHOW=null;
+ if(typeof detailHtml==='function'){const _dh=detailHtml;detailHtml=function(sid){let h=_dh(sid);const p=(S.profile||{})[sid]||{},s=stu(sid)||{},ph=p.phone||s.phone||'',show=PII_SHOW===sid;
+  const f='<div class="kv"><span>생년월일</span><b>'+(p.birth?esc(show?p.birth:p.birth.slice(0,4)+'-**-**'):'<span class="muted">미입력</span>')+'</b></div><div class="kv"><span>연락처</span><b class="pii">'+(ph?esc(show?ph:mask(ph)):'<span class="muted">미입력</span>')+'</b></div>'+
+   '<div class="inl" style="margin:4px 0 2px">'+((p.birth||ph)?'<button class="linkb" data-act="piiShow" data-id="'+sid+'">'+(show?'가리기':'전체 보기')+'</button>':'')+'<button class="linkb" data-act="piiEdit" data-id="'+sid+'">생년월일·연락처 입력</button>'+(ph?'<a class="linkb" href="tel:'+esc(ph)+'">📞 전화</a>':'')+'</div>';
+  return h.replace('<label class="f" style="margin-top:8px">강사 메모</label>',f+'<label class="f" style="margin-top:8px">강사 메모</label>')}}
+ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-act="piiShow"],[data-act="piiEdit"]');if(!a)return;e.stopPropagation();const sid=a.dataset.id;
+  if(a.dataset.act==='piiShow'){PII_SHOW=PII_SHOW===sid?null:sid;render();return}
+  const p=(S.profile||{})[sid]||{},s=stu(sid)||{};const b=prompt('생년월일 (예: 2000-01-31)',p.birth||'');if(b===null)return;const ph=prompt('연락처 (예: 010-1234-5678)',p.phone||s.phone||'');if(ph===null)return;
+  if(b&&!/^\d{4}-\d{2}-\d{2}$/.test(b.trim())){alert('생년월일은 2000-01-31 처럼 적어 주세요.');return}
+  commit('학생 상세 정보 입력 · '+(s.name||''),'mgmt',x=>{const pp=((x.profile=x.profile||{})[sid]=x.profile[sid]||{});pp.birth=b.trim();pp.phone=ph.trim()})},true);
+
+ /* ---------- ④ 슬랙 연동 (Apps Script 서버가 웹훅으로 보냄) ---------- */
+ const slackCfg=()=>S.slack||{};
+ async function slackSend(text){if(!syncOn())return{ok:false,why:'nosync'};try{const r=await call({op:'slack',text:String(text).slice(0,3000)});return r&&r.ok?{ok:true}:{ok:false,why:(r&&r.error)||'error'}}catch(e){return{ok:false,why:'net'}}}
+ function slackFallback(text){try{navigator.clipboard&&navigator.clipboard.writeText(text)}catch(e){}alert('슬랙 자동 전달이 아직 연결되지 않았어요.\n· 여러 기기 연동(Apps Script)을 켜고, Apps Script 프로젝트 설정 › 스크립트 속성에 SLACK_WEBHOOK_URL 을 넣으면 자동으로 올라가요 (apps-script/설치_안내.md).\n· 지금 글은 복사해 두었어요. 슬랙에 붙여 넣어 주세요.')}
+ function slackBox(p){const host=document.getElementById(p+'Board');if(!host||!isMgr())return;let bx=document.getElementById(p+'Slack');if(!bx){bx=document.createElement('div');bx.id=p+'Slack';bx.className='hqSlack';host.before(bx)}
+  const c=slackCfg();bx.innerHTML='<b>🔗 슬랙 연동</b> <span class="xs muted">'+(syncOn()?'서버 연동 켜짐':'서버 연동 꺼짐 — 켜야 자동 전달돼요')+'</span><div style="margin-top:6px"><label><input type="checkbox" data-slk="rooms"'+(c.rooms?' checked':'')+'> 단톡방 새 메시지를 슬랙으로</label><label><input type="checkbox" data-slk="posts"'+(c.posts?' checked':'')+'> 새 게시글을 슬랙으로</label><label><input type="checkbox" data-slk="inq"'+(c.inq?' checked':'')+'> 수강생 새 문의를 슬랙으로</label><button type="button" class="btn s sm" data-slk="test">테스트 보내기</button></div>'}
+ document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.slk;if(!k||k==='test')return;const v=e.target.checked;commit('슬랙 연동 설정 · '+k+' '+(v?'켬':'끔'),'',s=>{(s.slack=s.slack||{})[k]=v})});
+ document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('[data-slk="test"]');if(!b)return;const t='[운영관리를 한큐에] 슬랙 연동 테스트 · '+stamp();const r=await slackSend(t);if(r.ok)alert('슬랙으로 보냈어요. 채널을 확인해 주세요.');else slackFallback(t)});
+ /* 자동 전달: 단톡방 메시지 · 새 글 · 새 문의 */
+ let lastRelay={};
+ function relay(){const c=slackCfg();if(!syncOn()||!(c.rooms||c.posts||c.inq)||!S.board)return;
+  if(c.rooms)(S.board.rooms||[]).forEach(r=>{const m=(r.msgs||[]).slice(-1)[0];if(!m||m.bk==='sys'||m.bk!==meKey())return;const key='r'+r.id+m.at+m.t;if(lastRelay[key])return;lastRelay[key]=1;slackSend('💬 ['+r.title+'] '+m.by+': '+m.t)});
+  if(c.posts)(S.board.posts||[]).slice(-1).forEach(x=>{if(x.bk!==meKey())return;const key='p'+x.id;if(lastRelay[key])return;lastRelay[key]=1;slackSend('🗨 자유소통방 ['+bcName(x.cat)+'] '+x.title+(x.anon?' (익명)':' · '+x.by))});
+  if(c.inq&&STU()){const it=(S.issues||[])[0];if(it&&it.cat==='문의'&&it.sid&&myStu&&myStu()&&it.sid===myStu().id){const key='q'+it.id;if(!lastRelay[key]){lastRelay[key]=1;slackSend('📩 새 문의 ['+(it.kind||'')+' → '+(it.target||it.owner||'')+'] '+it.who+': '+it.t)}}}}
+ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-act="bSend"],[data-act="bPost"],#saSend');if(a)setTimeout(relay,120)},true);
+ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&/Msg$/.test(e.target.id||''))setTimeout(relay,120)},true);
+
+ /* ---------- 수강생 문의: 실시간 전달 상태 + 매니저용 연동 링크 ---------- */
+ function inqStatus(){const on=syncOn();
+  const put=(sel,id,html)=>{const host=document.querySelector(sel);if(!host)return;let el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;el.className='hqStat';host.before(el)}el.innerHTML=html};
+  const dot='<span class="dot" style="background:'+(on?'var(--ok)':'var(--warn)')+'"></span>';
+  if(PG==='sask')put('#sAskList','hqAskStat',dot+(on?'<b>실시간 전달 켜짐</b> · 보낸 문의는 운영진 화면에 바로 떠요'+(slackCfg().inq?' · 슬랙으로도 전달돼요':''):'<b>이 기기에만 저장되고 있어요</b> · 운영진에게 받은 <b>연동 링크</b>로 열면 바로 전달돼요'));
+  if(PG==='notice'&&SUB.notice==='n-inq'&&!STU()){const url=on&&typeof SYNC_URL!=='undefined'&&SYNC_URL?location.origin+location.pathname+'?sync='+encodeURIComponent(SYNC_URL):'';
+   put('#pg-notice .sub[data-sub="n-inq"] .card','hqInqStat',dot+(on?'<b>실시간 수신 켜짐</b> · 다른 기기 수강생 문의가 바로 들어와요'+(url?' <button type="button" class="btn s sm" data-copy="'+esc(url)+'">수강생용 연동 링크 복사</button>':''):'<b>실시간 수신 꺼짐</b> · 다른 기기에서 보낸 문의는 안 보여요 → 왼쪽 아래 <b>☁ 연동 설정</b>에서 웹앱 주소를 넣으면 켜져요 (apps-script/설치_안내.md)')+(isMgr()?' <span class="xs muted">· 슬랙 전달은 자유소통방 위 [슬랙 연동]에서</span>':''))}}
+ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;const t=b.dataset.copy;try{navigator.clipboard.writeText(t).then(()=>{b.textContent='복사됐어요'},()=>prompt('이 링크를 복사해 수강생에게 보내세요',t))}catch(x){prompt('이 링크를 복사해 수강생에게 보내세요',t)}});
+
+ /* ---------- 강사: 학생별 맞춤 복습 ---------- */
+ const STOP=new Set('오늘 내용 부분 실습 강의 정리 배운 배웠다 했다 했다. 좋았던 어려웠던 다음 수업 시간 조금 진짜 정말 그리고 그래서 이번 처음 직접 함께 바로'.split(' '));
+ function kw(t){const f={};String(t||'').split(/[^가-힣A-Za-z0-9]+/).forEach(w=>{w=w.replace(/(은|는|이|가|을|를|에|의|로|으로|와|과|도|만|에서|하고)$/,'');if(w.length<2||STOP.has(w)||/(니다|어요|았다|었다|했다|한다|하는|해서|하면)$/.test(w))return;f[w]=(f[w]||0)+1});return Object.keys(f).filter(k=>f[k]>=2&&!/^(파일|속도|폴더|결과|방법|부분|내용|시간|문제|생각|이해|사용|정도)$/.test(k)).sort((a,b)=>f[b]-f[a])}
+ function sheetRow(name){const R=(S.sheet||{}).rows||[];if(R.length<2)return null;const h=R[0].map(x=>String(x).trim());const i=h.findIndex(x=>/이름|성명/.test(x));if(i<0)return null;const r=R.find((x,j)=>j>0&&String(x[i]).trim()===name);if(!r)return null;const o={};h.forEach((k,j)=>{if(k&&j!==i&&r[j]!=null&&String(r[j]).trim())o[k]=String(r[j]).trim()});return o}
+ function reviewPlan(s){const L=Object.keys((S.logs||{})[s.id]||{}).sort().reverse().slice(0,10).map(k=>[k,S.logs[s.id][k]]).filter(x=>x[1]&&x[1].st==='done');
+  const hard=L.filter(([k,l])=>/어려|매우/.test(l.diff||''));const R=(S.quizRes||{})[s.id]||{};const wrong=[];(S.lectures||[]).filter(l=>l.st==='pub').forEach(l=>{const r=R[l.id];if(!r)return;l.quiz.forEach((q,i)=>{if(r.ans[i]!==q.answer)wrong.push({l,q})})});
+  const notTaken=(S.lectures||[]).filter(l=>l.st==='pub'&&!R[l.id]);const p=(S.profile||{})[s.id]||{},sh=sheetRow(s.name)||{};
+  const dom=((S.curriculum||[]).map(w=>w.title+' '+w.topics).join(' ')+' '+(S.lectures||[]).map(l=>l.title+' '+(l.terms||[]).map(t=>t.t).join(' ')+' '+(l.points||[]).join(' ')).join(' '));
+  const interests=[sh['관심사']||sh['관심 분야']||'',p.goal||''].filter(Boolean).concat(kw(L.map(x=>x[1].sum+' '+(x[1].retro||'')).join(' ')).filter(k=>!/다$/.test(k)&&dom.includes(k)).slice(0,3));
+  const g=(typeof GITC!=='undefined'&&GITC[s.id]&&GITC[s.id].ok)?GITC[s.id].list:null;const repo=(S.git||{})[s.id];
+  const items=[];
+  wrong.slice(0,3).forEach(w=>items.push({t:'틀린 문제 다시 보기 · '+w.l.title,d:w.q.q.replace(/\n/g,' ')+' → 정답: '+w.q.choices[w.q.answer]+(w.q.explain?' ('+w.q.explain+')':'')}));
+  notTaken.slice(0,2).forEach(l=>items.push({t:'아직 안 푼 복습퀴즈 · '+l.title,d:'홈의 복습퀴즈를 풀고 강의 정리집의 핵심 내용을 다시 읽어 보세요.'}));
+  hard.slice(0,2).forEach(([k,l])=>items.push({t:md(k)+' 수업 다시 보기 (난이도 '+l.diff+')',d:(l.sum||'')+(l.retro?' · 회고: '+l.retro:'')}));
+  if(interests.length)items.push({t:'관심 분야 맞춤 실습',d:'「'+interests.slice(0,3).join(' · ')+'」 주제로 오늘 배운 방법을 한 번 더 적용해 작은 결과물을 만들어 깃허브에 올려 보세요.'});
+  if(sh['진도'])items.push({t:'진도 확인',d:'시트 기준 진도: '+sh['진도']});
+  if(!repo||!repo.repo)items.push({t:'깃허브 연결',d:'학습 › 깃허브 & 제작물 제출에서 내 저장소를 연결하면 복습 결과물을 모아 볼 수 있어요.'});else if(g&&g.length){const last=g[0];items.push({t:'최근 커밋 이어가기',d:'마지막 커밋: '+last.msg+' — 이번 복습 결과물도 같은 저장소에 올려 보세요.'})}
+  return{interests:interests.slice(0,4),hard:hard.length,wrong:wrong.length,logs:L.length,items:items.slice(0,6)}}
+ let RV_BUSY=null;
+ async function aiReview(s,plan){if(typeof SAMPLE==='undefined'||!SAMPLE)return null;const L=Object.keys((S.logs||{})[s.id]||{}).sort().reverse().slice(0,8).map(k=>{const l=S.logs[s.id][k];return md(k)+' 난이도:'+l.diff+' 요약:'+l.sum+' 회고:'+(l.retro||'')}).join('\n');
+  const prompt='너는 AI 실무 교육 과정 강사의 조교야. 아래 수강생 한 명의 학습 기록으로 그 사람만을 위한 복습 계획 4~6개를 만들어. 관심사와 어려워한 부분을 반영하고, 각 항목은 제목과 구체적인 할 일 1~2문장. 이름·연락처는 쓰지 마.\nJSON 배열로만 답해: [{"t":"제목","d":"할 일"}]\n\n관심사: '+plan.interests.join(', ')+'\n틀린 퀴즈 수: '+plan.wrong+'\n최근 학습로그:\n'+L+'\n\n규칙 기반 초안:\n'+plan.items.map(x=>'- '+x.t+': '+x.d).join('\n');
+  try{const r=await SAMPLE.json(prompt,{modelTier:'default',cache:false});return Array.isArray(r)?r.filter(x=>x&&x.t).slice(0,6).map(x=>({t:String(x.t),d:String(x.d||'')})):null}catch(e){return null}}
+ function rReview(){const el=document.getElementById('mReview');if(!el)return;const rv=S.reviews||{};
+  el.innerHTML='<div class="hqSlack"><b>📊 구글 시트 연동</b> <span class="xs muted">'+((S.sheet&&S.sheet.at)?'마지막 불러옴 '+esc(S.sheet.at)+' · '+(((S.sheet.rows||[]).length||1)-1)+'명':'아직 안 불러옴')+'</span><div class="inl" style="margin-top:6px"><input id="rvSheet" placeholder="'+(syncOn()?'시트 탭 이름 (예: 진도표)':'웹에 게시한 CSV 주소 (파일 › 공유 › 웹에 게시)')+'" value="'+esc((S.sheet||{}).src||'')+'" style="flex:1;min-width:180px"><button type="button" class="btn s sm" id="rvLoad">불러오기</button></div><div class="xs muted" style="margin-top:4px">열 이름에 「이름」은 꼭, 「관심사」「진도」가 있으면 맞춤 복습에 반영돼요. 키·비밀번호는 넣지 않아요.</div></div>'+
+   '<div class="inl" style="margin:6px 0"><button type="button" class="btn" id="rvAll">전체 학생 맞춤 복습 만들기</button><span class="xs muted">'+(typeof SAMPLE!=='undefined'&&SAMPLE?'🤖 Claude AI로 다듬어요':'⚙️ 학습로그·퀴즈·깃허브·시트 규칙으로 만들어요')+'</span></div>'+
+   S.students.map(s=>{const plan=reviewPlan(s),sent=rv[s.id];return'<div class="rvCard"><div class="rvHead"><b>'+esc(s.name)+'</b><span class="xs muted">학습로그 '+plan.logs+'개 · 어려움 '+plan.hard+' · 틀린 퀴즈 '+plan.wrong+'</span><div class="rvTags">'+plan.interests.map(t=>'<span class="badge">'+esc(t)+'</span>').join('')+'</div><span class="grow"></span>'+(sent?'<span class="badge b-ok">보냄 '+esc(sent.at)+'</span>':'')+'<button type="button" class="btn s sm" data-rv="ai" data-id="'+s.id+'"'+(RV_BUSY===s.id?' disabled':'')+'>'+(RV_BUSY===s.id?'만드는 중…':'다시 만들기')+'</button><button type="button" class="btn sm" data-rv="send" data-id="'+s.id+'">수강생에게 보내기</button></div><ul>'+((sent&&sent.draft)||plan.items).map(x=>'<li><b>'+esc(x.t)+'</b> — '+esc(x.d)+'</li>').join('')+'</ul></div>'}).join('');
+  const lb=document.getElementById('rvLoad');if(lb)lb.onclick=loadSheet;const all=document.getElementById('rvAll');if(all)all.onclick=()=>{S.students.forEach(s=>{const plan=reviewPlan(s);commit(null,'',x=>{((x.reviews=x.reviews||{})[s.id]=x.reviews[s.id]||{}).draft=plan.items})});ck('review_all')}}
+ async function loadSheet(){const v=(document.getElementById('rvSheet').value||'').trim();if(!v)return;let rows=null;
+  try{if(syncOn()&&!/^https?:/.test(v)){const r=await call({op:'sheet',tab:v});rows=r&&r.rows}else{const t=await (await fetch(v)).text();rows=t.split(/\r?\n/).filter(Boolean).map(l=>{const o=[];let c='',q=false;for(const ch of l){if(ch==='"'){q=!q;continue}if(ch===','&&!q){o.push(c);c='';continue}c+=ch}o.push(c);return o})}}catch(e){rows=null}
+  if(!rows||!rows.length){alert(syncOn()?'시트를 불러오지 못했어요. 탭 이름과 Apps Script 코드(시트 읽기)를 확인해 주세요.':'CSV를 불러오지 못했어요. 시트의 파일 › 공유 › 웹에 게시 › CSV 주소인지 확인해 주세요. (claude.ai 링크 안에서는 외부 주소를 못 불러와요)');return}
+  ck('sheet_load');commit('📊 구글 시트 불러옴 · '+(rows.length-1)+'줄','mgmt',s=>{s.sheet={src:v,at:stamp(),rows:rows.slice(0,300).map(r=>r.slice(0,20))}})}
+ document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('[data-rv]');if(!b)return;const s=stu(b.dataset.id);if(!s)return;
+  if(b.dataset.rv==='send'){const items=((S.reviews||{})[s.id]||{}).draft||reviewPlan(s).items;ck('review_send');commit('@stu:'+s.id+'|📌 강사님이 '+s.name+'님 맞춤 복습을 보냈어요','slearn',x=>{const r=(x.reviews=x.reviews||{})[s.id]=x.reviews[s.id]||{};r.sent=items;r.draft=items;r.at=stamp();r.by=ME?ME.name:''});return}
+  if(b.dataset.rv==='ai'){RV_BUSY=s.id;render();const plan=reviewPlan(s);const ai=await aiReview(s,plan);RV_BUSY=null;commit(null,'',x=>{((x.reviews=x.reviews||{})[s.id]=x.reviews[s.id]||{}).draft=ai||plan.items});ck('review_make')}});
+ /* 수강생: 홈·강의 정리집에 '나만의 맞춤 복습' */
+ function stuReview(){const me=STU()&&myStu&&myStu();if(!me)return;const r=(S.reviews||{})[me.id];
+  const put=(hostSel,id,before)=>{const host=document.querySelector(hostSel);if(!host)return;let el=document.getElementById(id);if(!r||!r.sent){if(el)el.remove();return}if(!el){el=document.createElement('div');el.id=id;el.className='card mt rvCard';before?host.before(el):host.after(el)}
+   el.innerHTML='<div class="rvHead"><b>📌 나만의 맞춤 복습</b><span class="xs muted">'+esc(r.by||'강사')+' · '+esc(r.at||'')+'</span></div><ul>'+r.sent.map(x=>'<li><b>'+esc(x.t)+'</b> — '+esc(x.d)+'</li>').join('')+'</ul>'};
+  if(PG==='shome')put('#sQuiz','sReviewH',false);if(PG==='slearn')put('#sSumList','sReviewS',true)}
+
+ /* ---------- 화면 붙이기 ---------- */
+ function mgmtReviewSub(){const pg=document.getElementById('pg-mgmt');if(!pg||pg.querySelector('[data-sub="m-review"]'))return;const d=document.createElement('div');d.className='sub';d.dataset.sub='m-review';
+  d.innerHTML='<div class="ph"><div><div class="eyebrow">학생관리</div><h1>맞춤 복습</h1></div></div><div class="xs muted" style="margin:-4px 0 8px">학생마다 학습로그(난이도·회고)·복습퀴즈 오답·깃허브·구글 시트(관심사·진도)를 보고 복습 계획을 만들어요. 확인하고 [수강생에게 보내기]를 누르면 그 학생 홈에 떠요.</div><div id="mReview"></div>';pg.appendChild(d);
+  const n=STAFF_NAV.find(x=>x.id==='mgmt');if(n&&!n.subs.some(x=>x[0]==='m-review'))n.subs.push(['m-review','맞춤 복습 (학생별)'])}
+ mgmtReviewSub();window.hqReviewPlan=reviewPlan;
+ const _render=render;render=function(){const r=_render.apply(this,arguments);try{if(!STU()){viewHooks();autoLoop();autoBadges();mgmtExcel();if(PG==='mgmt'&&SUB.mgmt==='m-review')rReview();if(PG==='free')slackBox('fr')}else stuReview();inqStatus()}catch(e){console.error(e)}return r};
+})();
+
+/* ==== 중복 정리 (11/27 추천 1~5) ====
+   1 매니저: 운영브리핑 › 📥 오늘 처리함 (긴급 이슈·문제·문의·할 일·서류를 한 목록에, 필터)
+   2 강사: 학생 상세를 탭으로 (한눈에 / 학습로그·피드백 / 제작물·깃허브 / 맞춤 복습 / 상담)
+   3 현장운영진: 오늘 출결 보드 위에 '같이 볼 것' (서류 대기 · 수당 경고·위험 · 전체 판정)
+   5 공통: 왼쪽 목록은 지금 메뉴의 하위만
+   원래 화면은 그대로 두고 더하기만 함. 함수 하나로 감쌈. */
+(function hqUnify(){
+ const ck=ev=>{try{if(typeof window.clarity==='function')window.clarity('event',ev)}catch(e){}};
+ const st=document.createElement('style');st.textContent=[
+  /* 5: 왼쪽 목록은 지금 메뉴만 (위 메뉴와 같은 목록이 두 번 나오지 않게) */
+  '#tree .tnode:not(.cur){display:none}',
+  '.ibx .row{align-items:center}.ibx .row.ovd{box-shadow:inset 3px 0 0 var(--bad)}.ibx .row.tdy{box-shadow:inset 3px 0 0 var(--warn)}.ibx .row{padding-left:10px}',
+  '.ibxF{display:flex;flex-wrap:wrap;margin-bottom:8px}',
+  '.dtabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 2px}.dtabs button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;cursor:pointer;min-height:36px}.dtabs button.on{background:var(--text);color:var(--panel);border-color:var(--text)}',
+  '.dpanel{margin-top:10px}.dlog{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;background:var(--panel)}.dlog .fb{margin-top:6px}',
+  '.tbSee{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}.tbSee .card{margin:0}.tbSee h3{margin:0 0 6px;font-size:15px}',
+  '@media(max-width:900px){.tbSee{grid-template-columns:1fr}}'].join('');
+ document.head.appendChild(st);
+
+ /* ---------- 1. 매니저 · 오늘 처리함 ---------- */
+ let IBF='all';
+ function inbox(){const me=ME?ME.role:'',out=[];
+  try{autoIssues().forEach(x=>out.push({k:'auto',cat:x.cat||'문제',pri:x.p,t:x.t,o:x.o,a:x.a,go:x.pg,sub:x.sub,sid:x.sid,due:''}))}catch(e){}
+  (S.issues||[]).filter(i=>i.st!=='done').forEach(i=>out.push({k:'issue',id:i.id,st:i.st,cat:i.cat||'이슈',pri:i.due&&i.due<DAY?'high':'mid',t:(i.who?i.who+': ':'')+i.t,o:i.owner,a:i.cat==='문의'?'답변':'처리',go:i.cat==='문의'?'notice':'',sub:i.cat==='문의'?'n-inq':'',due:i.due||''}));
+  (S.tasks||[]).filter(t=>!t.done&&t.due&&t.due<=addDays(DAY,1)).forEach(t=>out.push({k:'task',id:t.id,cat:'할 일',pri:t.due<DAY?'high':'mid',t:t.t+(t.time?' ~'+t.time:''),o:t.o,a:'완료 체크',due:t.due}));
+  try{const wk=mondayOf(DAY),done=(S.loop||{})[wk]||{};A.loop.forEach((d,i)=>d.items.forEach(it=>{const dk=addDays(wk,i);if(!done[it.id]&&dk<=DAY)out.push({k:'loop',id:it.id,cat:'루프',pri:dk<DAY?'high':'mid',t:d.d+'요일 · '+it.t,o:it.o,a:'완료 체크',due:dk})}))}catch(e){}
+  try{sickList().filter(x=>x.doc!=='done').forEach(x=>out.push({k:'doc',cat:'서류',pri:x.due&&x.due<DAY?'high':'mid',t:(stu(x.sid)||{}).name+' · '+md(x.k)+' 결석 증빙 '+(x.sub?'확인 대기':'미제출'),o:'현장운영진',a:'서류 확인',go:'docs',sub:'d-absent',due:x.due||''}))}catch(e){}
+  const rank={high:0,mid:1,low:2};return out.sort((a,b)=>(rank[a.pri]-rank[b.pri])||String(a.due||'9').localeCompare(String(b.due||'9')))}
+ const IBC=[['all','전체'],['mine','내 담당'],['high','긴급'],['문의','문의'],['task','할 일·루프'],['서류','서류']];
+ const ibPass=(x,f)=>f==='all'||(f==='mine'?x.o===(ME&&ME.role):f==='high'?x.pri==='high':f==='task'?(x.k==='task'||x.k==='loop'):x.cat===f);
+ function rInbox(){const el=document.getElementById('ibxList');if(!el)return;const all=inbox(),L=all.filter(x=>ibPass(x,IBF));
+  el.innerHTML='<div class="seg ibxF" role="group" aria-label="처리함 거르기">'+IBC.map(([k,n])=>'<button type="button" data-ibf="'+k+'" class="'+(IBF===k?'on':'')+'">'+n+' '+all.filter(x=>ibPass(x,k)).length+'</button>').join('')+'</div>'+
+   (L.length?'<div class="card ibx">'+L.map(x=>'<div class="row '+(x.pri==='high'?'ovd':x.due===DAY?'tdy':'')+'"><span class="pri p-'+x.pri+'">'+esc(x.cat)+'</span><div class="grow"><b>'+esc(x.t)+'</b><div class="xs muted">'+esc(x.o||'')+' · '+esc(x.a||'')+(x.due?' · '+(x.due<DAY?'<span class="no">기한 지남 '+md(x.due)+'</span>':md(x.due)):'')+'</div></div>'+
+    (x.k==='task'||x.k==='loop'?'<button class="btn s sm" data-act="'+x.k+'" data-id="'+x.id+'">✓ 완료</button>':
+     x.k==='issue'?'<button class="btn s sm '+((ISS_ST[x.st]||[])[1]||'')+'" data-act="iss" data-id="'+x.id+'" title="눌러서 상태 변경 (접수 → 처리 중 → 완료)">'+((ISS_ST[x.st]||['상태'])[0])+'</button>'+(x.go?'<button class="btn s sm" data-go="'+x.go+'" data-sub="'+x.sub+'">답변 →</button>':''):
+     '<button class="btn s sm" data-go="'+x.go+'"'+(x.sub?' data-sub="'+x.sub+'"':'')+(x.sid?' data-sid="'+x.sid+'"':'')+'>처리 →</button>')+'</div>').join('')+'</div>':'<p class="ok" style="margin:8px 0"><b>✓ 이 조건에 처리할 일이 없어요</b></p>')}
+ /* 11/27: 운영브리핑 '문제·이슈'를 없애고 처리함으로 합침 · '기수 일정·할 일'은 현황 한눈에로 */
+ const _goU=go;go=function(p,sub){if(p==='brief'&&sub==='b-issue')sub='b-inbox';if(p==='brief'&&sub==='b-plan')sub='b-status';return _goU(p,sub)};
+ function rTimeline(){const el=document.getElementById('bsTimeline');if(!el)return;const first=COURSE[0],last=COURSE[COURSE.length-1];
+  const ev=[[first,'개강']].concat(UNITS.map(u=>[u.b,u.n+' 단위기간 종료']),(A.events||[]).map(e=>[e.k,e.t]),[['2026-12-25','공휴일(휴강)'],['2027-01-01','공휴일(휴강)'],[last,'수료 · 과정 종료']]);
+  const seen={},L=ev.filter(([k,t])=>{const key=k+t;if(seen[key])return false;seen[key]=1;return true}).sort((a,b)=>a[0]<b[0]?-1:1);
+  const nx=L.find(([k])=>k>=DAY);const idx=COURSE.indexOf(DAY);
+  document.getElementById('bsTlSub').textContent=md(first)+' → '+md(last)+' · '+COURSE.length+' 교육일'+(idx>=0?' · 오늘 '+(idx+1)+'일차':'');
+  el.innerHTML=L.map(([k,t])=>'<div class="time'+(nx&&k===nx[0]?' cur':'')+(k<DAY?' off':'')+'"><b>'+md(k)+'('+wd(k)+')</b><span>'+esc(t)+'</span></div>').join('')}
+ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ibf]');if(!b)return;IBF=b.dataset.ibf;render()});
+ (function addInboxSub(){const pg=document.getElementById('pg-brief');if(!pg||pg.querySelector('[data-sub="b-inbox"]'))return;const d=document.createElement('div');d.className='sub';d.dataset.sub='b-inbox';
+  d.innerHTML='<div class="ph"><div><div class="eyebrow">운영브리핑</div><h1>📥 오늘 처리함</h1></div></div><div class="xs muted" style="margin:-4px 0 8px">긴급 이슈 · 지금 처리할 문제 · 수강생 문의 · 오늘·지난 할 일 · 주간 루프 · 결석 서류를 한 목록에 모았어요. 홈의 긴급 이슈와 운영브리핑을 따로 돌지 않아도 돼요.</div><div id="ibxList"></div>';
+  pg.insertBefore(d,pg.querySelector('.sub'));
+  /* 없앤 '문제·이슈'의 [새 이슈 등록] 칸은 처리함으로 옮김 */
+  const reg=pg.querySelector('.sub[data-sub="b-issue"] details.more');if(reg)d.appendChild(reg);
+  const n=STAFF_NAV.find(x=>x.id==='brief');if(n&&!n.subs.some(x=>x[0]==='b-inbox'))n.subs.unshift(['b-inbox','📥 오늘 처리함']);SUB.brief='b-inbox'})();
+ function homeInboxLink(){const c=document.getElementById('urgCnt');if(!c||PG!=='home')return;let a=document.getElementById('ibxLink');const n=inbox().length;if(!a){a=document.createElement('button');a.id='ibxLink';a.type='button';a.className='linkb';a.dataset.go='brief';a.dataset.sub='b-inbox';c.after(a)}a.textContent='📥 처리함 '+n+'건 전체 보기 →'}
+
+ /* ---------- 2. 강사 · 학생 상세 탭 ---------- */
+ const DTAB={};const TABS=[['all','한눈에'],['logs','학습로그 · 피드백'],['work','제작물 · 깃허브'],['review','맞춤 복습'],['counsel','상담']];
+ function panel(sid,t){const s=stu(sid)||{};
+  if(t==='logs'){const L=Object.keys((S.logs||{})[sid]||{}).sort().reverse().map(k=>[k,S.logs[sid][k]]).filter(x=>x[1]);
+   return L.length?L.map(([k,l])=>'<div class="dlog"><div class="inl" style="justify-content:space-between"><b>'+md(k)+'('+wd(k)+')</b><span><span class="badge">난이도 '+esc(l.diff||'-')+'</span> <span class="badge">속도 '+esc(l.speed||'-')+'</span></span></div><div class="sm" style="margin-top:4px"><b>배운 내용</b> '+esc(l.sum||'')+'</div>'+(l.prac?'<div class="sm"><b>실습</b> '+esc(l.prac)+'</div>':'')+(l.retro?'<div class="sm"><b>회고</b> '+esc(l.retro)+'</div>':'')+(l.fb?'<div class="fb">💬 '+esc(l.fb.t)+' <span class="xs muted">'+esc(l.fb.by||'')+' '+esc(l.fb.at||'')+'</span></div>':'')+'<button class="linkb" data-dfb="'+sid+'|'+k+'">'+(l.fb?'피드백 고치기':'💬 피드백 남기기')+'</button></div>').join(''):'<p class="muted sm">아직 쓴 학습로그가 없어요.</p>'}
+  if(t==='work'){const dl=[];(S.deliv||[]).forEach(d=>{const T=((d.subs||{}).team||{})[teamOf(sid)]||{};(d.req||[]).forEach(r=>{if(T[r.key])dl.push(['조별 · '+d.title,r.label,T[r.key].v,T[r.key].at])});(((d.subs||{}).personal||{})[sid]||[]).forEach(v=>dl.push(['개인 · '+d.title,'개인 제출',v.v,v.at]))});
+   const g=(S.git||{})[sid],c=typeof GITC!=='undefined'?GITC[sid]:null;
+   return'<div class="card"><h3>제작물</h3>'+(dl.length?'<table><tbody>'+dl.map(x=>'<tr><td><span class="badge">'+esc(x[0])+'</span></td><td>'+esc(x[1])+'</td><td class="sm"><a href="'+esc(x[2])+'" target="_blank" rel="noopener">'+esc(x[2])+'</a></td><td class="xs muted">'+esc(x[3]||'')+'</td></tr>').join('')+'</tbody></table>':'<p class="muted sm">제출한 제작물이 없어요.</p>')+'</div>'+
+    '<div class="card mt"><div class="ch"><h3 style="margin:0">깃허브</h3>'+(g&&g.repo?'<button class="btn s sm" data-dgit="'+sid+'">최근 커밋 불러오기</button>':'')+'</div>'+(g&&g.repo?'<div class="sm"><a href="'+esc(g.repo)+'" target="_blank" rel="noopener">'+esc(g.repo)+'</a></div>'+(c&&c.ok?'<ul class="sm">'+c.list.slice(0,8).map(x=>'<li>'+esc(x.msg)+' <span class="xs muted">'+esc(x.date||'')+'</span></li>').join('')+'</ul>':c&&!c.ok?'<p class="xs no">'+esc(c.err||'불러오기 실패')+'</p>':'<p class="xs muted">버튼을 누르면 공개 저장소의 최근 커밋을 보여 줘요.</p>'):'<p class="muted sm">아직 저장소를 연결하지 않았어요.</p>')+'</div>'}
+  if(t==='review'){if(typeof window.hqReviewPlan!=='function')return'<p class="muted sm">학생관리 › 맞춤 복습에서 만들 수 있어요.</p>';const p=window.hqReviewPlan(s),r=(S.reviews||{})[sid]||{},items=r.draft||p.items;
+   return'<div class="rvCard"><div class="rvHead"><b>맞춤 복습</b><div class="rvTags">'+p.interests.map(x=>'<span class="badge">'+esc(x)+'</span>').join('')+'</div><span class="grow"></span>'+(r.sent?'<span class="badge b-ok">보냄 '+esc(r.at||'')+'</span>':'')+'<button type="button" class="btn s sm" data-rv="ai" data-id="'+sid+'">다시 만들기</button><button type="button" class="btn sm" data-rv="send" data-id="'+sid+'">수강생에게 보내기</button></div><ul>'+items.map(x=>'<li><b>'+esc(x.t)+'</b> — '+esc(x.d)+'</li>').join('')+'</ul></div>'}
+  if(t==='counsel'){const co=(S.counsel||[]).filter(x=>x.sid===sid).sort((a,b)=>a.date<b.date?1:-1);
+   return'<div class="inl" style="margin-bottom:8px"><button class="btn sm" data-act="mCoCal" data-id="'+sid+'">📅 월별 상담기록</button><button class="btn s sm" data-act="mNewCo" data-id="'+sid+'">+ 상담 등록</button></div>'+(co.length?co.map(x=>'<div class="dlog"><div class="inl"><span class="badge">'+esc(x.type)+'</span><b class="grow">'+esc(x.title)+'</b><span class="xs muted">'+md(x.date)+' · '+esc(x.st||'')+'</span></div><div class="sm">'+esc(x.body||'')+'</div><div class="xs muted">후속: '+esc(x.next||'-')+(x.follow?' · '+md(x.follow):'')+' · '+esc(x.by||'')+'</div></div>').join(''):'<p class="muted sm">상담 기록이 없어요.</p>')}
+  return''}
+ if(typeof detailHtml==='function'){const _dh=detailHtml;detailHtml=function(sid){const t=DTAB[sid]||'all',h=_dh(sid);const bar='<div class="dtabs" role="tablist" aria-label="학생 상세">'+TABS.map(([k,n])=>'<button type="button" role="tab" aria-selected="'+(t===k)+'" data-dtab="'+sid+'|'+k+'" class="'+(t===k?'on':'')+'">'+n+'</button>').join('')+'</div>';
+  const cut=h.indexOf('<div class="g c3 mt">');const head=cut>0?h.slice(0,cut):'';if(t==='all'||cut<0)return cut>0?head+bar+h.slice(cut):bar+h;
+  /* 머리(이름·숫자·월별 상담 달력) 아래에 탭 내용 */
+  return head+bar+'<div class="dpanel">'+panel(sid,t)+'</div>'}}
+ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-dtab],[data-dfb],[data-dgit]');if(!b)return;e.stopPropagation();
+  if(b.dataset.dtab){const[sid,t]=b.dataset.dtab.split('|');DTAB[sid]=t;ck('detail_tab_'+t);render();return}
+  if(b.dataset.dgit){if(typeof gitLoad==='function')gitLoad(b.dataset.dgit,true);return}
+  if(b.dataset.dfb){const[sid,k]=b.dataset.dfb.split('|'),l=((S.logs||{})[sid]||{})[k];if(!l)return;const v=prompt(md(k)+' 학습로그 피드백',l.fb?l.fb.t:'');if(v===null||!v.trim())return;
+   commit('@stu:'+sid+'|💬 '+md(k)+' 학습로그에 강사 피드백 · '+((stu(sid)||{}).name||''),'mgmt',s=>{const x=((s.logs||{})[sid]||{})[k];if(x)x.fb={t:v.trim(),by:ME?ME.name:'',at:stamp()}})}},true);
+
+ /* ---------- 3. 현장운영진 · 오늘 출결 보드 위 '같이 볼 것' ---------- */
+ function boardSee(){const sub=document.querySelector('#pg-att .sub[data-sub="t-board"]');if(!sub||PG!=='att'||SUB.att!=='t-board')return;let el=document.getElementById('tbSee');if(!el){el=document.createElement('div');el.id='tbSee';el.className='tbSee';const ph=sub.querySelector('.ph');ph?ph.after(el):sub.prepend(el)}
+  const pend=sickList().filter(x=>x.doc!=='done'),u=Math.max(0,unitOf(DAY)),sig=S.students.map(s=>{const c=calc(s.id),g=uSig(c.units[u]);return{s,g}}).filter(x=>x.g[1]!=='ok');
+  el.innerHTML='<div class="card"><h3>📂 서류 대기 '+pend.length+'</h3>'+(pend.length?pend.slice(0,5).map(x=>'<div class="xs">· '+esc((stu(x.sid)||{}).name||'')+' '+md(x.k)+' '+(x.sub?'<span class="wn">확인 대기</span>':'<span class="no">미제출</span>')+'</div>').join('')+'<button class="linkb" data-go="docs" data-sub="d-absent">서류 확인 →</button>':'<p class="xs ok" style="margin:0">✓ 대기 없음</p>')+'</div>'+
+   '<div class="card"><h3>💰 '+UNITS[u].n+' 수당 경고·위험 '+sig.length+'</h3>'+(sig.length?sig.slice(0,6).map(x=>'<div class="xs">· <button class="linkb" data-go="att" data-sub="a-calc" data-sid="'+x.s.id+'">'+esc(x.s.name)+'</button> <span class="'+(x.g[1]==='bad'?'no':'wn')+'">'+esc(x.g[0])+'</span></div>').join(''):'<p class="xs ok" style="margin:0">✓ 모두 안정</p>')+'</div>'+
+   '<div class="card"><h3>📋 전체 판정</h3><p class="xs muted" style="margin:0 0 6px">수료·1·2·3차 수당 신호를 한 표로</p><button class="btn s sm" data-go="att" data-sub="a-list">참여자 목록 열기 →</button></div>'}
+
+ const _render=render;render=function(){const r=_render.apply(this,arguments);try{if(!STU()){if(PG==='brief'&&SUB.brief==='b-inbox')rInbox();if(PG==='brief'&&SUB.brief==='b-status')rTimeline();homeInboxLink();boardSee()}}catch(e){console.error(e)}return r};
+})();
 
 /* ---- 공통 클릭 처리 ---- */
 document.addEventListener('click',e=>{
